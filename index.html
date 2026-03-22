@@ -65,7 +65,7 @@
 
         <hr>
 
-        <section id="sobre-mi">
+        <section class="reveal" id="sobre-mi">
             <h2 id="sec-sobre">Sobre mí</h2>
             <p id="sobre-p1">
                 Programador con una sólida base técnica y mentalidad estratégica. Mi stack incluye lenguajes robustos como <strong>Java</strong> y <strong>Fortran</strong>, la versatilidad de <strong>Python</strong> y el manejo profesional de <strong>bases de datos relacionales</strong>. 
@@ -81,7 +81,7 @@
             </p>
         </section>
 
-        <section id="habilidades">
+        <section class="reveal" id="habilidades">
             <h2 id="sec-hab">🎯 Habilidades & Perfil Profesional</h2>
             <p class="personality-note" id="hab-note">
                 Mi enfoque de trabajo combina el rigor técnico con una visión estratégica, priorizando siempre la eficiencia y la escalabilidad de los sistemas que desarrollo.
@@ -106,7 +106,7 @@
             </div>
         </section>
 
-        <section id="proyectos">
+        <section class="reveal" id="proyectos">
             <h2 id="sec-proy">Proyecto Destacado</h2>
             <div class="project-card">
                 <h3>🐳 Dockers-Image-Creator</h3>
@@ -115,7 +115,7 @@
             </div>
         </section>
 
-        <section id="estudios">
+        <section class="reveal" id="estudios">
             <h2 id="sec-est">🎓 Formación Académica</h2>
 
             <div class="education-item">
@@ -202,6 +202,40 @@
                 document.getElementById('btn-es').classList.add('active');
             }
         };
+
+        // Función para mostrar/ocultar el botón de volver arriba
+        window.onscroll = function() {
+            const btn = document.getElementById("back-to-top");
+            if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
+                btn.classList.add("show");
+            } else {
+                btn.classList.remove("show");
+            }
+        };
+
+        function reveal() {
+        var reveals = document.querySelectorAll(".reveal");
+
+        for (var i = 0; i < reveals.length; i++) {
+            var windowHeight = window.innerHeight;
+            var elementTop = reveals[i].getBoundingClientRect().top;
+            var elementVisible = 150; // Cuántos píxeles antes de verse debe activarse
+
+            if (elementTop < windowHeight - elementVisible) {
+            reveals[i].classList.add("active");
+            }
+        }
+        }
+
+        // Escuchamos el evento de scroll para ejecutar la función
+        window.addEventListener("scroll", reveal);
+
+        // También la ejecutamos una vez al cargar por si el usuario ya está en medio de la página
+        reveal();
     </script>
+
+    <a href="#inicio" id="back-to-top" title="Volver arriba">
+        <span class="arrow">↑</span>
+    </a>
 </body>
 </html>
