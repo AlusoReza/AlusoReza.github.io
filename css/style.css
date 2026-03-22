@@ -79,6 +79,22 @@ section {
     transform: translateY(0);
 }
 
+@media (max-width: 650px) {
+    .nav-container {
+        /* Añadimos un margen derecho para que los links no lleguen hasta el final 
+           donde está el selector de idioma */
+        padding-right: 80px; 
+        text-align: left; /* Alineamos a la izquierda para ganar espacio */
+        padding-left: 15px;
+    }
+
+    nav a {
+        margin: 0 8px 0 0; /* Ajustamos márgenes de los links */
+        font-size: 0.75em;
+        display: inline-block;
+    }
+}
+
 /* --- 3. CABECERA Y PERFIL --- */
 .profile-header {
     display: flex;
@@ -606,7 +622,7 @@ footer, #contacto {
     font-size: 0.8em;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 650px) {
     .lang-switcher {
         top: 10px;
         right: 10px;
