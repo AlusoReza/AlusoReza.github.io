@@ -600,8 +600,8 @@ footer, #contacto {
 
     .profile-img {
         /* Mantenemos proporciones cuadradas para que no se deforme */
-        width: 150px; 
-        height: 150px; 
+        width: 180px; 
+        height: 185px; 
         margin: 0 auto;
         flex-shrink: 0; /* Prohibido encogerse */
     }
@@ -616,7 +616,7 @@ footer, #contacto {
     .badge {
         /* Margen de seguridad para que nunca se solapen */
         margin: 4px; 
-        font-size: 0.75em;
+        font-size: 0.85em;
         padding: 4px 10px;
     }
     
