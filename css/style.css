@@ -342,6 +342,32 @@ section {
     text-decoration: underline;
 }
 
+.project-links {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+/* Estilo común para ambos botones */
+.btn-outline {
+    display: inline-block;
+    padding: 8px 18px;
+    border: 1px solid #555; /* Borde gris neutro */
+    color: #555; /* Texto a juego */
+    text-decoration: none;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+/* Efecto al pasar el ratón */
+.btn-outline:hover {
+    background-color: #f5f5f5; /* Un fondo muy tenue */
+    border-color: #000; /* Se oscurece el borde */
+    color: #000; /* El texto resalta más */
+    transform: translateY(-2px); /* Pequeña elevación */
+}
+
 /* --- 7. FORMACIÓN ACADÉMICA (CON ANIMACIONES) --- */
 .education-item {
     margin-bottom: 30px;
