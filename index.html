@@ -6,17 +6,29 @@
     <title>Alonso José Suárez Reza | Junior Software Developer</title>
     <meta name="description" content="Portafolio profesional de Alonso José Suárez Reza. Programador Junior con experiencia en física computacional, Java, Python y Docker.">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico?v=1">
+
+    <meta property="og:title" content="Alonso José Suárez Reza | Software Developer">
+    <meta property="og:description" content="Programador Junior con base en física computacional y experto en Backend.">
+    <meta property="og:image" content="assets/perfil.jpg">
+    <meta property="og:url" content="https://alusoreza.github.io/">
 </head>
 <body>
 
+    <div class="lang-switcher">
+        <button onclick="changeLanguage('es')" class="lang-btn active" id="btn-es">ES</button>
+        <span class="divider">|</span>
+        <button onclick="changeLanguage('en')" class="lang-btn" id="btn-en">EN</button>
+    </div>
+
     <nav>
         <div class="nav-container">
-            <a href="#inicio">Inicio</a>
-            <a href="#sobre-mi">Sobre mí</a>
-            <a href="#habilidades">Habilidades</a>
-            <a href="#proyectos">Proyectos</a>
-            <a href="#estudios">Estudios</a>
-            <a href="#contacto">Contacto</a>
+            <a href="#inicio" id="nav-inicio">Inicio</a>
+            <a href="#sobre-mi" id="nav-sobre">Sobre mí</a>
+            <a href="#habilidades" id="nav-hab">Habilidades</a>
+            <a href="#proyectos" id="nav-proy">Proyectos</a>
+            <a href="#estudios" id="nav-est">Estudios</a>
+            <a href="#contacto" id="nav-cont">Contacto</a>
         </div>
     </nav>
 
@@ -26,7 +38,7 @@
                 <img src="assets/perfil.jpg" alt="Alonso José Suárez Reza" class="profile-img">
                 <div class="profile-text">
                     <h1>Alonso José Suárez Reza</h1>
-                    <p class="subtitle"><strong>Junior Software Developer</strong> | Backend & Data Enthusiast</p>
+                    <p class="subtitle" id="hero-sub"><strong>Junior Software Developer</strong> | Backend & Data Enthusiast</p>
                     <div class="badges">
                         <span class="badge b-python">Python</span>
                         <span class="badge b-java">Java</span>
@@ -45,7 +57,7 @@
                     </div>
                     <a href="assets/Alonso_Reza_CV.pdf" class="cv-cta-button" download>
                         <span class="icon">📄</span>
-                        <span class="text">Descargar Curriculum Vitae (PDF)</span>
+                        <span class="text" id="cv-text-h">Descargar Curriculum Vitae (PDF)</span>
                     </a>
                 </div>
             </div>
@@ -54,112 +66,142 @@
         <hr>
 
         <section id="sobre-mi">
-            <h2>Sobre mí</h2>
-            <p>
+            <h2 id="sec-sobre">Sobre mí</h2>
+            <p id="sobre-p1">
                 Programador con una sólida base técnica y mentalidad estratégica. Mi stack incluye lenguajes robustos como <strong>Java</strong> y <strong>Fortran</strong>, la versatilidad de <strong>Python</strong> y el manejo profesional de <strong>bases de datos relacionales</strong>. 
                 También me apasiona el desarrollo web moderno (HTML/CSS/JS) y la optimización de sistemas mediante la automatización.
             </p>
-            <p>
+            <p id="sobre-p2">
                 Cuento con años de experiencia en el mundo de la programación, habiendo desarrollado una base sólida a través de la <strong>física computacional</strong>. 
                 Esta trayectoria me ha permitido dominar la resolución de problemas complejos y el cálculo numérico con lenguajes como <strong>Fortran</strong> y <strong>Python</strong>.
             </p>
-            <p>
+            <p id="sobre-p3">
                 Actualmente, estoy ampliando mis horizontes hacia nuevos ámbitos tecnológicos, integrando mis capacidades analíticas en el desarrollo <strong>Backend</strong>, la gestión de <strong>bases de datos</strong> y la arquitectura de sistemas como con <strong>Docker</strong>. 
                 Mi objetivo es aplicar el rigor científico a la creación de soluciones de software modernas, eficientes y escalables.
             </p>
         </section>
 
         <section id="habilidades">
-            <h2>🎯 Habilidades & Perfil Profesional</h2>
-            <p class="personality-note">
+            <h2 id="sec-hab">🎯 Habilidades & Perfil Profesional</h2>
+            <p class="personality-note" id="hab-note">
                 Mi enfoque de trabajo combina el rigor técnico con una visión estratégica, priorizando siempre la eficiencia y la escalabilidad de los sistemas que desarrollo.
             </p>
             <div class="skills-grid">
                 <div class="skill-item">
-                    <strong>Visión Estratégica</strong>
-                    <p>Capacidad para analizar el panorama general de un proyecto y diseñar arquitecturas de código organizadas y preparadas para crecer.</p>
+                    <strong id="sk-t1">Visión Estratégica</strong>
+                    <p id="sk-d1">Capacidad para analizar el panorama general de un proyecto y diseñar arquitecturas de código organizadas y preparadas para crecer.</p>
                 </div>
                 <div class="skill-item">
-                    <strong>Resolución Analítica</strong>
-                    <p>Enfoque lógico para descomponer problemas complejos en soluciones técnicas sencillas, eficientes y fáciles de mantener.</p>
+                    <strong id="sk-t2">Resolución Analítica</strong>
+                    <p id="sk-d2">Enfoque lógico para descomponer problemas complejos en soluciones técnicas sencillas, eficientes y fáciles de mantener.</p>
                 </div>
                 <div class="skill-item">
-                    <strong>Planificación y Rigor</strong>
-                    <p>Metodología de trabajo orientada a la estructura, la documentación detallada y el cumplimiento de estándares de calidad.</p>
+                    <strong id="sk-t3">Planificación y Rigor</strong>
+                    <p id="sk-d3">Metodología de trabajo orientada a la estructura, la documentación detallada y el cumplimiento de estándares de calidad.</p>
                 </div>
                 <div class="skill-item">
-                    <strong>Compromiso con la Excelencia</strong>
-                    <p>Mentalidad de crecimiento continuo, siempre buscando optimizar procesos existentes y dominar nuevas tecnologías.</p>
+                    <strong id="sk-t4">Compromiso con la Excelencia</strong>
+                    <p id="sk-d4">Mentalidad de crecimiento continuo, siempre buscando optimizar procesos existentes y dominar nuevas tecnologías.</p>
                 </div>
             </div>
         </section>
 
         <section id="proyectos">
-            <h2>Proyecto Destacado</h2>
+            <h2 id="sec-proy">Proyecto Destacado</h2>
             <div class="project-card">
                 <h3>🐳 Dockers-Image-Creator</h3>
-                <p>Herramienta diseñada para automatizar y simplificar la creación de entornos Docker, permitiendo despliegues rápidos y estandarizados.</p>
-                <a href="https://github.com/AlusoReza/Dockers-Image-Creator" target="_blank" class="btn">Ver proyecto en GitHub →</a>
+                <p id="proy-desc">Herramienta diseñada para automatizar y simplificar la creación de entornos Docker, permitiendo despliegues rápidos y estandarizados.</p>
+                <a href="https://github.com/AlusoReza/Dockers-Image-Creator" target="_blank" class="btn" id="proy-btn">Ver proyecto en GitHub →</a>
             </div>
         </section>
 
         <section id="estudios">
-            <h2>🎓 Formación Académica</h2>
+            <h2 id="sec-est">🎓 Formación Académica</h2>
 
             <div class="education-item">
                 <div class="edu-header">
-                    <strong>Desarrollo de Aplicaciones Multiplataforma (DAM)</strong>
-                    <span class="edu-date">sept. 2025 - Actualidad</span>
+                    <strong id="est-t1">Desarrollo de Aplicaciones Multiplataforma (DAM)</strong>
+                    <span class="edu-date" id="est-d1">sept. 2025 - Actualidad</span>
                 </div>
                 <p class="edu-institution">UNIR | Universidad Internacional de La Rioja</p>
-                <p class="edu-description">Enfoque en ingeniería de software, desarrollo de sistemas multiplataforma y capacidad de análisis avanzado.</p>
+                <p class="edu-description" id="est-desc1">Enfoque en ingeniería de software, desarrollo de sistemas multiplataforma y capacidad de análisis avanzado.</p>
             </div>
 
             <div class="education-item">
                 <div class="edu-header">
-                    <strong>Grado en Física (Ciclo Parcial)</strong>
-                    <span class="edu-date">Trayectoria previa</span>
+                    <strong id="est-t2">Grado en Física (Ciclo Parcial)</strong>
+                    <span class="edu-date" id="est-d2">Trayectoria previa</span>
                 </div>
                 <p class="edu-institution">Universidad de Granada</p>
-                <p class="edu-description">Fuerte base en matemáticas y lógica. Especial interés y desempeño destacado en <strong>Física Computacional</strong> y <strong>Métodos Numéricos</strong>.</p>
+                <p class="edu-description" id="est-desc2">Fuerte base en matemáticas y lógica. Especial interés y desempeño destacado en <strong>Física Computacional</strong> y <strong>Métodos Numéricos</strong>.</p>
             </div>
 
             <div class="education-item">
                 <div class="edu-header">
-                    <strong>Cursos & Certificaciones</strong>
+                    <strong id="est-t3">Cursos & Certificaciones</strong>
                     <span class="edu-date">2025</span>
                 </div>
                 <ul class="edu-list">
-                    <li>Preparación para la Certificación <strong>AWS Cloud Practitioner</strong> (UNIR).</li>
-                    <li>Bootcamp en Habilidades Digitales y Gestión Ágil (UNIR).</li>
+                    <li id="est-c1">Preparación para la Certificación <strong>AWS Cloud Practitioner</strong> (UNIR).</li>
+                    <li id="est-c2">Bootcamp en Habilidades Digitales y Gestión Ágil (UNIR).</li>
                 </ul>
             </div>
         </section>
 
         <footer id="contacto" class="contact-links">
-            <h2>🚀 ¿Construimos el siguiente nivel?</h2>
-            <p class="contact-subtitle">
+            <h2 id="sec-cont">🚀 ¿Construimos el siguiente nivel?</h2>
+            <p class="contact-subtitle" id="cont-sub">
                 Busco mi próximo gran desafío técnico donde pueda aplicar mi rigor analítico y mi pasión por el código. 
                 Me entusiasma aprender rápido, abrir nuevos horizontes y transformar problemas complejos en soluciones eficientes. 
                 <strong>Si buscas a alguien que aprenda sin miedo y ejecute con precisión, ¡hablemos!</strong>
             </p>
 
             <a href="assets/Alonso_Reza_CV.pdf" class="cv-cta-button footer-cv-btn" download>
-                <span>📄 Descargar Curriculum Vitae (PDF)</span>
+                <span id="cv-text-f">📄 Descargar Curriculum Vitae (PDF)</span>
             </a>
 
             <div class="social-btns">
                 <a href="https://www.linkedin.com/in/alonsoreza" target="_blank">
                     <span>LinkedIn</span>
-                    <small>Red profesional</small>
+                    <small id="soc-li">Red profesional</small>
                 </a>
                 <a href="https://github.com/AlusoReza" target="_blank">
                     <span>GitHub</span>
-                    <small>Código y proyectos</small>
+                    <small id="soc-gh">Código y proyectos</small>
                 </a>
             </div>
         </footer>
     </main>
 
+    <script>
+        async function changeLanguage(lang) {
+            try {
+                const response = await fetch('./lang.json');
+                const translations = await response.json();
+                const texts = translations[lang];
+
+                for (let id in texts) {
+                    const el = document.getElementById(id);
+                    if (el) el.innerHTML = texts[id];
+                }
+
+                document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+                document.getElementById(`btn-${lang}`).classList.add('active');
+                localStorage.setItem('preferredLang', lang);
+                document.documentElement.lang = lang;
+            } catch (error) {
+                console.error("Error cargando lang.json:", error);
+            }
+        }
+
+        window.onload = () => {
+            const savedLang = localStorage.getItem('preferredLang') || 'es';
+            if (savedLang !== 'es') {
+                changeLanguage(savedLang);
+            } else {
+                document.getElementById('btn-es').classList.add('active');
+            }
+        };
+    </script>
 </body>
 </html>

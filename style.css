@@ -529,3 +529,46 @@ footer, #contacto {
         font-size: 2em;
     }
 }
+
+/* --- 10. SELECTOR DE IDIOMA --- */
+.lang-switcher {
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    z-index: 2000;
+    background: rgba(22, 27, 34, 0.8);
+    backdrop-filter: blur(8px);
+    padding: 5px 15px;
+    border-radius: 20px;
+    border: 1px solid #30363d;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.lang-btn {
+    background: none;
+    border: none;
+    color: #8b949e;
+    cursor: pointer;
+    font-size: 0.8em;
+    font-weight: 700;
+    padding: 5px;
+    transition: color 0.3s ease;
+}
+
+.lang-btn.active, .lang-btn:hover {
+    color: #58a6ff;
+}
+
+.divider {
+    color: #30363d;
+    font-size: 0.8em;
+}
+
+@media (max-width: 650px) {
+    .lang-switcher {
+        top: 10px;
+        right: 10px;
+    }
+}
