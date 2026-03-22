@@ -3,7 +3,8 @@
 Welcome to my professional portfolio! I am a software developer with a strong technical foundation in **Computational Physics** and a strategic approach toward **Backend development** and systems architecture.
 
 ## 🌐 Live Portfolio
-Explore my work and interactive CV here: **[alusoreza.github.io](https://alusoreza.github.io/)**
+
+[![Website](https://img.shields.io/badge/Visit-My_Portfolio-0078d7?style=for-the-badge&logo=github&logoColor=white)](https://alusoreza.github.io/)
 
 ---
 
