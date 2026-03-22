@@ -73,8 +73,8 @@ nav a:hover {
 }
 
 .profile-img {
-    width: 140px;
-    height: 140px;
+    width: 170px;
+    height: 200px;
     border-radius: 50%;
     border: 3px solid #30363d;
     object-fit: cover;
@@ -163,6 +163,92 @@ nav a:hover {
 }
 .b-web:hover { 
     border-color: #238636; 
+}
+
+/* --- BOTÓN CV: FORMATO BARRA HORIZONTAL --- */
+
+.cv-cta-button {
+    display: flex; /* Flex para permitir que crezca */
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 25px;
+    
+    /* CONTROL DE TAMAÑO: Alargado pero no infinito */
+    width: 85%;            /* Ocupa casi todo el ancho del bloque de texto */
+    max-width: 480px;      /* Pero nunca más de 480px para que no sea tosco */
+    height: 45px;          /* Altura fija para que se vea como una barra sólida */
+    
+    background-color: #0d1117; /* Fondo oscuro GitHub */
+    color: #c9d1d9;
+    font-weight: 600;
+    font-size: 0.95em;
+    text-decoration: none;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.cv-cta-button:hover {
+    background-color: #161b22;
+    border-color: #58a6ff; /* El azul de tu nombre para el borde */
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Para asegurar que en móvil no se rompa */
+@media (max-width: 650px) {
+    .cv-cta-button {
+        width: 100%;
+        max-width: none;
+    }
+}
+
+/* --- ESTILO PARA HERRAMIENTAS (TOOLS) --- */
+
+.tools-badges {
+    margin-top: 10px; /* Separación sutil con los lenguajes */
+}
+
+/* Base para los badges de herramientas, idéntica a los lenguajes */
+.tools-badges .badge {
+    color: #ffffff; /* Texto blanco nítido para todos */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Borde sutil de integración */
+}
+
+/* Colores Oficiales Mate (Glow Sutil) */
+
+.b-vscode { 
+    background-color: #007acc; /* Azul oficial de VS Code */
+}
+.b-vscode:hover { box-shadow: 0 0 10px rgba(0, 122, 204, 0.4); }
+
+.b-eclipse { 
+    background-color: #2c2255; /* Morado mate de Eclipse Foundation */
+}
+.b-eclipse:hover { box-shadow: 0 0 10px rgba(44, 34, 85, 0.4); }
+
+.b-docker { 
+    background-color: #1a6ac9; /* Azul ballena de Docker */
+}
+.b-docker:hover { box-shadow: 0 0 10px rgba(26, 106, 201, 0.4); }
+
+.b-workbench { 
+    background-color: #00758f; /* Mismo azul que MySQL, para coherencia */
+}
+.b-workbench:hover { box-shadow: 0 0 10px rgba(0, 117, 143, 0.4); }
+
+.b-paradigm { 
+    background-color: #710900; /* Granate oscuro de Visual Paradigm */
+}
+.b-paradigm:hover { box-shadow: 0 0 10px rgba(113, 9, 0, 0.4); }
+
+/* Efecto hover minimalista unificado para las herramientas */
+.tools-badges .badge:hover {
+    transform: translateY(-2px); /* Pequeña elevación */
+    background-color: #30363d;   /* Fondo neutro al pasar el ratón */
+    border-color: #8b949e;       /* Borde más brillante */
 }
 
 /* --- 5. HABILIDADES Y PERFIL ANALÍTICO --- */
@@ -398,6 +484,20 @@ nav a:hover {
 footer, #contacto {
     border-top: none !important;
     outline: none !important;
+}
+
+/* Ajuste específico para que la barra de CV se centre en el footer */
+.footer-cv-btn {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px; /* Separación con los botones de redes sociales */
+    background-color: #161b22; /* Un pelín más claro para resaltar sobre el fondo del footer */
+}
+
+.footer-cv-btn:hover {
+    background-color: #58a6ff; /* En el footer podemos permitirnos que se ilumine en azul al pasar el ratón */
+    color: #0d1117;
+    border-color: #58a6ff;
 }
 
 /* --- 9. DISEÑO RESPONSIVO --- */
