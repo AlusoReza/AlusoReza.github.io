@@ -143,7 +143,8 @@ section {
     /* Transición suave solo para el color de fondo */
     transition: background-color 0.3s ease, border-color 0.3s ease;
     cursor: default;
-    margin-right: 5px; /* Espacio entre badges */
+    margin: 4px 4px 4px 0; /* Margen arriba, derecha y abajo */
+    white-space: nowrap;
 }
 
 /* EFECTO HOVER MINIMALISTA: Solo cambia el fondo a un gris un poco más claro */
