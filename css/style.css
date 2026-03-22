@@ -606,7 +606,7 @@ footer, #contacto {
     font-size: 0.8em;
 }
 
-@media (max-width: 650px) {
+@media (max-width: 450px) {
     .lang-switcher {
         top: 10px;
         right: 10px;
