@@ -110,6 +110,7 @@ section {
     border: 3px solid #30363d;
     object-fit: cover;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0;
 }
 
 .profile-text h1 {
@@ -126,24 +127,26 @@ section {
 
 /* --- 4. BADGES TECNOLÓGICOS (SISTEMA MINIMALISTA Y PROFESIONAL) --- */
 
+.badges-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0; 
+}
+
 .badge {
-    padding: 5px 15px; /* Un poco más de aire interior */
-    border-radius: 4px; /* Bordes más rectos y sobrios */
+    padding: 5px 15px;
+    border-radius: 4px;
     font-size: 0.8em;
-    font-weight: 600; /* Texto más nítido */
+    font-weight: 600;
     display: inline-block;
     
-    /* Fondo neutro y oscuro para todos */
     background-color: #1a1f26; 
-    color: #ffffff; /* Texto blanco puro para máxima legibilidad */
-    
-    /* Borde base sutil para integración */
+    color: #ffffff; 
     border: 1px solid rgba(255, 255, 255, 0.1);
     
-    /* Transición suave solo para el color de fondo */
     transition: background-color 0.3s ease, border-color 0.3s ease;
     cursor: default;
-    margin: 4px 4px 4px 0; /* Margen arriba, derecha y abajo */
+    margin: 4px 6px 4px 0; 
     white-space: nowrap;
 }
 
@@ -585,6 +588,42 @@ footer, #contacto {
 
     h1 {
         font-size: 2em;
+    }
+}
+
+@media (max-width: 650px) {
+    .profile-header {
+        flex-direction: column; /* La foto pasa arriba, el texto abajo */
+        text-align: center;
+        gap: 20px; /* Espacio entre foto y texto */
+    }
+
+    .profile-img {
+        /* Mantenemos proporciones cuadradas para que no se deforme */
+        width: 150px; 
+        height: 150px; 
+        margin: 0 auto;
+        flex-shrink: 0; /* Prohibido encogerse */
+    }
+
+    .badges-wrapper {
+        display: flex;
+        flex-wrap: wrap; 
+        justify-content: center; /* Centramos las badges para que se vea simétrico */
+        gap: 5px; /* Espacio controlado */
+    }
+
+    .badge {
+        /* Margen de seguridad para que nunca se solapen */
+        margin: 4px; 
+        font-size: 0.75em;
+        padding: 4px 10px;
+    }
+    
+    .cv-cta-button {
+        width: 100%; /* El botón de CV ocupa todo el ancho en móvil */
+        max-width: none;
+        margin: 20px auto 0;
     }
 }
 
