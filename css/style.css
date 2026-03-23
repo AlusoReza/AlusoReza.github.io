@@ -623,7 +623,7 @@ footer, #contacto {
     .cv-cta-button {
         width: 100%; /* El botón de CV ocupa todo el ancho en móvil */
         max-width: none;
-        margin: 20px auto 0;
+        margin: 20px auto 20px;
     }
 }
 
