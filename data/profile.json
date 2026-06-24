@@ -1,0 +1,56 @@
+{
+  "name": "Alonso José Suárez Reza",
+  "cvPath": "assets/Alonso_Reza_CV.pdf",
+  "badges": [
+    {
+      "label": "Python",
+      "class": "b-python"
+    },
+    {
+      "label": "Java",
+      "class": "b-java"
+    },
+    {
+      "label": "JavaScript",
+      "class": "b-javascript"
+    },
+    {
+      "label": "MySQL",
+      "class": "b-sql"
+    },
+    {
+      "label": "Fortran",
+      "class": "b-fortran"
+    },
+    {
+      "label": "HTML/CSS/JS",
+      "class": "b-web"
+    }
+  ],
+  "toolBadges": [
+    {
+      "label": "VS Code",
+      "class": "b-vscode"
+    },
+    {
+      "label": "Eclipse",
+      "class": "b-eclipse"
+    },
+    {
+      "label": "Docker Desktop",
+      "class": "b-docker"
+    },
+    {
+      "label": "MySQL Workbench",
+      "class": "b-workbench"
+    },
+    {
+      "label": "Visual Paradigm",
+      "class": "b-paradigm"
+    },
+    {
+      "label": "AI Agents",
+      "class": "b-aiagents"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "title": {
+      "es": "Visión Estratégica",
+      "en": "Strategic Vision"
+    },
+    "description": {
+      "es": "Capacidad para analizar el panorama general de un proyecto y diseñar arquitecturas de código organizadas y preparadas para crecer.",
+      "en": "Ability to analyze the big picture of a project and design organized code architectures ready to grow."
+    }
+  },
+  {
+    "title": {
+      "es": "Resolución Analítica",
+      "en": "Analytical Resolution"
+    },
+    "description": {
+      "es": "Enfoque lógico para descomponer problemas complejos en soluciones técnicas sencillas, eficientes y fáciles de mantener.",
+      "en": "Logical approach to decompose complex problems into simple, efficient, and maintainable technical solutions."
+    }
+  },
+  {
+    "title": {
+      "es": "Planificación y Rigor",
+      "en": "Planning and Rigor"
+    },
+    "description": {
+      "es": "Metodología de trabajo orientada a la estructura, la documentación detallada y el cumplimiento de estándares de calidad.",
+      "en": "Work methodology oriented towards structure, detailed documentation, and compliance with quality standards."
+    }
+  },
+  {
+    "title": {
+      "es": "Compromiso con la Excelencia",
+      "en": "Commitment to Excellence"
+    },
+    "description": {
+      "es": "Mentalidad de crecimiento continuo, siempre buscando optimizar procesos existentes y dominar nuevas tecnologías.",
+      "en": "Continuous growth mindset, always looking to optimize existing processes and master new technologies."
+    }
+  }
+]

@@ -34,7 +34,7 @@ hr {
     margin: 30px 0;
 }
 
-#sobre-p1, #sobre-p2, #sobre-p3 {
+.about-text {
   text-align: justify;
 }
 
@@ -282,6 +282,11 @@ section {
     background-color: #710900; /* Granate oscuro de Visual Paradigm */
 }
 .b-paradigm:hover { box-shadow: 0 0 10px rgba(113, 9, 0, 0.4); }
+
+.b-aiagents { 
+    background-color: #10a37f; /* Verde OpenAI */
+}
+.b-aiagents:hover { box-shadow: 0 0 10px rgba(16, 163, 127, 0.4); }
 
 /* Efecto hover minimalista unificado para las herramientas */
 .tools-badges .badge:hover {

@@ -1,0 +1,56 @@
+[
+  {
+    "title": {
+      "es": "Curso de Programación en Python",
+      "en": "Python Programming Course"
+    },
+    "institution": {
+      "es": "Universidad Internacional de La Rioja (UNIR)",
+      "en": "International University of La Rioja (UNIR)"
+    },
+    "date": {
+      "es": "18 jun. 2026",
+      "en": "June 18, 2026"
+    },
+    "description": {
+      "es": "Curso de 75 horas (3 ECTS) sobre fundamentos de programación en Python: sintaxis, estructuras de datos, control de flujo y resolución de problemas computacionales.",
+      "en": "75-hour course (3 ECTS) on Python programming fundamentals: syntax, data structures, control flow, and computational problem-solving."
+    }
+  },
+  {
+    "title": {
+      "es": "Curso de Preparación para la Certificación AWS Cloud Practitioner",
+      "en": "AWS Cloud Practitioner Certification Prep Course"
+    },
+    "institution": {
+      "es": "Universidad Internacional de La Rioja (UNIR)",
+      "en": "International University of La Rioja (UNIR)"
+    },
+    "date": {
+      "es": "1 jun. 2026",
+      "en": "June 1, 2026"
+    },
+    "description": {
+      "es": "Curso de 50 horas sobre fundamentos de AWS Cloud: servicios principales, arquitectura en la nube, seguridad, facturación y preparación para el examen CLF-C01.",
+      "en": "50-hour course on AWS Cloud fundamentals: core services, cloud architecture, security, billing, and preparation for the CLF-C01 exam."
+    }
+  },
+  {
+    "title": {
+      "es": "Curso de Preparación para la Certificación AZ-900: Microsoft Azure Fundamentals",
+      "en": "AZ-900: Microsoft Azure Fundamentals Prep Course"
+    },
+    "institution": {
+      "es": "Universidad Internacional de La Rioja (UNIR)",
+      "en": "International University of La Rioja (UNIR)"
+    },
+    "date": {
+      "es": "26 may. 2026",
+      "en": "May 26, 2026"
+    },
+    "description": {
+      "es": "Curso de 50 horas sobre fundamentos de Microsoft Azure: servicios en la nube, arquitectura, gestión de recursos, seguridad, privacidad y cumplimiento.",
+      "en": "50-hour course on Microsoft Azure fundamentals: cloud services, architecture, resource management, security, privacy, and compliance."
+    }
+  }
+]
