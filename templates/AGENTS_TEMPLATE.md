@@ -15,7 +15,6 @@ commit)
 - `[carpeta]/` — [qué contiene]
 - `[carpeta]/` — [qué contiene]
 - `[carpeta]/` — [qué contiene]
-7
 ## Convenciones
 - [Estilo de nombres, p. ej. camelCase para variables y funciones.]
 - [Dónde van los tests, p. ej. al lado del archivo: `foo.ts` +

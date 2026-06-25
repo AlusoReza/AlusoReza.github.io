@@ -111,7 +111,14 @@ function reveal() {
   }
 }
 
-window.addEventListener('scroll', reveal);
+const motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (motionOK) {
+  window.addEventListener('scroll', reveal);
+} else {
+  document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
+}
+
 window.addEventListener('scroll', function () {
   const btn = document.getElementById('back-to-top');
   if (!btn) return;

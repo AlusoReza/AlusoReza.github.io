@@ -1,12 +1,27 @@
+/* --- 0. DESIGN TOKENS --- */
+:root {
+    --color-bg: #0d1117;
+    --color-bg-card: #161b22;
+    --color-bg-hover: #1c2128;
+    --color-border: #30363d;
+    --color-text: #c9d1d9;
+    --color-text-bright: #f0f6fc;
+    --color-text-muted: #8b949e;
+    --color-accent: #7fc1fe;
+    --color-green: #3fb950;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
 /* --- 1. CONFIGURACIÓN GENERAL Y RESET --- */
 html {
     scroll-behavior: smooth;
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    background-color: #0d1117;
-    color: #c9d1d9;
+    font-family: var(--font-body);
+    background-color: var(--color-bg);
+    color: var(--color-text);
     line-height: 1.6;
     margin: 0;
     padding: 0;
@@ -19,18 +34,21 @@ body {
 }
 
 h2 {
-    color: #f0f6fc;
-    border-bottom: 1px solid #30363d;
+    font-family: var(--font-display);
+    color: var(--color-text-bright);
+    border-bottom: 1px solid var(--color-border);
     padding-bottom: 10px;
     margin-top: 50px;
     display: flex;
     align-items: center;
     gap: 10px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
 }
 
 hr {
     border: 0;
-    border-top: 1px solid #30363d;
+    border-top: 1px solid var(--color-border);
     margin: 30px 0;
 }
 
@@ -44,7 +62,7 @@ nav {
     top: 0;
     background: rgba(13, 17, 23, 0.9);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid #30363d;
+    border-bottom: 1px solid var(--color-border);
     padding: 15px 0;
     z-index: 1000;
 }
@@ -56,7 +74,7 @@ nav {
 }
 
 nav a {
-    color: #8b949e;
+    color: var(--color-text-muted);
     text-decoration: none;
     margin: 0 12px;
     font-weight: 500;
@@ -65,7 +83,7 @@ nav a {
 }
 
 nav a:hover {
-    color: #58a6ff;
+    color: var(--color-accent);
 }
 
 section {
@@ -111,22 +129,52 @@ section {
     width: 170px;
     height: 200px;
     border-radius: 50%;
-    border: 3px solid #30363d;
+    border: 3px solid var(--color-border);
     object-fit: cover;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     flex-shrink: 0;
 }
 
 .profile-text h1 {
-    color: #58a6ff;
+    font-family: var(--font-display);
+    color: var(--color-accent);
     font-size: 2.5em;
     margin: 0;
+    font-weight: 600;
+    letter-spacing: -0.03em;
 }
 
 .subtitle {
     font-size: 1.1em;
-    color: #8b949e;
+    color: var(--color-text-muted);
     margin: 5px 0 15px 0;
+}
+
+/* --- FIRMA VISUAL: Cuadrícula computacional (hero) --- */
+#inicio {
+    position: relative;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 28px 28px;
+    border-radius: 12px;
+    padding: 30px;
+}
+
+#inicio::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 60%, var(--color-bg) 100%);
+    pointer-events: none;
+    border-radius: 12px;
+}
+
+@media (max-width: 650px) {
+    #inicio {
+        padding: 20px;
+        background-size: 20px 20px;
+    }
 }
 
 /* --- 4. BADGES TECNOLÓGICOS (SISTEMA MINIMALISTA Y PROFESIONAL) --- */
@@ -145,7 +193,7 @@ section {
     display: inline-block;
     
     background-color: #1a1f26; 
-    color: #ffffff; 
+    color: var(--color-text-bright); 
     border: 1px solid rgba(255, 255, 255, 0.1);
     
     transition: background-color 0.3s ease, border-color 0.3s ease;
@@ -156,7 +204,7 @@ section {
 
 /* EFECTO HOVER MINIMALISTA: Solo cambia el fondo a un gris un poco más claro */
 .badge:hover {
-    background-color: #30363d;
+    background-color: var(--color-border);
 }
 
 /* SISTEMA DE IDENTIDAD POR BORDE (Sin Glow) */
@@ -177,7 +225,6 @@ section {
 
 .b-javascript { 
     border-left: 2px solid #f7df1e; 
-    color: #ffffff; /* Ahora el texto es blanco, mucho mejor */
 }
 .b-javascript:hover { 
     border-color: #f7df1e; 
@@ -198,10 +245,10 @@ section {
 }
 
 .b-web { 
-    border-left: 2px solid #238636; 
+    border-left: 2px solid var(--color-green); 
 }
 .b-web:hover { 
-    border-color: #238636; 
+    border-color: var(--color-green); 
 }
 
 /* --- BOTÓN CV: FORMATO BARRA HORIZONTAL --- */
@@ -218,20 +265,20 @@ section {
     max-width: 480px;      /* Pero nunca más de 480px para que no sea tosco */
     height: 45px;          /* Altura fija para que se vea como una barra sólida */
     
-    background-color: #0d1117; /* Fondo oscuro GitHub */
-    color: #c9d1d9;
+    background-color: var(--color-bg); /* Fondo oscuro GitHub */
+    color: var(--color-text);
     font-weight: 600;
     font-size: 0.95em;
     text-decoration: none;
-    border: 1px solid #30363d;
+    border: 1px solid var(--color-border);
     border-radius: 8px;
     transition: all 0.3s ease;
 }
 
 .cv-cta-button:hover {
-    background-color: #161b22;
-    border-color: #58a6ff; /* El azul de tu nombre para el borde */
-    color: #ffffff;
+    background-color: var(--color-bg-card);
+    border-color: var(--color-accent); /* El azul de tu nombre para el borde */
+    color: var(--color-text-bright);
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
 }
@@ -252,7 +299,7 @@ section {
 
 /* Base para los badges de herramientas, idéntica a los lenguajes */
 .tools-badges .badge {
-    color: #ffffff; /* Texto blanco nítido para todos */
+    color: var(--color-text-bright); /* Texto blanco nítido para todos */
     border: 1px solid rgba(255, 255, 255, 0.1); /* Borde sutil de integración */
 }
 
@@ -291,17 +338,17 @@ section {
 /* Efecto hover minimalista unificado para las herramientas */
 .tools-badges .badge:hover {
     transform: translateY(-2px); /* Pequeña elevación */
-    background-color: #30363d;   /* Fondo neutro al pasar el ratón */
-    border-color: #8b949e;       /* Borde más brillante */
+    background-color: var(--color-border);   /* Fondo neutro al pasar el ratón */
+    border-color: var(--color-text-muted);       /* Borde más brillante */
 }
 
 /* --- 5. HABILIDADES Y PERFIL ANALÍTICO --- */
 .personality-note {
     font-size: 1em;
-    color: #c9d1d9;
+    color: var(--color-text);
     margin-bottom: 25px;
     padding-left: 15px;
-    border-left: 3px solid #238636;
+    border-left: 3px solid var(--color-green);
     font-style: italic;
 }
 
@@ -312,53 +359,56 @@ section {
 }
 
 .skill-item {
-    background-color: #161b22;
+    background-color: var(--color-bg-card);
     padding: 20px;
     border-radius: 8px;
-    border: 1px solid #30363d;
+    border: 1px solid var(--color-border);
     transition: border-color 0.3s ease;
 }
 
 .skill-item:hover {
-    border-color: #238636;
+    border-color: var(--color-green);
 }
 
 .skill-item strong {
-    color: #58a6ff;
+    font-family: var(--font-display);
+    color: var(--color-accent);
     display: block;
     margin-bottom: 5px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
 }
 
 .skill-item p {
     margin: 0;
     font-size: 0.9em;
-    color: #8b949e;
+    color: var(--color-text-muted);
 }
 
 /* --- 6. PROYECTOS DESTACADOS --- */
 .project-card {
-    border: 1px solid #30363d;
+    border: 1px solid var(--color-border);
     padding: 25px;
     border-radius: 12px;
-    background-color: #161b22;
+    background-color: var(--color-bg-card);
     margin-top: 20px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .project-card:hover {
     transform: translateY(-5px);
-    border-color: #58a6ff;
-    background-color: #1c2128;
+    border-color: var(--color-accent);
+    background-color: var(--color-bg-hover);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 .project-card h3 {
     margin-top: 0;
-    color: #f0f6fc;
+    color: var(--color-text-bright);
 }
 
 .btn {
-    color: #58a6ff;
+    color: var(--color-accent);
     font-weight: bold;
     text-decoration: none;
     display: inline-block;
@@ -367,7 +417,7 @@ section {
 }
 
 .btn:hover {
-    color: #ffffff;
+    color: var(--color-text-bright);
     text-decoration: underline;
 }
 
@@ -381,28 +431,27 @@ section {
 .btn-outline {
     display: inline-block;
     padding: 8px 18px;
-    border: 1px solid #555; /* Borde gris neutro */
-    color: #555; /* Texto a juego */
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
     text-decoration: none;
     font-size: 0.9rem;
     border-radius: 4px;
     transition: all 0.3s ease;
 }
 
-/* Efecto al pasar el ratón */
 .btn-outline:hover {
-    background-color: #f5f5f5; /* Un fondo muy tenue */
-    border-color: #000; /* Se oscurece el borde */
-    color: #000; /* El texto resalta más */
-    transform: translateY(-2px); /* Pequeña elevación */
+    background-color: var(--color-bg-card);
+    border-color: var(--color-accent);
+    color: var(--color-text-bright);
+    transform: translateY(-2px);
 }
 
 /* --- 7. FORMACIÓN ACADÉMICA (CON ANIMACIONES) --- */
 .education-item {
     margin-bottom: 30px;
     padding: 25px;
-    border-left: 3px solid #30363d;
-    background-color: #161b22;
+    border-left: 3px solid var(--color-border);
+    background-color: var(--color-bg-card);
     border-radius: 0 12px 12px 0;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: default;
@@ -410,8 +459,8 @@ section {
 
 .education-item:hover {
     transform: translateX(8px);
-    border-left-color: #58a6ff;
-    background-color: #1c2128;
+    border-left-color: var(--color-accent);
+    background-color: var(--color-bg-hover);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
@@ -424,43 +473,45 @@ section {
 }
 
 .edu-header strong {
-    color: #58a6ff;
+    font-family: var(--font-display);
+    color: var(--color-accent);
     font-size: 1.15em;
     letter-spacing: 0.5px;
+    font-weight: 600;
     transition: color 0.3s ease;
 }
 
 .education-item:hover .edu-header strong {
-    color: #ffffff;
+    color: var(--color-text-bright);
 }
 
 .edu-date {
     font-size: 0.8em;
-    color: #8b949e;
-    background-color: #0d1117;
+    color: var(--color-text-muted);
+    background-color: var(--color-bg);
     padding: 4px 12px;
     border-radius: 12px;
-    border: 1px solid #30363d;
+    border: 1px solid var(--color-border);
     font-weight: 500;
     transition: all 0.3s ease;
 }
 
 .education-item:hover .edu-date {
-    border-color: #58a6ff;
-    color: #c9d1d9;
+    border-color: var(--color-accent);
+    color: var(--color-text);
 }
 
 .edu-institution {
     margin: 12px 0 8px 0;
     font-weight: 600;
-    color: #f0f6fc;
+    color: var(--color-text-bright);
     font-size: 1em;
 }
 
 .edu-description {
     margin: 8px 0 0 0;
     font-size: 0.95em;
-    color: #8b949e;
+    color: var(--color-text-muted);
     line-height: 1.5;
 }
 
@@ -468,7 +519,7 @@ section {
     margin: 15px 0 0 0;
     padding-left: 20px;
     list-style-type: square;
-    color: #8b949e;
+    color: var(--color-text-muted);
     font-size: 0.9em;
 }
 
@@ -482,7 +533,7 @@ section {
     margin-top: 100px;
     text-align: center;
     padding: 60px 20px;
-    background: linear-gradient(180deg, transparent, #161b22);
+    background: linear-gradient(180deg, transparent, var(--color-bg-card));
     border-radius: 12px;
 }
 
@@ -490,20 +541,20 @@ section {
     justify-content: center;
     border-bottom: none;
     margin-bottom: 20px;
-    color: #f0f6fc;
+    color: var(--color-text-bright);
     font-size: 1.8em;
 }
 
 .contact-subtitle {
     max-width: 680px;
     margin: 0 auto 40px auto;
-    color: #8b949e;
+    color: var(--color-text-muted);
     font-size: 1em;
     line-height: 1.6;
 }
 
 .contact-subtitle strong {
-    color: #58a6ff;
+    color: var(--color-accent);
     display: block;
     margin-top: 15px;
     font-size: 1.1em;
@@ -521,10 +572,10 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #0d1117;
-    color: #ffffff;
+    background-color: var(--color-bg);
+    color: var(--color-text-bright);
     padding: 20px 40px;
-    border: 1px solid #30363d;
+    border: 1px solid var(--color-border);
     border-radius: 10px;
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -534,26 +585,26 @@ section {
 .social-btns a span {
     font-weight: 700;
     font-size: 1.2em;
-    color: #58a6ff;
+    color: var(--color-accent);
 }
 
 .social-btns a small {
     font-size: 0.85em;
-    color: #8b949e;
+    color: var(--color-text-muted);
     margin-top: 5px;
 }
 
 .social-btns a:hover {
-    border-color: #58a6ff;
-    background-color: #1c2128;
+    border-color: var(--color-accent);
+    background-color: var(--color-bg-hover);
     transform: translateY(-5px);
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.6);
 }
 
 /* ANTI-LÍNEA DEFINITIVO */
-footer, #contacto {
-    border-top: none !important;
-    outline: none !important;
+footer.contact-links {
+    border-top: none;
+    outline: none;
 }
 
 /* Ajuste específico para que la barra de CV se centre en el footer */
@@ -561,13 +612,13 @@ footer, #contacto {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 30px; /* Separación con los botones de redes sociales */
-    background-color: #161b22; /* Un pelín más claro para resaltar sobre el fondo del footer */
+    background-color: var(--color-bg-card); /* Un pelín más claro para resaltar sobre el fondo del footer */
 }
 
 .footer-cv-btn:hover {
-    background-color: #58a6ff; /* En el footer podemos permitirnos que se ilumine en azul al pasar el ratón */
-    color: #0d1117;
-    border-color: #58a6ff;
+    background-color: var(--color-accent); /* En el footer podemos permitirnos que se ilumine en azul al pasar el ratón */
+    color: var(--color-bg);
+    border-color: var(--color-accent);
 }
 
 /* --- 9. DISEÑO RESPONSIVO --- */
@@ -575,6 +626,14 @@ footer, #contacto {
     .profile-header {
         flex-direction: column;
         text-align: center;
+        gap: 20px;
+    }
+
+    .profile-img {
+        width: 180px;
+        height: 185px;
+        margin: 0 auto;
+        flex-shrink: 0;
     }
 
     .skills-grid {
@@ -598,41 +657,40 @@ footer, #contacto {
     h1 {
         font-size: 2em;
     }
-}
-
-@media (max-width: 650px) {
-    .profile-header {
-        flex-direction: column; /* La foto pasa arriba, el texto abajo */
-        text-align: center;
-        gap: 20px; /* Espacio entre foto y texto */
-    }
-
-    .profile-img {
-        /* Mantenemos proporciones cuadradas para que no se deforme */
-        width: 180px; 
-        height: 185px; 
-        margin: 0 auto;
-        flex-shrink: 0; /* Prohibido encogerse */
-    }
 
     .badges-wrapper {
         display: flex;
-        flex-wrap: wrap; 
-        justify-content: center; /* Centramos las badges para que se vea simétrico */
-        gap: 5px; /* Espacio controlado */
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
     }
 
     .badge {
-        /* Margen de seguridad para que nunca se solapen */
-        margin: 4px; 
+        margin: 4px;
         font-size: 0.85em;
         padding: 4px 10px;
     }
-    
+
     .cv-cta-button {
-        width: 100%; /* El botón de CV ocupa todo el ancho en móvil */
+        width: 100%;
         max-width: none;
-        margin: 20px auto 20px;
+        margin: 20px auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .social-btns {
+        flex-direction: column;
+        align-items: center;
+    }
+    .social-btns a {
+        min-width: 0;
+        width: 100%;
+        max-width: 280px;
+    }
+    nav a {
+        font-size: 0.7em;
+        margin: 0 4px;
     }
 }
 
@@ -646,7 +704,7 @@ footer, #contacto {
     backdrop-filter: blur(8px);
     padding: 5px 12px;
     border-radius: 20px;
-    border: 1px solid #30363d;
+    border: 1px solid var(--color-border);
     display: flex;
     align-items: center;
     gap: 5px;
@@ -654,7 +712,7 @@ footer, #contacto {
 .lang-btn {
     background: none;
     border: none;
-    color: #8b949e;
+    color: var(--color-text-muted);
     cursor: pointer;
     font-size: 0.8em;
     font-weight: 700;
@@ -663,11 +721,11 @@ footer, #contacto {
 }
 
 .lang-btn.active, .lang-btn:hover {
-    color: #58a6ff;
+    color: var(--color-accent);
 }
 
 .divider {
-    color: #30363d;
+    color: var(--color-border);
     font-size: 0.8em;
 }
 
@@ -686,9 +744,9 @@ footer, #contacto {
     right: 30px;
     width: 45px;
     height: 45px;
-    background-color: #161b22;
-    color: #58a6ff;
-    border: 1px solid #30363d;
+    background-color: var(--color-bg-card);
+    color: var(--color-accent);
+    border: 1px solid var(--color-border);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -709,13 +767,26 @@ footer, #contacto {
 }
 
 #back-to-top:hover {
-    background-color: #30363d;
-    color: #ffffff;
-    border-color: #58a6ff;
+    background-color: var(--color-border);
+    color: var(--color-text-bright);
+    border-color: var(--color-accent);
     transform: translateY(-5px);
 }
 
 .arrow {
     line-height: 0;
     margin-top: -2px;
+}
+
+/* --- 12. ACCESIBILIDAD: REDUCIR MOVIMIENTO --- */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
 }

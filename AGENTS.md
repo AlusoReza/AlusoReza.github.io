@@ -7,7 +7,7 @@ Static portfolio site built with **Astro 5** (static output), vanilla CSS, and v
 - **Languages:** HTML (Astro `.astro`), CSS3 (vanilla, imported), JavaScript (vanilla ES module)
 - **Runtime:** Build-time (Node) + Browser (client JS)
 - **Database:** None
-- **Tests:** None
+- **Tests:** `.agents/tests/check-mcp.ps1` (MCP) + `.agents/tests/check-frontend-design.ps1` (frontend-design skill)
 
 ## Commands
 - `npm run dev` — Start Astro dev server (usually `http://localhost:4321`)
@@ -22,7 +22,7 @@ src/
 ├── components/       — 10 Astro components (Nav, LangSwitcher, Profile, About,
 │                       Skills, Education, Projects, Experience, Certificates, Contact)
 ├── layouts/
-│   └── BaseLayout.astro  — HTML shell, Nav, LangSwitcher, window.DATA inline script,
+│   └── BaseLayout.astro  — HTML shell, Nav, LangSwitcher, data-data attribute on body,
 │                           client.js bundle
 ├── pages/
 │   └── index.astro       — Single-page entry (imports all components)
@@ -38,6 +38,10 @@ src/
     ├── projects.json
     ├── experience.json
     └── certificates.json
+
+docs/
+├── bitacora.md          — Resumen global escaneable del flujo de trabajo
+└── logs/                — Logs detallados por día (YYYY-MM-DD.md)
 
 public/
 ├── assets/               — perfil.jpg, favicon.ico (CV.pdf optional)
@@ -59,11 +63,11 @@ index.html                — Original single-page (to be removed)
 - **Auto-hide:** Experience and certificates sections auto-hide when empty array (Astro renders `display:none` + JS `toggleSection()`).
 - **Design:** Dark theme (`#0d1117` bg, `#c9d1d9` text), accent blue `#58a6ff`, scroll-triggered reveal (`.reveal`), responsive at 650px.
 - **Badges:** Language badges (border-left accent) + tool badges (solid background, glow hover). AI Agents badge in tool badges (green `#10a37f`). Rendered at build time by Astro Profile component.
-- **window.DATA:** All JSONs stringified into a global `window.DATA` object via an inline `<script is:inline set:html>` in BaseLayout. Client JS reads from this, no fetch calls.
+- **data-data:** All JSONs serialized into a `data-data` attribute on `<body>` via `JSON.stringify()`. Client JS reads from `document.body.dataset.data` (browser auto-decodes HTML entities), no fetch calls or globals.
 
 ## Architecture
-1. **Build time (Astro):** Renders all sections statically in Spanish. `data-i18n` attributes preserved in HTML for client-side translation. Profile badges rendered by Astro. Empty experience/certificates arrays render section with `style="display:none"`.
-2. **Client side (client.js):** On page load, runs `init()` which loads saved language from `localStorage`. If non-default, calls `changeLanguage()` which re-renders all dynamic sections from `window.DATA`. ES/EN buttons call `changeLanguage()` directly — no page reload.
+1. **Build time (Astro):** Renders all sections statically in Spanish. `data-i18n` attributes preserved in HTML for client-side translation. Profile badges rendered by Astro. Empty experience/certificates arrays render section with `style="display:none"`. All JSON data serialized into `data-data` attribute on `<body>`.
+2. **Client side (client.js):** On page load, reads `JSON.parse(document.body.dataset.data)`, loads saved language from `localStorage`. If non-default or dynamic content needed, calls `changeLanguage()` which re-renders all sections from the data object. ES/EN buttons use `addEventListener` via `data-lang` attributes — no inline handlers.
 
 ## Don'ts
 - **No `url` field in certificates** — do not include URLs in `src/data/certificates.json`.
@@ -83,6 +87,24 @@ index.html                — Original single-page (to be removed)
   4. Agent writes the entry to `src/data/certificates.json` using the bilingual format
   5. Section auto-appears on page reload (hidden if array is empty)
 - **Adding content:** Edit the corresponding JSON file in `src/data/` — no component changes required.
+- **Contexto histórico:** Si el usuario pregunta o hace referencia a algo trabajado en sesiones anteriores y no está en tu ventana de contexto actual, escanea automáticamente `docs/logs/` y `docs/bitacora.md` para reconstruir el contexto antes de responder.
+- **Session log (IMPORTANTE — SIEMPRE, build-driven):**
+  1. **BEFORE — snapshot inicial**: antes del primer cambio de la sesión, ejecutar `git diff` y `git diff --stat` para capturar el estado limpio. Crear `docs/logs/YYYY-MM-DD.md` si no existe. Añadir `## Sesión N — Título descriptivo` con `### Prompt` (resumen de lo que pidió el usuario) y, si ya hay plan aprobado, `### Plan`.
+  2. **AFTER EVERY BUILD** (inmediatamente después de `npm run build`, `npm run update` o cualquier comando que compile):
+     - Capturar el output completo del build (éxito/fallo, tiempo, errors, warnings).
+     - Ejecutar `git diff --stat` y `git diff` para identificar TODOS los archivos modificados desde el snapshot inicial.
+     - Consultar `docs/logs/YYYY-MM-DD.md`:
+       - **¿Hay una sesión activa?** — una sesión con `### Prompt` y `### Plan` pero que le falta `### Cambios` o `### Build`. → Completarla: rellenar `### Cambios` con cada archivo modificado (rutas, líneas, descripción del cambio y por qué) y `### Build` con el comando ejecutado, resultado, tiempo, y cualquier warning/error relevante.
+       - **¿NO hay sesión activa?** (el build ocurrió sin que se creara previamente una cabecera de sesión) → Crear una nueva sesión desde cero: auto-generar `### Prompt` reconstruido del contexto reciente de la conversación, escribir `### Cambios` a partir del `git diff`, y escribir `### Build` con el comando y output capturados.
+     - Actualizar `docs/bitacora.md` con una entrada resumida (fecha, sesión, prompt breve + plan en 2-3 líneas).
+     - Resetear el snapshot inicial con `git diff --stat` para que el próximo build solo capture cambios nuevos.
+  3. **No hay excepciones.** Este check se ejecuta después de CADA build, haya o no sesión previa. Si no hay cambios detectados por `git diff`, indicarlo explícitamente en `### Cambios`.
+
+## Tests
+- **"Comprueba MCP"** → el agente ejecuta `.agents/tests/check-mcp.ps1` y revisa los resultados. FAILs graves reciben plan de corrección; WARNs se discuten contigo.
+- **"Comprueba skill"** → el agente ejecuta `.agents/tests/check-frontend-design.ps1` y revisa los resultados. FAILs graves reciben plan de corrección; WARNs requieren decisión estética tuya.
+- **Output esperado:** cada test muestra PASS/FAIL/WARN por check, más un resumen y un plan de acción detallado para cada incumplimiento.
+- **Protocolo:** el agente ejecuta el script, captura su output, y te propone el plan de acción. No aplica correcciones automáticas sin tu aprobación explícita.
 
 ## Documentation
 - [README.md](./README.md) — project overview and social links
