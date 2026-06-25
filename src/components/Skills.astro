@@ -1,0 +1,20 @@
+---
+import lang from '../data/lang.json'
+import skills from '../data/skills.json'
+const l = 'es'
+const t = (key) => lang[l]?.[key] || ''
+const tl = (obj) => obj?.[l] || ''
+---
+<section class="reveal section" id="habilidades">
+  <h2 data-i18n="sec-hab">{t('sec-hab')}</h2>
+  <p class="personality-note" data-i18n="hab-note">{t('hab-note')}</p>
+  <p class="personality-note" data-i18n="hab-ai">{t('hab-ai')}</p>
+  <div class="skills-grid" data-section="skills">
+    {skills.map(s => (
+      <div class="skill-item">
+        <strong>{tl(s.title)}</strong>
+        <p>{tl(s.description)}</p>
+      </div>
+    ))}
+  </div>
+</section>

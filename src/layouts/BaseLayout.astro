@@ -1,0 +1,44 @@
+---
+import Nav from '../components/Nav.astro'
+import LangSwitcher from '../components/LangSwitcher.astro'
+import lang from '../data/lang.json'
+import skills from '../data/skills.json'
+import education from '../data/education.json'
+import projects from '../data/projects.json'
+import experience from '../data/experience.json'
+import certificates from '../data/certificates.json'
+import profile from '../data/profile.json'
+import '../styles/global.css'
+
+const { title, description } = Astro.props
+const dataBundle = JSON.stringify({ lang, skills, education, projects, experience, certificates, profile })
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:image" content="/assets/perfil.jpg">
+  <meta property="og:url" content="https://alusoreza.github.io/">
+  <meta name="google-site-verification" content="wR-Ww7Z3Js_kmiCYxoddSnZxfFNydHYLBu6iaO8ykUY" />
+
+</head>
+<body>
+  <LangSwitcher />
+  <Nav />
+  <main class="container">
+    <slot />
+  </main>
+  <a href="#inicio" id="back-to-top" title="Volver arriba">
+    <span class="arrow">&uarr;</span>
+  </a>
+  <script is:inline set:html={`window.DATA = ${dataBundle};`}></script>
+  <script src="../scripts/client.js"></script>
+</body>
+</html>

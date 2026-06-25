@@ -1,0 +1,22 @@
+---
+import lang from '../data/lang.json'
+const l = 'es'
+const t = (key) => lang[l]?.[key] || ''
+---
+<footer id="contacto" class="contact-links">
+  <h2 data-i18n="sec-cont">{t('sec-cont')}</h2>
+  <p class="contact-subtitle" data-i18n="cont-sub">{t('cont-sub')}</p>
+  <a href="assets/Alonso_Reza_CV.pdf" class="cv-cta-button footer-cv-btn" download>
+    <span data-i18n="cv-text-f">📄 Descargar Curriculum Vitae (PDF)</span>
+  </a>
+  <div class="social-btns">
+    <a href="https://www.linkedin.com/in/alonsoreza" target="_blank">
+      <span>LinkedIn</span>
+      <small data-i18n="soc-li">{t('soc-li')}</small>
+    </a>
+    <a href="https://github.com/AlusoReza" target="_blank">
+      <span>GitHub</span>
+      <small data-i18n="soc-gh">{t('soc-gh')}</small>
+    </a>
+  </div>
+</footer>

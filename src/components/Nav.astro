@@ -1,0 +1,22 @@
+---
+import lang from '../data/lang.json'
+const l = 'es'
+const t = (key) => lang[l]?.[key] || ''
+const links = [
+  { href: '#inicio', key: 'nav-inicio' },
+  { href: '#sobre-mi', key: 'nav-sobre' },
+  { href: '#habilidades', key: 'nav-hab' },
+  { href: '#proyectos', key: 'nav-proy' },
+  { href: '#estudios', key: 'nav-est' },
+  { href: '#experiencia', key: 'nav-exp' },
+  { href: '#certificados', key: 'nav-cert' },
+  { href: '#contacto', key: 'nav-cont' },
+]
+---
+<nav>
+  <div class="nav-container">
+    {links.map(link => (
+      <a href={link.href} data-i18n={link.key}>{t(link.key)}</a>
+    ))}
+  </div>
+</nav>

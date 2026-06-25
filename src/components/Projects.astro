@@ -1,0 +1,25 @@
+---
+import lang from '../data/lang.json'
+import projects from '../data/projects.json'
+const l = 'es'
+const t = (key) => lang[l]?.[key] || ''
+const tl = (obj) => obj?.[l] || ''
+---
+<section class="reveal section" id="proyectos">
+  <h2 data-i18n="sec-proy">{t('sec-proy')}</h2>
+  <div data-section="projects">
+    {projects.map(proj => (
+      <div class="project-card">
+        <h3>{proj.title}</h3>
+        <p>{tl(proj.description)}</p>
+        {proj.links && (
+          <div class="project-links">
+            {proj.links.map(link => (
+              <a href={link.url} target="_blank" class="btn btn-primary">{tl(link.text)}</a>
+            ))}
+          </div>
+        )}
+      </div>
+    ))}
+  </div>
+</section>

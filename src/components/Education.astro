@@ -1,0 +1,27 @@
+---
+import lang from '../data/lang.json'
+import education from '../data/education.json'
+const l = 'es'
+const t = (key) => lang[l]?.[key] || ''
+const tl = (obj) => obj?.[l] || ''
+---
+<section class="reveal section" id="estudios">
+  <h2 data-i18n="sec-est">{t('sec-est')}</h2>
+  <div data-section="education">
+    {education.map(item => (
+      <div class="education-item">
+        <div class="edu-header">
+          <strong>{tl(item.title)}</strong>
+          {item.date && <span class="edu-date">{tl(item.date)}</span>}
+        </div>
+        {item.institution && <p class="edu-institution">{tl(item.institution)}</p>}
+        {item.description && <p class="edu-description">{tl(item.description)}</p>}
+        {item.list && (
+          <ul class="edu-list">
+            {item.list.map(li => <li>{tl(li)}</li>)}
+          </ul>
+        )}
+      </div>
+    ))}
+  </div>
+</section>

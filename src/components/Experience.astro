@@ -1,0 +1,23 @@
+---
+import lang from '../data/lang.json'
+import experience from '../data/experience.json'
+const l = 'es'
+const t = (key) => lang[l]?.[key] || ''
+const tl = (obj) => obj?.[l] || ''
+const empty = !experience || experience.length === 0
+---
+<section class="reveal section" id="experiencia" style={empty ? 'display:none' : ''}>
+  <h2 data-i18n="sec-exp">{t('sec-exp')}</h2>
+  <div data-section="experience">
+    {experience.map(item => (
+      <div class="education-item">
+        <div class="edu-header">
+          <strong>{tl(item.title)}</strong>
+          {item.date && <span class="edu-date">{tl(item.date)}</span>}
+        </div>
+        {item.company && <p class="edu-institution">{tl(item.company)}</p>}
+        {item.description && <p class="edu-description">{tl(item.description)}</p>}
+      </div>
+    ))}
+  </div>
+</section>
