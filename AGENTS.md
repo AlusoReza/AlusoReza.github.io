@@ -25,6 +25,7 @@ data/projects.json    \u2014 Featured projects (bilingual)
 data/experience.json  \u2014 Work experience (bilingual, empty = hidden)
 data/certificates.json\u2014 Certificates (bilingual, empty = hidden)
 certificates/.gitkeep \u2014 Folder for certificate PDFs (contents ignored by git)
+templates/            \u2014 AGENTS_TEMPLATE.md (structure reference)
 assets/               \u2014 perfil.jpg, favicon.ico, CV.pdf
 ```
 
