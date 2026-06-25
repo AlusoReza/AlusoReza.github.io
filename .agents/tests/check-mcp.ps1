@@ -1,6 +1,6 @@
 # .agents/tests/check-mcp.ps1
-# Test de alineación con mejores prácticas de Astro 5 (MCP)
-# Ejecutar: pwsh .agents/tests/check-mcp.ps1
+# Astro 5 best practices (MCP) compliance test
+# Run: pwsh .agents/tests/check-mcp.ps1
 
 $root = Resolve-Path "$PSScriptRoot\..\.."
 $src = "$root\src"
@@ -29,7 +29,7 @@ function Title($t) {
 }
 
 # ─── CHECK 1: onclick ───
-Title "Eventos inline"
+Title "Inline events"
 $astroFiles = Get-ChildItem -Path "$src\components" -Filter *.astro
 $onclickCount = 0
 $onclickFiles = @()
@@ -63,8 +63,8 @@ $astroSer = (Select-String -Path "$src\layouts\*.astro" -Pattern 'Astro\.seriali
 if ($astroSer -eq 0) { Pass "No Astro.serialize() — usa JSON.stringify" }
 else { Fail "Astro.serialize() encontrado" "Reemplazar por JSON.stringify()" }
 
-# ─── CHECK 5: data-data en <body> ───
-Title "Estructura MCP"
+# ─── CHECK 5: data-data on <body> ───
+Title "MCP Structure"
 $baseLayout = Get-Content "$src\layouts\BaseLayout.astro" -Raw
 if ($baseLayout -match 'data-data=') { Pass "data-data en <body> en BaseLayout.astro" }
 else { Fail "data-data NO encontrado en BaseLayout.astro" "Añadir data-data={dataBundle} al <body>" }
@@ -82,7 +82,7 @@ if ($tsconfig) {
 } else { Fail "tsconfig.json NO encontrado" "Crear tsconfig.json con extends astro/tsconfigs/base" }
 
 # ─── CHECK 8: addEventListener ───
-Title "JavaScript cliente"
+Title "Client JavaScript"
 $clientJs = Get-Content "$src\scripts\client.js" -Raw
 if ($clientJs -match "querySelectorAll\('\[data-lang\]'\)") { Pass "client.js usa addEventListener con [data-lang]" }
 else { Fail "client.js NO usa addEventListener con [data-lang]" "Migrar onclick a addEventListener" }
@@ -96,8 +96,8 @@ $ls = Get-Content "$src\components\LangSwitcher.astro" -Raw
 if ($ls -match 'data-lang=' -and $ls -notmatch 'onclick=') { Pass "LangSwitcher.astro usa data-lang (sin onclick)" }
 else { Fail "LangSwitcher.astro con onclick o sin data-lang" "Reemplazar onclick por data-lang" }
 
-# ─── CHECK 11: set:html en elementos HTML ───
-Title "Directivas Astro"
+# ─── CHECK 11: set:html on HTML elements ───
+Title "Astro Directives"
 $setHtmlCount = (Select-String -Path "$src\components\*.astro" -Pattern 'set:html=' -SimpleMatch).Count
 if ($setHtmlCount -gt 0) { Pass "set:html usado correctamente en $setHtmlCount elementos HTML" }
 else { Warn "No se usa set:html — podría ser normal si todo es data-i18n" "Verificar que contenido dinámico funciona" }
@@ -129,14 +129,14 @@ $scriptSrc = $baseLayoutLines | Where-Object { $_ -match '<script\s+src=' }
 if ($scriptSrc) { Pass "Script incluido como src (Astro bundle)" }
 else { Fail "Script no encontrado como src en BaseLayout" "Añadir <script src='.../client.js'></script>" }
 
-# ─── RESUMEN ───
+# ─── SUMMARY ───
 Write-Host "`n═══════════════════════════════════════" -ForegroundColor Cyan
-Write-Host "  RESUMEN MCP" -ForegroundColor Cyan
+Write-Host "  MCP SUMMARY" -ForegroundColor Cyan
 Write-Host "  PASS: $($passes.Count)   FAIL: $($failures.Count)   WARN: $($warnings.Count)" -ForegroundColor Cyan
 Write-Host "═══════════════════════════════════════" -ForegroundColor Cyan
 
 if ($failures.Count -gt 0 -or $warnings.Count -gt 0) {
-    Write-Host "`n── PLAN DE ACCIÓN ──" -ForegroundColor Cyan
+    Write-Host "`n── ACTION PLAN ──" -ForegroundColor Cyan
     foreach ($f in $failures) {
         Write-Host "`n[FAIL]" -ForegroundColor Red -NoNewline; Write-Host " $($f.message)"
         Write-Host "  -> $($f.plan)" -ForegroundColor White

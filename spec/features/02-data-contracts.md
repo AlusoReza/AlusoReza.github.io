@@ -1,19 +1,19 @@
-# 02 — Contratos de datos
+# 02 — Data contracts
 
-## Propósito
+## Purpose
 
-Define los esquemas de los 7 archivos JSON en `src/data/`. Todos los datos del portfolio se gestionan exclusivamente desde estos archivos.
+Defines the schemas of the 7 JSON files in `src/data/`. All portfolio data is managed exclusively from these files.
 
-## Formato general
+## General format
 
-### Campos bilingües
-Los campos traducibles usan el formato:
+### Bilingual fields
+Translatable fields use the format:
 ```json
 { "es": "Hola", "en": "Hello" }
 ```
-Los campos no traducibles usan strings planos.
+Non-translatable fields use plain strings.
 
-### Resolución en cliente
+### Client-side resolution
 ```javascript
 function t(field) {
   if (!field) return '';
@@ -22,67 +22,67 @@ function t(field) {
 }
 ```
 
-## Esquemas
+## Schemas
 
 ### lang.json
-| Campo | Tipo | Required | Descripción |
+| Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| es.{key} | string | sí | Texto en español |
-| en.{key} | string | sí | Texto en inglés |
+| es.{key} | string | yes | Spanish text |
+| en.{key} | string | yes | English text |
 
-Claves (`key`): `hero-sub`, `sec-sobre`, `hab-ai`, `sec-hab`, `sec-proy`, `sec-est`, `sec-exp`, `sec-cert`, `sec-cont`, `cont-sub`, `cv-text-h`, `cv-text-f`, `ver-btn`, `cert-dl`.
+Keys (`key`): `hero-sub`, `sec-sobre`, `hab-ai`, `sec-hab`, `sec-proy`, `sec-est`, `sec-exp`, `sec-cert`, `sec-cont`, `cont-sub`, `cv-text-h`, `cv-text-f`, `ver-btn`, `cert-dl`.
 
 ### profile.json
-| Campo | Tipo | Required | Descripción |
+| Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| name | string | sí | Nombre completo |
-| photo | string | sí | Ruta de la foto de perfil |
-| role | {es, en} | sí | Título profesional |
+| name | string | yes | Full name |
+| photo | string | yes | Profile photo path |
+| role | {es, en} | yes | Professional title |
 
 ### skills.json
-| Campo | Tipo | Required | Descripción |
+| Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| title | {es, en} | sí | Nombre de la skill |
-| description | {es, en} | sí | Descripción breve |
+| title | {es, en} | yes | Skill name |
+| description | {es, en} | yes | Brief description |
 
 ### education.json
-| Campo | Tipo | Required | Descripción |
+| Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| title | {es, en} | sí | Título obtenido |
-| date | string | no | Fecha o período |
-| institution | {es, en} | sí | Institución educativa |
-| description | {es, en} | no | Descripción |
-| list | [{es, en}] | no | Lista de logros |
+| title | {es, en} | yes | Degree obtained |
+| date | string | no | Date or period |
+| institution | {es, en} | yes | Educational institution |
+| description | {es, en} | no | Description |
+| list | [{es, en}] | no | List of achievements |
 
 ### projects.json
-| Campo | Tipo | Required | Descripción |
+| Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| title | string | sí | Nombre del proyecto |
-| description | {es, en} | sí | Descripción |
-| links | [{url, text}] | no | Enlaces (github, demo) |
+| title | string | yes | Project name |
+| description | {es, en} | yes | Description |
+| links | [{url, text}] | no | Links (github, demo) |
 
 ### experience.json
-| Campo | Tipo | Required | Descripción |
+| Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| title | {es, en} | sí | Puesto |
-| date | string | no | Fecha o período |
-| company | {es, en} | sí | Empresa |
-| description | {es, en} | no | Descripción |
+| title | {es, en} | yes | Position |
+| date | string | no | Date or period |
+| company | {es, en} | yes | Company |
+| description | {es, en} | no | Description |
 
 ### certificates.json
-| Campo | Tipo | Required | Descripción |
+| Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| title | {es, en} | sí | Nombre del certificado |
-| institution | {es, en} | sí | Institución emisora |
-| date | string | sí | Fecha ("YYYY-MM-DD") |
-| description | {es, en} | no | Descripción breve |
+| title | {es, en} | yes | Certificate name |
+| institution | {es, en} | yes | Issuing institution |
+| date | string | yes | Date ("YYYY-MM-DD") |
+| description | {es, en} | no | Brief description |
 
-## Reglas
-- `certificates.json` **NO debe incluir campo `url`**.
-- Los arrays vacíos en `experience` o `certificates` ocultan automáticamente la sección.
-- Cada JSON se importa estáticamente en `BaseLayout.astro` (no se usa fetch).
+## Rules
+- `certificates.json` **MUST NOT include a `url` field**.
+- Empty arrays in `experience` or `certificates` automatically hide the section.
+- Each JSON is statically imported in `BaseLayout.astro` (no fetch used).
 
-## Código relevante
-- `src/data/*.json` — los 7 archivos
-- `src/layouts/BaseLayout.astro:4-10` — imports estáticos
-- `src/scripts/client.js:4-8` — helper `t()`
+## Relevant code
+- `src/data/*.json` — the 7 files
+- `src/layouts/BaseLayout.astro:4-10` — static imports
+- `src/scripts/client.js:4-8` — `t()` helper

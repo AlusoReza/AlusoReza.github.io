@@ -1,60 +1,60 @@
-# 13 — Sistema de logging
+# 13 — Logging system
 
-## Propósito
+## Purpose
 
-Define el protocolo de logging build-driven que garantiza que todas las sesiones de trabajo queden registradas automáticamente.
+Defines the build-driven logging protocol that ensures all work sessions are automatically recorded.
 
 ## Protocolo
 
-### Before — Snapshot inicial
-Antes del primer cambio de la sesión:
+### Before — Initial snapshot
+Before the first change of the session:
 ```powershell
 git diff --stat
 git diff
 ```
-El output se guarda como referencia del estado limpio inicial.
+The output is saved as a reference of the initial clean state.
 
 ### After every build
-Inmediatamente después de `npm run build`, `npm run update` o cualquier comando que compile:
+Immediately after `npm run build`, `npm run update` or any command that compiles:
 
-1. Capturar el output completo del build (éxito/fallo, tiempo, errors, warnings).
-2. Ejecutar `git diff --stat` y `git diff` para identificar todos los archivos modificados.
-3. Consultar `docs/logs/YYYY-MM-DD.md`:
-   - **¿Hay sesión activa?** (tiene `### Prompt` y `### Plan` pero le falta `### Cambios` o `### Build`)
-     - Completar: rellenar `### Cambios` + `### Build`
-   - **¿NO hay sesión activa?** (build sin sesión creada previamente)
-     - Crear nueva sesión: auto-generar `### Prompt` del contexto reciente, escribir `### Cambios` del git diff, y `### Build`
-4. Actualizar `docs/bitacora.md` con entrada resumida.
-5. Resetear snapshot inicial con `git diff --stat` (próximo build solo captura cambios nuevos).
+1. Capture the full build output (success/failure, time, errors, warnings).
+2. Run `git diff --stat` and `git diff` to identify all modified files.
+3. Check `docs/logs/YYYY-MM-DD.md`:
+   - **Is there an active session?** (has `### Prompt` and `### Plan` but is missing `### Changes` or `### Build`)
+     - Complete: fill in `### Changes` + `### Build`
+   - **Is there NO active session?** (build without a prior session created)
+     - Create new session: auto-generate `### Prompt` from recent context, write `### Changes` from git diff, and `### Build`
+4. Update `docs/bitacora.md` with a summary entry.
+5. Reset initial snapshot with `git diff --stat` (next build only captures new changes).
 
-### Estructura de sesión
+### Session structure
 
 ```markdown
-## Sesión N — Título descriptivo
+## Session N — Descriptive title
 
 ### Prompt
-Resumen de lo que pidió el usuario.
+Summary of what the user requested.
 
 ### Plan
-Pasos acordados (si aplica).
+Agreed steps (if applicable).
 
-### Cambios
-Lista de archivos modificados con rutas, líneas y descripción breve.
+### Changes
+List of modified files with paths, lines and brief description.
 
 ### Build
-Comando ejecutado, resultado, tiempo, warnings/errors relevantes.
+Command executed, result, time, relevant warnings/errors.
 ```
 
-### Archivos de bitácora
-- `docs/logs/YYYY-MM-DD.md` — sesiones detalladas por día. Un archivo por fecha.
-- `docs/bitacora.md` — resumen global escaneable con links a los logs diarios.
+### Log files
+- `docs/logs/YYYY-MM-DD.md` — detailed sessions by day. One file per date.
+- `docs/bitacora.md` — scannable global summary with links to daily logs.
 
-## Reglas
-- **No hay excepciones.** El check se ejecuta después de CADA build.
-- Si no hay cambios detectados por git diff, indicar explícitamente en `### Cambios`.
-- Contexto histórico: si el usuario pregunta por trabajo de sesiones anteriores, escanear `docs/logs/` y `docs/bitacora.md`.
+## Rules
+- **No exceptions.** The check runs after EVERY build.
+- If no changes detected by git diff, state explicitly in `### Changes`.
+- Historical context: if the user asks about work from previous sessions, scan `docs/logs/` and `docs/bitacora.md`.
 
-## Código relevante
-- `docs/bitacora.md` — resumen global
-- `docs/logs/2026-06-25.md` — logs del día
-- `AGENTS.md` — workflow build-driven definido
+## Relevant code
+- `docs/bitacora.md` — global summary
+- `docs/logs/2026-06-25.md` — today's logs
+- `AGENTS.md` — defined build-driven workflow

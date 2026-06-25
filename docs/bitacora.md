@@ -1,45 +1,45 @@
 # Bitácora — Alonso Suárez Reza Portfolio
 
-Resumen global del flujo de trabajo. Cada entrada enlaza al log detallado del día.
+Global workflow summary. Each entry links to the detailed day log.
 
 ---
 
 ## 2026-06-25
 
-[Log detallado →](logs/2026-06-25.md)
+[Detailed log →](logs/2026-06-25.md)
 
-### Sesión 1: Refactorización MCP
-**Prompt:** Alinear el código con las mejores prácticas de Astro 5.
-**Plan:** Reemplazar script inline `is:inline set:html` por atributo `data-data` en `<body>`. Migrar `onclick` a `data-lang` + `addEventListener`. Eliminar `window.changeLanguage`. Añadir `tsconfig.json` y directorio `.agents/`.
+### Session 1: MCP Refactoring
+**Prompt:** Align the code with Astro 5 best practices.
+**Plan:** Replace inline script `is:inline set:html` with `data-data` attribute on `<body>`. Migrate `onclick` to `data-lang` + `addEventListener`. Remove `window.changeLanguage`. Add `tsconfig.json` and `.agents/` directory.
 
-### Sesión 2: Refactorización de diseño
-**Prompt:** Aplicar la skill frontend-design para mejorar la estética del portfolio.
-**Plan:** Elegir Space Grotesk + Inter como sistema tipográfico. Refinar paleta (acento `#7fc1fe`, secundario `#f0a030`). Añadir cuadrícula computacional como fondo del hero. Reformular el subtítulo como tesis profesional. Eliminar emojis de los headings.
+### Session 2: Design Refactoring
+**Prompt:** Apply the frontend-design skill to improve portfolio aesthetics.
+**Plan:** Choose Space Grotesk + Inter as the typographic system. Refine palette (accent `#7fc1fe`, secondary `#f0a030`). Add computational grid as hero background. Reformulate subtitle as professional thesis. Remove emojis from headings.
 
-### Sesión 3: Corrección de color y subtítulo
-**Prompt:** La página se ve blanca, los hovers son invisibles, el subtítulo es demasiado narrativo.
-**Plan:** Bugfix crítico en `:root` (variables auto-referenciales → valores reales del tema oscuro). Migrar `.btn-outline` de colores de tema claro a dark theme. Simplificar hero-sub a "Desarrollador de software" + "Full Stack · IA · Agentes".
+### Session 3: Color and subtitle fix
+**Prompt:** The page renders white, hovers are invisible, the subtitle is too narrative.
+**Plan:** Critical bugfix in `:root` (self-referential variables → real dark theme values). Migrate `.btn-outline` from light-theme to dark-theme colors. Simplify hero-sub to "Desarrollador de software" + "Full Stack · IA · Agentes".
 
-### Sesión 4: Sistema de logging automático
-**Prompt:** Crear sistema de logs automáticos que registre todas las sesiones del agente (plan detallado, cambios, build) y un resumen global. Aplicar retroactivo.
-**Plan:** Crear `docs/logs/YYYY-MM-DD.md` con sesiones detalladas, `docs/bitacora.md` con resumen global, modificar `AGENTS.md` con workflow obligatorio de logging.
+### Session 4: Automatic logging system
+**Prompt:** Create an automatic log system that records all agent sessions (detailed plan, changes, build) and a global summary. Apply retroactively.
+**Plan:** Create `docs/logs/YYYY-MM-DD.md` with detailed sessions, `docs/bitacora.md` with global summary, modify `AGENTS.md` with mandatory logging workflow.
 
-### Sesión 5: Anclaje de contexto y actualización de logs
-**Prompt:** Pregunta "What did we do so far?" — se proporciona resumen estructurado. Luego se constata que el log de la sesión actual no se actualizó siguiendo el protocolo.
-**Plan:** Crear entrada faltante de Sesión 5 en `docs/logs/2026-06-25.md` y `docs/bitacora.md`. No hay cambios al portfolio — solo corrección de logging.
+### Session 5: Context anchoring and log update
+**Prompt:** Question "What did we do so far?" — structured summary provided. Then it is noted that the current session log was not updated following the protocol.
+**Plan:** Create missing Session 5 entry in `docs/logs/2026-06-25.md` and `docs/bitacora.md`. No portfolio changes — only logging correction.
 
-### Sesión 6: Tests MCP y Frontend Design
-**Prompt:** Añadir dos tests: uno de alineación con Astro MCP y otro de cumplimiento con la skill frontend-design. Mostrar fallos por pantalla y proponer plan de acción.
-**Plan:** Crear `.agents/tests/check-mcp.ps1` (16 checks) y `.agents/tests/check-frontend-design.ps1` (21→22 checks). Opción híbrida: scripts para checks mecánicos + revisión manual semántica. Actualizar AGENTS.md con `## Tests`. Crear `.gitkeep` y `skills-lock.json` faltante. Posteriormente, corregir WARN 1 (`#ffffff` → `var(--color-text-bright)`) y verificar con build exitoso.
+### Session 6: MCP and Frontend Design Tests
+**Prompt:** Add two tests: one for Astro MCP compliance and one for frontend-design skill compliance. Display failures on screen and propose action plan.
+**Plan:** Create `.agents/tests/check-mcp.ps1` (16 checks) and `.agents/tests/check-frontend-design.ps1` (21→22 checks). Hybrid option: scripts for mechanical checks + manual semantic review. Update AGENTS.md with `## Tests`. Create missing `.gitkeep` and `skills-lock.json`. Afterwards, fix WARN 1 (`#ffffff` → `var(--color-text-bright)`) and verify with successful build.
 
-### Sesión 7: Reestructuración SDD completa
-**Prompt:** Completar la documentación del proyecto siguiendo SDD.
-**Plan:** Crear `spec/constitution/` (5 metadocs), `spec/features/` (index + 13 specs modulares), `spec/template/` (spec-template + AGENTS_TEMPLATE), `spec/glossary.md`. Mover `certificates/` → `docs/certificates/`. Actualizar `.gitignore` y estructura en `AGENTS.md`.
+### Session 7: Full SDD restructure
+**Prompt:** Complete project documentation following SDD.
+**Plan:** Create `spec/constitution/` (5 metadocs), `spec/features/` (index + 13 modular specs), `spec/template/` (spec-template + AGENTS_TEMPLATE), `spec/glossary.md`. Move `certificates/` → `docs/certificates/`. Update `.gitignore` and structure in `AGENTS.md`.
 
-### Sesión 8: Limpieza de certificados huérfanos
-**Prompt:** Root `certificates/` seguía con PDFs tras migración SDD.
-**Plan:** MoverPDFs a `docs/certificates/`, eliminar root, verificar gitignore + no descargables. Confirmar que workflow de AGENTS.md está bien definido.
+### Session 8: Orphan certificate cleanup
+**Prompt:** Root `certificates/` still had PDFs after SDD migration.
+**Plan:** Move PDFs to `docs/certificates/`, delete root, verify gitignore + no downloads. Confirm AGENTS.md workflow is well defined.
 
-### Sesión 9: Tests modulares + bug tracking
-**Prompt:** Crear suite de tests modular (6 scripts + run-all.ps1), sistema de bug tracking en bugs.md, expandir AGENTS.md con workflows.
-**Plan:** check-js-logic, check-css-logic, check-json-schema, check-paths, run-all.ps1. bugs.md con 11 bugs. Bug tracking protocol en AGENTS.md + feature 14 spec. Debuggear issues en scripts.
+### Session 9: Modular tests + bug tracking
+**Prompt:** Create modular test suite (6 scripts + run-all.ps1), bug tracking system in bugs.md, expand AGENTS.md with workflows.
+**Plan:** check-js-logic, check-css-logic, check-json-schema, check-paths, run-all.ps1. bugs.md with 11 bugs. Bug tracking protocol in AGENTS.md + feature 14 spec. Debug script issues.

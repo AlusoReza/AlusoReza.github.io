@@ -1,12 +1,12 @@
-# 07 — Cuadrícula computacional
+# 07 — Computational grid
 
-## Propósito
+## Purpose
 
-Firma visual del portfolio: una cuadrícula sutil que evoca papel milimetrado, coordenadas, física computacional y análisis de datos.
+Visual signature of the portfolio: a subtle grid that evokes graph paper, coordinates, computational physics and data analysis.
 
-## Técnica
+## Technique
 
-La cuadrícula se implementa como `background-image` con dos gradientes lineales sobre la sección `#inicio`:
+The grid is implemented as a `background-image` with two linear gradients on the `#inicio` section:
 
 ```css
 #inicio {
@@ -17,11 +17,11 @@ La cuadrícula se implementa como `background-image` con dos gradientes lineales
 }
 ```
 
-- **Spacing:** 28px (intencionalmente no redondo, evita parecer una cuadrícula de diseño genérica).
-- **Opacidad:** 2% blanco — apenas perceptible, no compite con el contenido.
-- **Responsive:** En móvil, `background-size: 20px`.
+- **Spacing:** 28px (intentionally not round, avoids looking like a generic design grid).
+- **Opacity:** 2% white — barely perceptible, does not compete with content.
+- **Responsive:** On mobile, `background-size: 20px`.
 
-## Degradado de desvanecimiento
+## Fade gradient
 
 ```css
 #inicio::after {
@@ -29,11 +29,11 @@ La cuadrícula se implementa como `background-image` con dos gradientes lineales
 }
 ```
 
-Esto evita que la cuadrícula se corte abruptamente al final del hero.
+This prevents the grid from cutting off abruptly at the end of the hero.
 
-## Reglas
-- La cuadrícula solo aparece en `#inicio`. No replicar en otras secciones.
-- No aumentar la opacidad — el diseño debe ser sutil.
+## Rules
+- The grid only appears in `#inicio`. Do not replicate in other sections.
+- Do not increase opacity — the design must be subtle.
 
-## Código relevante
-- `src/styles/global.css:154-178` — implementación completa
+## Relevant code
+- `src/styles/global.css:154-178` — full implementation

@@ -1,6 +1,6 @@
 # .agents/tests/run-all.ps1
-# Master runner: ejecuta todos los tests y guarda hallazgos en bugs.md
-# Ejecutar: pwsh .agents/tests/run-all.ps1
+# Master runner: runs all tests and saves findings to bugs.md
+# Run: pwsh .agents/tests/run-all.ps1
 
 $root = Resolve-Path "$PSScriptRoot\..\.."
 $testsDir = "$PSScriptRoot"
@@ -10,10 +10,10 @@ $allOutput = @()
 $global:allFails = @()
 $global:allWarns = @()
 $global:manualItems = @(
-    @{ check = "Flujo init() — lógica profunda"; desc = "init() llama a translateUI() pero no a renderAll(). Visitante con EN guardado ve secciones mixtas." },
-    @{ check = "Icono 📄 en Contact.astro"; desc = "El icono está DENTRO del span data-i18n. translateUI() lo borra al cambiar idioma." },
-    @{ check = "Arquitectura de datos"; desc = "Verificar que data-data → JSON.parse → renderAll() funciona sin errores de consola." },
-    @{ check = "Regresión de bugs conocidos"; desc = "Revisar spec/constitution/bugs.md — los bugs marcados como ✅ Arreglado deben seguir arreglados." }
+    @{ check = "init() flow — deep logic"; desc = "init() calls translateUI() but not renderAll(). Visitor with EN saved sees mixed sections." },
+    @{ check = "📄 icon in Contact.astro"; desc = "The icon is INSIDE the data-i18n span. translateUI() deletes it when switching language." },
+    @{ check = "Data architecture"; desc = "Verify that data-data → JSON.parse → renderAll() works without console errors." },
+    @{ check = "Known bug regression"; desc = "Check spec/constitution/bugs.md — bugs marked as ✅ Arreglado should remain fixed." }
 )
 
 function Title($t) {
@@ -25,14 +25,14 @@ function Title($t) {
 function Run-Test($name, $script) {
     $path = "$testsDir\$script"
     if (-not (Test-Path $path)) {
-        Write-Host "`n  [SKIP] $script — no encontrado" -ForegroundColor DarkGray
+        Write-Host "`n  [SKIP] $script — not found" -ForegroundColor DarkGray
         return @()
     }
-    Write-Host "`n  >>> Ejecutando $script..." -ForegroundColor Cyan
+    Write-Host "`n  >>> Running $script..." -ForegroundColor Cyan
     $output = & pwsh -NoProfile -File $path 2>&1
     $output | ForEach-Object { Write-Host $_ }
     
-    # Capturar FAILs y WARNs para bugs.md
+    # Capture FAILs and WARNs for bugs.md
     foreach ($line in $output) {
         $text = "$line"
         if ($text -match '^\s*\[FAIL\]\s+(.*)') {
@@ -46,10 +46,10 @@ function Run-Test($name, $script) {
 
 # ─── BANNER ───
 Write-Host "╔══════════════════════════════════════════╗" -ForegroundColor Magenta
-Write-Host "║       RUN-ALL — Suite completa de tests  ║" -ForegroundColor Magenta
+Write-Host "║    RUN-ALL — Complete test suite         ║" -ForegroundColor Magenta
 Write-Host "╚══════════════════════════════════════════╝" -ForegroundColor Magenta
 
-# ─── EJECUTAR TODOS ───
+# ─── RUN ALL ───
 Run-Test "Astro MCP" "check-mcp.ps1"
 Run-Test "Frontend Design" "check-frontend-design.ps1"
 Run-Test "JS Logic" "check-js-logic.ps1"
@@ -59,24 +59,24 @@ Run-Test "Paths" "check-paths.ps1"
 
 # ─── [MANUAL] ───
 Write-Host "`n`n════════════════════════════════════════════" -ForegroundColor Yellow
-Write-Host "  [MANUAL] — Revisión de lógica profunda" -ForegroundColor Yellow
+Write-Host "  [MANUAL] — Deep logic review" -ForegroundColor Yellow
 Write-Host "════════════════════════════════════════════" -ForegroundColor Yellow
 
 foreach ($item in $global:manualItems) {
     Write-Host "`n  □ $($item.check)" -ForegroundColor Yellow
     Write-Host "    $($item.desc)" -ForegroundColor DarkGray
 }
-Write-Host "`n  (El agente debe revisar estos items manualmente)" -ForegroundColor DarkGray
+Write-Host "`n  (The agent must review these items manually)" -ForegroundColor DarkGray
 
-# ─── GUARDAR EN bugs.md ───
+# ─── SAVE TO bugs.md ───
 Write-Host "`n`n════════════════════════════════════════════" -ForegroundColor Cyan
-Write-Host "  Guardando hallazgos en bugs.md..." -ForegroundColor Cyan
+Write-Host "  Saving findings to bugs.md..." -ForegroundColor Cyan
 Write-Host "════════════════════════════════════════════" -ForegroundColor Cyan
 
 $sessionDate = Get-Date -Format "yyyy-MM-dd"
 $sessionNum = "?"
 
-# Leer número de sesión actual del último log
+# Read current session number from last log
 $logFile = "$root\docs\$sessionDate.md"
 if (Test-Path $logFile) {
     $logContent = Get-Content $logFile -Raw
@@ -87,7 +87,7 @@ if (Test-Path $logFile) {
 $totalFails = $global:allFails.Count
 $totalWarns = $global:allWarns.Count
 
-# Preservar contenido curado y actualizar fecha de escaneo
+# Preserve curated content and update scan date
 $existingCurated = ""
 $hasHeader = $false
 if (Test-Path $bugsFile) {
@@ -101,56 +101,56 @@ if (Test-Path $bugsFile) {
     $hasHeader = $existingCurated -match "^# Bugs conocidos"
 }
 
-# Construir header si no existe (primera vez)
+# Build header if it doesn't exist (first run)
 $header = if (-not $hasHeader) {
 @"
 # Bugs conocidos — Alonso Suárez Reza Portfolio
 "@
 } else { "" }
 
-# Actualizar línea de Último escaneo en el contenido curado
-$existingCurated = $existingCurated -replace '(?m)^Último escaneo:.*', "Último escaneo: $sessionDate (Sesión $sessionNum)"
+# Update Last scan line in curated content
+$existingCurated = $existingCurated -replace '(?m)^Último escaneo:.*', "Last scan: $sessionDate (Sesión $sessionNum)"
 
 $bugsContent = if ($header) { "$header`n`n" } else { "" }
 $bugsContent += "$existingCurated`n`n"
 
-# Añadir FAILs
+# Add FAILs
 foreach ($f in $global:allFails) {
     $msg = $f.message
     $src = $f.source
     $bugsContent += @"
 
 ### $msg — ERROR
-- **Origen:** $src
-- **Detectado:** Sesión $sessionNum
-- **Descripción:** $msg
-- **Estado:** ⏳ Pendiente
+- **Source:** $src
+- **Detected:** Session $sessionNum
+- **Description:** $msg
+- **Status:** ⏳ Pending
 
 "@
 }
 
-# Añadir WARNs
+# Add WARNs
 foreach ($w in $global:allWarns) {
     $msg = $w.message
     $src = $w.source
     $bugsContent += @"
 
-### $msg — ADVERTENCIA
-- **Origen:** $src
-- **Detectado:** Sesión $sessionNum
-- **Descripción:** $msg
-- **Estado:** ⏳ Pendiente
+### $msg — WARNING
+- **Source:** $src
+- **Detected:** Session $sessionNum
+- **Description:** $msg
+- **Status:** ⏳ Pending
 
 "@
 }
 
 $bugsContent += @"
 
-## 📡 Hallazgos automáticos (Sesión $sessionNum — $sessionDate)
+## 📡 Automatic findings (Session $sessionNum — $sessionDate)
 
 "@
 
-# Añadir FAILs (deduplicados)
+# Add FAILs (deduplicated)
 $seenFail = @{}
 foreach ($f in $global:allFails) {
     $msg = $f.message
@@ -161,14 +161,14 @@ foreach ($f in $global:allFails) {
     $bugsContent += @"
 
 ### $msg — ERROR
-- **Origen:** $src
-- **Detectado:** Sesión $sessionNum (automático)
-- **Estado:** ⏳ Pendiente
+- **Source:** $src
+- **Detected:** Session $sessionNum (automatic)
+- **Status:** ⏳ Pending
 
 "@
 }
 
-# Añadir WARNs (deduplicados)
+# Add WARNs (deduplicated)
 $seenWarn = @{}
 foreach ($w in $global:allWarns) {
     $msg = $w.message
@@ -178,10 +178,10 @@ foreach ($w in $global:allWarns) {
     $seenWarn[$key] = $true
     $bugsContent += @"
 
-### $msg — ADVERTENCIA
-- **Origen:** $src
-- **Detectado:** Sesión $sessionNum (automático)
-- **Estado:** ⏳ Pendiente
+### $msg — WARNING
+- **Source:** $src
+- **Detected:** Session $sessionNum (automatic)
+- **Status:** ⏳ Pending
 
 "@
 }
@@ -189,22 +189,22 @@ foreach ($w in $global:allWarns) {
 $bugsContent += @"
 
 ---
-*Los hallazgos automáticos se añaden aquí en cada ejecución de run-all.ps1. El agente debe moverlos a las secciones de arriba con la descripción detallada y severidad correcta.*
+*Automatic findings are added here on each run-all.ps1 execution. The agent must move them to sections above with the correct description and severity.*
 "@
 
-# Guardar archivo
+# Save file
 $bugsContent | Out-File -FilePath $bugsFile -Encoding utf8
-Write-Host "  Hallazgos guardados en $bugsFile" -ForegroundColor Green
+Write-Host "  Findings saved to $bugsFile" -ForegroundColor Green
 
-# ─── RESUMEN GLOBAL ───
+# ─── GLOBAL SUMMARY ───
 Write-Host "`n`n════════════════════════════════════════════" -ForegroundColor Magenta
-Write-Host "  RESUMEN GLOBAL" -ForegroundColor Magenta
+Write-Host "  GLOBAL SUMMARY" -ForegroundColor Magenta
 Write-Host "════════════════════════════════════════════" -ForegroundColor Magenta
-Write-Host "  Scripts ejecutados: 6" -ForegroundColor White
+Write-Host "  Scripts run: 6" -ForegroundColor White
 Write-Host "  FAILs: $totalFails" -ForegroundColor $(if ($totalFails -gt 0) { "Red" } else { "Green" })
 Write-Host "  WARNs: $totalWarns" -ForegroundColor $(if ($totalWarns -gt 0) { "Yellow" } else { "Green" })
-Write-Host "  Items manuales pendientes: $($global:manualItems.Count)" -ForegroundColor Yellow
-Write-Host "  Bugs guardados en: spec/constitution/bugs.md" -ForegroundColor Cyan
+Write-Host "  Manual items pending: $($global:manualItems.Count)" -ForegroundColor Yellow
+Write-Host "  Bugs saved to: spec/constitution/bugs.md" -ForegroundColor Cyan
 Write-Host "`n"
 
 if ($totalFails -gt 0) { exit 1 }

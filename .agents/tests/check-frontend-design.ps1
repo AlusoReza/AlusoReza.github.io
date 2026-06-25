@@ -1,6 +1,6 @@
 # .agents/tests/check-frontend-design.ps1
-# Test de cumplimiento con la skill frontend-design
-# Ejecutar: pwsh .agents/tests/check-frontend-design.ps1
+# Frontend-design skill compliance test
+# Run: pwsh .agents/tests/check-frontend-design.ps1
 
 $root = Resolve-Path "$PSScriptRoot\..\.."
 $css = "$root\src\styles\global.css"
@@ -56,14 +56,14 @@ foreach ($v in $requiredVars) {
     $pattern = [regex]::Escape("$($v): var($($v))")
     if ($cssContent -match $pattern) {
         $line = ($cssLines | Select-String -Pattern $pattern).LineNumber
-        $circularRefs += "$($v) (línea $line)"
+        $circularRefs += "$($v) (line $line)"
     }
 }
 if ($circularRefs.Count -eq 0) { Pass "Sin variables auto-referenciales (circular ref)" }
 else { Fail "Variables circulares detectadas: $($circularRefs -join '; ')" "Reemplazar var(x) por valor real, ej: --color-bg: #0d1117" }
 
 # ─── CHECK 3: !important solo dentro de prefers-reduced-motion ───
-Title "!important y accesibilidad"
+Title "!important & accessibility"
 $inMotionBlock = $false
 $motionDepth = 0
 $outsideImportant = @()
@@ -76,7 +76,7 @@ for ($i = 0; $i -lt $cssLines.Count; $i++) {
         if ($motionDepth -le 0) { $inMotionBlock = $false; continue }
     }
     if ($line -match '!important' -and -not $inMotionBlock) {
-        $outsideImportant += "  Línea $($i+1): $($line.Trim())"
+        $outsideImportant += "  Line $($i+1): $($line.Trim())"
     }
 }
 if ($outsideImportant.Count -eq 0) { Pass "!important solo dentro de prefers-reduced-motion (WCAG)" }
@@ -163,8 +163,8 @@ for ($i = 0; $i -lt $cssLines.Count; $i++) {
     $line = $cssLines[$i]
     if ($line -match 'color:\s*#ffffff') {
         $trimmed = $line.Trim()
-        if ($trimmed -match '\.(b-|tools-badges|badge)') { $badgeWhiteLines += "  Línea $($i+1): $trimmed" }
-        else { $whiteLines += "  Línea $($i+1): $trimmed" }
+        if ($trimmed -match '\.(b-|tools-badges|badge)') { $badgeWhiteLines += "  Line $($i+1): $trimmed" }
+        else { $whiteLines += "  Line $($i+1): $trimmed" }
     }
 }
 if ($whiteLines.Count -eq 0) { Pass "Sin #ffffff hardcodeado fuera de badges" }
@@ -180,7 +180,7 @@ if ($badgeWhiteLines.Count -gt 0) {
 
 # ─── CHECK 12: Hardcoded #1a1f26 ───
 $hard1a1f26 = @()
-for ($i = 0; $i -lt $cssLines.Count; $i++) { if ($cssLines[$i] -match '#1a1f26') { $hard1a1f26 += "  Línea $($i+1): $($cssLines[$i].Trim())" } }
+for ($i = 0; $i -lt $cssLines.Count; $i++) { if ($cssLines[$i] -match '#1a1f26') { $hard1a1f26 += "  Line $($i+1): $($cssLines[$i].Trim())" } }
 if ($hard1a1f26.Count -gt 0) {
     $msg = "#1a1f26 hardcodeado:`n" + ($hard1a1f26 -join "`n")
     Warn $msg "Usar var(--color-bg-card) (#161b22) en su lugar"
@@ -192,7 +192,7 @@ $foundBrands = @()
 foreach ($bc in $brandColors) {
     $escaped = [regex]::Escape($bc)
     $m = (Select-String -InputObject $cssContent -Pattern $escaped -AllMatches).Matches.Count
-    if ($m -gt 0) { $foundBrands += "$bc ($m uso(s))" }
+    if ($m -gt 0) { $foundBrands += "$bc ($m use(s))" }
 }
 if ($foundBrands.Count -gt 0) {
     Warn "Colores de marca en badges: $($foundBrands -join ', ') — intencionales pero no normalizables" "Los colores de badges son OK por diseño, pero revisar que ninguno sobreescriba variable del tema"
@@ -234,7 +234,7 @@ else { Warn "Falta sticky o backdrop-filter en nav" "Añadir position: sticky + 
 $redundantLines = @()
 for ($i = 0; $i -lt $cssLines.Count; $i++) {
     if ($cssLines[$i] -match 'color:\s*#ffffff' -and $cssLines[$i] -match 'background-color:') {
-        $redundantLines += "  Línea $($i+1): $($cssLines[$i].Trim())"
+        $redundantLines += "  Line $($i+1): $($cssLines[$i].Trim())"
     }
 }
 if ($redundantLines.Count -gt 0) {
@@ -250,14 +250,14 @@ else { Warn "LangSwitcher no es fixed" "Añadir position: fixed + top: 15px + ri
 if ($cssContent -match '#back-to-top\s*\{[^}]*position:\s*fixed') { Pass "Botón back-to-top fixed" }
 else { Warn "Falta botón back-to-top" "Añadir #back-to-top si no existe" }
 
-# ─── RESUMEN ───
+# ─── SUMMARY ───
 Write-Host "`n══════════════════════════════════════════" -ForegroundColor Cyan
-Write-Host "  RESUMEN FRONTEND DESIGN" -ForegroundColor Cyan
+Write-Host "  FRONTEND DESIGN SUMMARY" -ForegroundColor Cyan
 Write-Host "  PASS: $($passes.Count)   FAIL: $($failures.Count)   WARN: $($warnings.Count)" -ForegroundColor Cyan
 Write-Host "══════════════════════════════════════════" -ForegroundColor Cyan
 
 if ($failures.Count -gt 0 -or $warnings.Count -gt 0) {
-    Write-Host "`n── PLAN DE ACCIÓN ──" -ForegroundColor Cyan
+    Write-Host "`n── ACTION PLAN ──" -ForegroundColor Cyan
     foreach ($f in $failures) {
         Write-Host "`n[FAIL]" -ForegroundColor Red -NoNewline; Write-Host " $($f.message)"
         Write-Host "  -> $($f.plan)" -ForegroundColor White

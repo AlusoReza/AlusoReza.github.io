@@ -1,6 +1,6 @@
 # .agents/tests/check-js-logic.ps1
-# Test de lógica JavaScript cliente
-# Ejecutar: pwsh .agents/tests/check-js-logic.ps1
+# Client JavaScript logic test
+# Run: pwsh .agents/tests/check-js-logic.ps1
 
 $root = Resolve-Path "$PSScriptRoot\..\.."
 $js = "$root\src\scripts\client.js"
@@ -37,13 +37,13 @@ foreach ($match in $getElemById) {
     $after = $jsContent.Substring($idx + $match.Length, [Math]::Min(60, $jsContent.Length - $idx - $match.Length))
     if ($after -match '^\s*\.' -and -not $after -match '^\s*\.\s*$') {
         $lineNum = ($jsContent.Substring(0, $idx).ToCharArray() | Where-Object { $_ -eq "`n" }).Count + 1
-        $unguarded += "  Línea $lineNum"
+        $unguarded += "  Line $lineNum"
     }
 }
 if ($unguarded.Count -eq 0) { Pass "getElementById siempre con null guard" }
 else {
     $msg = "getElementById sin null guard en $($unguarded.Count) sitio(s):`n$($unguarded -join "`n")"
-    Fail $msg "Añadir null guard: const btn = document.getElementById(...); if (btn) btn.classList.add(...)"
+    Fail $msg "Add null guard: const btn = document.getElementById(...); if (btn) btn.classList.add(...)"
 }
 
 # ─── CHECK 2: changeLanguage sin early return ───
@@ -55,12 +55,12 @@ if ($jsContent -match 'function\s+changeLanguage\s*\(') {
     if ($funcBody -match 'if\s*\(\s*lang\s*===\s*currentLang\s*\)') {
         Pass "changeLanguage tiene early return si mismo idioma"
     } else {
-        Warn "changeLanguage no tiene early return" "Añadir: if (lang === currentLang) return;"
+        Warn "changeLanguage has no early return" "Add: if (lang === currentLang) return;"
     }
-} else { Warn "No se encuentra función changeLanguage" "Verificar que existe" }
+} else { Warn "Function changeLanguage not found" "Check that it exists" }
 
-# ─── CHECK 3: target=_blank sin rel=noopener en JS ───
-Title "Seguridad en enlaces"
+# ─── CHECK 3: target=_blank without rel=noopener in JS ───
+Title "Link security"
 $blankWithoutNoopener = @()
 $blankPattern = [regex]::Match($jsContent, '(?s)target\s*=\s*["'']_blank["'']')
 if ($blankPattern.Success) {
@@ -89,11 +89,11 @@ foreach ($f in $components) {
 if ($blankWithoutNoopener.Count -eq 0) { Pass "Todos los target=_blank tienen rel=noopener" }
 else {
     $msg = "target=_blank sin rel=noopener:`n$($blankWithoutNoopener -join "`n")"
-    Warn $msg "Añadir rel='noopener noreferrer' a todos los enlaces externos"
+    Warn $msg "Add rel='noopener noreferrer' to all external links"
 }
 
-# ─── CHECK 4: btn-primary referenciado pero sin CSS ───
-Title "Clases CSS referenciadas"
+# ─── CHECK 4: btn-primary referenced but missing CSS ───
+Title "Referenced CSS classes"
 $cssFile = "$root\src\styles\global.css"
 $cssContent = Get-Content $cssFile -Raw
 $btnPrimaryInJS = $jsContent -match 'btn-primary'
@@ -103,29 +103,29 @@ if (($btnPrimaryInJS -or $btnPrimaryInAstro -gt 0) -and -not $btnPrimaryInCSS) {
     $refs = @()
     if ($btnPrimaryInJS) { $refs += "client.js" }
     if ($btnPrimaryInAstro -gt 0) { $refs += "$btnPrimaryInAstro componente(s) Astro" }
-    Warn "btn-primary usado en $($refs -join ', ') pero NO definido en CSS" "Definir .btn-primary en global.css o eliminar la clase"
-} elseif ($btnPrimaryInCSS) { Pass "btn-primary definido en CSS" }
-else { Pass "btn-primary no referenciado — no aplica" }
+    Warn "btn-primary used in $($refs -join ', ') but NOT defined in CSS" "Define .btn-primary in global.css or remove the class"
+} elseif ($btnPrimaryInCSS) { Pass "btn-primary defined in CSS" }
+else { Pass "btn-primary not referenced — N/A" }
 
-# ─── CHECK 5: window.* globals no declaradas ───
-Title "Variables globales"
+# ─── CHECK 5: window.* undeclared globals ───
+Title "Global variables"
 $windowRefs = [regex]::Matches($jsContent, 'window\.\w+')
 $problematicGlobals = @()
 foreach ($wr in $windowRefs) {
     $name = $wr.Value
     if ($name -match 'window\.(DATA|changeLanguage|renderAll)') {
         $lineNum = ($jsContent.Substring(0, $wr.Index).ToCharArray() | Where-Object { $_ -eq "`n" }).Count + 1
-        $problematicGlobals += "  Línea ${lineNum}: $name"
+        $problematicGlobals += "  Line ${lineNum}: $name"
     }
 }
 if ($problematicGlobals.Count -eq 0) { Pass "Sin window.* globales problemáticas" }
 else {
     $msg = "window.* encontrados:`n$($problematicGlobals -join "`n")"
-    Fail $msg "Eliminar dependencia de window.* — datos van en data-data, eventos en addEventListener"
+    Fail $msg "Remove window.* dependency — data goes in data-data, events in addEventListener"
 }
 
-# ─── CHECK 6: init() llama a renderAll? ───
-Title "Flujo de inicialización"
+# ─── CHECK 6: does init() call renderAll? ───
+Title "Initialization flow"
 if ($jsContent -match 'function\s+init\s*\(') {
     $initBody = ""
     $idx = $jsContent.IndexOf('function init')
@@ -138,27 +138,27 @@ if ($jsContent -match 'function\s+init\s*\(') {
     }
     if ($initBody -match 'renderAll') { Pass "init() llama a renderAll()" }
     else {
-        Fail "init() NO llama a renderAll() — visitante con EN guardado ve secciones mixtas ES/EN" "Añadir renderAll() o changeLanguage(savedLang) al final de init()"
+        Fail "init() does NOT call renderAll() — visitor with EN saved sees mixed ES/EN sections" "Add renderAll() or changeLanguage(savedLang) at end of init()"
     }
-} else { Fail "No se encuentra función init() en client.js" "Añadir init() como entry point" }
+} else { Fail "Function init() not found in client.js" "Add init() as entry point" }
 
-# ─── CHECK 7: Comillas/patrones inconsistentes ───
-Title "Consistencia"
+# ─── CHECK 7: Quotes/inconsistent patterns ───
+Title "Consistency"
 $singleQuotes = ($jsContent.ToCharArray() | Where-Object { $_ -eq "'" }).Count
 $doubleQuotes = ($jsContent.ToCharArray() | Where-Object { $_ -eq '"' }).Count
 if ($singleQuotes -gt $doubleQuotes * 1.5 -or $doubleQuotes -gt $singleQuotes * 1.5) {
-    $dominant = if ($singleQuotes -gt $doubleQuotes) { "simples" } else { "dobles" }
-    Warn "Predominan comillas $dominant ($singleQuotes simples vs $doubleQuotes dobles)" "Unificar estilo de comillas si es posible"
-} else { Pass "Uso equilibrado de comillas ($singleQuotes simples, $doubleQuotes dobles)" }
+    $dominant = if ($singleQuotes -gt $doubleQuotes) { "single" } else { "double" }
+    Warn "Predominantly $dominant quotes ($singleQuotes single vs $doubleQuotes double)" "Unify quote style if possible"
+} else { Pass "Balanced quote usage ($singleQuotes single, $doubleQuotes double)" }
 
-# ─── RESUMEN ───
+# ─── SUMMARY ───
 Write-Host "`n═══════════════════════════════════════" -ForegroundColor Cyan
-Write-Host "  RESUMEN JS LOGIC" -ForegroundColor Cyan
+Write-Host "  JS LOGIC SUMMARY" -ForegroundColor Cyan
 Write-Host "  PASS: $($passes.Count)   FAIL: $($failures.Count)   WARN: $($warnings.Count)" -ForegroundColor Cyan
 Write-Host "═══════════════════════════════════════" -ForegroundColor Cyan
 
 if ($failures.Count -gt 0 -or $warnings.Count -gt 0) {
-    Write-Host "`n── PLAN DE ACCIÓN ──" -ForegroundColor Cyan
+    Write-Host "`n── ACTION PLAN ──" -ForegroundColor Cyan
     foreach ($f in $failures) {
         Write-Host "`n[FAIL]" -ForegroundColor Red -NoNewline; Write-Host " $($f.message)"
         Write-Host "  -> $($f.plan)" -ForegroundColor White

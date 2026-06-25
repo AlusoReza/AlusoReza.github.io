@@ -1,6 +1,6 @@
 # .agents/tests/check-paths.ps1
-# Test de integridad de rutas de archivos
-# Ejecutar: pwsh .agents/tests/check-paths.ps1
+# File path integrity test
+# Run: pwsh .agents/tests/check-paths.ps1
 
 $root = Resolve-Path "$PSScriptRoot\..\.."
 
@@ -25,39 +25,39 @@ function Title($t) {
 }
 
 # ─── CHECK 1: CV PDF ───
-Title "Archivos estáticos"
+Title "Static files"
 $cvPath = "$root\public\assets\Alonso_Reza_CV.pdf"
 $cvExists = Test-Path $cvPath -PathType Leaf
 $cvsFound = Get-ChildItem "$root\public" -Recurse -Filter "*CV*" -ErrorAction SilentlyContinue
-if ($cvExists) { Pass "CV.pdf existe en public/assets/" }
+if ($cvExists) { Pass "CV.pdf exists in public/assets/" }
 else {
     $hint = ""
-    if ($cvsFound) { $hint = " — pero se encontró en $($cvsFound.FullName)" }
-    Fail "CV.pdf NO existe en public/assets/Alonso_Reza_CV.pdf$hint" "Añadir el archivo CV en public/assets/ o actualizar la ruta en profile.json y Contact.astro"
+    if ($cvsFound) { $hint = " — but found at $($cvsFound.FullName)" }
+    Fail "CV.pdf NOT found in public/assets/Alonso_Reza_CV.pdf$hint" "Add CV file to public/assets/ or update path in profile.json and Contact.astro"
 }
 
 # ─── CHECK 2: perfil.jpg ───
 $profileImg = "$root\public\assets\perfil.jpg"
-if (Test-Path $profileImg -PathType Leaf) { Pass "perfil.jpg existe en public/assets/" }
-else { Fail "perfil.jpg NO encontrado en public/assets/" "Añadir la foto de perfil en public/assets/perfil.jpg" }
+if (Test-Path $profileImg -PathType Leaf) { Pass "perfil.jpg exists in public/assets/" }
+else { Fail "perfil.jpg NOT found in public/assets/" "Add profile picture to public/assets/perfil.jpg" }
 
 # ─── CHECK 3: favicon ───
 $favicon = "$root\public\assets\favicon.ico"
-if (Test-Path $favicon -PathType Leaf) { Pass "favicon.ico existe en public/assets/" }
-else { Warn "favicon.ico NO encontrado en public/assets/" "Añadir favicon o actualizar ruta en BaseLayout.astro" }
+if (Test-Path $favicon -PathType Leaf) { Pass "favicon.ico exists in public/assets/" }
+else { Warn "favicon.ico NOT found in public/assets/" "Add favicon or update path in BaseLayout.astro" }
 
-# ─── CHECK 4: docs/certificates/ tiene .gitkeep ───
-Title "Certificados"
+# ─── CHECK 4: docs/certificates/ has .gitkeep ───
+Title "Certificates"
 $gitkeep = "$root\docs\certificates\.gitkeep"
-if (Test-Path $gitkeep -PathType Leaf) { Pass ".gitkeep existe en docs/certificates/" }
-else { Warn ".gitkeep NO encontrado en docs/certificates/" "Añadir .gitkeep para mantener la carpeta trackeada" }
+if (Test-Path $gitkeep -PathType Leaf) { Pass ".gitkeep exists in docs/certificates/" }
+else { Warn ".gitkeep NOT found in docs/certificates/" "Add .gitkeep to keep the folder tracked" }
 
-# ─── CHECK 5: Sin carpeta certificates/ en root ───
+# ─── CHECK 5: No certificates/ folder in root ───
 $oldCertDir = "$root\certificates"
 if (Test-Path $oldCertDir -PathType Container) {
     $oldFiles = Get-ChildItem $oldCertDir -File
-    Warn "Todavía existe la carpeta certificates/ en raíz con $($oldFiles.Count) archivo(s)" "Mover contenido a docs/certificates/ y eliminar la carpeta raíz"
-} else { Pass "Sin carpeta certificates/ residual en raíz" }
+    Warn "Root certificates/ folder still exists with $($oldFiles.Count) file(s)" "Move contents to docs/certificates/ and delete root folder"
+} else { Pass "No residual root certificates/ folder" }
 
 # ─── CHECK 6: PDFs en docs/certificates/ (ignorados) ───
 $certPdfs = Get-ChildItem "$root\docs\certificates" -Filter *.pdf -ErrorAction SilentlyContinue
@@ -70,37 +70,37 @@ if ($certPdfs.Count -gt 0) {
         if ($ignored) { $ignoredCount++ }
         else { $trackedCount++; Write-Host "  [WARN] $rel NO está gitignorado" -ForegroundColor Yellow }
     }
-    if ($trackedCount -eq 0) { Pass "$($certPdfs.Count) PDF(s) en docs/certificates/ — todos ignorados por git" }
-    else { Warn "$trackedCount PDF(s) no están gitignorados" "Actualizar .gitignore para ignorar docs/certificates/*" }
-} else { Pass "Sin PDFs en docs/certificates/ (o todos ignorados)" }
+    if ($trackedCount -eq 0) { Pass "$($certPdfs.Count) PDF(s) in docs/certificates/ — all gitignored" }
+    else { Warn "$trackedCount PDF(s) are NOT gitignored" "Update .gitignore to ignore docs/certificates/*" }
+} else { Pass "No PDFs in docs/certificates/ (or all gitignored)" }
 
-# ─── CHECK 7: Consistencia paths assets ───
-Title "Consistencia de rutas"
+# ─── CHECK 7: Asset path consistency ───
+Title "Path consistency"
 $profileJson = Get-Content "$root\src\data\profile.json" -Raw
 $contactAstro = Get-Content "$root\src\components\Contact.astro" -Raw
 $baseLayout = Get-Content "$root\src\layouts\BaseLayout.astro" -Raw
 $cvRelPaths = @()
 if ($profileJson -match '"cvPath"\s*:\s*"([^"]+)"') {
     $cvPathStr = $matches[1]
-    if ($cvPathStr -notmatch '^/') { $cvRelPaths += "profile.json: cvPath = '$cvPathStr' (relativo)" }
+    if ($cvPathStr -notmatch '^/') { $cvRelPaths += "profile.json: cvPath = '$cvPathStr' (relative)" }
 }
 if ($contactAstro -match 'href="([^"]*CV[^"]*)"') {
     $href = $matches[1]
-    if ($href -notmatch '^/') { $cvRelPaths += "Contact.astro: href = '$href' (relativo)" }
+    if ($href -notmatch '^/') { $cvRelPaths += "Contact.astro: href = '$href' (relative)" }
 }
 if ($baseLayout -match 'href="/assets/favicon') { $favAbs = $true }
 if ($cvRelPaths.Count -gt 0) {
-    Warn "Rutas relativas de CV (inconsistente con favicon absoluto):`n$($cvRelPaths -join "`n")" "Usar rutas absolutas /assets/... para consistencia"
-} else { Pass "Todas las rutas de assets usan paths absolutos" }
+    Warn "Relative CV paths (inconsistent with absolute favicon):`n$($cvRelPaths -join "`n")" "Use absolute paths /assets/... for consistency"
+} else { Pass "All asset paths use absolute paths" }
 
-# ─── RESUMEN ───
+# ─── SUMMARY ───
 Write-Host "`n═══════════════════════════════════════" -ForegroundColor Cyan
-Write-Host "  RESUMEN PATHS" -ForegroundColor Cyan
+Write-Host "  PATHS SUMMARY" -ForegroundColor Cyan
 Write-Host "  PASS: $($passes.Count)   FAIL: $($failures.Count)   WARN: $($warnings.Count)" -ForegroundColor Cyan
 Write-Host "═══════════════════════════════════════" -ForegroundColor Cyan
 
 if ($failures.Count -gt 0 -or $warnings.Count -gt 0) {
-    Write-Host "`n── PLAN DE ACCIÓN ──" -ForegroundColor Cyan
+    Write-Host "`n── ACTION PLAN ──" -ForegroundColor Cyan
     foreach ($f in $failures) {
         Write-Host "`n[FAIL]" -ForegroundColor Red -NoNewline; Write-Host " $($f.message)"
         Write-Host "  -> $($f.plan)" -ForegroundColor White

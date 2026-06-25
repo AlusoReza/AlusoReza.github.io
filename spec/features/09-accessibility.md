@@ -1,8 +1,8 @@
-# 09 — Accesibilidad
+# 09 — Accessibility
 
-## Propósito
+## Purpose
 
-Garantizar que el portfolio sea utilizable por personas con sensibilidades al movimiento.
+Ensure the portfolio is usable by people with motion sensitivities.
 
 ## prefers-reduced-motion
 
@@ -21,7 +21,7 @@ Garantizar que el portfolio sea utilizable por personas con sensibilidades al mo
 }
 ```
 
-Patrón WCAG recomendado: el `!important` universal es intencional y necesario para overridear todas las transiciones.
+Recommended WCAG pattern: the universal `!important` is intentional and necessary to override all transitions.
 
 ### JavaScript
 ```javascript
@@ -34,15 +34,15 @@ if (motionOK) {
 }
 ```
 
-Si el usuario tiene activado `prefers-reduced-motion`:
-- No se registra el event listener de scroll → cero animaciones.
-- Todos los elementos `.reveal` se muestran inmediatamente visibles.
+If the user has `prefers-reduced-motion` enabled:
+- The scroll event listener is not registered → zero animations.
+- All `.reveal` elements are immediately visible.
 
-## Reglas
-- **No eliminar el `!important`** en el bloque `prefers-reduced-motion` — es necesario por especificidad.
-- **No añadir `!important` fuera** de ese bloque.
-- El JS debe respetar la misma media query que el CSS.
+## Rules
+- **Do not remove `!important`** in the `prefers-reduced-motion` block — it's required for specificity.
+- **Do not add `!important` outside** that block.
+- The JS must respect the same media query as the CSS.
 
-## Código relevante
-- `src/styles/global.css:782-792` — bloque CSS prefers-reduced-motion
-- `src/scripts/client.js:114-120` — detección JS + scroll condicional
+## Relevant code
+- `src/styles/global.css:782-792` — prefers-reduced-motion CSS block
+- `src/scripts/client.js:114-120` — JS detection + conditional scroll

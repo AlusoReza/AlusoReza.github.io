@@ -1,40 +1,40 @@
-# 01 — Arquitectura
+# 01 — Architecture
 
-## Propósito
+## Purpose
 
-Define la arquitectura two-phase del portfolio: renderizado estático en build-time (Astro) + hidratación dinámica en cliente (JS vanilla).
+Defines the two-phase architecture of the portfolio: static render at build-time (Astro) + dynamic client-side hydration (vanilla JS).
 
-## Fases
+## Phases
 
-### Fase 1: Build-time (Astro)
-- Astro compila todos los `.astro` a HTML estático.
-- El layout `BaseLayout.astro` serializa los 7 JSONs de `src/data/` en un objeto `dataBundle` mediante `JSON.stringify()`.
-- Este string se inyecta como atributo `data-data` en la etiqueta `<body>`.
-- Los componentes renderizan el contenido en español por defecto.
-- Las secciones con arrays vacíos (`experience`, `certificates`) reciben `style="display:none"`.
+### Phase 1: Build-time (Astro)
+- Astro compiles all `.astro` files to static HTML.
+- The `BaseLayout.astro` layout serializes the 7 JSONs from `src/data/` into a `dataBundle` object using `JSON.stringify()`.
+- This string is injected as a `data-data` attribute on the `<body>` tag.
+- Components render content in Spanish by default.
+- Sections with empty arrays (`experience`, `certificates`) receive `style="display:none"`.
 
-### Fase 2: Client-side (browser)
-- `client.js` se carga como script externo (bundled por Astro).
-- Lee `JSON.parse(document.body.dataset.data)` — el navegador decodifica HTML entities automáticamente.
-- Carga el idioma guardado de `localStorage`.
-- Si el idioma no es español, ejecuta `changeLanguage()` que re-renderiza todas las secciones.
+### Phase 2: Client-side (browser)
+- `client.js` loads as an external script (bundled by Astro).
+- Reads `JSON.parse(document.body.dataset.data)` — the browser auto-decodes HTML entities.
+- Loads the saved language from `localStorage`.
+- If the language is not Spanish, it runs `changeLanguage()` which re-renders all sections.
 
-## Flujo de datos
+## Data flow
 
 ```
 src/data/*.json
-    → BaseLayout.astro los importa y serializa
+    → BaseLayout.astro imports and serializes them
     → <body data-data={JSON.stringify({...})}>
     → client.js: JSON.parse(document.body.dataset.data)
     → renderAll() / changeLanguage()
 ```
 
-## Reglas
-- **No usar fetch() para cargar JSONs en cliente** — todo viaja en el `data-data`.
-- **No usar `<script is:inline set:html>`** — los datos van en el atributo HTML.
-- **No exponer `window.DATA`** — los datos son accesibles solo desde `document.body.dataset.data`.
+## Rules
+- **Do not use fetch() to load JSONs on the client** — everything travels in `data-data`.
+- **Do not use `<script is:inline set:html>`** — data goes in the HTML attribute.
+- **Do not expose `window.DATA`** — data is only accessible from `document.body.dataset.data`.
 
-## Código relevante
-- `src/layouts/BaseLayout.astro:13-14` — serialización del dataBundle
+## Relevant code
+- `src/layouts/BaseLayout.astro:13-14` — dataBundle serialization
 - `src/layouts/BaseLayout.astro:35` — `<body data-data={dataBundle}>`
 - `src/scripts/client.js:1` — `JSON.parse(document.body.dataset.data)`

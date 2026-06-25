@@ -1,6 +1,6 @@
 # .agents/tests/check-css-logic.ps1
-# Test de lógica CSS
-# Ejecutar: pwsh .agents/tests/check-css-logic.ps1
+# CSS logic test
+# Run: pwsh .agents/tests/check-css-logic.ps1
 
 $root = Resolve-Path "$PSScriptRoot\..\.."
 $css = "$root\src\styles\global.css"
@@ -27,22 +27,22 @@ function Title($t) {
     Write-Host "`n── $t ──" -ForegroundColor Cyan
 }
 
-# ─── CHECK 1: #1a1f26 hardcodeado ───
-Title "Colores hardcodeados"
+# ─── CHECK 1: #1a1f26 hardcoded ───
+Title "Hardcoded colors"
 $hard1a1f26 = @()
 for ($i = 0; $i -lt $cssLines.Count; $i++) {
-    if ($cssLines[$i] -match '#1a1f26') { $hard1a1f26 += "  Línea $($i+1): $($cssLines[$i].Trim())" }
+    if ($cssLines[$i] -match '#1a1f26') { $hard1a1f26 += "  Line $($i+1): $($cssLines[$i].Trim())" }
 }
 if ($hard1a1f26.Count -gt 0) {
     $msg = "#1a1f26 hardcodeado en $($hard1a1f26.Count) sitio(s):`n$($hard1a1f26 -join "`n")"
-    Warn $msg "Usar var(--color-bg-card) (#161b22) en su lugar"
+    Warn $msg "Use var(--color-bg-card) (#161b22) instead"
 } else { Pass "Sin #1a1f26 hardcodeado" }
 
-# ─── CHECK 2: #ffffff residual (no badge) ───
+# ─── CHECK 2: #ffffff residual (non-badge) ───
 $whiteResidual = @()
 for ($i = 0; $i -lt $cssLines.Count; $i++) {
     if ($cssLines[$i] -match 'color:\s*#ffffff' -and $cssLines[$i] -notmatch '\.(b-|tools-badges|badge)') {
-        $whiteResidual += "  Línea $($i+1): $($cssLines[$i].Trim())"
+        $whiteResidual += "  Line $($i+1): $($cssLines[$i].Trim())"
     }
 }
 if ($whiteResidual.Count -eq 0) { Pass "Sin #ffffff residual" }
@@ -51,8 +51,8 @@ else {
     Warn $msg "Usar var(--color-text-bright)"
 }
 
-# ─── CHECK 3: Clases usadas en componentes pero no en CSS ───
-Title "Clases sin definir"
+# ─── CHECK 3: Classes used in components but not in CSS ───
+Title "Undefined classes"
 $allAstroContent = (Get-ChildItem "$root\src\components\*.astro" | Get-Content -Raw) -join "`n"
 $clientJs = Get-Content "$root\src\scripts\client.js" -Raw
 $allContent = $allAstroContent + "`n" + $clientJs
@@ -82,10 +82,10 @@ if (($hasBtnPrimaryAstro -or $hasBtnPrimaryJS) -and -not $hasBtnPrimaryCSS) {
 }
 if ($undefined.Count -eq 0) { Pass "Todas las clases referenciadas están definidas en CSS" }
 else {
-    Warn "Clases referenciadas pero sin CSS: $($undefined -join ', ')" "Definir las clases faltantes o eliminar referencias"
+    Warn "Classes referenced but missing CSS: $($undefined -join ', ')" "Define missing classes or remove references"
 }
 
-# ─── CHECK 4: !important fuera de reduced-motion ───
+# ─── CHECK 4: !important outside reduced-motion ───
 Title "!important"
 $inMotionBlock = $false
 $motionDepth = 0
@@ -99,14 +99,14 @@ for ($i = 0; $i -lt $cssLines.Count; $i++) {
         if ($motionDepth -le 0) { $inMotionBlock = $false }
     }
     if ($line -match '!important' -and -not $inMotionBlock) {
-        $outsideImportant += "  Línea $($i+1): $($line.Trim())"
+        $outsideImportant += "  Line $($i+1): $($line.Trim())"
     }
 }
 if ($outsideImportant.Count -eq 0) { Pass "Sin !important fuera de reduced-motion" }
-else { Warn "!important fuera del bloque:`n$($outsideImportant -join "`n")" "Reemplazar por especificidad natural" }
+else { Warn "!important outside block:`n$($outsideImportant -join "`n")" "Replace with natural specificity" }
 
-# ─── CHECK 5: Variables CSS definidas pero no usadas ───
-Title "Variables CSS"
+# ─── CHECK 5: CSS variables defined but not used ───
+Title "CSS Variables"
 $definedVars = [regex]::Matches($cssContent, '(--[\w-]+)\s*:')
 $usedVars = [regex]::Matches($cssContent, 'var\((--[\w-]+)\)')
 $definedSet = @{}; $usedSet = @{}
@@ -127,16 +127,16 @@ foreach ($dv in $definedSet.Keys) {
 }
 $unused = $unused | Select-Object -Unique | Where-Object { $_ -ne "" }
 if ($unused.Count -eq 0) { Pass "Todas las variables CSS se usan" }
-else { Warn "Variables CSS definidas pero quizás no usadas: $($unused -join ', ')" "Revisar si son necesarias" }
+else { Warn "CSS variables defined but possibly unused: $($unused -join ', ')" "Check if they are needed" }
 
-# ─── RESUMEN ───
+# ─── SUMMARY ───
 Write-Host "`n═══════════════════════════════════════" -ForegroundColor Cyan
-Write-Host "  RESUMEN CSS LOGIC" -ForegroundColor Cyan
+Write-Host "  CSS LOGIC SUMMARY" -ForegroundColor Cyan
 Write-Host "  PASS: $($passes.Count)   FAIL: $($failures.Count)   WARN: $($warnings.Count)" -ForegroundColor Cyan
 Write-Host "═══════════════════════════════════════" -ForegroundColor Cyan
 
 if ($failures.Count -gt 0 -or $warnings.Count -gt 0) {
-    Write-Host "`n── PLAN DE ACCIÓN ──" -ForegroundColor Cyan
+    Write-Host "`n── ACTION PLAN ──" -ForegroundColor Cyan
     foreach ($f in $failures) {
         Write-Host "`n[FAIL]" -ForegroundColor Red -NoNewline; Write-Host " $($f.message)"
         Write-Host "  -> $($f.plan)" -ForegroundColor White

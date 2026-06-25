@@ -1,29 +1,29 @@
-# 06 — Tipografía
+# 06 — Typography
 
-## Propósito
+## Purpose
 
-Define el sistema tipográfico del portfolio.
+Defines the typographic system of the portfolio.
 
-## Fuentes
+## Fonts
 
 ### Display: Space Grotesk
-- **Propósito:** Títulos, nombre del perfil, badges, labels de skills/educación.
-- **Carácter:** Técnico, geométrico, evoca matemáticas y código.
-- **Pesos:** 400, 500, 600, 700.
-- **Carga:** Google Fonts vía `<link>` en `<head>` de `BaseLayout.astro`.
+- **Purpose:** Titles, profile name, badges, skill/education labels.
+- **Character:** Technical, geometric, evokes math and code.
+- **Weights:** 400, 500, 600, 700.
+- **Loading:** Google Fonts via `<link>` in `<head>` of `BaseLayout.astro`.
 
 ### Body: Inter
-- **Propósito:** Texto de párrafos, descripciones, navegación.
-- **Carácter:** Optimizada para pantalla, excelente legibilidad en pesos ligeros.
-- **Pesos:** 400, 500, 600, 700.
-- **Variable CSS:** `--font-body`.
+- **Purpose:** Paragraph text, descriptions, navigation.
+- **Character:** Optimized for screen, excellent readability at light weights.
+- **Weights:** 400, 500, 600, 700.
+- **CSS Variable:** `--font-body`.
 
-## Jerarquía
+## Hierarchy
 
-| Elemento | Font | Tamaño | Peso |
-|----------|------|--------|------|
-| h1 (nombre) | `--font-display` | 2.5em | 600 |
-| h2 (secciones) | `--font-display` | — | 600 |
+| Element | Font | Size | Weight |
+|---------|------|------|--------|
+| h1 (name) | `--font-display` | 2.5em | 600 |
+| h2 (sections) | `--font-display` | — | 600 |
 | .subtitle | `--font-body` | 1.1em | — |
 | body | `--font-body` | — | 400 |
 | .badge | `--font-display` | 0.8em | 600 |
@@ -31,12 +31,12 @@ Define el sistema tipográfico del portfolio.
 | .edu-header strong | `--font-display` | 1.15em | 600 |
 | nav a | `--font-body` | 0.85em | 500 |
 
-## Reglas
-- **No mezclar fuentes** en el mismo contexto. Display para títulos, body para texto.
-- **Cargar con `display=swap`** para evitar FOIT (Flash of Invisible Text).
+## Rules
+- **Do not mix fonts** in the same context. Display for titles, body for text.
+- **Load with `display=swap`** to avoid FOIT (Flash of Invisible Text).
 
-## Código relevante
-- `src/styles/global.css:12-13` — declaración de variables de fuente
-- `src/styles/global.css:22` — font-family en body
-- `src/styles/global.css:37` — font-family en h2
+## Relevant code
+- `src/styles/global.css:12-13` — font variable declarations
+- `src/styles/global.css:22` — font-family on body
+- `src/styles/global.css:37` — font-family on h2
 - `src/layouts/BaseLayout.astro:30-32` — Google Fonts <link>

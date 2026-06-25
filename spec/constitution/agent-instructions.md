@@ -19,11 +19,11 @@ Static portfolio site built with **Astro 5** (static output), vanilla CSS, and v
 ## Project structure
 ```
 spec/
-├── constitution/    — Metaspec SDD, agent instructions, project overview,
-│                       roadmap, changelog
-├── features/        — 13 módulos detallados (contratos, flujo, diseño, tests…)
-├── template/        — Plantillas (AGENTS_TEMPLATE.md, spec-template.md)
-└── glossary.md      — Definiciones del dominio (SDD, MCP, data-data…)
+├── constitution/    — SDD metadocs: project overview, agent instructions,
+│                       roadmap, changelog, bugs
+├── features/        — 14 detailed feature specs (contracts, flow, design, tests…)
+├── template/        — Templates (AGENTS_TEMPLATE.md, spec-template.md)
+└── glossary.md      — Domain definitions (SDD, MCP, data-data…)
 
 src/
 ├── components/       — 10 Astro components (Nav, LangSwitcher, Profile, About,
@@ -47,18 +47,18 @@ src/
     └── certificates.json
 
 docs/
-├── bitacora.md          — Resumen global escaneable del flujo de trabajo
-├── certificates/        — PDFs de certificados (ignorados por git, solo .gitkeep)
-└── logs/                — Logs detallados por día (YYYY-MM-DD.md)
+├── bitacora.md          — Global scannable workflow summary
+├── certificates/        — Certificate PDFs (ignored by git, only .gitkeep)
+└── logs/                — Detailed logs by day (YYYY-MM-DD.md)
 
 .agents/
-├── skills/              — Skills instaladas (frontend-design)
-├── tests/               — Scripts de verificación (check-mcp.ps1, check-frontend-design.ps1)
-└── skills-lock.json     — Registro de skills
+├── skills/              — Installed skills (frontend-design)
+├── tests/               — Verification scripts (check-mcp.ps1, check-frontend-design.ps1)
+└── skills-lock.json     — Skill registry
 
 public/
 ├── assets/               — perfil.jpg, favicon.ico (CV.pdf optional)
-└── certificates/.gitkeep — (mantenido por compatibilidad)
+└── certificates/.gitkeep — (kept for compatibility)
 ```
 
 ## Conventions
@@ -94,24 +94,28 @@ public/
   4. Agent writes the entry to `src/data/certificates.json` using the bilingual format
   5. Section auto-appears on page reload (hidden if array is empty)
 - **Adding content:** Edit the corresponding JSON file in `src/data/` — no component changes required.
-- **Contexto histórico:** Si el usuario pregunta o hace referencia a algo trabajado en sesiones anteriores y no está en tu ventana de contexto actual, escanea automáticamente `docs/logs/` y `docs/bitacora.md` para reconstruir el contexto antes de responder.
-- **Session log (IMPORTANTE — SIEMPRE, build-driven):**
-  1. **BEFORE — snapshot inicial**: antes del primer cambio de la sesión, ejecutar `git diff` y `git diff --stat` para capturar el estado limpio. Crear `docs/logs/YYYY-MM-DD.md` si no existe. Añadir `## Sesión N — Título descriptivo` con `### Prompt` (resumen de lo que pidió el usuario) y, si ya hay plan aprobado, `### Plan`.
-  2. **AFTER EVERY BUILD** (inmediatamente después de `npm run build`, `npm run update` o cualquier comando que compile):
-     - Capturar el output completo del build (éxito/fallo, tiempo, errors, warnings).
-     - Ejecutar `git diff --stat` y `git diff` para identificar TODOS los archivos modificados desde el snapshot inicial.
-     - Consultar `docs/logs/YYYY-MM-DD.md`:
-       - **¿Hay una sesión activa?** — una sesión con `### Prompt` y `### Plan` pero que le falta `### Cambios` o `### Build`. → Completarla: rellenar `### Cambios` con cada archivo modificado (rutas, líneas, descripción del cambio y por qué) y `### Build` con el comando ejecutado, resultado, tiempo, y cualquier warning/error relevante.
-       - **¿NO hay sesión activa?** (el build ocurrió sin que se creara previamente una cabecera de sesión) → Crear una nueva sesión desde cero: auto-generar `### Prompt` reconstruido del contexto reciente de la conversación, escribir `### Cambios` a partir del `git diff`, y escribir `### Build` con el comando y output capturados.
-     - Actualizar `docs/bitacora.md` con una entrada resumida (fecha, sesión, prompt breve + plan en 2-3 líneas).
-     - Resetear el snapshot inicial con `git diff --stat` para que el próximo build solo capture cambios nuevos.
-  3. **No hay excepciones.** Este check se ejecuta después de CADA build, haya o no sesión previa. Si no hay cambios detectados por `git diff`, indicarlo explícitamente en `### Cambios`.
+- **Historical context:** If the user asks about or references work from previous sessions that is not in your current context window, automatically scan `docs/logs/` and `docs/bitacora.md` to reconstruct the context before responding.
+- **Session log (IMPORTANT — ALWAYS, build-driven):**
+  1. **BEFORE — initial snapshot**: before the first change of the session, run `git diff` and `git diff --stat` to capture the clean state. Create `docs/logs/YYYY-MM-DD.md` if it does not exist. Add `## Session N — Descriptive title` with `### Prompt` (summary of what the user requested) and, if a plan was approved, `### Plan`.
+  2. **AFTER EVERY BUILD** (immediately after `npm run build`, `npm run update` or any compile command):
+     - Capture the full build output (success/failure, time, errors, warnings).
+     - Run `git diff --stat` and `git diff` to identify ALL files modified since the initial snapshot.
+     - Check `docs/logs/YYYY-MM-DD.md`:
+       - **Is there an active session?** — a session with `### Prompt` and `### Plan` but missing `### Changes` or `### Build`. → Complete it: fill in `### Changes` with each modified file (paths, lines, change description and why) and `### Build` with the command, result, time, and any relevant warnings/errors.
+       - **Is there NO active session?** (the build occurred without a prior session header) → Create a new session from scratch: auto-generate `### Prompt` reconstructed from recent conversation context, write `### Changes` from `git diff`, and write `### Build` with the command and captured output.
+     - Update `docs/bitacora.md` with a summary entry (date, session, brief prompt + plan in 2-3 lines).
+     - Reset the initial snapshot with `git diff --stat` so the next build only captures new changes.
+  3. **No exceptions.** This check runs after EVERY build, whether or not a prior session exists. If no changes are detected by `git diff`, state this explicitly in `### Changes`.
 
 ## Tests
-- **"Comprueba MCP"** → el agente ejecuta `.agents/tests/check-mcp.ps1` y revisa los resultados. FAILs graves reciben plan de corrección; WARNs se discuten contigo.
-- **"Comprueba skill"** → el agente ejecuta `.agents/tests/check-frontend-design.ps1` y revisa los resultados. FAILs graves reciben plan de corrección; WARNs requieren decisión estética tuya.
-- **Output esperado:** cada test muestra PASS/FAIL/WARN por check, más un resumen y un plan de acción detallado para cada incumplimiento.
-- **Protocolo:** el agente ejecuta el script, captura su output, y te propone el plan de acción. No aplica correcciones automáticas sin tu aprobación explícita.
+- **"Comprueba MCP"** → the agent runs `.agents/tests/run-all.ps1` and reviews results. Critical FAILs receive a fix plan; WARNs are discussed with you.
+- **Output expected:** each test shows PASS/FAIL/WARN per check, plus a summary and detailed action plan for each violation.
+- **Protocol:** the agent runs the script, captures its output, and proposes the action plan. Does not apply automatic fixes without your explicit approval.
+
+## Language Policy
+- **AI documentation language:** All content in `AGENTS.md`, `spec/`, `.agents/tests/`, and `docs/bitacora.md` must be written in English, regardless of the conversation language with the user.
+- **Session logs:** `docs/logs/` preserve the original chat language (entries are written in whatever language the conversation was held).
+- **Future additions:** Any new file created under `spec/`, `.agents/tests/`, or `docs/bitacora.md` must be written in English. If the user requests content in another language for these files, translate it to English before writing.
 
 ## Documentation
 - [README.md](../README.md) — project overview and social links

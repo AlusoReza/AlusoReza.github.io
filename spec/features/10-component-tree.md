@@ -1,26 +1,26 @@
-# 10 — Árbol de componentes
+# 10 — Component tree
 
-## Propósito
+## Purpose
 
-Inventario de los 10 componentes Astro del portfolio, con sus props, responsabilidades y relaciones.
+Inventory of the 10 Astro components in the portfolio, with their props, responsibilities and relationships.
 
-## Lista de componentes
+## Component list
 
 | Componente | Archivo | Props | Responsabilidad |
 |------------|---------|-------|-----------------|
-| BaseLayout | `layouts/BaseLayout.astro` | title, description | Shell HTML, data-data, Google Fonts, bundles |
-| Nav | `components/Nav.astro` | — | Navegación sticky con links a secciones |
-| LangSwitcher | `components/LangSwitcher.astro` | — | Botones ES/EN con `data-lang` |
-| Profile | `components/Profile.astro` | data, lang | Foto, nombre, subtítulo, badges |
-| About | `components/About.astro` | data | Párrafos "Sobre mí" con `set:html` |
-| Skills | `components/Skills.astro` | data | Grid de habilidades + nota de personalidad |
-| Education | `components/Education.astro` | data | Timeline formativo con hover interactivo |
-| Projects | `components/Projects.astro` | data | Tarjetas de proyecto con enlaces |
-| Experience | `components/Experience.astro` | data | Experiencia laboral (auto-hide si vacío) |
-| Certificates | `components/Certificates.astro` | data | Certificados (auto-hide si vacío) |
-| Contact | `components/Contact.astro` | data | Footer con botones sociales + CV |
+| BaseLayout | `layouts/BaseLayout.astro` | title, description | HTML shell, data-data, Google Fonts, bundles |
+| Nav | `components/Nav.astro` | — | Sticky navigation with section links |
+| LangSwitcher | `components/LangSwitcher.astro` | — | ES/EN buttons with `data-lang` |
+| Profile | `components/Profile.astro` | data, lang | Photo, name, subtitle, badges |
+| About | `components/About.astro` | data | "About me" paragraphs with `set:html` |
+| Skills | `components/Skills.astro` | data | Skills grid + personality note |
+| Education | `components/Education.astro` | data | Educational timeline with interactive hover |
+| Projects | `components/Projects.astro` | data | Project cards with links |
+| Experience | `components/Experience.astro` | data | Work experience (auto-hide if empty) |
+| Certificates | `components/Certificates.astro` | data | Certificates (auto-hide if empty) |
+| Contact | `components/Contact.astro` | data | Footer with social buttons + CV |
 
-## Relaciones
+## Relationships
 
 ```
 BaseLayout
@@ -37,15 +37,15 @@ BaseLayout
     └── Contact
 ```
 
-## Carga de datos
+## Data loading
 
-`index.astro` importa `BaseLayout` y le pasa los 7 JSONs como `data`. `BaseLayout` los serializa en `data-data` y los pasa a los componentes como props.
+`index.astro` imports `BaseLayout` and passes it the 7 JSONs as `data`. `BaseLayout` serializes them into `data-data` and passes them to components as props.
 
-## Reglas
-- Los componentes **no importan datos directamente** — los reciben como props.
-- Los componentes **no tienen lógica de negocio** — solo renderizan.
-- `set:html` solo en elementos HTML (no en `<script>`).
+## Rules
+- Components **do not import data directly** — they receive it as props.
+- Components **have no business logic** — they only render.
+- `set:html` only on HTML elements (not in `<script>`).
 
-## Código relevante
+## Relevant code
 - `src/pages/index.astro` — entry point
-- `src/components/*.astro` — los 10 componentes
+- `src/components/*.astro` — the 10 components

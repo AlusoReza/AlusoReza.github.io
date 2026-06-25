@@ -1,24 +1,24 @@
 # Roadmap — Alonso Suárez Reza Portfolio
 
-## Estado actual (25/06/2026)
-- Portfolio funcional con Astro 5, data-driven, bilingüe (ES/EN)
-- Tests MCP y frontend-design implementados (22 checks)
-- Sistema de logging build-driven operativo
-- Especificaciones SDD completadas
+## Current state (25/06/2026)
+- Functional portfolio with Astro 5, data-driven, bilingual (ES/EN)
+- MCP and frontend-design tests implemented (22 checks + 4 modular test scripts)
+- Build-driven logging system operational
+- SDD specifications completed
 
-## Próximos pasos
+## Next steps
 
-### Corto plazo
-- Instalar mcp de todos los lenguajes de programación instalados en este pryecto para comprobar que se esté aplicando todo correctamente.
--Agregar cv.
+### Short term
+- Install MCP for all programming languages used in this project to verify everything is applied correctly.
+- Add CV file.
 
-- [ ] Revisar `#1a1f26` hardcodeado en `.badge` (línea 195 de `global.css`) — posible migración a `var(--color-bg-card)`
-- [ ] Verificar que todos los paths de `public/certificates/` → `docs/certificates/` están actualizados en referencias
+- [ ] Review `#1a1f26` hardcoded in `.badge` (line 195 of `global.css`) — possible migration to `var(--color-bg-card)`
+- [ ] Verify all paths from `public/certificates/` → `docs/certificates/` are updated in references
 
-### Medio plazo
-- [ ] Añadir más tests de integración (build output, HTML snapshot)
-- [ ] Explorar modo claro (light theme) como toggle
+### Medium term
+- [ ] Add more integration tests (build output, HTML snapshot)
+- [ ] Explore light theme as a toggle
 
-### Largo plazo
-- [ ] Migrar a i18n con `@astrojs/netlify` o similar si se necesita SSR
-- [ ] Añadir blog o sección de artículos técnicos -> Modularidad en distintas páginas.
+### Long term
+- [ ] Migrate i18n to `@astrojs/netlify` or similar if SSR is needed
+- [ ] Add blog or technical articles section → Modular pages

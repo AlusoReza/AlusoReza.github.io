@@ -1,26 +1,26 @@
-# Metaspec SDD — Alonso Suárez Reza Portfolio
+# SDD Metaspec — Alonso Suárez Reza Portfolio
 
-Este directorio contiene la especificación formal del proyecto siguiendo los principios de **Specification-Driven Development (SDD)**.
+This directory contains the formal specification of the project following **Specification-Driven Development (SDD)** principles.
 
-## Estructura
+## Structure
 
 ```
 spec/
-├── constitution/      — Metadocumentación: visión general, plan, histórico
-├── features/          — Especificaciones detalladas de cada feature (01 a 13)
-├── template/          — Plantillas reutilizables para escribir nuevas specs
-└── glossary.md        — Definiciones del dominio del proyecto
+├── constitution/      — Metadocs: overview, roadmap, changelog, bugs, agent instructions
+├── features/          — Detailed specifications for each feature (01 to 14)
+├── template/          — Reusable templates for writing new specs
+└── glossary.md        — Domain definitions
 ```
 
-## Convenciones
+## Conventions
 
-- Cada feature en `features/` se numera (`01-nombre.md`) para establecer orden de lectura.
-- Las specs se escriben en markdown plano, sin herramientas externas.
-- El contenido raíz (`AGENTS.md`, `README.md`) mantiene una versión operativa mínima; las specs contienen la documentación canónica y expandida.
+- Each feature in `features/` is numbered (`01-name.md`) to establish reading order.
+- Specs are written in plain markdown, no external tools.
+- Root content (`AGENTS.md`, `README.md`) keeps a minimal operational version; specs contain canonical and expanded documentation.
 
-## Cómo leer este spec
+## How to read this spec
 
-1. **Glosario** (`spec/glossary.md`) si encuentras un término desconocido.
-2. **Project overview** (`spec/constitution/project-overview.md`) para visión general.
-3. **Agent instructions** (`spec/constitution/agent-instructions.md`) si eres un agente de IA.
-4. **Features** (`spec/features/`) en orden numérico para profundizar en áreas específicas.
+1. **Glossary** (`spec/glossary.md`) if you find an unknown term.
+2. **Project overview** (`spec/constitution/project-overview.md`) for general vision.
+3. **Agent instructions** (`spec/constitution/agent-instructions.md`) if you are an AI agent.
+4. **Features** (`spec/features/`) in numerical order to dive into specific areas.

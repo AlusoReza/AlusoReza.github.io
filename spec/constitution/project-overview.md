@@ -34,6 +34,6 @@ A specialized tool designed to automate and simplify the creation of Docker envi
 - **LinkedIn:** [linkedin.com/in/alonsoreza](https://www.linkedin.com/in/alonsoreza)
 - **GitHub:** [github.com/AlusoReza](https://github.com/AlusoReza)
 
-## Documentación técnica
+## Technical documentation
 
-Para documentación detallada de la arquitectura, componentes, diseño y tests, consultar `spec/features/` (especificaciones modulares SDD).
+For detailed documentation on architecture, components, design and tests, see `spec/features/` (modular SDD specifications).

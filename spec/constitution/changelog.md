@@ -1,47 +1,47 @@
 # Changelog — Alonso Suárez Reza Portfolio
 
-## 2026-06-25 — Sesiones 1-6
+## 2026-06-25 — Sessions 1-9
 
-### Sesión 1 — Refactorización MCP
-- Reemplazo de script inline `is:inline set:html` por atributo `data-data` en `<body>`
-- Migración de `onclick` a `data-lang` + `addEventListener`
-- Eliminación de `window.DATA` y `window.changeLanguage`
-- Añadido `tsconfig.json` (extends `astro/tsconfigs/base`)
-- Creado `.agents/skills/frontend-design/SKILL.md`
+### Session 1 — MCP Refactoring
+- Replaced inline script `is:inline set:html` with `data-data` attribute on `<body>`
+- Migrated `onclick` to `data-lang` + `addEventListener`
+- Removed `window.DATA` and `window.changeLanguage`
+- Added `tsconfig.json` (extends `astro/tsconfigs/base`)
+- Created `.agents/skills/frontend-design/SKILL.md`
 
-### Sesión 2 — Refactorización de diseño
-- Tipografía: Space Grotesk (display) + Inter (body)
-- Paleta: acento `#7fc1fe`, 11 variables `:root` con valores reales
-- Cuadrícula computacional como fondo del hero
-- Subtítulo reformulado como tesis profesional
-- Eliminación de emojis de headings
+### Session 2 — Design Refactoring
+- Typography: Space Grotesk (display) + Inter (body)
+- Palette: accent `#7fc1fe`, 11 `:root` variables with real values
+- Computational grid as hero background
+- Subtitle reformulated as professional thesis
+- Removed emojis from headings
 
-### Sesión 3 — Corrección de color y subtítulo
-- Bugfix crítico: variables `:root` auto-referenciales → valores reales
-- `.btn-outline` migrado de tema claro a dark theme
-- Hero simplificado: "Desarrollador de software / Software developer"
+### Session 3 — Color and subtitle fix
+- Critical bugfix: self-referential `:root` variables → real values
+- `.btn-outline` migrated from light theme to dark theme
+- Hero simplified: "Desarrollador de software / Software developer"
 - Tags: "Backend · Datos · Sistemas" → "Full Stack · IA · Agentes"
 
-### Sesión 4 — Sistema de logging automático
-- Creado `docs/logs/` con formato `YYYY-MM-DD.md`
-- Creado `docs/bitacora.md` como resumen global
-- AGENTS.md actualizado con workflow build-driven
+### Session 4 — Automatic logging system
+- Created `docs/logs/` with `YYYY-MM-DD.md` format
+- Created `docs/bitacora.md` as global summary
+- AGENTS.md updated with build-driven workflow
 
-### Sesión 5 — Anclaje de contexto y actualización de logs
-- Resumen estructurado de todo el trabajo realizado
-- Corrección del protocolo de logging
+### Session 5 — Context anchoring and log update
+- Structured summary of all work done
+- Corrected logging protocol
 
-### Sesión 6 — Tests MCP y Frontend Design
-- Creado `.agents/tests/check-mcp.ps1` (16 checks)
-- Creado `.agents/tests/check-frontend-design.ps1` (22 checks)
-- Añadido `skills-lock.json` faltante
-- AGENTS.md: añadida sección `## Tests`
-- Corregidos 7 `color: #ffffff` → `var(--color-text-bright)`
+### Session 6 — MCP and Frontend Design Tests
+- Created `.agents/tests/check-mcp.ps1` (16 checks)
+- Created `.agents/tests/check-frontend-design.ps1` (22 checks)
+- Added missing `skills-lock.json`
+- AGENTS.md: added `## Tests` section
+- Fixed 7 `color: #ffffff` → `var(--color-text-bright)`
 
-### Sesión 7 — Reestructuración SDD
-- Creado `spec/` con `constitution/`, `features/`, `template/`
-- Movido `certificates/` raíz → `docs/certificates/`
-- Movido `spec_template/AGENTS_TEMPLATE.md` → `spec/template/`
-- Creados 21 archivos de especificación SDD
-- AGENTS.md: actualizado project structure y paths de certificados
-- `.gitignore`: actualizado `certificates/` → `docs/certificates/`
+### Session 7 — SDD Restructure
+- Created `spec/` with `constitution/`, `features/`, `template/`
+- Moved root `certificates/` → `docs/certificates/`
+- Moved `spec_template/AGENTS_TEMPLATE.md` → `spec/template/`
+- Created 21 SDD specification files
+- AGENTS.md: updated project structure and certificate paths
+- `.gitignore`: updated `certificates/` → `docs/certificates/`

@@ -1,42 +1,42 @@
 # 08 — Responsive
 
-## Propósito
+## Purpose
 
-Define los puntos de quiebre y los cambios de layout para dispositivos móviles.
+Defines breakpoints and layout changes for mobile devices.
 
 ## Breakpoints
 
-### 650px — Tablet / Móvil grande
-| Elemento | Cambio |
-|----------|--------|
-| `.profile-header` | Flex column, centrado |
-| `.profile-img` | 180x185px, centrado |
-| `.skills-grid` | 1 columna |
-| `.badges-wrapper` | Centrado, gap 5px |
+### 650px — Tablet / Large mobile
+| Element | Change |
+|---------|--------|
+| `.profile-header` | Flex column, centered |
+| `.profile-img` | 180x185px, centered |
+| `.skills-grid` | 1 column |
+| `.badges-wrapper` | Centered, gap 5px |
 | `.badge` | Font-size 0.85em |
 | `.cv-cta-button` | Width 100%, max-width none |
-| `.edu-header` | Flex column, alineado a la izquierda |
-| `nav a` | Font-size 0.75em, margin reducido |
+| `.edu-header` | Flex column, left-aligned |
+| `nav a` | Font-size 0.75em, reduced margin |
 | h1 | Font-size 2em |
-| `.nav-container` | Padding-right 80px (espacio para lang switcher) |
+| `.nav-container` | Padding-right 80px (space for lang switcher) |
 | `#inicio` | Padding 20px, background-size 20px |
 | `.lang-switcher` | Top 10px, right 10px |
 
-### 480px — Móvil pequeño
-| Elemento | Cambio |
-|----------|--------|
-| `.social-btns` | Flex column, centrado |
+### 480px — Small mobile
+| Element | Change |
+|---------|--------|
+| `.social-btns` | Flex column, centered |
 | `.social-btns a` | Min-width 0, width 100%, max-width 280px |
 | `nav a` | Font-size 0.7em, margin 0 4px |
 
-## Reglas
-- Mobile-first: el layout base es desktop, los media queries reducen.
-- No duplicar propiedades entre media queries del mismo breakpoint.
+## Rules
+- Mobile-first: the base layout is desktop, media queries scale down.
+- Do not duplicate properties between media queries of the same breakpoint.
 
-## Código relevante
+## Relevant code
 - `src/styles/global.css:104-118` — nav responsive (650px)
 - `src/styles/global.css:173-178` — hero responsive (650px)
 - `src/styles/global.css:287-292` — CV button responsive (650px)
-- `src/styles/global.css:625-679` — perfil, skills, badges responsive (650px)
+- `src/styles/global.css:625-679` — profile, skills, badges responsive (650px)
 - `src/styles/global.css:681-695` — social, nav (480px)
 - `src/styles/global.css:732-738` — lang switcher (650px)

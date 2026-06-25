@@ -1,81 +1,81 @@
-# 14 — Sistema de Bug Tracking
+# 14 — Bug tracking system
 
-## Propósito
+## Purpose
 
-Define el sistema de documentación y seguimiento de bugs del portfolio. Los bugs se registran en `spec/constitution/bugs.md` ANTES de ser corregidos, garantizando que ningún hallazgo se pierda entre sesiones.
+Defines the portfolio's bug documentation and tracking system. Bugs are recorded in `spec/constitution/bugs.md` BEFORE being fixed, ensuring that no finding is lost between sessions.
 
-## Archivo de bugs
+## Bug file
 
-**Ubicación:** `spec/constitution/bugs.md`
+**Location:** `spec/constitution/bugs.md`
 
-**Estructura:**
+**Structure:**
 ```markdown
-# Bugs conocidos — Alonso Suárez Reza Portfolio
-Último escaneo: YYYY-MM-DD (Sesión N)
+# Known bugs — Alonso Suárez Reza Portfolio
+Last scan: YYYY-MM-DD (Session N)
 Total: X FAIL(s), Y WARN(s)
 
-## 🔴 Sin arreglar
-### [Título del bug] — SEVERIDAD
-- **Archivo:** `ruta/archivo:línea`
-- **Origen:** [script que lo detectó]
-- **Detectado:** Sesión N
-- **Descripción:** [explicación del bug, por qué ocurre, impacto]
-- **Fix propuesto:** [cómo arreglarlo]
-- **Estado:** ⏳ Pendiente / 🔄 En progreso
+## 🔴 Not fixed
+### [Bug title] — SEVERITY
+- **File:** `path/file:line`
+- **Source:** [script that detected it]
+- **Detected:** Session N
+- **Description:** [bug explanation, why it occurs, impact]
+- **Proposed fix:** [how to fix it]
+- **Status:** ⏳ Pending / 🔄 In progress
 
-## 🟡 Parcialmente arreglado
-### [Título] — SEVERIDAD
-- [mismos campos + nota de qué falta]
+## 🟡 Partially fixed
+### [Title] — SEVERITY
+- [same fields + note on what's missing]
 
-## ✅ Arreglado
-### [Título] — SEVERIDAD
-- **Archivo:** `ruta/archivo:línea`
-- **Detectado:** Sesión N
-- **Arreglado:** Sesión N (commit abc1234)
-- **Descripción:** [explicación]
-- **Fix aplicado:** [qué se cambió]
+## ✅ Fixed
+### [Title] — SEVERITY
+- **File:** `path/file:line`
+- **Detected:** Session N
+- **Fixed:** Session N (commit abc1234)
+- **Description:** [explanation]
+- **Fix applied:** [what was changed]
 ```
 
-## Ciclo de vida de un bug
+## Bug lifecycle
 
 ```
-1. DETECTAR
-   - Tests automáticos (run-all.ps1) identifican bugs mecánicos
-   - Revisión [MANUAL] identifica bugs de lógica profunda
+1. DETECT
+   - Automated tests (run-all.ps1) identify mechanical bugs
+   - [MANUAL] review identifies deep logic bugs
         │
-2. DOCUMENTAR (ANTES de arreglar)
-   - run-all.ps1 guarda FAILs y WARNs en bugs.md bajo 🔴 Sin arreglar
-   - Bugs manuales se añaden por el agente con el mismo formato
+2. DOCUMENT (BEFORE fixing)
+   - run-all.ps1 saves FAILs and WARNs to bugs.md under 🔴 Not fixed
+   - Manual bugs are added by the agent in the same format
         │
-3. DECIDIR
-   - El usuario decide si arreglar ahora o dejarlo para otra sesión
-   - Si se arregla → seguir a paso 4
-   - Si no → el bug queda documentado para futuras sesiones
+3. DECIDE
+   - The user decides whether to fix now or leave it for another session
+   - If fixed → go to step 4
+   - If not → the bug remains documented for future sessions
         │
-4. ARREGLAR
-   - Agente propone plan, usuario aprueba
-   - Se aplica el fix
-   - Build + run-all.ps1 para verificar
+4. FIX
+   - Agent proposes plan, user approves
+   - Fix is applied
+   - Build + run-all.ps1 to verify
         │
-5. ACTUALIZAR bugs.md
-   - Mover entrada de 🔴 Sin arreglar → ✅ Arreglado
-   - Añadir sesión y hash del commit
-   - Si el fix es parcial → mover a 🟡 Parcialmente arreglado
+5. UPDATE bugs.md
+   - Move entry from 🔴 Not fixed → ✅ Fixed
+   - Add session and commit hash
+   - If the fix is partial → move to 🟡 Partially fixed
         │
-6. REGRESIÓN
-   - En el próximo run-all.ps1, los bugs marcados como ✅ se re-verifican
-   - Si reaparecen, volver a 🔴 Sin arreglar
+6. REGRESSION
+   - On the next run-all.ps1, bugs marked as ✅ are re-verified
+   - If they reappear, move back to 🔴 Not fixed
 ```
 
-## Reglas
+## Rules
 
-- **Documentar antes de arreglar.** No se aplica ningún fix sin que el bug esté registrado en `bugs.md`.
-- **Cada bug tiene un estado.** No puede pasar de detectado a arreglado sin pasar por documentado.
-- **Regresión automática.** Los tests de `run-all.ps1` cubren todos los bugs conocidos. Si un bug arreglado reaparece, el test lo detectará.
-- **Los bugs no expiran.** Aunque no se arreglen en meses, quedan documentados. El escaneo más reciente actualiza su estado en `Último escaneo`.
+- **Document before fixing.** No fix is applied without the bug being registered in `bugs.md`.
+- **Every bug has a status.** It cannot go from detected to fixed without going through documented.
+- **Automatic regression.** The `run-all.ps1` tests cover all known bugs. If a fixed bug reappears, the test will detect it.
+- **Bugs don't expire.** Even if not fixed for months, they remain documented. The most recent scan updates their status in `Last scan`.
 
-## Dependencias
+## Dependencies
 
-- [Feature 11](11-testing-mcp.md) — Tests MCP (run-all.ps1 es el entry point)
-- [Feature 12](12-testing-design.md) — Tests de diseño
-- [Feature 13](13-logging-system.md) — Logging de sesiones (cada fix se registra en el log de sesión)
+- [Feature 11](11-testing-mcp.md) — MCP Tests (run-all.ps1 is the entry point)
+- [Feature 12](12-testing-design.md) — Design tests
+- [Feature 13](13-logging-system.md) — Session logging (each fix is recorded in the session log)
