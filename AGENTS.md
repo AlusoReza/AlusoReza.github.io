@@ -1,69 +1,63 @@
-# AGENTS.md
+# Alonso Su\u00e1rez Reza \u2014 Portfolio
 
-**Static portfolio site** — vanilla HTML/CSS/JS, no build tools, no dependencies.
+Static portfolio site built with vanilla HTML, CSS, and JavaScript. No frameworks, no build tools, no dependencies. Hosted on GitHub Pages.
 
-## Quick start
-- **Preview locally:** Open `index.html` with Live Server (port 5501 per `.vscode/settings.json`) or any static file server
-- **Deploy:** Push to `main` — GitHub Pages serves from root at `https://alusoreza.github.io/`
+## Stack
+- **Languages:** HTML5, CSS3, JavaScript (vanilla, no transpilers)
+- **Runtime:** Browser only
+- **Database:** None
+- **Tests:** None
+
+## Commands
+- `npx live-server --port=5501` or open `index.html` with VS Code Live Server (port 5501 per `.vscode/settings.json`)
+- **Deploy:** Push to `main` \u2014 GitHub Pages auto-serves from root at `https://alusoreza.github.io/`
 
 ## Project structure
 ```
-index.html            — Single-page portfolio (Spanish default, `lang="es"`)
-css/style.css         — Dark GitHub theme
-js/script.js          — Data-driven i18n, rendering, scroll-reveal, back-to-top
-data/lang.json        — Static UI strings only (nav, about, contact)
-data/profile.json     — Name, badges
-data/skills.json      — Skill items (bilingual)
-data/education.json   — Education entries (bilingual)
-data/projects.json    — Featured projects (bilingual)
-data/experience.json  — Work experience (bilingual, empty = hidden)
-data/certificates.json— Certificates (bilingual, empty = hidden)
-certificates/.gitkeep — Folder for certificate PDFs (contents ignored by git)
-assets/               — perfil.jpg, favicon.ico, CV.pdf
+index.html            \u2014 Single-page portfolio (Spanish default, lang="es")
+css/style.css         \u2014 Dark GitHub theme (714 lines)
+js/script.js          \u2014 Data-driven i18n, rendering, scroll-reveal, back-to-top
+data/lang.json        \u2014 Static UI strings only (nav, about, contact)
+data/profile.json     \u2014 Name, badges (language + tools)
+data/skills.json      \u2014 Skill items (bilingual)
+data/education.json   \u2014 Education entries (bilingual)
+data/projects.json    \u2014 Featured projects (bilingual)
+data/experience.json  \u2014 Work experience (bilingual, empty = hidden)
+data/certificates.json\u2014 Certificates (bilingual, empty = hidden)
+certificates/.gitkeep \u2014 Folder for certificate PDFs (contents ignored by git)
+assets/               \u2014 perfil.jpg, favicon.ico, CV.pdf
 ```
 
-## Data-driven sections
-- Skills, education, projects, experience, certificates render from their JSON files.
-- Experience and certificates sections auto-hide when their array is empty (`toggleSection()` in JS).
-- To add content, edit the corresponding JSON file — no HTML changes needed.
-- Every bilingual field uses `{ "es": "...", "en": "..." }`; plain strings for language-neutral values.
+## Conventions
+- **Data-driven:** Skills, education, projects, experience, certificates render from their JSON files. Edit a JSON file to add content \u2014 no HTML changes.
+- **Bilingual fields:** Every translatable field uses `{ "es": "...", "en": "..." }`. Plain strings for language-neutral values.
+- **i18n static UI:** Nav, about paragraphs, contact use `data-i18n` attributes on HTML elements, keyed to `data/lang.json`.
+- **i18n dynamic content:** Use the `t()` helper: `t({ es: "Hola", en: "Hello" })` resolves to the current language.
+- **Language:** Persists in `localStorage` (`preferredLang`). Default: `es`. Switch via ES/EN buttons.
+- **Auto-hide:** Experience and certificates sections auto-hide when their array is empty (`toggleSection()` in JS).
+- **Design:** Dark theme (`#0d1117` bg, `#c9d1d9` text), accent blue `#58a6ff`, scroll-triggered reveal (`.reveal`), responsive at 650px.
+- **Skills section:** Two `.personality-note` paragraphs \u2014 work approach (`hab-note`) and AI/LLM/agents (`hab-ai`).
+- **Badges:** Language badges (border-left accent) + tool badges (solid background, glow hover). AI Agents badge in tool badges (green `#10a37f`).
 
-## i18n
-- Static UI (nav, about paragraphs, contact) is in `data/lang.json` with `data-i18n` attributes.
-- Dynamic content uses the `t()` helper: `t({ es: "Hola", en: "Hello" })` resolves to current language.
-- Language persists in `localStorage` (`preferredLang`). Default: `es`.
+## Don'ts
+- **No frameworks or build tools** \u2014 no npm, no node_modules, no bundlers.
+- **No `url` field in certificates** \u2014 do not include URLs in `data/certificates.json`.
+- **No touching HTML for content** \u2014 all dynamic content comes from JSON files.
+- **No committing certificate PDFs** \u2014 everything inside `certificates/` except `.gitkeep` is gitignored.
+- **No removing `.gitkeep`** \u2014 it keeps the empty folder tracked in git.
 
-## Adding a certificate
-1. Drop the PDF into `certificates/`
-2. Ask the agent: "Add the certificate from `certificates/mi-cert.pdf`"
-3. Agent reads the PDF with `pypdf` (`PdfReader`), extracts:
-   - `title` — course/program name
-   - `institution` — issuing entity
-   - `date` — completion/issue date
-   - `description` — brief summary of what was covered (duration, topics)
-4. Agent writes the entry to `data/certificates.json` in this format:
-   ```json
-   {
-     "title": { "es": "...", "en": "..." },
-     "institution": { "es": "...", "en": "..." },
-     "date": { "es": "...", "en": "..." },
-     "description": { "es": "...", "en": "..." }
-   }
-   ```
-5. **Do NOT include `url` field** — the user does not want URLs in certificates.
-6. Section appears automatically on page reload. If no certificates exist, section is hidden.
+## Workflow
+- Before a non-trivial task, propose a plan and wait for approval.
+- One task at a time; when finished, state what was changed for review.
+- If not at least 80% sure, ask. Do not guess or invent.
+- **Adding a certificate:**
+  1. Drop the PDF into `certificates/`
+  2. Ask: "Add the certificate from `certificates/file-name.pdf`"
+  3. Agent reads the PDF with `pypdf` (`PdfReader`), extracts `title`, `institution`, `date`, `description`
+  4. Agent writes the entry to `data/certificates.json` using the bilingual format
+  5. Section auto-appears on page reload (hidden if array is empty)
+- **Adding content:** Edit the corresponding JSON file in `data/` \u2014 no HTML changes required.
 
-## Design conventions
-- Dark theme (`#0d1117` background, `#c9d1d9` text, GitHub-inspired)
-- Accent blue: `#58a6ff`
-- Scroll-triggered reveal animations (class `.reveal`)
-- Responsive breakpoint at 650px
-- Skills section has two `.personality-note` paragraphs: one about work approach (`hab-note`), one about AI/LLM/agents (`hab-ai`)
-- Education no longer includes courses/certifications sub-section (removed)
-- Badges include an **AI Agents** tool badge (green `#10a37f`); AI is also mentioned in the `hab-ai` paragraph
-
-## What is NOT here
-- No package.json, no npm/yarn, no build step
-- No tests, no lint, no typecheck
-- No CI/CD workflows
-- No backend or server-side code
+## Documentation
+- [README.md](./README.md) \u2014 project overview and social links
+- [LICENSE](./LICENSE) \u2014 MIT license
