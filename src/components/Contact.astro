@@ -5,7 +5,7 @@ const t = (key) => lang[l]?.[key] || ''
 ---
 <footer id="contacto" class="contact-links">
   <h2 data-i18n="sec-cont">{t('sec-cont')}</h2>
-  <p class="contact-subtitle" data-i18n="cont-sub">{t('cont-sub')}</p>
+  <p class="contact-subtitle" data-i18n="cont-sub" set:html={t('cont-sub')}></p>
   <a href="assets/Alonso_Reza_CV.pdf" class="cv-cta-button footer-cv-btn" download>
     <span data-i18n="cv-text-f">📄 Descargar Curriculum Vitae (PDF)</span>
   </a>

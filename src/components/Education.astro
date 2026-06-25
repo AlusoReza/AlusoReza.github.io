@@ -15,7 +15,7 @@ const tl = (obj) => obj?.[l] || ''
           {item.date && <span class="edu-date">{tl(item.date)}</span>}
         </div>
         {item.institution && <p class="edu-institution">{tl(item.institution)}</p>}
-        {item.description && <p class="edu-description">{tl(item.description)}</p>}
+        {item.description && <p class="edu-description" set:html={tl(item.description)}></p>}
         {item.list && (
           <ul class="edu-list">
             {item.list.map(li => <li>{tl(li)}</li>)}

@@ -1,9 +1,15 @@
 let currentLang = localStorage.getItem('preferredLang') || 'es';
 
+function decodeHtml(str) {
+  const txt = document.createElement('textarea');
+  txt.innerHTML = str;
+  return txt.value;
+}
+
 function t(field) {
   if (!field) return '';
-  if (typeof field === 'string') return field;
-  return field[currentLang] || field.es || field.en || '';
+  if (typeof field === 'string') return decodeHtml(field);
+  return decodeHtml(field[currentLang] || field.es || field.en || '');
 }
 
 function translateUI() {
@@ -12,7 +18,7 @@ function translateUI() {
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.dataset.i18n;
     if (data[currentLang] && data[currentLang][key]) {
-      el.innerHTML = data[currentLang][key];
+      el.innerHTML = decodeHtml(data[currentLang][key]);
     }
   });
 }
@@ -98,6 +104,7 @@ function changeLanguage(lang) {
   document.documentElement.lang = lang;
   requestAnimationFrame(() => reveal());
 }
+window.changeLanguage = changeLanguage;
 
 function reveal() {
   const reveals = document.querySelectorAll('.reveal');
@@ -123,11 +130,13 @@ window.addEventListener('scroll', function () {
 
 function init() {
   const savedLang = localStorage.getItem('preferredLang') || 'es';
-  if (savedLang !== 'es') {
-    changeLanguage(savedLang);
-  } else {
-    document.getElementById('btn-es').classList.add('active');
-  }
+  currentLang = savedLang;
+  translateUI();
+  toggleSection('experiencia', window.DATA.experience);
+  toggleSection('certificados', window.DATA.certificates);
+  document.getElementById(`btn-${savedLang}`).classList.add('active');
+  document.documentElement.lang = savedLang;
+  requestAnimationFrame(() => reveal());
 }
 
 init();
