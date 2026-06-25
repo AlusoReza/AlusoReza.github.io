@@ -1,37 +1,32 @@
+const DATA = JSON.parse(document.body.dataset.data);
 let currentLang = localStorage.getItem('preferredLang') || 'es';
-
-function decodeHtml(str) {
-  const txt = document.createElement('textarea');
-  txt.innerHTML = str;
-  return txt.value;
-}
 
 function t(field) {
   if (!field) return '';
-  if (typeof field === 'string') return decodeHtml(field);
-  return decodeHtml(field[currentLang] || field.es || field.en || '');
+  if (typeof field === 'string') return field;
+  return field[currentLang] || field.es || field.en || '';
 }
 
 function translateUI() {
-  const data = window.DATA.lang;
+  const data = DATA.lang;
   if (!data) return;
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.dataset.i18n;
     if (data[currentLang] && data[currentLang][key]) {
-      el.innerHTML = decodeHtml(data[currentLang][key]);
+      el.innerHTML = data[currentLang][key];
     }
   });
 }
 
 function renderAll() {
   translateUI();
-  renderSection('skills', window.DATA.skills, renderSkillItem);
-  renderSection('projects', window.DATA.projects, renderProjectItem);
-  renderSection('education', window.DATA.education, renderEducationItem);
-  renderSection('experience', window.DATA.experience, renderExperienceItem);
-  renderSection('certificates', window.DATA.certificates, renderCertificateItem);
-  toggleSection('experiencia', window.DATA.experience);
-  toggleSection('certificados', window.DATA.certificates);
+  renderSection('skills', DATA.skills, renderSkillItem);
+  renderSection('projects', DATA.projects, renderProjectItem);
+  renderSection('education', DATA.education, renderEducationItem);
+  renderSection('experience', DATA.experience, renderExperienceItem);
+  renderSection('certificates', DATA.certificates, renderCertificateItem);
+  toggleSection('experiencia', DATA.experience);
+  toggleSection('certificados', DATA.certificates);
 }
 
 function renderSection(name, items, renderFn) {
@@ -104,7 +99,6 @@ function changeLanguage(lang) {
   document.documentElement.lang = lang;
   requestAnimationFrame(() => reveal());
 }
-window.changeLanguage = changeLanguage;
 
 function reveal() {
   const reveals = document.querySelectorAll('.reveal');
@@ -128,12 +122,16 @@ window.addEventListener('scroll', function () {
   }
 });
 
+document.querySelectorAll('[data-lang]').forEach(btn => {
+  btn.addEventListener('click', () => changeLanguage(btn.dataset.lang));
+});
+
 function init() {
   const savedLang = localStorage.getItem('preferredLang') || 'es';
   currentLang = savedLang;
   translateUI();
-  toggleSection('experiencia', window.DATA.experience);
-  toggleSection('certificados', window.DATA.certificates);
+  toggleSection('experiencia', DATA.experience);
+  toggleSection('certificados', DATA.certificates);
   document.getElementById(`btn-${savedLang}`).classList.add('active');
   document.documentElement.lang = savedLang;
   requestAnimationFrame(() => reveal());

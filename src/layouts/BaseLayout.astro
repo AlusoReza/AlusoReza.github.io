@@ -29,7 +29,7 @@ const dataBundle = JSON.stringify({ lang, skills, education, projects, experienc
   <meta name="google-site-verification" content="wR-Ww7Z3Js_kmiCYxoddSnZxfFNydHYLBu6iaO8ykUY" />
 
 </head>
-<body>
+<body data-data={dataBundle}>
   <LangSwitcher />
   <Nav />
   <main class="container">
@@ -38,7 +38,6 @@ const dataBundle = JSON.stringify({ lang, skills, education, projects, experienc
   <a href="#inicio" id="back-to-top" title="Volver arriba">
     <span class="arrow">&uarr;</span>
   </a>
-  <script is:inline set:html={`window.DATA = ${dataBundle};`}></script>
   <script src="../scripts/client.js"></script>
 </body>
 </html>
