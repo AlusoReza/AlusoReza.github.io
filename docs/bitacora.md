@@ -31,3 +31,15 @@ Resumen global del flujo de trabajo. Cada entrada enlaza al log detallado del d�
 ### Sesión 6: Tests MCP y Frontend Design
 **Prompt:** Añadir dos tests: uno de alineación con Astro MCP y otro de cumplimiento con la skill frontend-design. Mostrar fallos por pantalla y proponer plan de acción.
 **Plan:** Crear `.agents/tests/check-mcp.ps1` (16 checks) y `.agents/tests/check-frontend-design.ps1` (21→22 checks). Opción híbrida: scripts para checks mecánicos + revisión manual semántica. Actualizar AGENTS.md con `## Tests`. Crear `.gitkeep` y `skills-lock.json` faltante. Posteriormente, corregir WARN 1 (`#ffffff` → `var(--color-text-bright)`) y verificar con build exitoso.
+
+### Sesión 7: Reestructuración SDD completa
+**Prompt:** Completar la documentación del proyecto siguiendo SDD.
+**Plan:** Crear `spec/constitution/` (5 metadocs), `spec/features/` (index + 13 specs modulares), `spec/template/` (spec-template + AGENTS_TEMPLATE), `spec/glossary.md`. Mover `certificates/` → `docs/certificates/`. Actualizar `.gitignore` y estructura en `AGENTS.md`.
+
+### Sesión 8: Limpieza de certificados huérfanos
+**Prompt:** Root `certificates/` seguía con PDFs tras migración SDD.
+**Plan:** MoverPDFs a `docs/certificates/`, eliminar root, verificar gitignore + no descargables. Confirmar que workflow de AGENTS.md está bien definido.
+
+### Sesión 9: Tests modulares + bug tracking
+**Prompt:** Crear suite de tests modular (6 scripts + run-all.ps1), sistema de bug tracking en bugs.md, expandir AGENTS.md con workflows.
+**Plan:** check-js-logic, check-css-logic, check-json-schema, check-paths, run-all.ps1. bugs.md con 11 bugs. Bug tracking protocol en AGENTS.md + feature 14 spec. Debuggear issues en scripts.

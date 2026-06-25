@@ -7,7 +7,7 @@ Static portfolio site built with **Astro 5** (static output), vanilla CSS, and v
 - **Languages:** HTML (Astro `.astro`), CSS3 (vanilla, imported), JavaScript (vanilla ES module)
 - **Runtime:** Build-time (Node) + Browser (client JS)
 - **Database:** None
-- **Tests:** `.agents/tests/run-all.ps1` (master runner — 6 módulos: astro-mcp, frontend-design, js-logic, css-logic, json-schema, paths)
+- **Tests:** `.agents/tests/check-mcp.ps1` (MCP) + `.agents/tests/check-frontend-design.ps1` (frontend-design skill)
 
 ## Commands
 - `npm run dev` — Start Astro dev server (usually `http://localhost:4321`)
@@ -53,14 +53,7 @@ docs/
 
 .agents/
 ├── skills/              — Skills instaladas (frontend-design)
-├── tests/
-│   ├── run-all.ps1               ← Master runner (entry point único)
-│   ├── check-astro-mcp.ps1       ← 16 checks Astro MCP
-│   ├── check-frontend-design.ps1 ← 22 checks diseño
-│   ├── check-js-logic.ps1        ← JS logic flaws (null guards, noopener, etc.)
-│   ├── check-css-logic.ps1       ← CSS logic flaws (#1a1f26, clases sin definir)
-│   ├── check-json-schema.ps1     ← JSON schema validation (contratos bilingües)
-│   └── check-paths.ps1           ← File path integrity (CV.pdf, assets)
+├── tests/               — Scripts de verificación (check-mcp.ps1, check-frontend-design.ps1)
 └── skills-lock.json     — Registro de skills
 
 public/
@@ -101,12 +94,7 @@ public/
   4. Agent writes the entry to `src/data/certificates.json` using the bilingual format
   5. Section auto-appears on page reload (hidden if array is empty)
 - **Adding content:** Edit the corresponding JSON file in `src/data/` — no component changes required.
-- **Bug tracking (IMPORTANTE — documentar antes de arreglar):**
-  1. **Detectar:** Al ejecutar "Comprueba MCP", `run-all.ps1` corre los 6 scripts e identifica bugs mecánicos. El agente revisa la sección `[MANUAL]` para bugs de lógica profunda.
-  2. **Documentar antes de arreglar:** Todos los hallazgos se guardan automáticamente en `spec/constitution/bugs.md` bajo `🔴 Sin arreglar`. Cada entrada: archivo, línea, severidad, descripción, sesión detectada, fix propuesto, estado. Los bugs del `[MANUAL]` se añaden manualmente por el agente con el mismo formato.
-  3. **Arreglar:** Si procede, el agente propone plan de corrección. El usuario aprueba. Se aplica el fix. Build + "Comprueba MCP" para verificar.
-  4. **Actualizar bugs.md:** Mover la entrada de `🔴 Sin arreglar` a `✅ Arreglado`, añadiendo fecha, sesión y hash del commit en la que se arregló. Si el fix es parcial, mover a `🟡 Parcialmente arreglado` con nota de qué falta.
-  5. **Nunca se pierde un bug:** Aunque no se arregle en la misma sesión, queda documentado en `bugs.md`. El próximo `run-all.ps1` lo re-verificará como regresión (si el test correspondiente lo cubre).
+- **Contexto histórico:** Si el usuario pregunta o hace referencia a algo trabajado en sesiones anteriores y no está en tu ventana de contexto actual, escanea automáticamente `docs/logs/` y `docs/bitacora.md` para reconstruir el contexto antes de responder.
 - **Session log (IMPORTANTE — SIEMPRE, build-driven):**
   1. **BEFORE — snapshot inicial**: antes del primer cambio de la sesión, ejecutar `git diff` y `git diff --stat` para capturar el estado limpio. Crear `docs/logs/YYYY-MM-DD.md` si no existe. Añadir `## Sesión N — Título descriptivo` con `### Prompt` (resumen de lo que pidió el usuario) y, si ya hay plan aprobado, `### Plan`.
   2. **AFTER EVERY BUILD** (inmediatamente después de `npm run build`, `npm run update` o cualquier comando que compile):
@@ -118,19 +106,13 @@ public/
      - Actualizar `docs/bitacora.md` con una entrada resumida (fecha, sesión, prompt breve + plan en 2-3 líneas).
      - Resetear el snapshot inicial con `git diff --stat` para que el próximo build solo capture cambios nuevos.
   3. **No hay excepciones.** Este check se ejecuta después de CADA build, haya o no sesión previa. Si no hay cambios detectados por `git diff`, indicarlo explícitamente en `### Cambios`.
-- **Contexto histórico:** Si el usuario pregunta o hace referencia a algo trabajado en sesiones anteriores y no está en tu ventana de contexto actual, escanea automáticamente `docs/logs/` y `docs/bitacora.md` para reconstruir el contexto antes de responder.
-- **Post-MCP installation:** Cuando se instale un nuevo MCP server, revisar `.agents/tests/` para identificar checks que el MCP cubre automáticamente. Marcarlos como `[OBSOLETO — cubierto por {MCP}]` y retirarlos del runner en la siguiente ventana de mantenimiento.
 
 ## Tests
-- **"Comprueba MCP"** → el agente ejecuta `.agents/tests/run-all.ps1`.
-  - Corre secuencialmente: astro-mcp → frontend-design → js-logic → css-logic → json-schema → paths.
-  - Cada script imprime PASS/FAIL/WARN por check.
-  - `run-all.ps1` recopila todos los FAILs y WARNs.
-  - Imprime sección `[MANUAL]` con items de lógica profunda que el agente debe revisar.
-  - **Guarda automáticamente todos los hallazgos en `spec/constitution/bugs.md`** bajo `🔴 Sin arreglar`.
+- **"Comprueba MCP"** → el agente ejecuta `.agents/tests/check-mcp.ps1` y revisa los resultados. FAILs graves reciben plan de corrección; WARNs se discuten contigo.
+- **"Comprueba skill"** → el agente ejecuta `.agents/tests/check-frontend-design.ps1` y revisa los resultados. FAILs graves reciben plan de corrección; WARNs requieren decisión estética tuya.
 - **Output esperado:** cada test muestra PASS/FAIL/WARN por check, más un resumen y un plan de acción detallado para cada incumplimiento.
-- **Protocolo:** el agente ejecuta el script, captura su output, identifica bugs, los documenta en `bugs.md`, y propone plan de corrección. No aplica fixes automáticos sin tu aprobación explícita.
+- **Protocolo:** el agente ejecuta el script, captura su output, y te propone el plan de acción. No aplica correcciones automáticas sin tu aprobación explícita.
 
 ## Documentation
-- [README.md](./README.md) — project overview and social links
-- [LICENSE](./LICENSE) — MIT license
+- [README.md](../README.md) — project overview and social links
+- [LICENSE](../LICENSE) — MIT license

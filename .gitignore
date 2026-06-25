@@ -1,5 +1,5 @@
 node_modules/
 dist/
 .astro/
-certificates/*
-!certificates/.gitkeep
+docs/certificates/*
+!docs/certificates/.gitkeep
