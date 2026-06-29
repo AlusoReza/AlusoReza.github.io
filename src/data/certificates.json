@@ -19,6 +19,42 @@
   },
   {
     "title": {
+      "es": "Certificado de Iniciación al Desarrollo con IA: Programa con Agentes",
+      "en": "Introduction to AI Development: Programming with Agents"
+    },
+    "institution": {
+      "es": "BIG SCHOOL",
+      "en": "BIG SCHOOL"
+    },
+    "date": {
+      "es": "26 jun. 2026",
+      "en": "June 26, 2026"
+    },
+    "description": {
+      "es": "Curso de 6 horas sobre desarrollo en el nuevo paradigma de programación con agentes de IA. Cubre conceptos básicos e intermedios/avanzados, uso de herramientas como OpenCode y Claude Code, elaboración de perfiles de proyecto con buenas prácticas y estándares modernos (skills, MCP, logs, SDD, uso de múltiples agentes).",
+      "en": "6-hour course on development in the new paradigm of programming with AI agents. Covers basic to intermediate/advanced concepts, use of tools like OpenCode and Claude Code, project profiling with best practices and modern standards (skills, MCP, logs, SDD, multi-agent usage)."
+    }
+  },
+  {
+    "title": {
+      "es": "Bootcamp en Habilidades Digitales y Gestión Ágil",
+      "en": "Bootcamp in Digital Skills and Agile Management"
+    },
+    "institution": {
+      "es": "Universidad Internacional de La Rioja (UNIR)",
+      "en": "International University of La Rioja (UNIR)"
+    },
+    "date": {
+      "es": "2025",
+      "en": "2025"
+    },
+    "description": {
+      "es": "Bootcamp sobre elaboración de currículum vitae, uso avanzado de herramientas como Excel y Canva, métodos de estudio y networking, y metodologías ágiles en el desarrollo de software.",
+      "en": "Bootcamp on resume building, advanced use of tools such as Excel and Canva, study methods and networking, and agile methodologies in software development."
+    }
+  },
+  {
+    "title": {
       "es": "Curso de Preparación para la Certificación AWS Cloud Practitioner",
       "en": "AWS Cloud Practitioner Certification Prep Course"
     },

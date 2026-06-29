@@ -58,7 +58,7 @@ function renderProjectItem(proj) {
   let html = `<div class="project-card"><h3>${proj.title}</h3><p>${t(proj.description)}</p>`;
   if (proj.links && proj.links.length) {
     html += '<div class="project-links">';
-    proj.links.forEach(link => html += `<a href="${link.url}" target="_blank" class="btn btn-primary">${t(link.text)}</a>`);
+    proj.links.forEach(link => html += `<a href="${link.url}" target="_blank" rel="noopener noreferrer" class="btn btn-outline">${t(link.text)}</a>`);
     html += '</div>';
   }
   html += '</div>';
@@ -91,6 +91,7 @@ function toggleSection(id, arr) {
 }
 
 function changeLanguage(lang) {
+  if (lang === currentLang) return;
   currentLang = lang;
   renderAll();
   document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
@@ -139,6 +140,7 @@ function init() {
   translateUI();
   toggleSection('experiencia', DATA.experience);
   toggleSection('certificados', DATA.certificates);
+  if (savedLang !== 'es') renderAll();
   document.getElementById(`btn-${savedLang}`).classList.add('active');
   document.documentElement.lang = savedLang;
   requestAnimationFrame(() => reveal());

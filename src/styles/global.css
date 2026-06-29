@@ -192,7 +192,7 @@ section {
     font-weight: 600;
     display: inline-block;
     
-    background-color: #1a1f26; 
+    background-color: var(--color-bg-card); 
     color: var(--color-text-bright); 
     border: 1px solid rgba(255, 255, 255, 0.1);
     
@@ -249,6 +249,27 @@ section {
 }
 .b-web:hover { 
     border-color: var(--color-green); 
+}
+
+.b-latex { 
+    border-left: 2px solid #008080; 
+}
+.b-latex:hover { 
+    border-color: #008080; 
+}
+
+.b-xml-json { 
+    border-left: 2px solid #e67e22; 
+}
+.b-xml-json:hover { 
+    border-color: #e67e22; 
+}
+
+.b-batch-bash { 
+    border-left: 2px solid #4CAF50; 
+}
+.b-batch-bash:hover { 
+    border-color: #4CAF50; 
 }
 
 /* --- BOTÓN CV: FORMATO BARRA HORIZONTAL --- */
@@ -330,10 +351,20 @@ section {
 }
 .b-paradigm:hover { box-shadow: 0 0 10px rgba(113, 9, 0, 0.4); }
 
-.b-aiagents { 
-    background-color: #10a37f; /* Verde OpenAI */
+.b-opencode-claude { 
+    background-color: #d97757; /* Naranja Anthropic */
 }
-.b-aiagents:hover { box-shadow: 0 0 10px rgba(16, 163, 127, 0.4); }
+.b-opencode-claude:hover { box-shadow: 0 0 10px rgba(217, 119, 87, 0.4); }
+
+.b-overleaf { 
+    background-color: #47A141; /* Verde Overleaf */
+}
+.b-overleaf:hover { box-shadow: 0 0 10px rgba(71, 161, 65, 0.4); }
+
+.b-excel { 
+    background-color: #217346; /* Verde Excel */
+}
+.b-excel:hover { box-shadow: 0 0 10px rgba(33, 115, 70, 0.4); }
 
 /* Efecto hover minimalista unificado para las herramientas */
 .tools-badges .badge:hover {
@@ -676,6 +707,10 @@ footer.contact-links {
         max-width: none;
         margin: 20px auto;
     }
+
+    .social-btns a {
+        min-width: 160px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -734,6 +769,13 @@ footer.contact-links {
         top: 10px;
         right: 10px;
         padding: 2px 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .lang-switcher {
+        right: 5px;
+        padding: 1px 5px;
     }
 }
 

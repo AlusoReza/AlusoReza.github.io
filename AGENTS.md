@@ -19,11 +19,22 @@ Static portfolio site built with **Astro 5** (static output), vanilla CSS, and v
 ## Project structure
 ```
 spec/
-├── constitution/    — SDD metadocs: project overview, agent instructions,
-│                       roadmap, changelog, bugs
-├── features/        — 14 detailed feature specs (contracts, flow, design, tests…)
-├── template/        — Templates (AGENTS_TEMPLATE.md, spec-template.md)
-└── glossary.md      — Domain definitions (SDD, MCP, data-data…)
+├── README.md                — Metaspec entry point
+├── constitution/            — Stable project rules
+│   ├── mission.md           — What, for whom, principles
+│   ├── tech-stack.md        — Stack, conventions, design, limits
+│   ├── roadmap.md           — Done / Next / Backlog
+│   ├── changelog.md         — Session history
+│   └── bugs.md              — Known bugs and lifecycle
+├── features/                — One folder per feature (NNN-name/)
+│   └── NNN-name/
+│       ├── spec.md          — What it does + acceptance criteria
+│       ├── plan.md          — How it's implemented
+│       └── tasks.md         — Actionable checklist
+├── glossary.md              — Domain definitions
+└── template/                — Templates
+    ├── AGENTS_TEMPLATE.md
+    └── spec_template/       — Canonical SDD template
 
 src/
 ├── components/       — 10 Astro components (Nav, LangSwitcher, Profile, About,

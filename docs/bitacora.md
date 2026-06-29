@@ -43,3 +43,39 @@ Global workflow summary. Each entry links to the detailed day log.
 ### Session 9: Modular tests + bug tracking
 **Prompt:** Create modular test suite (6 scripts + run-all.ps1), bug tracking system in bugs.md, expand AGENTS.md with workflows.
 **Plan:** check-js-logic, check-css-logic, check-json-schema, check-paths, run-all.ps1. bugs.md with 11 bugs. Bug tracking protocol in AGENTS.md + feature 14 spec. Debug script issues.
+
+## 2026-06-26
+
+[Detailed log →](logs/2026-06-26.md)
+
+### Session 10: SDD Spec Refactor — flat files → template structure
+**Prompt:** Refactor `spec/` to match the new `spec_template/` structure. Every feature must have `spec.md` + `plan.md` + `tasks.md`. Constitution restructured per template. No information loss.
+**Plan:** Constitution: README, mission, tech-stack, roadmap (Done/Next/Backlog), keep changelog + bugs. Features: 14 folders × 3 files (42 total), thin features filled from source code. Remove 18 old flat files. Clean bugs.md duplicates. Update AGENTS.md project structure.
+
+## 2026-06-29
+
+[Detailed log →](logs/2026-06-29.md)
+
+### Session 11: Add BIG SCHOOL certificate
+**Prompt:** Replace `Guia-Markdown...PDF` with actual certificate (`Certificado-Alonso-Jose-Suarez-Reza-32z2bo0a.pdf`), extract metadata, add to `certificates.json`.
+**Plan:** Read PDF (image-based, no extractable text), ask user for details, insert entry as 2nd element in JSON array. Build + verify.
+
+### Session 12: Bug fix sprint
+**Prompt:** Review bugs.md and roadmap.md, elaborate plan to fix all bugs, and execute.
+**Plan:** 9 fixes in 6 files: init() renderAll, 📄 icon, btn-primary→btn-outline, noopener, early return, #1a1f26→var(--color-bg-card), CV absolute paths, lang switcher overflow, social buttons width. Build + tests + clean bugs.md.
+
+### Session 13: Badges + certificate addition
+**Prompt:** Add LaTeX, Overleaf, Excel badges. Add Bootcamp Metodologías Ágiles as 3rd certificate (info from CV).
+**Plan:** profile.json +3 badges, global.css +3 CSS classes, certificates.json +1 entry. Build + tests.
+
+### Session 14: XML/JSON + Batch/Bash badges; rename AI Agents; subtitle
+**Prompt:** Add XML/JSON and Batch/Bash badges (2+2). Change AI Agents → OpenCode/Claude (naranja). Change subtitle to Full Stack · Agentes · Data.
+**Plan:** profile.json +2 badges, rename AI Agents; global.css +2 classes, rename .b-aiagents; lang.json hero-sub.
+
+### Session 15: Deep bug review
+**Prompt:** Complete project check for more bugs.
+**Plan:** Run tests + deep manual review. Fix stale fallback in Profile.astro. Update [MANUAL] section in test suite.
+
+### Session 16: Conditional nav links
+**Prompt:** Hide "Experiencia" in nav when no data. Apply same for "Certificados".
+**Plan:** Nav.astro conditional links via experience.length and certificates.length.

@@ -1,6 +1,6 @@
 {
   "name": "Alonso José Suárez Reza",
-  "cvPath": "assets/Alonso_Reza_CV.pdf",
+  "cvPath": "/assets/Alonso_Reza_CV.pdf",
   "badges": [
     {
       "label": "Python",
@@ -15,7 +15,7 @@
       "class": "b-javascript"
     },
     {
-      "label": "MySQL",
+      "label": "SQL/PostgreSQL",
       "class": "b-sql"
     },
     {
@@ -25,6 +25,18 @@
     {
       "label": "HTML/CSS/JS",
       "class": "b-web"
+    },
+    {
+      "label": "LaTeX",
+      "class": "b-latex"
+    },
+    {
+      "label": "XML/JSON",
+      "class": "b-xml-json"
+    },
+    {
+      "label": "Batch/Bash",
+      "class": "b-batch-bash"
     }
   ],
   "toolBadges": [
@@ -49,8 +61,16 @@
       "class": "b-paradigm"
     },
     {
-      "label": "AI Agents",
-      "class": "b-aiagents"
+      "label": "OpenCode/Claude",
+      "class": "b-opencode-claude"
+    },
+    {
+      "label": "Overleaf",
+      "class": "b-overleaf"
+    },
+    {
+      "label": "Excel",
+      "class": "b-excel"
     }
   ]
 }

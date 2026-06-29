@@ -10,10 +10,10 @@ $allOutput = @()
 $global:allFails = @()
 $global:allWarns = @()
 $global:manualItems = @(
-    @{ check = "init() flow — deep logic"; desc = "init() calls translateUI() but not renderAll(). Visitor with EN saved sees mixed sections." },
-    @{ check = "📄 icon in Contact.astro"; desc = "The icon is INSIDE the data-i18n span. translateUI() deletes it when switching language." },
     @{ check = "Data architecture"; desc = "Verify that data-data → JSON.parse → renderAll() works without console errors." },
-    @{ check = "Known bug regression"; desc = "Check spec/constitution/bugs.md — bugs marked as ✅ Arreglado should remain fixed." }
+    @{ check = "Known bug regression"; desc = "Check spec/constitution/bugs.md — bugs marked as ✅ Arreglado should remain fixed." },
+    @{ check = "Static fallback freshness"; desc = "Verify that Astro static fallback text in .astro files matches latest lang.json strings." },
+    @{ check = "Badge CSS — no orphan classes"; desc = "Every new badge class (b-xml-json, b-batch-bash, b-opencode-claude, etc.) must exist in CSS." }
 )
 
 function Title($t) {

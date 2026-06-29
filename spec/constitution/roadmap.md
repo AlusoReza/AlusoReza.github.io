@@ -1,24 +1,29 @@
-# Roadmap — Alonso Suárez Reza Portfolio
+# Roadmap
 
-## Current state (25/06/2026)
-- Functional portfolio with Astro 5, data-driven, bilingual (ES/EN)
-- MCP and frontend-design tests implemented (22 checks + 4 modular test scripts)
-- Build-driven logging system operational
-- SDD specifications completed
+## Done ✅
 
-## Next steps
+1. **01 · Architecture** — Two-phase architecture (Astro build + client JS hydration via `data-data`)
+2. **02 · Data contracts** — Schemas for all 7 JSONs with bilingual format
+3. **03 · Data flow** — JSON → `data-data` → client.js render pipeline
+4. **04 · i18n system** — `data-i18n`, `t()`, `changeLanguage()`, localStorage persistence
+5. **05 · Design tokens** — CSS variables in `:root` (GitHub dark theme)
+6. **06 · Typography** — Space Grotesk (display) + Inter (body)
+7. **07 · Computational grid** — Graph paper background on hero section
+8. **08 · Responsive** — Breakpoints at 650px and 480px
+9. **09 · Accessibility** — `prefers-reduced-motion` in CSS + JS
+10. **10 · Component tree** — 10 Astro components with props and relationships
+11. **11 · MCP tests** — Modular test suite (6 modules, master runner)
+12. **12 · Design tests** — 22 checks for frontend-design compliance
+13. **13 · Logging system** — Build-driven session logging protocol
+14. **14 · Bug tracking** — bugs.md lifecycle and regression tracking
 
-### Short term
-- Install MCP for all programming languages used in this project to verify everything is applied correctly.
-- Add CV file.
+## Next 🔜
 
-- [ ] Review `#1a1f26` hardcoded in `.badge` (line 195 of `global.css`) — possible migration to `var(--color-bg-card)`
-- [ ] Verify all paths from `public/certificates/` → `docs/certificates/` are updated in references
+- Add more integration tests (build output, HTML snapshot)
 
-### Medium term
-- [ ] Add more integration tests (build output, HTML snapshot)
-- [ ] Explore light theme as a toggle
+## Backlog 💡
 
-### Long term
-- [ ] Migrate i18n to `@astrojs/netlify` or similar if SSR is needed
-- [ ] Add blog or technical articles section → Modular pages
+- Explore light theme toggle
+- Migrate i18n to `@astrojs/netlify` or similar if SSR is ever needed
+- Add blog or technical articles section → modular pages
+- Install MCP for all programming languages used in the project
