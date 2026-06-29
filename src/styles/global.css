@@ -63,26 +63,35 @@ nav {
     background: rgba(13, 17, 23, 0.9);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--color-border);
-    padding: 15px 0;
+    padding: 10px 0;
     z-index: 1000;
 }
 
 .nav-container {
     max-width: 850px;
     margin: auto;
-    text-align: center;
+    padding: 0 20px;
 }
 
-nav a {
+.nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.nav-links a {
     color: var(--color-text-muted);
     text-decoration: none;
-    margin: 0 12px;
+    padding: 5px 10px;
     font-weight: 500;
     font-size: 0.85em;
     transition: color 0.3s ease;
+    white-space: nowrap;
 }
 
-nav a:hover {
+.nav-links a:hover {
     color: var(--color-accent);
 }
 
@@ -99,22 +108,6 @@ section {
 .reveal.active {
     opacity: 1;
     transform: translateY(0);
-}
-
-@media (max-width: 650px) {
-    .nav-container {
-        /* Añadimos un margen derecho para que los links no lleguen hasta el final 
-           donde está el selector de idioma */
-        padding-right: 80px; 
-        text-align: left; /* Alineamos a la izquierda para ganar espacio */
-        padding-left: 15px;
-    }
-
-    nav a {
-        margin: 0 8px 0 0; /* Ajustamos márgenes de los links */
-        font-size: 0.75em;
-        display: inline-block;
-    }
 }
 
 /* --- 3. CABECERA Y PERFIL --- */
@@ -280,6 +273,7 @@ section {
     justify-content: center;
     gap: 12px;
     margin-top: 25px;
+    box-sizing: border-box;
     
     /* CONTROL DE TAMAÑO: Alargado pero no infinito */
     width: 85%;            /* Ocupa casi todo el ancho del bloque de texto */
@@ -603,6 +597,7 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     background-color: var(--color-bg);
     color: var(--color-text-bright);
     padding: 20px 40px;
@@ -611,6 +606,7 @@ section {
     text-decoration: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     min-width: 210px;
+    box-sizing: border-box;
 }
 
 .social-btns a span {
@@ -680,9 +676,9 @@ footer.contact-links {
         margin-top: 5px;
     }
 
-    nav a {
-        margin: 0 5px;
+    .nav-links a {
         font-size: 0.75em;
+        padding: 4px 8px;
     }
 
     h1 {
@@ -709,7 +705,8 @@ footer.contact-links {
     }
 
     .social-btns a {
-        min-width: 160px;
+        min-width: 0;
+        flex: 1 1 200px;
     }
 }
 
@@ -722,36 +719,33 @@ footer.contact-links {
         min-width: 0;
         width: 100%;
         max-width: 280px;
+        flex: none;
     }
-    nav a {
+    .nav-links a {
         font-size: 0.7em;
-        margin: 0 4px;
+        padding: 3px 6px;
     }
 }
 
-/* --- 10. SELECTOR DE IDIOMA --- */
+/* --- 10. SELECTOR DE IDIOMA (en nav) --- */
 .lang-switcher {
-    position: fixed;
-    top: 15px;
-    right: 20px;
-    z-index: 2000;
-    background: rgba(22, 27, 34, 0.9);
-    backdrop-filter: blur(8px);
-    padding: 5px 12px;
-    border-radius: 20px;
-    border: 1px solid var(--color-border);
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 4px;
+    padding: 3px 10px;
+    margin-left: 6px;
+    border-radius: 20px;
+    border: 1px solid var(--color-border);
+    background: rgba(22, 27, 34, 0.9);
 }
 .lang-btn {
     background: none;
     border: none;
     color: var(--color-text-muted);
     cursor: pointer;
-    font-size: 0.8em;
+    font-size: 0.75em;
     font-weight: 700;
-    padding: 5px;
+    padding: 4px 6px;
     transition: color 0.3s ease;
 }
 
@@ -761,22 +755,7 @@ footer.contact-links {
 
 .divider {
     color: var(--color-border);
-    font-size: 0.8em;
-}
-
-@media (max-width: 650px) {
-    .lang-switcher {
-        top: 10px;
-        right: 10px;
-        padding: 2px 8px;
-    }
-}
-
-@media (max-width: 480px) {
-    .lang-switcher {
-        right: 5px;
-        padding: 1px 5px;
-    }
+    font-size: 0.75em;
 }
 
 /* --- 11. BOTÓN VOLVER ARRIBA --- */

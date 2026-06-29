@@ -19,8 +19,15 @@ const links = [
 ---
 <nav>
   <div class="nav-container">
-    {links.map(link => (
-      <a href={link.href} data-i18n={link.key}>{t(link.key)}</a>
-    ))}
+    <div class="nav-links">
+      {links.map(link => (
+        <a href={link.href} data-i18n={link.key}>{t(link.key)}</a>
+      ))}
+      <div class="lang-switcher">
+        <button data-lang="es" class="lang-btn active" id="btn-es">ES</button>
+        <span class="divider">|</span>
+        <button data-lang="en" class="lang-btn" id="btn-en">EN</button>
+      </div>
+    </div>
   </div>
 </nav>

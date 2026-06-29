@@ -2,8 +2,8 @@
 
 # Known bugs — Alonso Suárez Reza Portfolio
 
-Last scan: 2026-06-29 (Session 12)
-Total: 0 FAIL(s), 8 WARN(s) — 4 non-bug, 4 intentional/neutral
+Last scan: 2026-06-29 (Session 17 — nav flexbox + box-sizing)
+Total: 0 FAIL(s), 8 WARN(s) — all intentional/neutral
 
 ## ✅ Fixed (Session 12 — 2026-06-29)
 
@@ -56,16 +56,16 @@ Total: 0 FAIL(s), 8 WARN(s) — 4 non-bug, 4 intentional/neutral
 - **Fix:** Changed both to absolute `/assets/Alonso_Reza_CV.pdf`
 
 ### Lang switcher overflow on very small screens — LOW
-- **File:** `src/styles/global.css:732`
+- **File:** `src/styles/global.css` (old `position: fixed` approach)
 - **Source:** roadmap.md (manual review)
-- **Detected:** Session 12 | **Fixed:** Session 12
-- **Fix:** Added `@media (max-width: 480px)` rule with compact positioning
+- **Detected:** Session 12 | **Fixed:** Session 17
+- **Fix:** Lang-switcher moved inside `<nav>` as inline flex element (no `position: fixed`)
 
 ### Social buttons width at ~480-550px — LOW
-- **File:** `src/styles/global.css:681`
+- **File:** `src/styles/global.css`
 - **Source:** roadmap.md (manual review)
-- **Detected:** Session 12 | **Fixed:** Session 12
-- **Fix:** Added `min-width: 160px` at 650px breakpoint
+- **Detected:** Session 12 | **Fixed:** Session 17
+- **Fix:** Added `box-sizing: border-box` to `.social-btns a` and `.cv-cta-button`; `flex: 1 1 200px` at 650px; `width: 100%; max-width: 280px; flex: none` at 480px
 
 ## 🔴 Open (non-bug — intentional/neutral)
 
@@ -88,145 +88,3 @@ Total: 0 FAIL(s), 8 WARN(s) — 4 non-bug, 4 intentional/neutral
 - **Source:** check-json-schema.ps1
 - **Description:** No work experience to list yet. Section auto-hides.
 - **Status:** ⏳ Intentional — no fix needed
-
-
-### Colores de marca en badges: #3776ab (2 use(s)), #e76f00 (2 use(s)), #f7df1e (2 use(s)), #00758f (3 use(s)), #734f96 (2 use(s)), #007acc (1 use(s)), #2c2255 (1 use(s)), #1a6ac9 (1 use(s)), #710900 (1 use(s)), #10a37f (1 use(s)) - intencionales pero no normalizables — WARNING
-- **Source:** check-frontend-design.ps1
-- **Detected:** Session ?
-- **Description:** Colores de marca en badges: #3776ab (2 use(s)), #e76f00 (2 use(s)), #f7df1e (2 use(s)), #00758f (3 use(s)), #734f96 (2 use(s)), #007acc (1 use(s)), #2c2255 (1 use(s)), #1a6ac9 (1 use(s)), #710900 (1 use(s)), #10a37f (1 use(s)) - intencionales pero no normalizables
-- **Status:** ⏳ Pending
-
-### Colores de marca en badges: #3776ab (2 use(s)), #e76f00 (2 use(s)), #f7df1e (2 use(s)), #00758f (3 use(s)), #734f96 (2 use(s)), #007acc (1 use(s)), #2c2255 (1 use(s)), #1a6ac9 (1 use(s)), #710900 (1 use(s)), #10a37f (1 use(s)) - intencionales pero no normalizables — WARNING
-- **Source:** check-frontend-design.ps1
-- **Detected:** Session ?
-- **Description:** Colores de marca en badges: #3776ab (2 use(s)), #e76f00 (2 use(s)), #f7df1e (2 use(s)), #00758f (3 use(s)), #734f96 (2 use(s)), #007acc (1 use(s)), #2c2255 (1 use(s)), #1a6ac9 (1 use(s)), #710900 (1 use(s)), #10a37f (1 use(s)) - intencionales pero no normalizables
-- **Status:** ⏳ Pending
-
-### Predominantly single quotes (98 single vs 48 double) — WARNING
-- **Source:** check-js-logic.ps1
-- **Detected:** Session ?
-- **Description:** Predominantly single quotes (98 single vs 48 double)
-- **Status:** ⏳ Pending
-
-### Predominantly single quotes (98 single vs 48 double) — WARNING
-- **Source:** check-js-logic.ps1
-- **Detected:** Session ?
-- **Description:** Predominantly single quotes (98 single vs 48 double)
-- **Status:** ⏳ Pending
-
-### Classes referenced but missing CSS: profile-text, badges, text, section — WARNING
-- **Source:** check-css-logic.ps1
-- **Detected:** Session ?
-- **Description:** Classes referenced but missing CSS: profile-text, badges, text, section
-- **Status:** ⏳ Pending
-
-### Classes referenced but missing CSS: profile-text, badges, text, section — WARNING
-- **Source:** check-css-logic.ps1
-- **Detected:** Session ?
-- **Description:** Classes referenced but missing CSS: profile-text, badges, text, section
-- **Status:** ⏳ Pending
-
-### experience.json empty — WARNING
-- **Source:** check-json-schema.ps1
-- **Detected:** Session ?
-- **Description:** experience.json empty
-- **Status:** ⏳ Pending
-
-### experience.json empty — WARNING
-- **Source:** check-json-schema.ps1
-- **Detected:** Session ?
-- **Description:** experience.json empty
-- **Status:** ⏳ Pending
-
-## 📡 Automatic findings (Session ? — 2026-06-29)
-
-### Colores de marca en badges: #3776ab (2 use(s)), #e76f00 (2 use(s)), #f7df1e (2 use(s)), #00758f (3 use(s)), #734f96 (2 use(s)), #007acc (1 use(s)), #2c2255 (1 use(s)), #1a6ac9 (1 use(s)), #710900 (1 use(s)), #10a37f (1 use(s)) - intencionales pero no normalizables — WARNING
-- **Source:** check-frontend-design.ps1
-- **Detected:** Session ? (automatic)
-- **Status:** ⏳ Pending
-
-### Predominantly single quotes (98 single vs 48 double) — WARNING
-- **Source:** check-js-logic.ps1
-- **Detected:** Session ? (automatic)
-- **Status:** ⏳ Pending
-
-### Classes referenced but missing CSS: profile-text, badges, text, section — WARNING
-- **Source:** check-css-logic.ps1
-- **Detected:** Session ? (automatic)
-- **Status:** ⏳ Pending
-
-### experience.json empty — WARNING
-- **Source:** check-json-schema.ps1
-- **Detected:** Session ? (automatic)
-- **Status:** ⏳ Pending
-
-
-### Colores de marca en badges: #3776ab (2 use(s)), #e76f00 (2 use(s)), #f7df1e (2 use(s)), #00758f (3 use(s)), #734f96 (2 use(s)), #007acc (1 use(s)), #2c2255 (1 use(s)), #1a6ac9 (1 use(s)), #710900 (1 use(s)) - intencionales pero no normalizables — WARNING
-- **Source:** check-frontend-design.ps1
-- **Detected:** Session ?
-- **Description:** Colores de marca en badges: #3776ab (2 use(s)), #e76f00 (2 use(s)), #f7df1e (2 use(s)), #00758f (3 use(s)), #734f96 (2 use(s)), #007acc (1 use(s)), #2c2255 (1 use(s)), #1a6ac9 (1 use(s)), #710900 (1 use(s)) - intencionales pero no normalizables
-- **Status:** ⏳ Pending
-
-### Colores de marca en badges: #3776ab (2 use(s)), #e76f00 (2 use(s)), #f7df1e (2 use(s)), #00758f (3 use(s)), #734f96 (2 use(s)), #007acc (1 use(s)), #2c2255 (1 use(s)), #1a6ac9 (1 use(s)), #710900 (1 use(s)) - intencionales pero no normalizables — WARNING
-- **Source:** check-frontend-design.ps1
-- **Detected:** Session ?
-- **Description:** Colores de marca en badges: #3776ab (2 use(s)), #e76f00 (2 use(s)), #f7df1e (2 use(s)), #00758f (3 use(s)), #734f96 (2 use(s)), #007acc (1 use(s)), #2c2255 (1 use(s)), #1a6ac9 (1 use(s)), #710900 (1 use(s)) - intencionales pero no normalizables
-- **Status:** ⏳ Pending
-
-### Predominantly single quotes (98 single vs 48 double) — WARNING
-- **Source:** check-js-logic.ps1
-- **Detected:** Session ?
-- **Description:** Predominantly single quotes (98 single vs 48 double)
-- **Status:** ⏳ Pending
-
-### Predominantly single quotes (98 single vs 48 double) — WARNING
-- **Source:** check-js-logic.ps1
-- **Detected:** Session ?
-- **Description:** Predominantly single quotes (98 single vs 48 double)
-- **Status:** ⏳ Pending
-
-### Classes referenced but missing CSS: section, profile-text, text, badges — WARNING
-- **Source:** check-css-logic.ps1
-- **Detected:** Session ?
-- **Description:** Classes referenced but missing CSS: section, profile-text, text, badges
-- **Status:** ⏳ Pending
-
-### Classes referenced but missing CSS: section, profile-text, text, badges — WARNING
-- **Source:** check-css-logic.ps1
-- **Detected:** Session ?
-- **Description:** Classes referenced but missing CSS: section, profile-text, text, badges
-- **Status:** ⏳ Pending
-
-### experience.json empty — WARNING
-- **Source:** check-json-schema.ps1
-- **Detected:** Session ?
-- **Description:** experience.json empty
-- **Status:** ⏳ Pending
-
-### experience.json empty — WARNING
-- **Source:** check-json-schema.ps1
-- **Detected:** Session ?
-- **Description:** experience.json empty
-- **Status:** ⏳ Pending
-
-## 📡 Automatic findings (Session ? — 2026-06-29)
-
-### Colores de marca en badges: #3776ab (2 use(s)), #e76f00 (2 use(s)), #f7df1e (2 use(s)), #00758f (3 use(s)), #734f96 (2 use(s)), #007acc (1 use(s)), #2c2255 (1 use(s)), #1a6ac9 (1 use(s)), #710900 (1 use(s)) - intencionales pero no normalizables — WARNING
-- **Source:** check-frontend-design.ps1
-- **Detected:** Session ? (automatic)
-- **Status:** ⏳ Pending
-
-### Predominantly single quotes (98 single vs 48 double) — WARNING
-- **Source:** check-js-logic.ps1
-- **Detected:** Session ? (automatic)
-- **Status:** ⏳ Pending
-
-### Classes referenced but missing CSS: section, profile-text, text, badges — WARNING
-- **Source:** check-css-logic.ps1
-- **Detected:** Session ? (automatic)
-- **Status:** ⏳ Pending
-
-### experience.json empty — WARNING
-- **Source:** check-json-schema.ps1
-- **Detected:** Session ? (automatic)
-- **Status:** ⏳ Pending

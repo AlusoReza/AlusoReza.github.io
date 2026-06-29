@@ -79,3 +79,7 @@ Global workflow summary. Each entry links to the detailed day log.
 ### Session 16: Conditional nav links
 **Prompt:** Hide "Experiencia" in nav when no data. Apply same for "Certificados".
 **Plan:** Nav.astro conditional links via experience.length and certificates.length.
+
+### Session 17: Nav flexbox + lang-switcher inline + box-sizing social buttons
+**Prompt:** Lang-switcher escapes nav on small screens; social buttons overflow viewport.
+**Plan:** Move lang-switcher inside nav (eliminar position:fixed), restructure nav with flexbox, add box-sizing:border-box to social buttons and CV button, fix responsive rules. Update tests. Clean bugs.md.

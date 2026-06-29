@@ -1,6 +1,5 @@
 ---
 import Nav from '../components/Nav.astro'
-import LangSwitcher from '../components/LangSwitcher.astro'
 import lang from '../data/lang.json'
 import skills from '../data/skills.json'
 import education from '../data/education.json'
@@ -33,7 +32,6 @@ const dataBundle = JSON.stringify({ lang, skills, education, projects, experienc
 
 </head>
 <body data-data={dataBundle}>
-  <LangSwitcher />
   <Nav />
   <main class="container">
     <slot />

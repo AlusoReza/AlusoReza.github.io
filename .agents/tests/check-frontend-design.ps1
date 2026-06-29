@@ -242,9 +242,9 @@ if ($redundantLines.Count -gt 0) {
     Warn $msg "Revisar si el color es necesario o heredable"
 } else { Pass "Sin colores redundantes" }
 
-# ─── CHECK 19: Lang switcher flotante ───
-if ($cssContent -match '\.lang-switcher\s*\{[^}]*position:\s*fixed') { Pass "LangSwitcher fixed (flotante)" }
-else { Warn "LangSwitcher no es fixed" "Añadir position: fixed + top: 15px + right: 20px" }
+# ─── CHECK 19: Lang switcher integrado en nav ───
+if ($cssContent -match '\.lang-switcher\s*\{[^}]*margin-left') { Pass "LangSwitcher integrado en nav (inline)" }
+else { Warn "LangSwitcher sin margin-left" "El lang-switcher debe estar dentro de nav-links, no fixed" }
 
 # ─── CHECK 20: Back-to-top button ───
 if ($cssContent -match '#back-to-top\s*\{[^}]*position:\s*fixed') { Pass "Botón back-to-top fixed" }
