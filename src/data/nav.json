@@ -1,0 +1,26 @@
+{
+  "es": {
+    "nav-sobre": "Sobre mí",
+    "nav-hab": "Habilidades",
+    "nav-proy": "Proyectos",
+    "nav-est": "Estudios",
+    "nav-exp": "Experiencia",
+    "nav-cert": "Certificados",
+    "cv-text": "Descargar CV (PDF)",
+    "hero-sub": "<strong>Desarrollador de software</strong><br>Full Stack · Agentes · Data",
+    "soc-li": "LinkedIn",
+    "soc-gh": "GitHub"
+  },
+  "en": {
+    "nav-sobre": "About me",
+    "nav-hab": "Skills",
+    "nav-proy": "Projects",
+    "nav-est": "Education",
+    "nav-exp": "Experience",
+    "nav-cert": "Certificates",
+    "cv-text": "Download CV (PDF)",
+    "hero-sub": "<strong>Software developer</strong><br>Full Stack · Agents · Data",
+    "soc-li": "LinkedIn",
+    "soc-gh": "GitHub"
+  }
+}

@@ -1,6 +1,8 @@
 ---
-import Nav from '../components/Nav.astro'
-import lang from '../data/lang.json'
+import Profile from '../components/Profile.astro'
+import nav from '../data/nav.json'
+import about from '../data/about.json'
+import sections from '../data/sections.json'
 import skills from '../data/skills.json'
 import education from '../data/education.json'
 import projects from '../data/projects.json'
@@ -10,6 +12,10 @@ import profile from '../data/profile.json'
 import '../styles/global.css'
 
 const { title, description } = Astro.props
+const lang = {
+  es: { ...nav.es, ...about.es, ...sections.es },
+  en: { ...nav.en, ...about.en, ...sections.en }
+}
 const dataBundle = JSON.stringify({ lang, skills, education, projects, experience, certificates, profile })
 ---
 
@@ -29,18 +35,23 @@ const dataBundle = JSON.stringify({ lang, skills, education, projects, experienc
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-
 </head>
 <body data-data={dataBundle}>
-  <Nav />
-  <main class="mx-auto max-w-[850px] 
-              px-5 py-10">
-    <slot />
-  </main>
-   <a href="#inicio" id="back-to-top" title="Volver arriba"
-     class="back-to-top">
-    <span class="-mt-0.5 leading-none">&uarr;</span>
-  </a>
+  <canvas id="particle-canvas"></canvas>
+  <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar">
+      <Profile />
+    </aside>
+    <main class="content" id="content">
+      <slot />
+      <p class="site-footer" data-i18n="footer">Diseñado y construido por Alonso Suárez Reza</p>
+    </main>
+  </div>
+  <a href="#" id="back-to-top" class="back-to-top" title="Volver arriba">&uarr;</a>
   <script src="../scripts/client.js"></script>
 </body>
 </html>

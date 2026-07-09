@@ -1,5 +1,7 @@
 const DATA = JSON.parse(document.body.dataset.data)
 let currentLang = localStorage.getItem('preferredLang') || 'es'
+let currentPage = 'sobre'
+let isTransitioning = false
 
 function t(field) {
   if (!field) return ''
@@ -20,7 +22,7 @@ function translateUI() {
 
 function renderAll() {
   translateUI()
-  renderSection('skills', DATA.skills, renderSkillItem)
+  renderSection('skills', DATA.skills.personality, renderPersonalityItem)
   renderSection('projects', DATA.projects, renderProjectItem)
   renderSection('education', DATA.education, renderEducationItem)
   renderSection('experience', DATA.experience, renderExperienceItem)
@@ -35,8 +37,8 @@ function renderSection(name, items, renderFn) {
   container.innerHTML = (items || []).map(renderFn).join('')
 }
 
-function renderSkillItem(s) {
-  return `<div class="skill-item stagger-item">
+function renderPersonalityItem(s) {
+  return `<div class="skill-personality-item stagger-item">
     <strong>${t(s.title)}</strong>
     <p>${t(s.description)}</p>
   </div>`
@@ -101,139 +103,194 @@ function toggleSection(id, arr) {
   if (el) el.style.display = (!arr || arr.length === 0) ? 'none' : ''
 }
 
+function navigateTo(pageId) {
+  if (pageId === currentPage || isTransitioning) return
+  isTransitioning = true
+
+  const oldPage = document.querySelector(`[data-page="${currentPage}"]`)
+  const newPage = document.querySelector(`[data-page="${pageId}"]`)
+  if (!newPage) { isTransitioning = false; return }
+
+  const contentEl = document.getElementById('content')
+  if (contentEl) contentEl.scrollTop = 0
+
+  const motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  newPage.style.display = 'block'
+  requestAnimationFrame(() => {
+    newPage.classList.add('active')
+  })
+
+  currentPage = pageId
+
+  document.querySelectorAll('.sidebar-nav-link').forEach(link => {
+    link.classList.toggle('active', link.dataset.nav === pageId)
+  })
+
+  if (oldPage && motionOK) {
+    oldPage.classList.remove('active')
+    oldPage.classList.add('exiting')
+    setTimeout(() => {
+      oldPage.classList.remove('exiting')
+      oldPage.style.display = ''
+      isTransitioning = false
+    }, 350)
+  } else if (oldPage) {
+    oldPage.classList.remove('active')
+    oldPage.style.display = ''
+    isTransitioning = false
+  } else {
+    isTransitioning = false
+  }
+}
+
+// --- Particle system ---
+function initParticles() {
+  const canvas = document.getElementById('particle-canvas')
+  if (!canvas) return
+  const ctx = canvas.getContext('2d')
+  let particles = []
+  let w, h
+
+  function resize() {
+    w = canvas.width = window.innerWidth
+    h = canvas.height = window.innerHeight
+  }
+
+  function createParticle() {
+    return {
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: (Math.random() - 0.5) * 0.5,
+      r: Math.random() * 2 + 1,
+      a: Math.random() * 0.4 + 0.1
+    }
+  }
+
+  function init() {
+    resize()
+    const count = Math.min(Math.floor(w * h / 12000), 80)
+    particles = Array.from({ length: count }, createParticle)
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h)
+    particles.forEach(p => {
+      p.x += p.vx
+      p.y += p.vy
+      if (p.x < 0) p.x = w
+      if (p.x > w) p.x = 0
+      if (p.y < 0) p.y = h
+      if (p.y > h) p.y = 0
+      ctx.beginPath()
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
+      ctx.fillStyle = `rgba(100, 255, 218, ${p.a})`
+      ctx.fill()
+    })
+    requestAnimationFrame(draw)
+  }
+
+  window.addEventListener('resize', resize)
+  init()
+  draw()
+}
+
+// --- Language switching ---
 function changeLanguage(lang) {
   if (lang === currentLang) return
   currentLang = lang
   renderAll()
-  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'))
+  document.querySelectorAll('.sidebar-lang-btn').forEach(btn => btn.classList.remove('active'))
   const activeBtn = document.getElementById(`btn-${lang}`)
   if (activeBtn) activeBtn.classList.add('active')
   localStorage.setItem('preferredLang', lang)
   document.documentElement.lang = lang
-  requestAnimationFrame(() => {
-    observeAll()
-    observeStagger()
-  })
-}
-
-// --- Intersection Observer scroll-reveal with stagger ---
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('active')
-      observer.unobserve(entry.target)
-    }
-  })
-}, { threshold: 0.15 })
-
-function observeAll() {
-  if (!motionOK) {
-    document.querySelectorAll('.reveal, .stagger-item').forEach(el => el.classList.add('active'))
-    return
-  }
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
-}
-
-// Stagger animation for grid items (skill, project, education, etc.)
-const staggerObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      const parent = entry.target
-      const items = parent.querySelectorAll('.stagger-item')
-      items.forEach((item, i) => {
-        item.style.transitionDelay = `${i * 80}ms`
-        item.classList.add('active')
-      })
-      staggerObserver.unobserve(parent)
-    }
-  })
-}, { threshold: 0.15 })
-
-function observeStagger() {
-  document.querySelectorAll('[data-section]').forEach(el => staggerObserver.observe(el))
-}
-
-const motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-// Back-to-top button
-const backToTop = document.getElementById('back-to-top')
-if (backToTop) {
-  if (backToTop.dataset.listener !== 'true') {
-    window.addEventListener('scroll', function () {
-      const scrollY = document.body.scrollTop || document.documentElement.scrollTop
-      if (scrollY > 400) {
-        backToTop.classList.add('show')
-      } else {
-        backToTop.classList.remove('show')
-      }
-    })
-    backToTop.dataset.listener = 'true'
-  }
-  // Initial check
-  if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
-    backToTop.classList.add('show')
-  }
+  translateUI()
 }
 
 document.querySelectorAll('[data-lang]').forEach(btn => {
   btn.addEventListener('click', () => changeLanguage(btn.dataset.lang))
 })
 
-function init() {
-  const savedLang = localStorage.getItem('preferredLang') || 'es'
-  currentLang = savedLang
-  translateUI()
-  toggleSection('experiencia', DATA.experience)
-  toggleSection('certificados', DATA.certificates)
-  if (savedLang !== 'es') renderAll()
-  const activeBtn = document.getElementById(`btn-${savedLang}`)
-  if (activeBtn) activeBtn.classList.add('active')
-  document.documentElement.lang = savedLang
-  requestAnimationFrame(() => {
-    observeAll()
-    observeStagger()
+// --- Nav clicks ---
+document.querySelectorAll('[data-nav]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    navigateTo(btn.dataset.nav)
+    closeSidebar()
   })
+})
+
+// --- Sidebar toggle (mobile) ---
+const sidebar = document.getElementById('sidebar')
+const sidebarToggle = document.getElementById('sidebar-toggle')
+const sidebarOverlay = document.getElementById('sidebar-overlay')
+
+function openSidebar() {
+  if (!sidebar || !sidebarOverlay) return
+  sidebar.classList.add('open')
+  sidebarOverlay.classList.add('open')
+  document.body.style.overflow = 'hidden'
 }
 
-init()
-
-// --- Hamburger menu drawer ---
-
-const navToggle = document.getElementById('nav-toggle')
-const navLinks = document.getElementById('nav-links')
-const navOverlay = document.getElementById('nav-overlay')
-
-function closeNav() {
-  if (!navLinks || !navOverlay) return
-  navLinks.classList.remove('open')
-  navOverlay.classList.remove('open')
+function closeSidebar() {
+  if (!sidebar || !sidebarOverlay) return
+  sidebar.classList.remove('open')
+  sidebarOverlay.classList.remove('open')
   document.body.style.overflow = ''
 }
 
-function toggleNav() {
-  if (!navLinks || !navOverlay) return
-  const isOpen = navLinks.classList.toggle('open')
-  navOverlay.classList.toggle('open')
-  document.body.style.overflow = isOpen ? 'hidden' : ''
+function toggleSidebar() {
+  const isOpen = sidebar?.classList.contains('open')
+  if (isOpen) closeSidebar()
+  else openSidebar()
 }
 
-if (navToggle) {
-  navToggle.addEventListener('click', toggleNav)
-}
+if (sidebarToggle) sidebarToggle.addEventListener('click', toggleSidebar)
+if (sidebarOverlay) sidebarOverlay.addEventListener('click', closeSidebar)
 
-if (navOverlay) {
-  navOverlay.addEventListener('click', closeNav)
-}
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeSidebar()
+})
 
-if (navLinks) {
-  navLinks.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', closeNav)
+// --- Back to top ---
+const backToTop = document.getElementById('back-to-top')
+const contentEl = document.getElementById('content')
+
+if (backToTop && contentEl) {
+  backToTop.addEventListener('click', (e) => {
+    e.preventDefault()
+    contentEl.scrollTo({ top: 0, behavior: 'smooth' })
+  })
+  contentEl.addEventListener('scroll', () => {
+    if (contentEl.scrollTop > 300) {
+      backToTop.classList.add('show')
+    } else {
+      backToTop.classList.remove('show')
+    }
   })
 }
 
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && navLinks?.classList.contains('open')) {
-    closeNav()
-  }
-})
+// --- Init ---
+function init() {
+  const savedLang = localStorage.getItem('preferredLang') || 'es'
+  currentLang = savedLang
+  currentPage = 'sobre'
+
+  const activeBtn = document.getElementById(`btn-${savedLang}`)
+  if (activeBtn) activeBtn.classList.add('active')
+
+  const sobrePage = document.querySelector('[data-page="sobre"]')
+  if (sobrePage) sobrePage.classList.add('active')
+  const sobreNav = document.querySelector('[data-nav="sobre"]')
+  if (sobreNav) sobreNav.classList.add('active')
+
+  document.documentElement.lang = savedLang
+  translateUI()
+
+  if (savedLang !== 'es') renderAll()
+
+  initParticles()
+}
+
+init()

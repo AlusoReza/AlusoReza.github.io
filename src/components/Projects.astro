@@ -1,27 +1,26 @@
 ---
-import lang from '../data/lang.json'
+import sections from '../data/sections.json'
 import projects from '../data/projects.json'
 const l = 'es'
-const t = (key) => lang[l]?.[key] || ''
+const t = (key) => sections[l]?.[key] || ''
 const tl = (obj) => obj?.[l] || ''
 ---
-<section id="proyectos" class="reveal section-reveal">
-  <h2 data-i18n="sec-proy"
-    class="section-title">{t('sec-proy')}</h2>
+<div data-page="proy" class="page">
+  <h2 class="section-title" data-i18n="sec-proy">Proyecto Destacado</h2>
+  <h1 class="section-heading">Proyectos</h1>
   <div data-section="projects">
-    {projects.map(proj => (
-      <div class="project-card">
-        <h3>{proj.title}</h3>
-        <p>{tl(proj.description)}</p>
-        {proj.links && (
-          <div class="project-links">
-            {proj.links.map(link => (
-              <a href={link.url} target="_blank" rel="noopener noreferrer"
-                 class="link-outline">{tl(link.text)}</a>
-            ))}
-          </div>
-        )}
-      </div>
-    ))}
+  {projects.map(proj => (
+    <div class="project-card">
+      <h3>{proj.title}</h3>
+      <p>{tl(proj.description)}</p>
+      {proj.links && (
+        <div class="project-links">
+          {proj.links.map(link => (
+            <a href={link.url} target="_blank" rel="noopener noreferrer" class="link-outline">{tl(link.text)}</a>
+          ))}
+        </div>
+      )}
+    </div>
+  ))}
   </div>
-</section>
+</div>

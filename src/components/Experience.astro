@@ -1,25 +1,23 @@
 ---
-import lang from '../data/lang.json'
+import sections from '../data/sections.json'
 import experience from '../data/experience.json'
 const l = 'es'
-const t = (key) => lang[l]?.[key] || ''
+const t = (key) => sections[l]?.[key] || ''
 const tl = (obj) => obj?.[l] || ''
-const empty = !experience || experience.length === 0
 ---
-<section id="experiencia" style={empty ? 'display:none' : ''}
-  class="reveal section-reveal">
-  <h2 data-i18n="sec-exp"
-    class="section-title">{t('sec-exp')}</h2>
+<div data-page="exp" class="page">
+  <h2 class="section-title" data-i18n="sec-exp">Experiencia</h2>
+  <h1 class="section-heading">Experiencia Laboral</h1>
   <div data-section="experience">
-    {experience.map(item => (
-      <div class="card-item">
-        <div class="card-header">
-          <strong class="card-title">{tl(item.title)}</strong>
-          {item.date && <span class="card-date">{tl(item.date)}</span>}
-        </div>
-        {item.company && <p class="card-sub">{tl(item.company)}</p>}
-        {item.description && <p class="card-desc">{tl(item.description)}</p>}
+  {experience.map(item => (
+    <div class="card-item">
+      <div class="card-header">
+        <strong class="card-title">{tl(item.title)}</strong>
+        {item.date && <span class="card-date">{tl(item.date)}</span>}
       </div>
-    ))}
+      {item.company && <p class="card-sub">{tl(item.company)}</p>}
+      {item.description && <p class="card-desc">{tl(item.description)}</p>}
+    </div>
+  ))}
   </div>
-</section>
+</div>

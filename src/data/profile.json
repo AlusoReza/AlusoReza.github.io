@@ -1,76 +1,11 @@
 {
-  "name": "Alonso José Suárez Reza",
+  "firstName": "Alonso José",
+  "lastName": "Suárez Reza",
+  "shortDesc": {
+    "es": "<strong>Desarrollador de software</strong><br>Full Stack · Agentes · Data",
+    "en": "<strong>Software developer</strong><br>Full Stack · Agents · Data"
+  },
   "cvPath": "/assets/Alonso_Reza_CV.pdf",
-  "badges": [
-    {
-      "label": "Python",
-      "class": "b-python"
-    },
-    {
-      "label": "Java",
-      "class": "b-java"
-    },
-    {
-      "label": "JavaScript",
-      "class": "b-javascript"
-    },
-    {
-      "label": "SQL/PostgreSQL",
-      "class": "b-sql"
-    },
-    {
-      "label": "Fortran",
-      "class": "b-fortran"
-    },
-    {
-      "label": "HTML/CSS/JS",
-      "class": "b-web"
-    },
-    {
-      "label": "LaTeX",
-      "class": "b-latex"
-    },
-    {
-      "label": "XML/JSON",
-      "class": "b-xml-json"
-    },
-    {
-      "label": "Batch/Bash",
-      "class": "b-batch-bash"
-    }
-  ],
-  "toolBadges": [
-    {
-      "label": "VS Code",
-      "class": "b-vscode"
-    },
-    {
-      "label": "Eclipse",
-      "class": "b-eclipse"
-    },
-    {
-      "label": "Docker Desktop",
-      "class": "b-docker"
-    },
-    {
-      "label": "MySQL Workbench",
-      "class": "b-workbench"
-    },
-    {
-      "label": "Visual Paradigm",
-      "class": "b-paradigm"
-    },
-    {
-      "label": "OpenCode/Claude",
-      "class": "b-opencode-claude"
-    },
-    {
-      "label": "Overleaf",
-      "class": "b-overleaf"
-    },
-    {
-      "label": "Excel",
-      "class": "b-excel"
-    }
-  ]
+  "githubUrl": "https://github.com/AlusoReza",
+  "linkedinUrl": "https://www.linkedin.com/in/alonsoreza"
 }

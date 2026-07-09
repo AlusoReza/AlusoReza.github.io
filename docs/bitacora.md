@@ -95,3 +95,11 @@ Global workflow summary. Each entry links to the detailed day log.
 ### Session 19: Mobile hamburger nav + responsive refinements + test sweep
 **Prompt:** Fix `.project-links` overflow, make nav a hamburger drawer on mobile, fix overlay click, fix z-index for link clicks, fix CV button compression, run tests, clean bugs.md, update logs.
 **Plan:** 10-step plan covering CSS fixes, nav restructure (toggle + drawer + overlay), z-index fixes, CV button padding, test suite run, bugs.md cleanup (eliminated ~1000 duplicate lines), log update.
+
+### Session 20: Complete redesign — brittanychiang.com inspired
+**Prompt:** Rediseño completo del portfolio inspirado en brittanychiang.com. Layout 2 columnas (sidebar fijo + páginas con slide-in). Fondo de partículas. Skills rediseñados con logo+name vía CDN.
+**Plan:** Restructurar JSONs, nuevo CSS (paleta #0a192f/#64ffda), layout sidebar+content, navegación por páginas con animación, partículas canvas, responsive mobile. Build exitoso.
+
+### Session 20b: Layout centering + contact removal + positioning fixes
+**Prompt:** Eliminar Contact (redundante), mover CV abajo del nav, centrar layout en monitores grandes (max-width + margin auto), contenido con max-width para evitar textos alargados, scroll-to-top al cambiar de página.
+**Plan:** CSS sidebar relative en desktop/fixed en mobile, max-width 1250px wrapper, content max-width 620px, scrollTop en navigateTo.

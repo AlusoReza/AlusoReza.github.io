@@ -1,9 +1,9 @@
 ---
-import lang from '../data/lang.json'
+import nav from '../data/nav.json'
 import experience from '../data/experience.json'
 import certificates from '../data/certificates.json'
 const l = 'es'
-const t = (key) => lang[l]?.[key] || ''
+const t = (key) => nav[l]?.[key] || ''
 const showExperience = experience && experience.length > 0
 const showCertificates = certificates && certificates.length > 0
 const links = [

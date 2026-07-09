@@ -1,0 +1,24 @@
+{
+  "es": {
+    "sec-sobre": "Sobre mí",
+    "sec-hab-tech": "Tecnologías",
+    "sec-hab-personal": "Perfil Profesional",
+    "sec-proy": "Proyecto Destacado",
+    "sec-est": "Formación Académica",
+    "sec-exp": "Experiencia",
+    "sec-cert": "Certificados",
+    "hab-note": "Mi enfoque de trabajo combina el rigor técnico con una visión estratégica, priorizando siempre la eficiencia y la escalabilidad de los sistemas que desarrollo.",
+    "hab-ai": "También integro de manera profesional <strong>modelos de lenguaje (LLMs)</strong> y <strong>agentes de IA</strong> en flujos de desarrollo, automatización y análisis. Mi objetivo es dominar estas tecnologías emergentes aplicándolas a problemas reales con el mismo rigor técnico."
+  },
+  "en": {
+    "sec-sobre": "About me",
+    "sec-hab-tech": "Technologies",
+    "sec-hab-personal": "Professional Profile",
+    "sec-proy": "Featured Project",
+    "sec-est": "Academic Background",
+    "sec-exp": "Experience",
+    "sec-cert": "Certificates",
+    "hab-note": "My work approach combines technical rigor with strategic vision, prioritizing efficiency and scalability in the systems I develop.",
+    "hab-ai": "I also professionally integrate <strong>Large Language Models (LLMs)</strong> and <strong>AI agents</strong> into development workflows, automation, and data analysis. My goal is to master these emerging technologies by applying them to real problems with the same technical rigor."
+  }
+}

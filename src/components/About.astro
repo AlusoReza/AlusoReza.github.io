@@ -1,11 +1,45 @@
 ---
-import lang from '../data/lang.json'
-const t = (key) => lang['es']?.[key] || ''
+import about from '../data/about.json'
+import skills from '../data/skills.json'
+const t = (key) => about['es']?.[key] || ''
+const languages = skills.languages || []
+const tools = skills.tools || []
 ---
-<section id="sobre-mi" class="reveal section-reveal">
-  <h2 data-i18n="sec-sobre"
-    class="section-title">Sobre mí</h2>
-  <p class="about-paragraph sm:text-justify" data-i18n="sobre-p1" set:html={t('sobre-p1')}></p>
-  <p class="about-paragraph sm:text-justify" data-i18n="sobre-p2" set:html={t('sobre-p2')}></p>
-  <p class="about-paragraph sm:text-justify" data-i18n="sobre-p3" set:html={t('sobre-p3')}></p>
-</section>
+<div data-page="sobre" class="page">
+  <h2 class="section-title" data-i18n="sec-sobre">Sobre mí</h2>
+
+  <div class="about-skills">
+    <div class="about-skills-group">
+      <span class="about-skills-label" data-i18n="about-lang-label">Lenguajes</span>
+      <div class="about-skills-badges" data-section="about-languages">
+        {languages.map(s => (
+          <span class="about-skill-badge">
+            {s.logo
+              ? <img src={s.logo} alt={s.name} loading="lazy" />
+              : <span class="about-skill-fallback">{s.name.slice(0, 2).toUpperCase()}</span>
+            }
+            {s.name}
+          </span>
+        ))}
+      </div>
+    </div>
+    <div class="about-skills-group">
+      <span class="about-skills-label" data-i18n="about-tools-label">Herramientas</span>
+      <div class="about-skills-badges" data-section="about-tools">
+        {tools.map(s => (
+          <span class="about-skill-badge">
+            {s.logo
+              ? <img src={s.logo} alt={s.name} loading="lazy" />
+              : <span class="about-skill-fallback">{s.name.slice(0, 2).toUpperCase()}</span>
+            }
+            {s.name}
+          </span>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <p class="about-paragraph" data-i18n="sobre-p1" set:html={t('sobre-p1')}></p>
+  <p class="about-paragraph" data-i18n="sobre-p2" set:html={t('sobre-p2')}></p>
+  <p class="about-paragraph" data-i18n="sobre-p3" set:html={t('sobre-p3')}></p>
+</div>

@@ -1,42 +1,64 @@
-[
-  {
-    "title": {
-      "es": "Visión Estratégica",
-      "en": "Strategic Vision"
+{
+  "personality": [
+    {
+      "title": {
+        "es": "Visión Estratégica",
+        "en": "Strategic Vision"
+      },
+      "description": {
+        "es": "Capacidad para analizar el panorama general de un proyecto y diseñar arquitecturas de código organizadas y preparadas para crecer.",
+        "en": "Ability to analyze the big picture of a project and design organized code architectures ready to grow."
+      }
     },
-    "description": {
-      "es": "Capacidad para analizar el panorama general de un proyecto y diseñar arquitecturas de código organizadas y preparadas para crecer.",
-      "en": "Ability to analyze the big picture of a project and design organized code architectures ready to grow."
-    }
-  },
-  {
-    "title": {
-      "es": "Resolución Analítica",
-      "en": "Analytical Resolution"
+    {
+      "title": {
+        "es": "Resolución Analítica",
+        "en": "Analytical Resolution"
+      },
+      "description": {
+        "es": "Enfoque lógico para descomponer problemas complejos en soluciones técnicas sencillas, eficientes y fáciles de mantener.",
+        "en": "Logical approach to decompose complex problems into simple, efficient, and maintainable technical solutions."
+      }
     },
-    "description": {
-      "es": "Enfoque lógico para descomponer problemas complejos en soluciones técnicas sencillas, eficientes y fáciles de mantener.",
-      "en": "Logical approach to decompose complex problems into simple, efficient, and maintainable technical solutions."
-    }
-  },
-  {
-    "title": {
-      "es": "Planificación y Rigor",
-      "en": "Planning and Rigor"
+    {
+      "title": {
+        "es": "Planificación y Rigor",
+        "en": "Planning and Rigor"
+      },
+      "description": {
+        "es": "Metodología de trabajo orientada a la estructura, la documentación detallada y el cumplimiento de estándares de calidad.",
+        "en": "Work methodology oriented towards structure, detailed documentation, and compliance with quality standards."
+      }
     },
-    "description": {
-      "es": "Metodología de trabajo orientada a la estructura, la documentación detallada y el cumplimiento de estándares de calidad.",
-      "en": "Work methodology oriented towards structure, detailed documentation, and compliance with quality standards."
+    {
+      "title": {
+        "es": "Compromiso con la Excelencia",
+        "en": "Commitment to Excellence"
+      },
+      "description": {
+        "es": "Mentalidad de crecimiento continuo, siempre buscando optimizar procesos existentes y dominar nuevas tecnologías.",
+        "en": "Continuous growth mindset, always looking to optimize existing processes and master new technologies."
+      }
     }
-  },
-  {
-    "title": {
-      "es": "Compromiso con la Excelencia",
-      "en": "Commitment to Excellence"
-    },
-    "description": {
-      "es": "Mentalidad de crecimiento continuo, siempre buscando optimizar procesos existentes y dominar nuevas tecnologías.",
-      "en": "Continuous growth mindset, always looking to optimize existing processes and master new technologies."
-    }
-  }
-]
+  ],
+  "languages": [
+    { "name": "Python", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" },
+    { "name": "Java", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" },
+    { "name": "JavaScript", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" },
+    { "name": "PostgreSQL", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" },
+    { "name": "Fortran", "logo": "" },
+    { "name": "HTML5", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" },
+    { "name": "LaTeX", "logo": "" },
+    { "name": "Bash", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg" }
+  ],
+  "tools": [
+    { "name": "VS Code", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" },
+    { "name": "Docker", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" },
+    { "name": "MySQL", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" },
+    { "name": "Git", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" },
+    { "name": "GitHub", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" },
+    { "name": "Eclipse", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/eclipse/eclipse-original.svg" },
+    { "name": "Overleaf", "logo": "" },
+    { "name": "Excel", "logo": "" }
+  ]
+}
