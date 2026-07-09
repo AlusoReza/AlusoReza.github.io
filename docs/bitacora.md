@@ -87,3 +87,11 @@ Global workflow summary. Each entry links to the detailed day log.
 ### Session 18: Workflow template with docs/logs protocol
 **Prompt:** Create a template with the complete action plan so any AI can replicate the working methodology. Include how docs/bitacora.md and docs/logs/ interact.
 **Plan:** Create `spec/template/workflow-template.md` (9 sections) covering session lifecycle, plan-first, build-driven logging with file hierarchy, bug tracking, testing, commits, language policy, context recovery, quality gates. Update spec template README.
+
+## 2026-07-09
+
+[Detailed log →](logs/2026-07-09.md)
+
+### Session 19: Mobile hamburger nav + responsive refinements + test sweep
+**Prompt:** Fix `.project-links` overflow, make nav a hamburger drawer on mobile, fix overlay click, fix z-index for link clicks, fix CV button compression, run tests, clean bugs.md, update logs.
+**Plan:** 10-step plan covering CSS fixes, nav restructure (toggle + drawer + overlay), z-index fixes, CV button padding, test suite run, bugs.md cleanup (eliminated ~1000 duplicate lines), log update.

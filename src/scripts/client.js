@@ -197,3 +197,43 @@ function init() {
 }
 
 init()
+
+// --- Hamburger menu drawer ---
+
+const navToggle = document.getElementById('nav-toggle')
+const navLinks = document.getElementById('nav-links')
+const navOverlay = document.getElementById('nav-overlay')
+
+function closeNav() {
+  if (!navLinks || !navOverlay) return
+  navLinks.classList.remove('open')
+  navOverlay.classList.remove('open')
+  document.body.style.overflow = ''
+}
+
+function toggleNav() {
+  if (!navLinks || !navOverlay) return
+  const isOpen = navLinks.classList.toggle('open')
+  navOverlay.classList.toggle('open')
+  document.body.style.overflow = isOpen ? 'hidden' : ''
+}
+
+if (navToggle) {
+  navToggle.addEventListener('click', toggleNav)
+}
+
+if (navOverlay) {
+  navOverlay.addEventListener('click', closeNav)
+}
+
+if (navLinks) {
+  navLinks.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', closeNav)
+  })
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && navLinks?.classList.contains('open')) {
+    closeNav()
+  }
+})

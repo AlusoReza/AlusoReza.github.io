@@ -245,6 +245,7 @@ hr {
 
 .project-links {
     display: flex;
+    flex-wrap: wrap;
     gap: 12px;
     margin-top: 25px;
 }
@@ -342,6 +343,9 @@ hr {
         width: 100%;
         max-width: none;
         margin: 20px auto;
+        height: auto;
+        min-height: 45px;
+        padding: 12px 20px;
     }
 }
 
@@ -388,6 +392,61 @@ hr {
     font-weight: 600;
 }
 
+.nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--color-border);
+    background-color: rgba(13, 17, 23, 0.9);
+    padding: 10px 0;
+    backdrop-filter: blur(12px);
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    cursor: pointer;
+    gap: 4px;
+    padding: 6px;
+    outline: none;
+}
+.nav-toggle span {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background-color: var(--color-text-muted);
+    border-radius: 1px;
+    transition: background-color 0.3s ease;
+}
+.nav-toggle:hover span {
+    background-color: var(--color-accent);
+}
+
+.nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.nav-overlay {
+    display: none;
+}
+
 .nav-link {
     color: var(--color-text-muted);
     text-decoration: none;
@@ -399,16 +458,6 @@ hr {
 }
 .nav-link:hover {
     color: var(--color-accent);
-}
-
-.nav-bar {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    border-bottom: 1px solid var(--color-border);
-    background-color: rgba(13, 17, 23, 0.9);
-    padding: 10px 0;
-    backdrop-filter: blur(12px);
 }
 
 .lang-switcher {
@@ -435,6 +484,60 @@ hr {
 .lang-btn:hover,
 .lang-btn.active {
     color: var(--color-accent);
+}
+
+@media (max-width: 650px) {
+    .nav-container {
+        justify-content: flex-start;
+    }
+    .nav-toggle {
+        display: flex;
+    }
+    .nav-links {
+        position: fixed;
+        top: 0;
+        left: -280px;
+        width: 280px;
+        height: 100vh;
+        flex-direction: column;
+        background-color: var(--color-bg);
+        border-right: 1px solid var(--color-border);
+        padding: 80px 20px 30px;
+        z-index: 100;
+        transition: left 0.3s ease;
+        justify-content: flex-start;
+        gap: 0;
+        flex-wrap: nowrap;
+        overflow-y: auto;
+    }
+    .nav-links.open {
+        left: 0;
+    }
+    .nav-links .nav-link {
+        width: 100%;
+        padding: 14px 10px;
+        font-size: 1em;
+        border-bottom: 1px solid var(--color-border);
+        white-space: normal;
+    }
+    .nav-links .lang-switcher {
+        margin: 20px 0 0 0;
+        align-self: flex-start;
+    }
+    .nav-overlay {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 99;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+    .nav-overlay.open {
+        opacity: 1;
+        pointer-events: auto;
+    }
 }
 
 .skills-grid {
@@ -689,7 +792,38 @@ hr {
     visibility: visible;
 }
 
-/* --- 6. ACCESIBILIDAD: REDUCIR MOVIMIENTO --- */
+/* --- 6. RESPONSIVE REFINEMENTS --- */
+
+@media (max-width: 650px) {
+    .section-title {
+        margin-top: 35px;
+    }
+    .contact-links {
+        margin-top: 50px;
+        padding: 40px 20px;
+    }
+    .section-reveal {
+        scroll-margin-top: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-item {
+        padding: 18px;
+    }
+    .about-paragraph {
+        text-align: left;
+    }
+}
+
+@media (max-width: 360px) {
+    .badge {
+        white-space: normal;
+        font-size: 0.75em;
+    }
+}
+
+/* --- 7. ACCESIBILIDAD: REDUCIR MOVIMIENTO --- */
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
         transition-duration: 0.01ms !important;
