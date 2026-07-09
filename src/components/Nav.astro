@@ -17,15 +17,18 @@ const links = [
   { href: '#contacto', key: 'nav-cont' },
 ]
 ---
-<nav>
-  <div class="nav-container">
-    <div class="nav-links">
+<nav class="nav-bar">
+  <div class="mx-auto max-w-[850px] 
+              px-5">
+    <div class="flex flex-wrap items-center 
+                justify-center gap-1">
       {links.map(link => (
-        <a href={link.href} data-i18n={link.key}>{t(link.key)}</a>
+        <a href={link.href} data-i18n={link.key}
+           class="nav-link">{t(link.key)}</a>
       ))}
       <div class="lang-switcher">
-        <button data-lang="es" class="lang-btn active" id="btn-es">ES</button>
-        <span class="divider">|</span>
+        <button data-lang="es" class="lang-btn" id="btn-es">ES</button>
+        <span class="text-xs text-border">|</span>
         <button data-lang="en" class="lang-btn" id="btn-en">EN</button>
       </div>
     </div>

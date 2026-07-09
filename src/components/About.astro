@@ -2,9 +2,10 @@
 import lang from '../data/lang.json'
 const t = (key) => lang['es']?.[key] || ''
 ---
-<section class="reveal section" id="sobre-mi">
-  <h2 data-i18n="sec-sobre">Sobre mí</h2>
-  <p class="about-text" data-i18n="sobre-p1" set:html={t('sobre-p1')}></p>
-  <p class="about-text" data-i18n="sobre-p2" set:html={t('sobre-p2')}></p>
-  <p class="about-text" data-i18n="sobre-p3" set:html={t('sobre-p3')}></p>
+<section id="sobre-mi" class="reveal section-reveal">
+  <h2 data-i18n="sec-sobre"
+    class="section-title">Sobre mí</h2>
+  <p class="text-justify about-paragraph" data-i18n="sobre-p1" set:html={t('sobre-p1')}></p>
+  <p class="text-justify about-paragraph" data-i18n="sobre-p2" set:html={t('sobre-p2')}></p>
+  <p class="text-justify about-paragraph" data-i18n="sobre-p3" set:html={t('sobre-p3')}></p>
 </section>

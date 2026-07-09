@@ -33,11 +33,13 @@ const dataBundle = JSON.stringify({ lang, skills, education, projects, experienc
 </head>
 <body data-data={dataBundle}>
   <Nav />
-  <main class="container">
+  <main class="mx-auto max-w-[850px] 
+              px-5 py-10">
     <slot />
   </main>
-  <a href="#inicio" id="back-to-top" title="Volver arriba">
-    <span class="arrow">&uarr;</span>
+   <a href="#inicio" id="back-to-top" title="Volver arriba"
+     class="back-to-top">
+    <span class="-mt-0.5 leading-none">&uarr;</span>
   </a>
   <script src="../scripts/client.js"></script>
 </body>

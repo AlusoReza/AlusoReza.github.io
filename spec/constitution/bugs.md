@@ -88,3 +88,826 @@ Total: 0 FAIL(s), 8 WARN(s) — all intentional/neutral
 - **Source:** check-json-schema.ps1
 - **Description:** No work experience to list yet. Section auto-hides.
 - **Status:** ⏳ Intentional — no fix needed
+
+
+### Colores de marca en badges: #3776ab (2 use(s)), #e76f00 (2 use(s)), #f7df1e (2 use(s)), #00758f (3 use(s)), #734f96 (2 use(s)), #007acc (1 use(s)), #2c2255 (1 use(s)), #1a6ac9 (1 use(s)), #710900 (1 use(s)) - intencionales pero no normalizables — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Colores de marca en badges: #3776ab (2 use(s)), #e76f00 (2 use(s)), #f7df1e (2 use(s)), #00758f (3 use(s)), #734f96 (2 use(s)), #007acc (1 use(s)), #2c2255 (1 use(s)), #1a6ac9 (1 use(s)), #710900 (1 use(s)) - intencionales pero no normalizables
+- **Status:** ⏳ Pending
+
+### Colores de marca en badges: #3776ab (2 use(s)), #e76f00 (2 use(s)), #f7df1e (2 use(s)), #00758f (3 use(s)), #734f96 (2 use(s)), #007acc (1 use(s)), #2c2255 (1 use(s)), #1a6ac9 (1 use(s)), #710900 (1 use(s)) - intencionales pero no normalizables — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Colores de marca en badges: #3776ab (2 use(s)), #e76f00 (2 use(s)), #f7df1e (2 use(s)), #00758f (3 use(s)), #734f96 (2 use(s)), #007acc (1 use(s)), #2c2255 (1 use(s)), #1a6ac9 (1 use(s)), #710900 (1 use(s)) - intencionales pero no normalizables
+- **Status:** ⏳ Pending
+
+### Predominantly single quotes (98 single vs 48 double) — WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session ?
+- **Description:** Predominantly single quotes (98 single vs 48 double)
+- **Status:** ⏳ Pending
+
+### Predominantly single quotes (98 single vs 48 double) — WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session ?
+- **Description:** Predominantly single quotes (98 single vs 48 double)
+- **Status:** ⏳ Pending
+
+### Classes referenced but missing CSS: profile-text, text, badges, section — WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session ?
+- **Description:** Classes referenced but missing CSS: profile-text, text, badges, section
+- **Status:** ⏳ Pending
+
+### Classes referenced but missing CSS: profile-text, text, badges, section — WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session ?
+- **Description:** Classes referenced but missing CSS: profile-text, text, badges, section
+- **Status:** ⏳ Pending
+
+### experience.json empty — WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session ?
+- **Description:** experience.json empty
+- **Status:** ⏳ Pending
+
+### experience.json empty — WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session ?
+- **Description:** experience.json empty
+- **Status:** ⏳ Pending
+
+## 📡 Automatic findings (Session ? — 2026-07-09)
+
+### Colores de marca en badges: #3776ab (2 use(s)), #e76f00 (2 use(s)), #f7df1e (2 use(s)), #00758f (3 use(s)), #734f96 (2 use(s)), #007acc (1 use(s)), #2c2255 (1 use(s)), #1a6ac9 (1 use(s)), #710900 (1 use(s)) - intencionales pero no normalizables — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Predominantly single quotes (98 single vs 48 double) — WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Classes referenced but missing CSS: profile-text, text, badges, section — WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### experience.json empty — WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+---
+*Automatic findings are added here on each run-all.ps1 execution. The agent must move them to sections above with the correct description and severity.*
+
+
+### Falta @media (max-width: 650px) — ERROR
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta @media (max-width: 650px)
+- **Status:** ⏳ Pending
+
+### Falta @media (max-width: 650px) — ERROR
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta @media (max-width: 650px)
+- **Status:** ⏳ Pending
+
+### Falta @media (max-width: 480px) — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta @media (max-width: 480px)
+- **Status:** ⏳ Pending
+
+### Falta --font-display en: h2, .profile-text h1, .skill-item strong, .edu-header strong — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta --font-display en: h2, .profile-text h1, .skill-item strong, .edu-header strong
+- **Status:** ⏳ Pending
+
+### Colores de marca en badges: #3776ab (2 use(s)), #e76f00 (2 use(s)), #f7df1e (2 use(s)), #00758f (3 use(s)), #734f96 (2 use(s)), #007acc (1 use(s)), #2c2255 (1 use(s)), #1a6ac9 (1 use(s)), #710900 (1 use(s)) - intencionales pero no normalizables — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Colores de marca en badges: #3776ab (2 use(s)), #e76f00 (2 use(s)), #f7df1e (2 use(s)), #00758f (3 use(s)), #734f96 (2 use(s)), #007acc (1 use(s)), #2c2255 (1 use(s)), #1a6ac9 (1 use(s)), #710900 (1 use(s)) - intencionales pero no normalizables
+- **Status:** ⏳ Pending
+
+### No se detecta cuadrícula computacional en #inicio — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** No se detecta cuadrícula computacional en #inicio
+- **Status:** ⏳ Pending
+
+### Falta gradiente de desvanecimiento en #inicio::after — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta gradiente de desvanecimiento en #inicio::after
+- **Status:** ⏳ Pending
+
+### No se encuentra .btn-outline — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** No se encuentra .btn-outline
+- **Status:** ⏳ Pending
+
+### Falta sticky o backdrop-filter en nav — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta sticky o backdrop-filter en nav
+- **Status:** ⏳ Pending
+
+### LangSwitcher sin margin-left — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** LangSwitcher sin margin-left
+- **Status:** ⏳ Pending
+
+### Falta botón back-to-top — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta botón back-to-top
+- **Status:** ⏳ Pending
+
+### Falta @media (max-width: 480px) — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta @media (max-width: 480px)
+- **Status:** ⏳ Pending
+
+### Falta --font-display en: h2, .profile-text h1, .skill-item strong, .edu-header strong — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta --font-display en: h2, .profile-text h1, .skill-item strong, .edu-header strong
+- **Status:** ⏳ Pending
+
+### Colores de marca en badges: #3776ab (2 use(s)), #e76f00 (2 use(s)), #f7df1e (2 use(s)), #00758f (3 use(s)), #734f96 (2 use(s)), #007acc (1 use(s)), #2c2255 (1 use(s)), #1a6ac9 (1 use(s)), #710900 (1 use(s)) - intencionales pero no normalizables — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Colores de marca en badges: #3776ab (2 use(s)), #e76f00 (2 use(s)), #f7df1e (2 use(s)), #00758f (3 use(s)), #734f96 (2 use(s)), #007acc (1 use(s)), #2c2255 (1 use(s)), #1a6ac9 (1 use(s)), #710900 (1 use(s)) - intencionales pero no normalizables
+- **Status:** ⏳ Pending
+
+### No se detecta cuadrícula computacional en #inicio — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** No se detecta cuadrícula computacional en #inicio
+- **Status:** ⏳ Pending
+
+### Falta gradiente de desvanecimiento en #inicio::after — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta gradiente de desvanecimiento en #inicio::after
+- **Status:** ⏳ Pending
+
+### No se encuentra .btn-outline — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** No se encuentra .btn-outline
+- **Status:** ⏳ Pending
+
+### Falta sticky o backdrop-filter en nav — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta sticky o backdrop-filter en nav
+- **Status:** ⏳ Pending
+
+### LangSwitcher sin margin-left — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** LangSwitcher sin margin-left
+- **Status:** ⏳ Pending
+
+### Falta botón back-to-top — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta botón back-to-top
+- **Status:** ⏳ Pending
+
+### Predominantly single quotes (98 single vs 48 double) — WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session ?
+- **Description:** Predominantly single quotes (98 single vs 48 double)
+- **Status:** ⏳ Pending
+
+### Predominantly single quotes (98 single vs 48 double) — WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session ?
+- **Description:** Predominantly single quotes (98 single vs 48 double)
+- **Status:** ⏳ Pending
+
+### Classes referenced but missing CSS: whitespace-nowrap, mx-auto, rounded-full, font-[family-name:var(--font-display)], edu-date, bg-none, m-0, mt-5, lang-switcher, mb-2, inline-block, text, mt-0, mt-1, edu-header, edu-list, mb-5, ml-1.5, sticky, edu-description, rounded-lg, grid, relative, badges, mb-7, text-justify, contact-subtitle, text-[1.2em], edu-institution, mb-1, mt-[100px], divider, text-xs, education-item, project-card, size-[170px], mb-[25px], lang-btn, mb-2.5, project-links, flex, skill-item, mt-[25px] — WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session ?
+- **Description:** Classes referenced but missing CSS: whitespace-nowrap, mx-auto, rounded-full, font-[family-name:var(--font-display)], edu-date, bg-none, m-0, mt-5, lang-switcher, mb-2, inline-block, text, mt-0, mt-1, edu-header, edu-list, mb-5, ml-1.5, sticky, edu-description, rounded-lg, grid, relative, badges, mb-7, text-justify, contact-subtitle, text-[1.2em], edu-institution, mb-1, mt-[100px], divider, text-xs, education-item, project-card, size-[170px], mb-[25px], lang-btn, mb-2.5, project-links, flex, skill-item, mt-[25px]
+- **Status:** ⏳ Pending
+
+### CSS variables defined but possibly unused: --color-bg-hover — WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session ?
+- **Description:** CSS variables defined but possibly unused: --color-bg-hover
+- **Status:** ⏳ Pending
+
+### Classes referenced but missing CSS: whitespace-nowrap, mx-auto, rounded-full, font-[family-name:var(--font-display)], edu-date, bg-none, m-0, mt-5, lang-switcher, mb-2, inline-block, text, mt-0, mt-1, edu-header, edu-list, mb-5, ml-1.5, sticky, edu-description, rounded-lg, grid, relative, badges, mb-7, text-justify, contact-subtitle, text-[1.2em], edu-institution, mb-1, mt-[100px], divider, text-xs, education-item, project-card, size-[170px], mb-[25px], lang-btn, mb-2.5, project-links, flex, skill-item, mt-[25px] — WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session ?
+- **Description:** Classes referenced but missing CSS: whitespace-nowrap, mx-auto, rounded-full, font-[family-name:var(--font-display)], edu-date, bg-none, m-0, mt-5, lang-switcher, mb-2, inline-block, text, mt-0, mt-1, edu-header, edu-list, mb-5, ml-1.5, sticky, edu-description, rounded-lg, grid, relative, badges, mb-7, text-justify, contact-subtitle, text-[1.2em], edu-institution, mb-1, mt-[100px], divider, text-xs, education-item, project-card, size-[170px], mb-[25px], lang-btn, mb-2.5, project-links, flex, skill-item, mt-[25px]
+- **Status:** ⏳ Pending
+
+### CSS variables defined but possibly unused: --color-bg-hover — WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session ?
+- **Description:** CSS variables defined but possibly unused: --color-bg-hover
+- **Status:** ⏳ Pending
+
+### experience.json empty — WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session ?
+- **Description:** experience.json empty
+- **Status:** ⏳ Pending
+
+### experience.json empty — WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session ?
+- **Description:** experience.json empty
+- **Status:** ⏳ Pending
+
+## 📡 Automatic findings (Session ? — 2026-07-09)
+
+### Falta @media (max-width: 650px) — ERROR
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Falta @media (max-width: 480px) — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Falta --font-display en: h2, .profile-text h1, .skill-item strong, .edu-header strong — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Colores de marca en badges: #3776ab (2 use(s)), #e76f00 (2 use(s)), #f7df1e (2 use(s)), #00758f (3 use(s)), #734f96 (2 use(s)), #007acc (1 use(s)), #2c2255 (1 use(s)), #1a6ac9 (1 use(s)), #710900 (1 use(s)) - intencionales pero no normalizables — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### No se detecta cuadrícula computacional en #inicio — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Falta gradiente de desvanecimiento en #inicio::after — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### No se encuentra .btn-outline — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Falta sticky o backdrop-filter en nav — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### LangSwitcher sin margin-left — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Falta botón back-to-top — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Predominantly single quotes (98 single vs 48 double) — WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Classes referenced but missing CSS: whitespace-nowrap, mx-auto, rounded-full, font-[family-name:var(--font-display)], edu-date, bg-none, m-0, mt-5, lang-switcher, mb-2, inline-block, text, mt-0, mt-1, edu-header, edu-list, mb-5, ml-1.5, sticky, edu-description, rounded-lg, grid, relative, badges, mb-7, text-justify, contact-subtitle, text-[1.2em], edu-institution, mb-1, mt-[100px], divider, text-xs, education-item, project-card, size-[170px], mb-[25px], lang-btn, mb-2.5, project-links, flex, skill-item, mt-[25px] — WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### CSS variables defined but possibly unused: --color-bg-hover — WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### experience.json empty — WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+---
+*Automatic findings are added here on each run-all.ps1 execution. The agent must move them to sections above with the correct description and severity.*
+
+
+### Falta reset de .reveal en prefers-reduced-motion — ERROR
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta reset de .reveal en prefers-reduced-motion
+- **Status:** ⏳ Pending
+
+### Falta if (motionOK) en event listener — ERROR
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta if (motionOK) en event listener
+- **Status:** ⏳ Pending
+
+### Falta @media (max-width: 650px) — ERROR
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta @media (max-width: 650px)
+- **Status:** ⏳ Pending
+
+### Falta reset de .reveal en prefers-reduced-motion — ERROR
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta reset de .reveal en prefers-reduced-motion
+- **Status:** ⏳ Pending
+
+### Falta if (motionOK) en event listener — ERROR
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta if (motionOK) en event listener
+- **Status:** ⏳ Pending
+
+### Falta @media (max-width: 650px) — ERROR
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta @media (max-width: 650px)
+- **Status:** ⏳ Pending
+
+### Falta @media (max-width: 480px) — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta @media (max-width: 480px)
+- **Status:** ⏳ Pending
+
+### Falta --font-display en: h2, .profile-text h1, .skill-item strong, .edu-header strong — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta --font-display en: h2, .profile-text h1, .skill-item strong, .edu-header strong
+- **Status:** ⏳ Pending
+
+### Colores de marca en badges: #3776ab (2 use(s)), #e76f00 (2 use(s)), #f7df1e (2 use(s)), #00758f (3 use(s)), #734f96 (2 use(s)), #007acc (1 use(s)), #2c2255 (1 use(s)), #1a6ac9 (1 use(s)), #710900 (1 use(s)) - intencionales pero no normalizables — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Colores de marca en badges: #3776ab (2 use(s)), #e76f00 (2 use(s)), #f7df1e (2 use(s)), #00758f (3 use(s)), #734f96 (2 use(s)), #007acc (1 use(s)), #2c2255 (1 use(s)), #1a6ac9 (1 use(s)), #710900 (1 use(s)) - intencionales pero no normalizables
+- **Status:** ⏳ Pending
+
+### No se detecta cuadrícula computacional en #inicio — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** No se detecta cuadrícula computacional en #inicio
+- **Status:** ⏳ Pending
+
+### Falta gradiente de desvanecimiento en #inicio::after — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta gradiente de desvanecimiento en #inicio::after
+- **Status:** ⏳ Pending
+
+### No se encuentra .btn-outline — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** No se encuentra .btn-outline
+- **Status:** ⏳ Pending
+
+### Falta sticky o backdrop-filter en nav — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta sticky o backdrop-filter en nav
+- **Status:** ⏳ Pending
+
+### LangSwitcher sin margin-left — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** LangSwitcher sin margin-left
+- **Status:** ⏳ Pending
+
+### Falta botón back-to-top — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta botón back-to-top
+- **Status:** ⏳ Pending
+
+### Falta @media (max-width: 480px) — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta @media (max-width: 480px)
+- **Status:** ⏳ Pending
+
+### Falta --font-display en: h2, .profile-text h1, .skill-item strong, .edu-header strong — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta --font-display en: h2, .profile-text h1, .skill-item strong, .edu-header strong
+- **Status:** ⏳ Pending
+
+### Colores de marca en badges: #3776ab (2 use(s)), #e76f00 (2 use(s)), #f7df1e (2 use(s)), #00758f (3 use(s)), #734f96 (2 use(s)), #007acc (1 use(s)), #2c2255 (1 use(s)), #1a6ac9 (1 use(s)), #710900 (1 use(s)) - intencionales pero no normalizables — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Colores de marca en badges: #3776ab (2 use(s)), #e76f00 (2 use(s)), #f7df1e (2 use(s)), #00758f (3 use(s)), #734f96 (2 use(s)), #007acc (1 use(s)), #2c2255 (1 use(s)), #1a6ac9 (1 use(s)), #710900 (1 use(s)) - intencionales pero no normalizables
+- **Status:** ⏳ Pending
+
+### No se detecta cuadrícula computacional en #inicio — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** No se detecta cuadrícula computacional en #inicio
+- **Status:** ⏳ Pending
+
+### Falta gradiente de desvanecimiento en #inicio::after — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta gradiente de desvanecimiento en #inicio::after
+- **Status:** ⏳ Pending
+
+### No se encuentra .btn-outline — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** No se encuentra .btn-outline
+- **Status:** ⏳ Pending
+
+### Falta sticky o backdrop-filter en nav — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta sticky o backdrop-filter en nav
+- **Status:** ⏳ Pending
+
+### LangSwitcher sin margin-left — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** LangSwitcher sin margin-left
+- **Status:** ⏳ Pending
+
+### Falta botón back-to-top — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta botón back-to-top
+- **Status:** ⏳ Pending
+
+### Predominantly single quotes (108 single vs 62 double) — WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session ?
+- **Description:** Predominantly single quotes (108 single vs 62 double)
+- **Status:** ⏳ Pending
+
+### Predominantly single quotes (108 single vs 62 double) — WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session ?
+- **Description:** Predominantly single quotes (108 single vs 62 double)
+- **Status:** ⏳ Pending
+
+### Classes referenced but missing CSS: mb-[25px], text-justify, grid, mb-2, whitespace-nowrap, mb-7, rounded-lg, font-[family-name:var(--font-display)], mb-5, inline-block, lang-switcher, flex, text-[1.2em], sticky, mt-[100px], mx-auto, ml-1.5, rounded-full, mt-[25px], mb-2.5, text, contact-subtitle, text-xs, relative, size-[170px], badges, mt-5, mt-0, mb-1, mt-1, bg-none, lang-btn, divider, m-0 — WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session ?
+- **Description:** Classes referenced but missing CSS: mb-[25px], text-justify, grid, mb-2, whitespace-nowrap, mb-7, rounded-lg, font-[family-name:var(--font-display)], mb-5, inline-block, lang-switcher, flex, text-[1.2em], sticky, mt-[100px], mx-auto, ml-1.5, rounded-full, mt-[25px], mb-2.5, text, contact-subtitle, text-xs, relative, size-[170px], badges, mt-5, mt-0, mb-1, mt-1, bg-none, lang-btn, divider, m-0
+- **Status:** ⏳ Pending
+
+### CSS variables defined but possibly unused: --animate-slide-in-left, --color-bg-hover, --animate-fade-in, --animate-fade-in-up — WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session ?
+- **Description:** CSS variables defined but possibly unused: --animate-slide-in-left, --color-bg-hover, --animate-fade-in, --animate-fade-in-up
+- **Status:** ⏳ Pending
+
+### Classes referenced but missing CSS: mb-[25px], text-justify, grid, mb-2, whitespace-nowrap, mb-7, rounded-lg, font-[family-name:var(--font-display)], mb-5, inline-block, lang-switcher, flex, text-[1.2em], sticky, mt-[100px], mx-auto, ml-1.5, rounded-full, mt-[25px], mb-2.5, text, contact-subtitle, text-xs, relative, size-[170px], badges, mt-5, mt-0, mb-1, mt-1, bg-none, lang-btn, divider, m-0 — WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session ?
+- **Description:** Classes referenced but missing CSS: mb-[25px], text-justify, grid, mb-2, whitespace-nowrap, mb-7, rounded-lg, font-[family-name:var(--font-display)], mb-5, inline-block, lang-switcher, flex, text-[1.2em], sticky, mt-[100px], mx-auto, ml-1.5, rounded-full, mt-[25px], mb-2.5, text, contact-subtitle, text-xs, relative, size-[170px], badges, mt-5, mt-0, mb-1, mt-1, bg-none, lang-btn, divider, m-0
+- **Status:** ⏳ Pending
+
+### CSS variables defined but possibly unused: --animate-slide-in-left, --color-bg-hover, --animate-fade-in, --animate-fade-in-up — WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session ?
+- **Description:** CSS variables defined but possibly unused: --animate-slide-in-left, --color-bg-hover, --animate-fade-in, --animate-fade-in-up
+- **Status:** ⏳ Pending
+
+### experience.json empty — WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session ?
+- **Description:** experience.json empty
+- **Status:** ⏳ Pending
+
+### experience.json empty — WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session ?
+- **Description:** experience.json empty
+- **Status:** ⏳ Pending
+
+## 📡 Automatic findings (Session ? — 2026-07-09)
+
+### Falta reset de .reveal en prefers-reduced-motion — ERROR
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Falta if (motionOK) en event listener — ERROR
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Falta @media (max-width: 650px) — ERROR
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Falta @media (max-width: 480px) — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Falta --font-display en: h2, .profile-text h1, .skill-item strong, .edu-header strong — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Colores de marca en badges: #3776ab (2 use(s)), #e76f00 (2 use(s)), #f7df1e (2 use(s)), #00758f (3 use(s)), #734f96 (2 use(s)), #007acc (1 use(s)), #2c2255 (1 use(s)), #1a6ac9 (1 use(s)), #710900 (1 use(s)) - intencionales pero no normalizables — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### No se detecta cuadrícula computacional en #inicio — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Falta gradiente de desvanecimiento en #inicio::after — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### No se encuentra .btn-outline — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Falta sticky o backdrop-filter en nav — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### LangSwitcher sin margin-left — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Falta botón back-to-top — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Predominantly single quotes (108 single vs 62 double) — WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Classes referenced but missing CSS: mb-[25px], text-justify, grid, mb-2, whitespace-nowrap, mb-7, rounded-lg, font-[family-name:var(--font-display)], mb-5, inline-block, lang-switcher, flex, text-[1.2em], sticky, mt-[100px], mx-auto, ml-1.5, rounded-full, mt-[25px], mb-2.5, text, contact-subtitle, text-xs, relative, size-[170px], badges, mt-5, mt-0, mb-1, mt-1, bg-none, lang-btn, divider, m-0 — WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### CSS variables defined but possibly unused: --animate-slide-in-left, --color-bg-hover, --animate-fade-in, --animate-fade-in-up — WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### experience.json empty — WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+---
+*Automatic findings are added here on each run-all.ps1 execution. The agent must move them to sections above with the correct description and severity.*
+
+
+### Falta reset de .reveal en prefers-reduced-motion — ERROR
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta reset de .reveal en prefers-reduced-motion
+- **Status:** ⏳ Pending
+
+### Falta if (motionOK) en event listener — ERROR
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta if (motionOK) en event listener
+- **Status:** ⏳ Pending
+
+### Falta reset de .reveal en prefers-reduced-motion — ERROR
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta reset de .reveal en prefers-reduced-motion
+- **Status:** ⏳ Pending
+
+### Falta if (motionOK) en event listener — ERROR
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta if (motionOK) en event listener
+- **Status:** ⏳ Pending
+
+### Falta --font-display en: h2, .profile-text h1, .edu-header strong — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta --font-display en: h2, .profile-text h1, .edu-header strong
+- **Status:** ⏳ Pending
+
+### Colores de marca en badges: #3776ab (2 use(s)), #e76f00 (2 use(s)), #f7df1e (2 use(s)), #00758f (3 use(s)), #734f96 (2 use(s)), #007acc (1 use(s)), #2c2255 (1 use(s)), #1a6ac9 (1 use(s)), #710900 (1 use(s)) - intencionales pero no normalizables — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Colores de marca en badges: #3776ab (2 use(s)), #e76f00 (2 use(s)), #f7df1e (2 use(s)), #00758f (3 use(s)), #734f96 (2 use(s)), #007acc (1 use(s)), #2c2255 (1 use(s)), #1a6ac9 (1 use(s)), #710900 (1 use(s)) - intencionales pero no normalizables
+- **Status:** ⏳ Pending
+
+### No se detecta cuadrícula computacional en #inicio — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** No se detecta cuadrícula computacional en #inicio
+- **Status:** ⏳ Pending
+
+### Falta gradiente de desvanecimiento en #inicio::after — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta gradiente de desvanecimiento en #inicio::after
+- **Status:** ⏳ Pending
+
+### No se encuentra .btn-outline — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** No se encuentra .btn-outline
+- **Status:** ⏳ Pending
+
+### Falta sticky o backdrop-filter en nav — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta sticky o backdrop-filter en nav
+- **Status:** ⏳ Pending
+
+### Falta botón back-to-top — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta botón back-to-top
+- **Status:** ⏳ Pending
+
+### Falta --font-display en: h2, .profile-text h1, .edu-header strong — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta --font-display en: h2, .profile-text h1, .edu-header strong
+- **Status:** ⏳ Pending
+
+### Colores de marca en badges: #3776ab (2 use(s)), #e76f00 (2 use(s)), #f7df1e (2 use(s)), #00758f (3 use(s)), #734f96 (2 use(s)), #007acc (1 use(s)), #2c2255 (1 use(s)), #1a6ac9 (1 use(s)), #710900 (1 use(s)) - intencionales pero no normalizables — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Colores de marca en badges: #3776ab (2 use(s)), #e76f00 (2 use(s)), #f7df1e (2 use(s)), #00758f (3 use(s)), #734f96 (2 use(s)), #007acc (1 use(s)), #2c2255 (1 use(s)), #1a6ac9 (1 use(s)), #710900 (1 use(s)) - intencionales pero no normalizables
+- **Status:** ⏳ Pending
+
+### No se detecta cuadrícula computacional en #inicio — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** No se detecta cuadrícula computacional en #inicio
+- **Status:** ⏳ Pending
+
+### Falta gradiente de desvanecimiento en #inicio::after — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta gradiente de desvanecimiento en #inicio::after
+- **Status:** ⏳ Pending
+
+### No se encuentra .btn-outline — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** No se encuentra .btn-outline
+- **Status:** ⏳ Pending
+
+### Falta sticky o backdrop-filter en nav — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta sticky o backdrop-filter en nav
+- **Status:** ⏳ Pending
+
+### Falta botón back-to-top — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta botón back-to-top
+- **Status:** ⏳ Pending
+
+### Predominantly single quotes (108 single vs 54 double) — WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session ?
+- **Description:** Predominantly single quotes (108 single vs 54 double)
+- **Status:** ⏳ Pending
+
+### Predominantly single quotes (108 single vs 54 double) — WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session ?
+- **Description:** Predominantly single quotes (108 single vs 54 double)
+- **Status:** ⏳ Pending
+
+### Classes referenced but missing CSS: mx-auto, flex, text-justify, text-xs — WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session ?
+- **Description:** Classes referenced but missing CSS: mx-auto, flex, text-justify, text-xs
+- **Status:** ⏳ Pending
+
+### CSS variables defined but possibly unused: --animate-fade-in, --animate-fade-in-up, --animate-slide-in-left — WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session ?
+- **Description:** CSS variables defined but possibly unused: --animate-fade-in, --animate-fade-in-up, --animate-slide-in-left
+- **Status:** ⏳ Pending
+
+### Classes referenced but missing CSS: mx-auto, flex, text-justify, text-xs — WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session ?
+- **Description:** Classes referenced but missing CSS: mx-auto, flex, text-justify, text-xs
+- **Status:** ⏳ Pending
+
+### CSS variables defined but possibly unused: --animate-fade-in, --animate-fade-in-up, --animate-slide-in-left — WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session ?
+- **Description:** CSS variables defined but possibly unused: --animate-fade-in, --animate-fade-in-up, --animate-slide-in-left
+- **Status:** ⏳ Pending
+
+### experience.json empty — WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session ?
+- **Description:** experience.json empty
+- **Status:** ⏳ Pending
+
+### experience.json empty — WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session ?
+- **Description:** experience.json empty
+- **Status:** ⏳ Pending
+
+## 📡 Automatic findings (Session ? — 2026-07-09)
+
+### Falta reset de .reveal en prefers-reduced-motion — ERROR
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Falta if (motionOK) en event listener — ERROR
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Falta --font-display en: h2, .profile-text h1, .edu-header strong — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Colores de marca en badges: #3776ab (2 use(s)), #e76f00 (2 use(s)), #f7df1e (2 use(s)), #00758f (3 use(s)), #734f96 (2 use(s)), #007acc (1 use(s)), #2c2255 (1 use(s)), #1a6ac9 (1 use(s)), #710900 (1 use(s)) - intencionales pero no normalizables — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### No se detecta cuadrícula computacional en #inicio — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Falta gradiente de desvanecimiento en #inicio::after — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### No se encuentra .btn-outline — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Falta sticky o backdrop-filter en nav — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Falta botón back-to-top — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Predominantly single quotes (108 single vs 54 double) — WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Classes referenced but missing CSS: mx-auto, flex, text-justify, text-xs — WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### CSS variables defined but possibly unused: --animate-fade-in, --animate-fade-in-up, --animate-slide-in-left — WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### experience.json empty — WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+---
+*Automatic findings are added here on each run-all.ps1 execution. The agent must move them to sections above with the correct description and severity.*

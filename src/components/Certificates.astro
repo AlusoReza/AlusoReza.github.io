@@ -6,17 +6,18 @@ const t = (key) => lang[l]?.[key] || ''
 const tl = (obj) => obj?.[l] || ''
 const empty = !certificates || certificates.length === 0
 ---
-<section class="reveal section" id="certificados" style={empty ? 'display:none' : ''}>
-  <h2 data-i18n="sec-cert">{t('sec-cert')}</h2>
+<section id="certificados" style={empty ? 'display:none' : ''} class="reveal section-reveal">
+  <h2 data-i18n="sec-cert"
+    class="section-title">{t('sec-cert')}</h2>
   <div data-section="certificates">
     {certificates.map(item => (
-      <div class="education-item">
-        <div class="edu-header">
-          <strong>{tl(item.title)}</strong>
-          {item.date && <span class="edu-date">{tl(item.date)}</span>}
+      <div class="card-item">
+        <div class="card-header">
+          <strong class="card-title">{tl(item.title)}</strong>
+          {item.date && <span class="card-date">{tl(item.date)}</span>}
         </div>
-        {item.institution && <p class="edu-institution">{tl(item.institution)}</p>}
-        {item.description && <p class="edu-description">{tl(item.description)}</p>}
+        {item.institution && <p class="card-sub">{tl(item.institution)}</p>}
+        {item.description && <p class="card-desc">{tl(item.description)}</p>}
       </div>
     ))}
   </div>

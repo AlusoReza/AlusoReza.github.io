@@ -5,8 +5,9 @@ const l = 'es'
 const t = (key) => lang[l]?.[key] || ''
 const tl = (obj) => obj?.[l] || ''
 ---
-<section class="reveal section" id="proyectos">
-  <h2 data-i18n="sec-proy">{t('sec-proy')}</h2>
+<section id="proyectos" class="reveal section-reveal">
+  <h2 data-i18n="sec-proy"
+    class="section-title">{t('sec-proy')}</h2>
   <div data-section="projects">
     {projects.map(proj => (
       <div class="project-card">
@@ -15,7 +16,8 @@ const tl = (obj) => obj?.[l] || ''
         {proj.links && (
           <div class="project-links">
             {proj.links.map(link => (
-              <a href={link.url} target="_blank" rel="noopener noreferrer" class="btn btn-outline">{tl(link.text)}</a>
+              <a href={link.url} target="_blank" rel="noopener noreferrer"
+                 class="link-outline">{tl(link.text)}</a>
             ))}
           </div>
         )}

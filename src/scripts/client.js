@@ -1,149 +1,199 @@
-const DATA = JSON.parse(document.body.dataset.data);
-let currentLang = localStorage.getItem('preferredLang') || 'es';
+const DATA = JSON.parse(document.body.dataset.data)
+let currentLang = localStorage.getItem('preferredLang') || 'es'
 
 function t(field) {
-  if (!field) return '';
-  if (typeof field === 'string') return field;
-  return field[currentLang] || field.es || field.en || '';
+  if (!field) return ''
+  if (typeof field === 'string') return field
+  return field[currentLang] || field.es || field.en || ''
 }
 
 function translateUI() {
-  const data = DATA.lang;
-  if (!data) return;
+  const data = DATA.lang
+  if (!data) return
   document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.dataset.i18n;
+    const key = el.dataset.i18n
     if (data[currentLang] && data[currentLang][key]) {
-      el.innerHTML = data[currentLang][key];
+      el.innerHTML = data[currentLang][key]
     }
-  });
+  })
 }
 
 function renderAll() {
-  translateUI();
-  renderSection('skills', DATA.skills, renderSkillItem);
-  renderSection('projects', DATA.projects, renderProjectItem);
-  renderSection('education', DATA.education, renderEducationItem);
-  renderSection('experience', DATA.experience, renderExperienceItem);
-  renderSection('certificates', DATA.certificates, renderCertificateItem);
-  toggleSection('experiencia', DATA.experience);
-  toggleSection('certificados', DATA.certificates);
+  translateUI()
+  renderSection('skills', DATA.skills, renderSkillItem)
+  renderSection('projects', DATA.projects, renderProjectItem)
+  renderSection('education', DATA.education, renderEducationItem)
+  renderSection('experience', DATA.experience, renderExperienceItem)
+  renderSection('certificates', DATA.certificates, renderCertificateItem)
+  toggleSection('experiencia', DATA.experience)
+  toggleSection('certificados', DATA.certificates)
 }
 
 function renderSection(name, items, renderFn) {
-  const container = document.querySelector(`[data-section="${name}"]`);
-  if (!container) return;
-  container.innerHTML = (items || []).map(renderFn).join('');
+  const container = document.querySelector(`[data-section="${name}"]`)
+  if (!container) return
+  container.innerHTML = (items || []).map(renderFn).join('')
 }
 
 function renderSkillItem(s) {
-  return `<div class="skill-item"><strong>${t(s.title)}</strong><p>${t(s.description)}</p></div>`;
+  return `<div class="skill-item stagger-item">
+    <strong>${t(s.title)}</strong>
+    <p>${t(s.description)}</p>
+  </div>`
 }
 
 function renderEducationItem(item) {
-  let html = `<div class="education-item"><div class="edu-header"><strong>${t(item.title)}</strong>`;
-  if (item.date) html += `<span class="edu-date">${t(item.date)}</span>`;
-  html += '</div>';
-  if (item.institution) html += `<p class="edu-institution">${t(item.institution)}</p>`;
-  if (item.description) html += `<p class="edu-description">${t(item.description)}</p>`;
+  let html = `<div class="card-item stagger-item">
+    <div class="card-header">
+      <strong class="card-title">${t(item.title)}</strong>`
+  if (item.date) html += `<span class="card-date">${t(item.date)}</span>`
+  html += '</div>'
+  if (item.institution) html += `<p class="card-sub">${t(item.institution)}</p>`
+  if (item.description) html += `<p class="card-desc">${t(item.description)}</p>`
   if (item.list && item.list.length) {
-    html += '<ul class="edu-list">';
-    item.list.forEach(li => html += `<li>${t(li)}</li>`);
-    html += '</ul>';
+    html += '<ul class="card-list">'
+    item.list.forEach(li => html += `<li>${t(li)}</li>`)
+    html += '</ul>'
   }
-  html += '</div>';
-  return html;
+  html += '</div>'
+  return html
 }
 
 function renderProjectItem(proj) {
-  let html = `<div class="project-card"><h3>${proj.title}</h3><p>${t(proj.description)}</p>`;
+  let html = `<div class="project-card stagger-item">
+    <h3>${proj.title}</h3>
+    <p>${t(proj.description)}</p>`
   if (proj.links && proj.links.length) {
-    html += '<div class="project-links">';
-    proj.links.forEach(link => html += `<a href="${link.url}" target="_blank" rel="noopener noreferrer" class="btn btn-outline">${t(link.text)}</a>`);
-    html += '</div>';
+    html += '<div class="project-links">'
+    proj.links.forEach(link => html += `<a href="${link.url}" target="_blank" rel="noopener noreferrer" class="link-outline">${t(link.text)}</a>`)
+    html += '</div>'
   }
-  html += '</div>';
-  return html;
+  html += '</div>'
+  return html
 }
 
 function renderExperienceItem(item) {
-  let html = `<div class="education-item"><div class="edu-header"><strong>${t(item.title)}</strong>`;
-  if (item.date) html += `<span class="edu-date">${t(item.date)}</span>`;
-  html += '</div>';
-  if (item.company) html += `<p class="edu-institution">${t(item.company)}</p>`;
-  if (item.description) html += `<p class="edu-description">${t(item.description)}</p>`;
-  html += '</div>';
-  return html;
+  let html = `<div class="card-item stagger-item">
+    <div class="card-header">
+      <strong class="card-title">${t(item.title)}</strong>`
+  if (item.date) html += `<span class="card-date">${t(item.date)}</span>`
+  html += '</div>'
+  if (item.company) html += `<p class="card-sub">${t(item.company)}</p>`
+  if (item.description) html += `<p class="card-desc">${t(item.description)}</p>`
+  html += '</div>'
+  return html
 }
 
 function renderCertificateItem(item) {
-  let html = `<div class="education-item"><div class="edu-header"><strong>${t(item.title)}</strong>`;
-  if (item.date) html += `<span class="edu-date">${t(item.date)}</span>`;
-  html += '</div>';
-  if (item.institution) html += `<p class="edu-institution">${t(item.institution)}</p>`;
-  if (item.description) html += `<p class="edu-description">${t(item.description)}</p>`;
-  html += '</div>';
-  return html;
+  let html = `<div class="card-item stagger-item">
+    <div class="card-header">
+      <strong class="card-title">${t(item.title)}</strong>`
+  if (item.date) html += `<span class="card-date">${t(item.date)}</span>`
+  html += '</div>'
+  if (item.institution) html += `<p class="card-sub">${t(item.institution)}</p>`
+  if (item.description) html += `<p class="card-desc">${t(item.description)}</p>`
+  html += '</div>'
+  return html
 }
 
 function toggleSection(id, arr) {
-  const el = document.getElementById(id);
-  if (el) el.style.display = (!arr || arr.length === 0) ? 'none' : '';
+  const el = document.getElementById(id)
+  if (el) el.style.display = (!arr || arr.length === 0) ? 'none' : ''
 }
 
 function changeLanguage(lang) {
-  if (lang === currentLang) return;
-  currentLang = lang;
-  renderAll();
-  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-  document.getElementById(`btn-${lang}`).classList.add('active');
-  localStorage.setItem('preferredLang', lang);
-  document.documentElement.lang = lang;
-  requestAnimationFrame(() => reveal());
+  if (lang === currentLang) return
+  currentLang = lang
+  renderAll()
+  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'))
+  const activeBtn = document.getElementById(`btn-${lang}`)
+  if (activeBtn) activeBtn.classList.add('active')
+  localStorage.setItem('preferredLang', lang)
+  document.documentElement.lang = lang
+  requestAnimationFrame(() => {
+    observeAll()
+    observeStagger()
+  })
 }
 
-function reveal() {
-  const reveals = document.querySelectorAll('.reveal');
-  for (let i = 0; i < reveals.length; i++) {
-    const windowHeight = window.innerHeight;
-    const elementTop = reveals[i].getBoundingClientRect().top;
-    if (elementTop < windowHeight - 150) {
-      reveals[i].classList.add('active');
+// --- Intersection Observer scroll-reveal with stagger ---
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('active')
+      observer.unobserve(entry.target)
     }
+  })
+}, { threshold: 0.15 })
+
+function observeAll() {
+  if (!motionOK) {
+    document.querySelectorAll('.reveal, .stagger-item').forEach(el => el.classList.add('active'))
+    return
   }
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
 }
 
-const motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+// Stagger animation for grid items (skill, project, education, etc.)
+const staggerObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      const parent = entry.target
+      const items = parent.querySelectorAll('.stagger-item')
+      items.forEach((item, i) => {
+        item.style.transitionDelay = `${i * 80}ms`
+        item.classList.add('active')
+      })
+      staggerObserver.unobserve(parent)
+    }
+  })
+}, { threshold: 0.15 })
 
-if (motionOK) {
-  window.addEventListener('scroll', reveal);
-} else {
-  document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
+function observeStagger() {
+  document.querySelectorAll('[data-section]').forEach(el => staggerObserver.observe(el))
 }
 
-window.addEventListener('scroll', function () {
-  const btn = document.getElementById('back-to-top');
-  if (!btn) return;
+const motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+// Back-to-top button
+const backToTop = document.getElementById('back-to-top')
+if (backToTop) {
+  if (backToTop.dataset.listener !== 'true') {
+    window.addEventListener('scroll', function () {
+      const scrollY = document.body.scrollTop || document.documentElement.scrollTop
+      if (scrollY > 400) {
+        backToTop.classList.add('show')
+      } else {
+        backToTop.classList.remove('show')
+      }
+    })
+    backToTop.dataset.listener = 'true'
+  }
+  // Initial check
   if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
-    btn.classList.add('show');
-  } else {
-    btn.classList.remove('show');
+    backToTop.classList.add('show')
   }
-});
+}
 
 document.querySelectorAll('[data-lang]').forEach(btn => {
-  btn.addEventListener('click', () => changeLanguage(btn.dataset.lang));
-});
+  btn.addEventListener('click', () => changeLanguage(btn.dataset.lang))
+})
 
 function init() {
-  const savedLang = localStorage.getItem('preferredLang') || 'es';
-  currentLang = savedLang;
-  translateUI();
-  toggleSection('experiencia', DATA.experience);
-  toggleSection('certificados', DATA.certificates);
-  if (savedLang !== 'es') renderAll();
-  document.getElementById(`btn-${savedLang}`).classList.add('active');
-  document.documentElement.lang = savedLang;
-  requestAnimationFrame(() => reveal());
+  const savedLang = localStorage.getItem('preferredLang') || 'es'
+  currentLang = savedLang
+  translateUI()
+  toggleSection('experiencia', DATA.experience)
+  toggleSection('certificados', DATA.certificates)
+  if (savedLang !== 'es') renderAll()
+  const activeBtn = document.getElementById(`btn-${savedLang}`)
+  if (activeBtn) activeBtn.classList.add('active')
+  document.documentElement.lang = savedLang
+  requestAnimationFrame(() => {
+    observeAll()
+    observeStagger()
+  })
 }
 
-init();
+init()
