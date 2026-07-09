@@ -103,3 +103,7 @@ Global workflow summary. Each entry links to the detailed day log.
 ### Session 20b: Layout centering + contact removal + positioning fixes
 **Prompt:** Eliminar Contact (redundante), mover CV abajo del nav, centrar layout en monitores grandes (max-width + margin auto), contenido con max-width para evitar textos alargados, scroll-to-top al cambiar de página.
 **Plan:** CSS sidebar relative en desktop/fixed en mobile, max-width 1250px wrapper, content max-width 620px, scrollTop en navigateTo.
+
+### Session 20g: Restore i18n render functions + fix scroll/display bug
+**Prompt:** Al navegar entre páginas se acumula scroll (páginas ocultas con display:block acumulado). Al cambiar idioma, todas las secciones quedan en español porque los render functions fueron eliminados incorrectamente.
+**Plan:** Restaurar renderSection/renderPersonalityItem/renderEducationItem/renderProjectItem/renderExperienceItem/renderCertificateItem/toggleSection. Agregar `oldPage.style.display=''` en navigateTo. Agregar data-section wrappers a 5 componentes. Build exitoso (577ms). Tests: 48 PASS, 8 FAIL (falsos positivos preexistentes), 10 WARN. Commit 5cb8a48.

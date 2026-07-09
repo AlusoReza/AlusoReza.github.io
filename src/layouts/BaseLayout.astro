@@ -47,8 +47,14 @@ const dataBundle = JSON.stringify({ lang, skills, education, projects, experienc
       <Profile />
     </aside>
     <main class="content" id="content">
-      <slot />
-      <p class="site-footer" data-i18n="footer">Diseñado y construido por Alonso Suárez Reza</p>
+      <div class="content-body">
+        <div class="lang-switcher-floating" id="lang-switcher-floating">
+          <button class="sidebar-lang-btn" data-lang="es">ES</button>
+          <button class="sidebar-lang-btn" data-lang="en">EN</button>
+        </div>
+        <slot />
+        <p class="site-footer" data-i18n="footer">Diseñado y construido por Alonso Suárez Reza</p>
+      </div>
     </main>
   </div>
   <a href="#" id="back-to-top" class="back-to-top" title="Volver arriba">&uarr;</a>

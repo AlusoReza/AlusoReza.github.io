@@ -773,3 +773,315 @@ Total: 0 FAIL(s), 4 WARN(s) — all false positives or intentional
 
 ---
 *Automatic findings are added here on each run-all.ps1 execution. The agent must move them to sections above with the correct description and severity.*
+
+
+### Faltan variables en :root: --color-green — ERROR
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Faltan variables en :root: --color-green
+- **Status:** ⏳ Pending
+
+### Falta reset de .reveal en prefers-reduced-motion — ERROR
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta reset de .reveal en prefers-reduced-motion
+- **Status:** ⏳ Pending
+
+### Falta if (motionOK) en event listener — ERROR
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta if (motionOK) en event listener
+- **Status:** ⏳ Pending
+
+### Falta @media (max-width: 650px) — ERROR
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta @media (max-width: 650px)
+- **Status:** ⏳ Pending
+
+### Faltan variables en :root: --color-green — ERROR
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Faltan variables en :root: --color-green
+- **Status:** ⏳ Pending
+
+### Falta reset de .reveal en prefers-reduced-motion — ERROR
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta reset de .reveal en prefers-reduced-motion
+- **Status:** ⏳ Pending
+
+### Falta if (motionOK) en event listener — ERROR
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta if (motionOK) en event listener
+- **Status:** ⏳ Pending
+
+### Falta @media (max-width: 650px) — ERROR
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta @media (max-width: 650px)
+- **Status:** ⏳ Pending
+
+### init() does NOT call renderAll() - visitor with EN saved sees mixed ES/EN sections — ERROR
+- **Source:** check-js-logic.ps1
+- **Detected:** Session ?
+- **Description:** init() does NOT call renderAll() - visitor with EN saved sees mixed ES/EN sections
+- **Status:** ⏳ Pending
+
+### init() does NOT call renderAll() - visitor with EN saved sees mixed ES/EN sections — ERROR
+- **Source:** check-js-logic.ps1
+- **Detected:** Session ?
+- **Description:** init() does NOT call renderAll() - visitor with EN saved sees mixed ES/EN sections
+- **Status:** ⏳ Pending
+
+### lang.json not found or invalid — ERROR
+- **Source:** check-json-schema.ps1
+- **Detected:** Session ?
+- **Description:** lang.json not found or invalid
+- **Status:** ⏳ Pending
+
+### profile.json incomplete: name, badges — ERROR
+- **Source:** check-json-schema.ps1
+- **Detected:** Session ?
+- **Description:** profile.json incomplete: name, badges
+- **Status:** ⏳ Pending
+
+### skills.json has non-bilingual fields:  (title),  (description) — ERROR
+- **Source:** check-json-schema.ps1
+- **Detected:** Session ?
+- **Description:** skills.json has non-bilingual fields:  (title),  (description)
+- **Status:** ⏳ Pending
+
+### lang.json not found or invalid — ERROR
+- **Source:** check-json-schema.ps1
+- **Detected:** Session ?
+- **Description:** lang.json not found or invalid
+- **Status:** ⏳ Pending
+
+### profile.json incomplete: name, badges — ERROR
+- **Source:** check-json-schema.ps1
+- **Detected:** Session ?
+- **Description:** profile.json incomplete: name, badges
+- **Status:** ⏳ Pending
+
+### skills.json has non-bilingual fields:  (title),  (description) — ERROR
+- **Source:** check-json-schema.ps1
+- **Detected:** Session ?
+- **Description:** skills.json has non-bilingual fields:  (title),  (description)
+- **Status:** ⏳ Pending
+
+### Falta --font-display en: h2, .profile-text h1, .skill-item strong, .edu-header strong — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta --font-display en: h2, .profile-text h1, .skill-item strong, .edu-header strong
+- **Status:** ⏳ Pending
+
+### No se detecta cuadrícula computacional en #inicio — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** No se detecta cuadrícula computacional en #inicio
+- **Status:** ⏳ Pending
+
+### Falta gradiente de desvanecimiento en #inicio::after — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta gradiente de desvanecimiento en #inicio::after
+- **Status:** ⏳ Pending
+
+### No se encuentra .btn-outline — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** No se encuentra .btn-outline
+- **Status:** ⏳ Pending
+
+### Falta sticky o backdrop-filter en nav — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta sticky o backdrop-filter en nav
+- **Status:** ⏳ Pending
+
+### LangSwitcher sin margin-left — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** LangSwitcher sin margin-left
+- **Status:** ⏳ Pending
+
+### Falta botón back-to-top — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta botón back-to-top
+- **Status:** ⏳ Pending
+
+### Falta --font-display en: h2, .profile-text h1, .skill-item strong, .edu-header strong — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta --font-display en: h2, .profile-text h1, .skill-item strong, .edu-header strong
+- **Status:** ⏳ Pending
+
+### No se detecta cuadrícula computacional en #inicio — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** No se detecta cuadrícula computacional en #inicio
+- **Status:** ⏳ Pending
+
+### Falta gradiente de desvanecimiento en #inicio::after — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta gradiente de desvanecimiento en #inicio::after
+- **Status:** ⏳ Pending
+
+### No se encuentra .btn-outline — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** No se encuentra .btn-outline
+- **Status:** ⏳ Pending
+
+### Falta sticky o backdrop-filter en nav — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta sticky o backdrop-filter en nav
+- **Status:** ⏳ Pending
+
+### LangSwitcher sin margin-left — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** LangSwitcher sin margin-left
+- **Status:** ⏳ Pending
+
+### Falta botón back-to-top — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Falta botón back-to-top
+- **Status:** ⏳ Pending
+
+### Predominantly single quotes (162 single vs 62 double) — WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session ?
+- **Description:** Predominantly single quotes (162 single vs 62 double)
+- **Status:** ⏳ Pending
+
+### Predominantly single quotes (162 single vs 62 double) — WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session ?
+- **Description:** Predominantly single quotes (162 single vs 62 double)
+- **Status:** ⏳ Pending
+
+### Classes referenced but missing CSS: lang-switcher, nav-bar, nav-overlay, nav-link, lang-btn, nav-container, nav-toggle, nav-links, text-xs, sidebar-name-first, mx-auto — WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session ?
+- **Description:** Classes referenced but missing CSS: lang-switcher, nav-bar, nav-overlay, nav-link, lang-btn, nav-container, nav-toggle, nav-links, text-xs, sidebar-name-first, mx-auto
+- **Status:** ⏳ Pending
+
+### Classes referenced but missing CSS: lang-switcher, nav-bar, nav-overlay, nav-link, lang-btn, nav-container, nav-toggle, nav-links, text-xs, sidebar-name-first, mx-auto — WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session ?
+- **Description:** Classes referenced but missing CSS: lang-switcher, nav-bar, nav-overlay, nav-link, lang-btn, nav-container, nav-toggle, nav-links, text-xs, sidebar-name-first, mx-auto
+- **Status:** ⏳ Pending
+
+### experience.json empty — WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session ?
+- **Description:** experience.json empty
+- **Status:** ⏳ Pending
+
+### experience.json empty — WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session ?
+- **Description:** experience.json empty
+- **Status:** ⏳ Pending
+
+## 📡 Automatic findings (Session ? — 2026-07-09)
+
+### Faltan variables en :root: --color-green — ERROR
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Falta reset de .reveal en prefers-reduced-motion — ERROR
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Falta if (motionOK) en event listener — ERROR
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Falta @media (max-width: 650px) — ERROR
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### init() does NOT call renderAll() - visitor with EN saved sees mixed ES/EN sections — ERROR
+- **Source:** check-js-logic.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### lang.json not found or invalid — ERROR
+- **Source:** check-json-schema.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### profile.json incomplete: name, badges — ERROR
+- **Source:** check-json-schema.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### skills.json has non-bilingual fields:  (title),  (description) — ERROR
+- **Source:** check-json-schema.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Falta --font-display en: h2, .profile-text h1, .skill-item strong, .edu-header strong — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### No se detecta cuadrícula computacional en #inicio — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Falta gradiente de desvanecimiento en #inicio::after — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### No se encuentra .btn-outline — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Falta sticky o backdrop-filter en nav — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### LangSwitcher sin margin-left — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Falta botón back-to-top — WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Predominantly single quotes (162 single vs 62 double) — WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### Classes referenced but missing CSS: lang-switcher, nav-bar, nav-overlay, nav-link, lang-btn, nav-container, nav-toggle, nav-links, text-xs, sidebar-name-first, mx-auto — WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+### experience.json empty — WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session ? (automatic)
+- **Status:** ⏳ Pending
+
+---
+*Automatic findings are added here on each run-all.ps1 execution. The agent must move them to sections above with the correct description and severity.*
