@@ -12,11 +12,15 @@ spec/
 │   ├── mission.md           ← qué construimos y para quién
 │   ├── tech-stack.md        ← tecnologías, convenciones y límites
 │   └── roadmap.md           ← orden de las features
-└── features/                ← una carpeta por feature
-    └── NNN-nombre-feature/
-        ├── spec.md          ← qué hace + criterios de aceptación
-        ├── plan.md          ← cómo se implementa
-        └── tasks.md         ← checklist de tareas
+├── features/                ← una carpeta por feature
+│   └── NNN-nombre-feature/
+│       ├── spec.md          ← qué hace + criterios de aceptación
+│       ├── plan.md          ← cómo se implementa
+│       └── tasks.md         ← checklist de tareas
+└── template/                ← plantillas reutilizables
+    ├── AGENTS_TEMPLATE.md   ← configuración inicial del agente
+    ├── spec_template/       ← copia esta carpeta para un proyecto nuevo
+    └── workflow-template.md ← protocolo de trabajo para cualquier IA
 ```
 
 _La constitución puede ser un único archivo si el proyecto es pequeño; cada feature también puede ser un único archivo. Divídelo cuando crezca._
@@ -31,3 +35,7 @@ _La constitución puede ser un único archivo si el proyecto es pequeño; cada f
 6. Actualizar `constitution/roadmap.md` (mover la feature a "Hecho").
 
 > La constitución manda: si una feature choca con `mission.md` o `tech-stack.md`, se replantea la feature, no la constitución.
+
+## Workflow para la IA
+
+> Lee [`template/workflow-template.md`](../template/workflow-template.md) antes de empezar a trabajar por primera vez. Define el protocolo completo de trabajo: logging, bugs, tests, commits, y cómo interactúa `docs/bitacora.md` con `docs/logs/`.

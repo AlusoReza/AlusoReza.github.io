@@ -2,7 +2,7 @@
 
 # Known bugs — Alonso Suárez Reza Portfolio
 
-Last scan: 2026-06-29 (Session 17 — nav flexbox + box-sizing)
+Last scan: 2026-06-29 (Session 18 — workflow template + docs/logs protocol)
 Total: 0 FAIL(s), 8 WARN(s) — all intentional/neutral
 
 ## ✅ Fixed (Session 12 — 2026-06-29)

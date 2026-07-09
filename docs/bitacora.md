@@ -83,3 +83,7 @@ Global workflow summary. Each entry links to the detailed day log.
 ### Session 17: Nav flexbox + lang-switcher inline + box-sizing social buttons
 **Prompt:** Lang-switcher escapes nav on small screens; social buttons overflow viewport.
 **Plan:** Move lang-switcher inside nav (eliminar position:fixed), restructure nav with flexbox, add box-sizing:border-box to social buttons and CV button, fix responsive rules. Update tests. Clean bugs.md.
+
+### Session 18: Workflow template with docs/logs protocol
+**Prompt:** Create a template with the complete action plan so any AI can replicate the working methodology. Include how docs/bitacora.md and docs/logs/ interact.
+**Plan:** Create `spec/template/workflow-template.md` (9 sections) covering session lifecycle, plan-first, build-driven logging with file hierarchy, bug tracking, testing, commits, language policy, context recovery, quality gates. Update spec template README.
