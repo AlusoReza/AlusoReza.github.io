@@ -107,3 +107,51 @@ Global workflow summary. Each entry links to the detailed day log.
 ### Session 20g: Restore i18n render functions + fix scroll/display bug
 **Prompt:** Al navegar entre páginas se acumula scroll (páginas ocultas con display:block acumulado). Al cambiar idioma, todas las secciones quedan en español porque los render functions fueron eliminados incorrectamente.
 **Plan:** Restaurar renderSection/renderPersonalityItem/renderEducationItem/renderProjectItem/renderExperienceItem/renderCertificateItem/toggleSection. Agregar `oldPage.style.display=''` en navigateTo. Agregar data-section wrappers a 5 componentes. Build exitoso (577ms). Tests: 48 PASS, 8 FAIL (falsos positivos preexistentes), 10 WARN. Commit 5cb8a48.
+
+## 2026-07-14
+
+[Detailed log →](logs/2026-07-14.md)
+
+### Session 21: Dynamic sidebar compact mode
+**Prompt:** Fix sidebar overflow on desktop: when viewport height is too small, the sidebar needs vertical scroll. Switch to mobile layout dynamically with animated transitions. Hide scrollbar for clean transitions. Add coordinated content expansion animation.
+**Plan:** Add `.sidebar-compact` CSS class + `ResizeObserver` overflow detection in JS. Hide sidebar scrollbar in desktop (`overflow-y: hidden`) + compact mode (`scrollbar-width: none`). Update `--sidebar-width` at each breakpoint. Add explicit `width` + `transition` to content for coordinated expansion. Build exitoso (544ms). 2 files changed, +191 lines.
+
+### Session 22: Fluid responsive adaptation
+**Prompt:** Replace hard compact-mode switch with fluid CSS adaptation. Sidebar and content adapt fluidly as viewport shrinks (reduce padding/margins smoothly). At minimum width (≤768px), switch to mobile layout. No more JS overflow detection.
+**Plan:** `--sidebar-width` → `clamp(240px, 23vw, 320px)`. Sidebar/content padding → `clamp()` with viewport-relative values. Remove all `body.sidebar-compact` rules (~100 lines). Remove compact mode JS detection. Sidebar gets `overflow-y: auto` + `scrollbar-width: none` for internal scroll. Build exitoso (586ms). 2 files changed.
+
+### Session 23: Fix sidebar padding overflow + raise mobile breakpoint
+**Prompt:** Sidebar content must never change size. Fix sidebar horizontal padding overflow (6vw grows too fast). Raise mobile breakpoint to ~1050px so sidebar+content only coexist on larger viewports.
+**Plan:** Reduce sidebar horizontal padding to `clamp(30px, 3vw, 50px)` (was `6vw/90px`). Raise mobile breakpoint from 768px to 1050px, desktop from 769px to 1051px. Update mobile content padding to fluid `clamp()` values. Build exitoso (605ms).
+
+### Session 24: Dynamic mobile breakpoint based on sidebar content area
+**Prompt:** Instead of hardcoded pixel breakpoint, switch to mobile when sidebar content area reaches 190px (minimum for CV button). Ensures sidebar content never resizes in desktop.
+**Plan:** Calculate: `17vw = 190px → viewport = 1118px`. Change breakpoints from 1050/1051px to 1118/1119px. Keep mobile sidebar scaling rules. Build exitoso (562ms).
+
+### Session 25: Fix CV button compression before breakpoint
+**Prompt:** CV button changes shape before mobile breakpoint triggers. Button's natural width (~210px) exceeds 190px threshold.
+**Plan:** Increase threshold from 190px to 210px: `17vw = 210px → viewport = 1235px`. Change breakpoints to 1235/1236px. Build exitoso (518ms).
+
+### Session 26: Fluid sidebar-to-mobile transition
+**Prompt:** Sidebar-to-mobile transition has visual "jump" — sidebar disappears and content jumps into place. Want gradual fade as viewport approaches breakpoint.
+**Plan:** CSS variable `--sidebar-fade: clamp(0, (100vw - 1236px) / 100px, 1)` creates opacity fade over 100px before breakpoint. Sidebar fades to invisible before layout switch. Respects `prefers-reduced-motion`. Build exitoso (532ms).
+
+### Session 27: Fix sidebar fade — scale width + opacity simultaneously
+**Prompt:** Sidebar "reloads" visible at breakpoint then slides away, defeating fade. Two issues: `opacity: 1` override flashes sidebar, and sidebar width disappears from flex causing content jump.
+**Plan:** Scale sidebar width using `calc(var(--sidebar-width) * var(--sidebar-fade))` so width and opacity shrink together. Remove `opacity: 1` from mobile `.sidebar`, add to `.sidebar.open` only. Content expands gradually as sidebar shrinks. Build exitoso (620ms).
+
+### Session 28: Sidebar gradient fade with fixed content size
+**Prompt:** Sidebar content compresses as sidebar shrinks. Want content to stay at original size and fade out like gradient.
+**Plan:** Wrap sidebar content in `.sidebar-inner` (position absolute, fixed width). Apply `mask-image: linear-gradient` for gradient fade. Move padding to inner div. Restore original width in mobile for hamburger slide-in. Build exitoso (603ms).
+
+### Session 29: Fix inverted sidebar gradient
+**Prompt:** Sidebar gradient is inverted — disappears when large, appears when small.
+**Plan:** Fix mask formula from `(1 - var(--sidebar-fade))` to `var(--sidebar-fade)`. Build exitoso (630ms).
+
+### Session 30: Content edge gradient to smooth sidebar fade
+**Prompt:** Content's hard left edge cuts through sidebar's gradient, creating ugly vertical line.
+**Plan:** Add `.content::before` with 40px gradient as visual bridge. Build exitoso (531ms).
+
+### Session 31: Sidebar overhang gradient instead of content gradient
+**Prompt:** Content `::before` darkens content. Doesn't work. Revert and reformulate.
+**Plan:** Remove `::before`. Extend `.sidebar-inner` width by 60px so it overlaps content's left edge. Mask fades the overlap. No content interference. Build exitoso (504ms).

@@ -26,7 +26,8 @@
   --color-accent-muted: rgba(100, 255, 218, 0.1);
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-  --sidebar-width: 320px;
+  --sidebar-width: clamp(240px, 23vw, 320px);
+  --sidebar-fade: clamp(0, (100vw - 1236px) / 100px, 1);
   --content-max-width: 800px;
   --transition-speed: 0.35s;
 }
@@ -65,16 +66,40 @@ body {
 /* Sidebar */
 .sidebar {
   position: relative;
-  flex: 0 0 var(--sidebar-width);
-  width: var(--sidebar-width);
+  flex: 0 0 calc(var(--sidebar-width) * var(--sidebar-fade));
+  width: calc(var(--sidebar-width) * var(--sidebar-fade));
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 57px 90px;
   background-color: var(--color-bg);
   z-index: 10;
+  overflow: visible;
+  scrollbar-width: none;
+  opacity: var(--sidebar-fade);
+  transition: opacity 0.3s ease, transform 0.3s ease, padding 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+.sidebar-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(var(--sidebar-width) + 60px);
+  height: 100%;
+  padding: clamp(30px, 4vh, 57px) clamp(30px, 3vw, 50px);
+  box-sizing: border-box;
   overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  mask-image: linear-gradient(to right, black 0%, black calc(var(--sidebar-fade) * 100% - 60px), transparent calc(var(--sidebar-fade) * 100%));
+}
+
+.sidebar-inner::-webkit-scrollbar {
+  display: none;
 }
 
 .sidebar-top {
@@ -260,7 +285,7 @@ body {
   gap: 4px;
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1236px) {
   .lang-switcher-floating {
     display: flex;
   }
@@ -279,7 +304,8 @@ body {
   z-index: 2;
   display: flex;
   flex-direction: column;
-  padding: 50px 50px;
+  padding: clamp(24px, 4vh, 50px) clamp(20px, 4vw, 50px);
+  transition: padding 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Content body — constrains all content width */
@@ -847,12 +873,15 @@ body {
 
 /* Large screens — proportional scaling */
 @media (min-width: 1400px) {
+  :root {
+    --sidebar-width: clamp(320px, 22vw, 420px);
+  }
   .app-layout {
     max-width: 90vw;
   }
   .sidebar {
-    flex: 0 0 clamp(320px, 22vw, 420px);
-    width: clamp(320px, 22vw, 420px);
+    flex: 0 0 var(--sidebar-width);
+    width: var(--sidebar-width);
   }
   .content-body {
     max-width: clamp(620px, 50vw, 900px);
@@ -860,6 +889,9 @@ body {
 }
 
 @media (min-width: 1800px) {
+  :root {
+    --sidebar-width: clamp(380px, 22vw, 550px);
+  }
   html {
     font-size: 18px;
   }
@@ -867,12 +899,12 @@ body {
     max-width: min(88vw, 2000px);
   }
   .sidebar {
-    flex: 0 0 clamp(380px, 22vw, 550px);
-    width: clamp(380px, 22vw, 550px);
-    padding: 70px 50px;
+    flex: 0 0 var(--sidebar-width);
+    width: var(--sidebar-width);
+    padding: clamp(40px, 5vh, 70px) clamp(35px, 3vw, 50px);
   }
   .content {
-    padding: 50px 60px;
+    padding: clamp(30px, 4vh, 50px) clamp(30px, 4vw, 60px);
   }
   .content-body {
     max-width: clamp(800px, 50vw, 1200px);
@@ -880,6 +912,9 @@ body {
 }
 
 @media (min-width: 2600px) {
+  :root {
+    --sidebar-width: clamp(420px, 20vw, 650px);
+  }
   html {
     font-size: 20px;
   }
@@ -887,12 +922,12 @@ body {
     max-width: min(85vw, 2400px);
   }
   .sidebar {
-    flex: 0 0 clamp(420px, 20vw, 650px);
-    width: clamp(420px, 20vw, 650px);
-    padding: 80px 60px;
+    flex: 0 0 var(--sidebar-width);
+    width: var(--sidebar-width);
+    padding: clamp(50px, 5vh, 80px) clamp(40px, 3vw, 60px);
   }
   .content {
-    padding: 60px 70px;
+    padding: clamp(35px, 4vh, 60px) clamp(40px, 4vw, 70px);
   }
   .content-body {
     max-width: clamp(900px, 48vw, 1400px);
@@ -900,7 +935,7 @@ body {
 }
 
 /* Mobile responsive */
-@media (max-width: 768px) {
+@media (max-width: 1235px) {
   .sidebar-toggle {
     display: flex;
   }
@@ -968,6 +1003,8 @@ body {
   }
 
   .sidebar {
+    width: var(--sidebar-width);
+    flex: 0 0 var(--sidebar-width);
     position: fixed;
     top: 0;
     left: 0;
@@ -977,12 +1014,13 @@ body {
   }
 
   .sidebar.open {
+    opacity: 1;
     transform: translateX(0);
   }
 
   .content {
     margin-left: 0;
-    padding: 60px 24px 30px;
+    padding: clamp(24px, 4vh, 60px) clamp(16px, 3vw, 24px);
   }
 
   .skills-grid {
@@ -1121,5 +1159,9 @@ body {
 
   .page.active {
     transform: none;
+  }
+
+  .sidebar {
+    transition: none;
   }
 }
