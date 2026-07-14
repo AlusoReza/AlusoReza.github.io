@@ -202,8 +202,7 @@ function changeLanguage(lang) {
   currentLang = lang
   renderAll()
   document.querySelectorAll('.sidebar-lang-btn').forEach(btn => btn.classList.remove('active'))
-  const activeBtn = document.getElementById(`btn-${lang}`)
-  if (activeBtn) activeBtn.classList.add('active')
+  document.querySelectorAll(`[data-lang="${lang}"]`).forEach(btn => btn.classList.add('active'))
   localStorage.setItem('preferredLang', lang)
   document.documentElement.lang = lang
   translateUI()
@@ -277,8 +276,7 @@ function init() {
   currentLang = savedLang
   currentPage = 'sobre'
 
-  const activeBtn = document.getElementById(`btn-${savedLang}`)
-  if (activeBtn) activeBtn.classList.add('active')
+  document.querySelectorAll(`[data-lang="${savedLang}"]`).forEach(btn => btn.classList.add('active'))
 
   const sobrePage = document.querySelector('[data-page="sobre"]')
   if (sobrePage) sobrePage.classList.add('active')

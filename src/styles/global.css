@@ -71,7 +71,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 60px 40px;
+  padding: 57px 90px;
   background-color: var(--color-bg);
   z-index: 10;
   overflow-y: auto;
@@ -85,11 +85,11 @@ body {
 
 /* Foto tipo cv perfil*/
 .sidebar-profile-img {
-  width: 120px;
-  height: 150px;
+  width: 140px;
+  height: 170px;
   border: 2px solid var(--color-accent);
   object-fit: cover;
-  margin-bottom: 16px;
+  margin-bottom: 15px;
 }
 
 .sidebar-name {
@@ -98,7 +98,7 @@ body {
   align-items: flex-start;
   margin: 0;
   font-family: var(--font-display);
-  font-size: 1.6rem;
+  font-size: 1.65rem;
   font-weight: 700;
   color: var(--color-text-bright);
   letter-spacing: -0.03em;
@@ -110,7 +110,7 @@ body {
 }
 
 .sidebar-desc {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--color-text-muted);
   margin: 4px 0 0 0;
   line-height: 1.5;
@@ -124,7 +124,7 @@ body {
 .sidebar-social {
   display: flex;
   gap: 12px;
-  margin-top: 14px;
+  margin-top: 13px;
 }
 
 .sidebar-social a {
@@ -138,7 +138,7 @@ body {
   color: var(--color-text-muted);
   text-decoration: none;
   transition: all 0.3s ease;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 600;
 }
 
@@ -154,12 +154,12 @@ body {
   justify-content: center;
   gap: 8px;
   padding: 10px 20px;
-  margin-top: 16px;
+  margin-top: 15px;
   border: 1px solid var(--color-accent);
   border-radius: 4px;
   color: var(--color-accent);
   font-family: var(--font-display);
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   font-weight: 600;
   text-decoration: none;
   background: transparent;
@@ -178,7 +178,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  margin-top: 24px;
+  margin-top: 23px;
   list-style: none;
   padding: 0;
 }
@@ -190,7 +190,7 @@ body {
   padding: 8px 0;
   color: var(--color-text-muted);
   text-decoration: none;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 500;
   transition: all 0.25s ease;
   cursor: pointer;
@@ -224,7 +224,7 @@ body {
 .sidebar-lang {
   display: flex;
   gap: 4px;
-  margin-top: 20px;
+  margin-top: 19px;
 }
 
 .sidebar-lang-btn {
@@ -232,7 +232,7 @@ body {
   border: 1px solid var(--color-border);
   border-radius: 4px;
   padding: 4px 10px;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 700;
   color: var(--color-text-muted);
   cursor: pointer;
@@ -254,8 +254,8 @@ body {
 .lang-switcher-floating {
   display: none;
   position: absolute;
-  top: 8px;
-  right: 0;
+  top: -10px;
+  right: -15%;
   z-index: 20;
   gap: 4px;
 }
@@ -279,7 +279,7 @@ body {
   z-index: 2;
   display: flex;
   flex-direction: column;
-  padding: 40px 50px;
+  padding: 50px 50px;
 }
 
 /* Content body — constrains all content width */
@@ -308,7 +308,7 @@ body {
   opacity: 0;
   transform: translateX(40px);
   transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
-  width: 100%;
+  width: 115%;
 }
 
 .page.active {
@@ -320,7 +320,7 @@ body {
 .page.exiting {
   display: block;
   position: absolute;
-  width: 100%;
+  width: 115%;
   opacity: 0;
   transform: translateX(-40px);
   pointer-events: none;
@@ -340,7 +340,7 @@ body {
 .section-title {
   font-family: var(--font-display);
   color: var(--color-accent);
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 500;
   margin: 0 0 8px 0;
   letter-spacing: 0.5px;
@@ -355,7 +355,7 @@ body {
 .section-heading {
   font-family: var(--font-display);
   color: var(--color-text-bright);
-  font-size: 1.8rem;
+  font-size: 1.85rem;
   font-weight: 700;
   margin: 4px 0 24px 0;
   letter-spacing: -0.02em;
@@ -365,7 +365,7 @@ body {
 /* About paragraphs */
 .about-paragraph {
   margin: 1em 0;
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: var(--color-text-muted);
   line-height: 1.7;
   text-align: justify;
@@ -386,25 +386,27 @@ body {
 
 .about-skills-label {
   font-family: var(--font-display);
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: var(--color-accent);
   letter-spacing: 0.5px;
-  white-space: nowrap;
+  display: block;
+  width: 100%;
+  margin-bottom: 6px;
 }
 
 .about-skills-badges {
   display: inline-flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 7px;
 }
 
 .about-skill-badge {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  padding: 5px 12px;
-  font-size: 0.85rem;
+  gap: 6px;
+  padding: 6px 14px;
+  font-size: 1rem;
   color: var(--color-text-muted);
   background-color: var(--color-bg-card);
   border: 1px solid var(--color-border);
@@ -418,8 +420,8 @@ body {
 }
 
 .about-skill-badge img {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   object-fit: contain;
 }
 
@@ -429,7 +431,7 @@ body {
   justify-content: center;
   width: 18px;
   height: 18px;
-  font-size: 0.6rem;
+  font-size: 0.65rem;
   font-weight: 700;
   color: var(--color-text-muted);
   border: 1px dashed var(--color-border);
@@ -442,7 +444,7 @@ body {
 
 /* Personality note */
 .personality-note {
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: var(--color-text-muted);
   margin-bottom: 20px;
   padding-left: 15px;
@@ -484,13 +486,13 @@ body {
 .card-title {
   font-family: var(--font-display);
   color: var(--color-text-bright);
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 600;
   letter-spacing: -0.01em;
 }
 
 .card-date {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: var(--color-text-muted);
   font-weight: 500;
   white-space: nowrap;
@@ -503,12 +505,12 @@ body {
   margin: 10px 0 6px 0;
   font-weight: 500;
   color: var(--color-accent);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 }
 
 .card-desc {
   margin: 8px 0 0 0;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: var(--color-text-muted);
   line-height: 1.6;
   text-align: justify;
@@ -523,7 +525,7 @@ body {
   padding-left: 20px;
   list-style-type: none;
   color: var(--color-text-muted);
-  font-size: 0.85rem;
+  font-size: 0.9rem;
 }
 
 .card-list li {
@@ -558,14 +560,14 @@ body {
   margin: 0 0 10px 0;
   color: var(--color-text-bright);
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   font-weight: 600;
 }
 
 .project-card p {
   margin: 0;
   color: var(--color-text-muted);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   line-height: 1.6;
   text-align: justify;
 }
@@ -585,7 +587,7 @@ body {
   border: 1px solid var(--color-border);
   color: var(--color-text-muted);
   text-decoration: none;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   border-radius: 4px;
   transition: all 0.3s ease;
 }
@@ -719,7 +721,7 @@ body {
 }
 
 .skill-tech-item span {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: var(--color-text-muted);
   font-weight: 500;
   text-align: center;
@@ -751,12 +753,12 @@ body {
   display: block;
   margin-bottom: 6px;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
 
 .skill-personality-item p {
   margin: 0;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--color-text-muted);
   line-height: 1.5;
   text-align: justify;
@@ -814,7 +816,7 @@ body {
   border-radius: 9999px;
   border: 1px solid var(--color-border);
   background-color: var(--color-bg-card);
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   color: var(--color-accent);
   text-decoration: none;
   opacity: 0;
@@ -838,8 +840,9 @@ body {
   margin-top: 15px;
   padding-top: 22px;
   border-top: 1px solid var(--color-border);
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: var(--color-text-muted);
+  width: 115%;
 }
 
 /* Large screens — proportional scaling */
@@ -922,6 +925,48 @@ body {
     pointer-events: auto;
   }
 
+  .page,
+  .page.exiting,
+  .site-footer {
+    width: 100%;
+  }
+
+  .about-skills-label {
+    display: inline;
+    white-space: nowrap;
+    width: auto;
+    margin-bottom: 0;
+  }
+
+  .sidebar-profile-img {
+    width: 120px;
+    height: 150px;
+  }
+
+  .sidebar-name {
+    font-size: 1.6rem;
+  }
+
+  .sidebar-desc {
+    font-size: 0.85rem;
+  }
+
+  .sidebar-nav-link {
+    font-size: 0.85rem;
+  }
+
+  .sidebar-social a {
+    font-size: 0.85rem;
+  }
+
+  .sidebar-cv-btn {
+    font-size: 0.8rem;
+  }
+
+  .sidebar-lang-btn {
+    font-size: 0.75rem;
+  }
+
   .sidebar {
     position: fixed;
     top: 0;
@@ -959,8 +1004,84 @@ body {
     padding: 56px 16px 24px;
   }
 
+  .page,
+  .page.exiting {
+    width: 100%;
+  }
+
   .section-heading {
-    font-size: 1.4rem;
+    font-size: 1.45rem;
+  }
+
+  .section-title {
+    font-size: 1.1rem;
+  }
+
+  .about-skill-badge {
+    font-size: 0.85rem;
+    padding: 5px 12px;
+    gap: 5px;
+  }
+
+  .about-skill-badge img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .personality-note {
+    font-size: 0.95rem;
+  }
+
+  .card-title {
+    font-size: 1.1rem;
+  }
+
+  .card-date {
+    font-size: 0.75rem;
+  }
+
+  .card-sub {
+    font-size: 0.9rem;
+  }
+
+  .card-desc {
+    font-size: 0.9rem;
+  }
+
+  .card-list {
+    font-size: 0.85rem;
+  }
+
+  .project-card h3 {
+    font-size: 1.15rem;
+  }
+
+  .project-card p {
+    font-size: 0.9rem;
+  }
+
+  .link-outline {
+    font-size: 0.8rem;
+  }
+
+  .skill-personality-item strong {
+    font-size: 0.95rem;
+  }
+
+  .skill-personality-item p {
+    font-size: 0.85rem;
+  }
+
+  .skill-tech-item span {
+    font-size: 0.75rem;
+  }
+
+  .back-to-top {
+    font-size: 1.1rem;
+  }
+
+  .site-footer {
+    font-size: 0.75rem;
   }
 
   .card-item {
