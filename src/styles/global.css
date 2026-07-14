@@ -335,6 +335,7 @@ body {
   transform: translateX(40px);
   transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
   width: 115%;
+  padding-top: 40px;
 }
 
 .page.active {

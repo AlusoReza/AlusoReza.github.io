@@ -1,6 +1,7 @@
 {
   "es": {
     "sec-sobre": "Sobre mí",
+    "sec-hab": "Habilidades",
     "sec-hab-tech": "Tecnologías",
     "sec-hab-personal": "Perfil Profesional",
     "sec-proy": "Proyecto Destacado",
@@ -12,6 +13,7 @@
   },
   "en": {
     "sec-sobre": "About me",
+    "sec-hab": "Skills",
     "sec-hab-tech": "Technologies",
     "sec-hab-personal": "Professional Profile",
     "sec-proy": "Featured Project",
