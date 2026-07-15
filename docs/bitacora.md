@@ -179,3 +179,7 @@ Global workflow summary. Each entry links to the detailed day log.
 ### Session 36: Lang-switcher fluid fade + mobile sidebar fix
 **Prompt:** Lang-switcher should fade like sidebar. Sidebar invisible on mobile.
 **Plan:** Remove media query `display` control; use `--sidebar-fade` for opacity on both elements. Restore sidebar width fade + media query override at 1135px for mobile visibility.
+
+### Session 37: Design refinement — darker palette, scroll-reveal, particle dimming
+**Prompt:** Multiple visual improvements: darker background (intermediate), restore scroll-reveal, fix duplicate titles, whiter badges, transparent sidebar with particle dimming on desktop.
+**Plan:** 8 files: darker palette (#0a1527), .reveal/.stagger-item system with IntersectionObserver (re-triggers on page switch), remove duplicate `<h1 class="section-heading">` from 5 components, sidebar transparent desktop/solid mobile, particle dimming with flat trough at CV button width. Commit `35be5cf`.

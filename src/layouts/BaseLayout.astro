@@ -20,10 +20,11 @@ const dataBundle = JSON.stringify({ lang, skills, education, projects, experienc
 ---
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="js-loading">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0a1527">
   <title>{title}</title>
   <meta name="description" content={description}>
   <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
@@ -35,8 +36,14 @@ const dataBundle = JSON.stringify({ lang, skills, education, projects, experienc
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script is:inline>
+    window.__spinnerTimer = setTimeout(function() {
+      document.documentElement.classList.add('show-spinner')
+    }, 500)
+  </script>
 </head>
 <body data-data={dataBundle}>
+  <div class="loading-spinner" id="loading-spinner"><div class="spinner"></div></div>
   <canvas id="particle-canvas"></canvas>
   <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Menú">
     <span></span><span></span><span></span>

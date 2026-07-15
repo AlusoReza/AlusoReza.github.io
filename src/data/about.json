@@ -4,6 +4,7 @@
     "sobre-p2": "Cuento con años de experiencia en programación, habiendo forjado una base sólida a través de la <strong>física computacional</strong>. Esta trayectoria me ha permitido dominar la resolución de problemas complejos y el cálculo numérico con lenguajes como <strong>Fortran</strong> y <strong>Python</strong>.",
     "sobre-p3": "Actualmente, estoy expandiendo mis horizontes hacia nuevos campos tecnológicos, integrando mis habilidades analíticas en el desarrollo <strong>Backend</strong>, la gestión de <strong>bases de datos</strong> y la arquitectura de sistemas con <strong>Docker</strong>. Me caracterizo por aplicar el <strong>rigor científico</strong> a la creación de soluciones de software modernas, eficientes y escalables.",
     "about-lang-label": "Lenguajes",
+    "about-frameworks-label": "Frameworks",
     "about-tools-label": "Herramientas"
   },
   "en": {
@@ -11,6 +12,7 @@
     "sobre-p2": "I have years of programming experience, having built a strong foundation through <strong>computational physics</strong>. This trajectory has allowed me to master complex problem-solving and numerical calculation with languages like <strong>Fortran</strong> and <strong>Python</strong>.",
     "sobre-p3": "Currently, I am expanding my horizons toward new technological fields, integrating my analytical skills into <strong>Backend development</strong>, <strong>database management</strong>, and systems architecture with <strong>Docker</strong>. I characterize myself by applying <strong>scientific rigor</strong> to the creation of modern, efficient, and scalable software solutions.",
     "about-lang-label": "Languages",
+    "about-frameworks-label": "Frameworks",
     "about-tools-label": "Tools"
   }
 }

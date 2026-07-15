@@ -25,5 +25,4 @@
 
 - Explore light theme toggle
 - Migrate i18n to `@astrojs/netlify` or similar if SSR is ever needed
-- Add blog or technical articles section → modular pages
 - Install MCP for all programming languages used in the project

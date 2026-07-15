@@ -104,6 +104,13 @@ function toggleSection(id, arr) {
   if (el) el.style.display = (!arr || arr.length === 0) ? 'none' : ''
 }
 
+function updateScrollbar() {
+  const el = document.getElementById('content')
+  if (!el) return
+  const ratio = el.clientHeight / el.scrollHeight
+  el.classList.toggle('scrollbar-hidden', ratio > 0.9)
+}
+
 function navigateTo(pageId) {
   if (pageId === currentPage || isTransitioning) return
   isTransitioning = true
@@ -123,6 +130,10 @@ function navigateTo(pageId) {
   })
 
   currentPage = pageId
+  localStorage.setItem('currentPage', pageId)
+
+  const footer = document.querySelector('.site-footer')
+  if (footer) footer.classList.toggle('hidden', !['sobre', 'hab'].includes(pageId))
 
   document.querySelectorAll('.sidebar-nav-link').forEach(link => {
     link.classList.toggle('active', link.dataset.nav === pageId)
@@ -136,15 +147,18 @@ function navigateTo(pageId) {
       oldPage.style.display = ''
       isTransitioning = false
       initScrollReveal()
+      updateScrollbar()
     }, 350)
   } else if (oldPage) {
     oldPage.classList.remove('active')
     oldPage.style.display = ''
     isTransitioning = false
     initScrollReveal()
+    updateScrollbar()
   } else {
     isTransitioning = false
     initScrollReveal()
+    updateScrollbar()
   }
 }
 
@@ -230,22 +244,25 @@ function initParticles() {
 }
 
 // --- Scroll reveal ---
+let scrollObserver = null
+
 function initScrollReveal() {
   const motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches
   if (!motionOK) {
     document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'))
     return
   }
+  if (scrollObserver) scrollObserver.disconnect()
   document.querySelectorAll('.reveal.visible').forEach(el => el.classList.remove('visible'))
-  const observer = new IntersectionObserver((entries) => {
+  scrollObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible')
-        observer.unobserve(entry.target)
+        scrollObserver.unobserve(entry.target)
       }
     })
   }, { threshold: 0.15 })
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
+  document.querySelectorAll('.reveal').forEach(el => scrollObserver.observe(el))
 }
 
 // --- Language switching ---
@@ -324,16 +341,24 @@ if (backToTop && contentEl) {
 
 // --- Init ---
 function init() {
+  clearTimeout(window.__spinnerTimer)
+
   const savedLang = localStorage.getItem('preferredLang') || 'es'
   currentLang = savedLang
-  currentPage = 'sobre'
+
+  const savedPage = localStorage.getItem('currentPage') || 'sobre'
+  const validPage = document.querySelector(`[data-page="${savedPage}"]`) ? savedPage : 'sobre'
+  currentPage = validPage
 
   document.querySelectorAll(`[data-lang="${savedLang}"]`).forEach(btn => btn.classList.add('active'))
 
-  const sobrePage = document.querySelector('[data-page="sobre"]')
-  if (sobrePage) sobrePage.classList.add('active')
-  const sobreNav = document.querySelector('[data-nav="sobre"]')
-  if (sobreNav) sobreNav.classList.add('active')
+  const activePage = document.querySelector(`[data-page="${validPage}"]`)
+  if (activePage) activePage.classList.add('active')
+  const activeNav = document.querySelector(`[data-nav="${validPage}"]`)
+  if (activeNav) activeNav.classList.add('active')
+
+  const footer = document.querySelector('.site-footer')
+  if (footer) footer.classList.toggle('hidden', !['sobre', 'hab'].includes(validPage))
 
   document.documentElement.lang = savedLang
   translateUI()
@@ -341,7 +366,17 @@ function init() {
   if (savedLang !== 'es') renderAll()
 
   initParticles()
+
+  const spinner = document.getElementById('loading-spinner')
+  if (spinner && document.documentElement.classList.contains('show-spinner')) {
+    spinner.classList.add('done')
+  }
+
   initScrollReveal()
+  updateScrollbar()
+  document.documentElement.classList.remove('js-loading')
+
+  window.addEventListener('resize', updateScrollbar)
 }
 
 init()

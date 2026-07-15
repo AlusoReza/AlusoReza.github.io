@@ -3,6 +3,7 @@ import about from '../data/about.json'
 import skills from '../data/skills.json'
 const t = (key) => about['es']?.[key] || ''
 const languages = skills.languages || []
+const frameworks = skills.frameworks || []
 const tools = skills.tools || []
 ---
 <div data-page="sobre" class="page">
@@ -13,6 +14,20 @@ const tools = skills.tools || []
       <span class="about-skills-label" data-i18n="about-lang-label">Lenguajes</span>
       <div class="about-skills-badges" data-section="about-languages">
         {languages.map(s => (
+          <span class="about-skill-badge">
+            {s.logo
+              ? <img src={s.logo} alt={s.name} loading="lazy" />
+              : <span class="about-skill-fallback">{s.name.slice(0, 2).toUpperCase()}</span>
+            }
+            {s.name}
+          </span>
+        ))}
+      </div>
+    </div>
+    <div class="about-skills-group">
+      <span class="about-skills-label" data-i18n="about-frameworks-label">Frameworks</span>
+      <div class="about-skills-badges" data-section="about-frameworks">
+        {frameworks.map(s => (
           <span class="about-skill-badge">
             {s.logo
               ? <img src={s.logo} alt={s.name} loading="lazy" />

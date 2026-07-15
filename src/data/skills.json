@@ -44,12 +44,25 @@
   "languages": [
     { "name": "Python", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" },
     { "name": "Java", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" },
-    { "name": "JavaScript", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" },
-    { "name": "PostgreSQL", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" },
     { "name": "Fortran", "logo": "" },
+    { "name": "Rust", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rust/rust-original.svg" },
+    { "name": "SQL", "logo": "" },
+    { "name": "PostgreSQL", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" },
     { "name": "HTML5", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" },
-    { "name": "LaTeX", "logo": "" },
-    { "name": "Bash", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg" }
+    { "name": "CSS", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" },
+    { "name": "JavaScript", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" },
+    { "name": "Batch", "logo": "" },
+    { "name": "Bash", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg" },
+    { "name": "XML", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/xml/xml-original.svg" },
+    { "name": "JSON", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/json/json-original.svg" },
+    { "name": "LaTeX", "logo": "" }
+  ],
+  "frameworks": [
+    { "name": "Spring Boot", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg" },
+    { "name": "React", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
+    { "name": "Astro", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/astro/astro-original.svg" },
+    { "name": "Tailwind CSS", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
+    { "name": "Bootstrap", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bootstrap/bootstrap-original.svg" }
   ],
   "tools": [
     { "name": "VS Code", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" },
@@ -59,6 +72,10 @@
     { "name": "GitHub", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" },
     { "name": "Eclipse", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/eclipse/eclipse-original.svg" },
     { "name": "Overleaf", "logo": "" },
-    { "name": "Excel", "logo": "" }
+    { "name": "Excel", "logo": "" },
+    { "name": "UML", "logo": "" },
+    { "name": "CASE", "logo": "" },
+    { "name": "OpenCode", "logo": "" },
+    { "name": "Claude", "logo": "" }
   ]
 }
