@@ -195,3 +195,11 @@ Global workflow summary. Each entry links to the detailed day log.
 ### Session 40: Mobile responsive polish + sidebar toggle slide + 10px gap
 **Prompt:** Mobile viewport issues (100vh), sidebar toggle should slide+morph to X, 10px gap between sidebar and X.
 **Plan:** `100dvh` fallback, `viewport-fit=cover`, safe-area insets, `.sidebar-toggle.open` slide to `calc(var(--sidebar-width) + 10px)` + X morph, `matchMedia` listener for 1236px, `is-resizing` debounce. Commits `6c06a60` + `f3cbcb4`.
+
+### Session 42: Sidebar content top offset — margin-top → padding-top
+**Prompt:** `margin-top: 50px` on `.sidebar` causes overflow (height 100dvh). Need sidebar content at ~50px from top.
+**Plan:** Remove `margin-top` from `.sidebar`. Increase `.sidebar-inner` top padding: `clamp(30px, 4vh, 57px)` → `clamp(80px, 9vh, 107px)`.
+
+### Session 43: Sidebar-inner top padding tuning
+**Prompt:** Sidebar content offset visual balance. Tested `clamp(50px, 6vh, 77px)` but user preferred `clamp(80px, 6vh, 77px)`.
+**Plan:** Adjust `.sidebar-inner` top padding. Final value: `clamp(80px, 6vh, 77px) clamp(30px, 3vw, 40px)`.

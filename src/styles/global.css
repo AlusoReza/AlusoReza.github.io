@@ -187,7 +187,7 @@ html:not(.js-loading) .content {
   left: 0;
   width: calc(var(--sidebar-width) + 60px);
   height: 100%;
-  padding: clamp(30px, 4vh, 57px) clamp(30px, 3vw, 40px);
+  padding: clamp(80px, 6vh, 77px) clamp(30px, 3vw, 40px);
   box-sizing: border-box;
   overflow-y: auto;
   overflow-x: hidden;
