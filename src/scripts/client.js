@@ -321,6 +321,11 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') closeSidebar()
 })
 
+const mql = window.matchMedia('(max-width: 1235px)')
+mql.addEventListener('change', (e) => {
+  if (!e.matches) closeSidebar()
+})
+
 // --- Back to top ---
 const backToTop = document.getElementById('back-to-top')
 const contentEl = document.getElementById('content')
@@ -378,5 +383,14 @@ function init() {
 
   window.addEventListener('resize', updateScrollbar)
 }
+
+let resizeTimer
+window.addEventListener('resize', () => {
+  document.documentElement.classList.add('is-resizing')
+  clearTimeout(resizeTimer)
+  resizeTimer = setTimeout(() => {
+    document.documentElement.classList.remove('is-resizing')
+  }, 150)
+})
 
 init()

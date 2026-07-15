@@ -48,13 +48,6 @@ body {
   height: 100dvh;
 }
 
-/* Prevent flash: force visible until JS init() runs */
-.js-loading .reveal {
-  opacity: 1 !important;
-  transform: none !important;
-  transition: none !important;
-}
-
 /* Loading spinner — base: invisible */
 .loading-spinner {
   position: fixed;
@@ -110,11 +103,23 @@ html:not(.js-loading) .content {
   display: none;
 }
 
+/* Sidebar + toggle hidden during loading */
+.js-loading .sidebar,
+.js-loading .sidebar-toggle {
+  opacity: 0 !important;
+}
+
+/* Disable sidebar transitions during resize */
+.is-resizing .sidebar,
+.is-resizing .sidebar-overlay {
+  transition: none !important;
+}
+
 /* Scroll-reveal system */
 .reveal {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition: opacity 0.1s ease, transform 0.1s ease;
 }
 
 .reveal.visible {
