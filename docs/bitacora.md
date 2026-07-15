@@ -155,3 +155,27 @@ Global workflow summary. Each entry links to the detailed day log.
 ### Session 31: Sidebar overhang gradient instead of content gradient
 **Prompt:** Content `::before` darkens content. Doesn't work. Revert and reformulate.
 **Plan:** Remove `::before`. Extend `.sidebar-inner` width by 60px so it overlaps content's left edge. Mask fades the overlap. No content interference. Build exitoso (504ms).
+
+## 2026-07-15
+
+[Detailed log →](logs/2026-07-15.md)
+
+### Session 32: Restore width: 115% pattern + fix lang-switcher
+**Prompt:** Content areas too narrow; restore `width: 115%` feel without overflow.
+**Plan:** `.page` `width: 100%; max-width: 115%`. Remove `.content-body` max-width bottleneck. Same on `.site-footer`. Restore lang-switcher `right: -15%`.
+
+### Session 33: Verify content-body max-width removal
+**Prompt:** Lang-switcher `right: -15%` pushes off-screen in some states. Verify no white-space issues.
+**Plan:** No changes needed — pattern works correctly.
+
+### Session 34: Reduce sidebar-content gap by 20%
+**Prompt:** Sidebar and content feel too far apart at max expansion.
+**Plan:** Reduce content max padding values ~20% (50px→40px base, large breakpoints similarly reduced).
+
+### Session 35: Align Skills section heading
+**Prompt:** Skills uses inline `margin-top: 40px` instead of `section-heading h1`.
+**Plan:** Add `section-heading h1` to Skills.astro, `sec-hab` to sections.json, handle in i18n render.
+
+### Session 36: Lang-switcher fluid fade + mobile sidebar fix
+**Prompt:** Lang-switcher should fade like sidebar. Sidebar invisible on mobile.
+**Plan:** Remove media query `display` control; use `--sidebar-fade` for opacity on both elements. Restore sidebar width fade + media query override at 1135px for mobile visibility.
