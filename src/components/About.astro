@@ -6,9 +6,9 @@ const languages = skills.languages || []
 const tools = skills.tools || []
 ---
 <div data-page="sobre" class="page">
-  <h2 class="section-title" data-i18n="sec-sobre">Sobre mí</h2>
+  <h2 class="section-title reveal" data-i18n="sec-sobre">Sobre mí</h2>
 
-  <div class="about-skills">
+  <div class="about-skills reveal">
     <div class="about-skills-group">
       <span class="about-skills-label" data-i18n="about-lang-label">Lenguajes</span>
       <div class="about-skills-badges" data-section="about-languages">
@@ -39,7 +39,7 @@ const tools = skills.tools || []
     </div>
   </div>
 
-  <p class="about-paragraph" data-i18n="sobre-p1" set:html={t('sobre-p1')}></p>
-  <p class="about-paragraph" data-i18n="sobre-p2" set:html={t('sobre-p2')}></p>
-  <p class="about-paragraph" data-i18n="sobre-p3" set:html={t('sobre-p3')}></p>
+  <p class="about-paragraph reveal" data-i18n="sobre-p1" set:html={t('sobre-p1')}></p>
+  <p class="about-paragraph reveal" data-i18n="sobre-p2" set:html={t('sobre-p2')}></p>
+  <p class="about-paragraph reveal" data-i18n="sobre-p3" set:html={t('sobre-p3')}></p>
 </div>

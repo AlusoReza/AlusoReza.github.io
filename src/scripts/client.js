@@ -29,6 +29,7 @@ function renderAll() {
   renderSection('certificates', DATA.certificates, renderCertificateItem)
   toggleSection('experiencia', DATA.experience)
   toggleSection('certificados', DATA.certificates)
+  initScrollReveal()
 }
 
 function renderSection(name, items, renderFn) {
@@ -38,14 +39,14 @@ function renderSection(name, items, renderFn) {
 }
 
 function renderPersonalityItem(s) {
-  return `<div class="skill-personality-item stagger-item">
+  return `<div class="skill-personality-item stagger-item reveal">
     <strong>${t(s.title)}</strong>
     <p>${t(s.description)}</p>
   </div>`
 }
 
 function renderEducationItem(item) {
-  let html = `<div class="card-item stagger-item">
+  let html = `<div class="card-item stagger-item reveal">
     <div class="card-header">
       <strong class="card-title">${t(item.title)}</strong>`
   if (item.date) html += `<span class="card-date">${t(item.date)}</span>`
@@ -62,7 +63,7 @@ function renderEducationItem(item) {
 }
 
 function renderProjectItem(proj) {
-  let html = `<div class="project-card stagger-item">
+  let html = `<div class="project-card stagger-item reveal">
     <h3>${proj.title}</h3>
     <p>${t(proj.description)}</p>`
   if (proj.links && proj.links.length) {
@@ -75,7 +76,7 @@ function renderProjectItem(proj) {
 }
 
 function renderExperienceItem(item) {
-  let html = `<div class="card-item stagger-item">
+  let html = `<div class="card-item stagger-item reveal">
     <div class="card-header">
       <strong class="card-title">${t(item.title)}</strong>`
   if (item.date) html += `<span class="card-date">${t(item.date)}</span>`
@@ -87,7 +88,7 @@ function renderExperienceItem(item) {
 }
 
 function renderCertificateItem(item) {
-  let html = `<div class="card-item stagger-item">
+  let html = `<div class="card-item stagger-item reveal">
     <div class="card-header">
       <strong class="card-title">${t(item.title)}</strong>`
   if (item.date) html += `<span class="card-date">${t(item.date)}</span>`
@@ -134,13 +135,16 @@ function navigateTo(pageId) {
       oldPage.classList.remove('exiting')
       oldPage.style.display = ''
       isTransitioning = false
+      initScrollReveal()
     }, 350)
   } else if (oldPage) {
     oldPage.classList.remove('active')
     oldPage.style.display = ''
     isTransitioning = false
+    initScrollReveal()
   } else {
     isTransitioning = false
+    initScrollReveal()
   }
 }
 
@@ -151,6 +155,8 @@ function initParticles() {
   const ctx = canvas.getContext('2d')
   let particles = []
   let w, h
+  const sidebar = document.querySelector('.sidebar')
+  const cvBtn = document.querySelector('.sidebar-cv-btn')
 
   function resize() {
     w = canvas.width = window.innerWidth
@@ -176,6 +182,17 @@ function initParticles() {
 
   function draw() {
     ctx.clearRect(0, 0, w, h)
+    const sidebarW = sidebar ? sidebar.offsetWidth : 0
+    const SIDEBAR_DIM = 0.05
+
+    let troughLeft = sidebarW / 2 - 100
+    let troughRight = sidebarW / 2 + 100
+    if (cvBtn) {
+      const cvRect = cvBtn.getBoundingClientRect()
+      troughLeft = cvRect.left
+      troughRight = cvRect.right
+    }
+
     particles.forEach(p => {
       p.x += p.vx
       p.y += p.vy
@@ -183,9 +200,25 @@ function initParticles() {
       if (p.x > w) p.x = 0
       if (p.y < 0) p.y = h
       if (p.y > h) p.y = 0
+
+      let alpha = p.a
+      if (sidebarW > 0) {
+        if (p.x < sidebarW) {
+          if (p.x >= troughLeft && p.x <= troughRight) {
+            alpha = p.a * SIDEBAR_DIM
+          } else if (p.x < troughLeft) {
+            const t = 1 - Math.max(0, p.x / troughLeft)
+            alpha = p.a * (SIDEBAR_DIM + (1 - SIDEBAR_DIM) * t)
+          } else {
+            const t = Math.min(1, (p.x - troughRight) / (sidebarW - troughRight))
+            alpha = p.a * (SIDEBAR_DIM + (1 - SIDEBAR_DIM) * t)
+          }
+        }
+      }
+
       ctx.beginPath()
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
-      ctx.fillStyle = `rgba(100, 255, 218, ${p.a})`
+      ctx.fillStyle = `rgba(100, 255, 218, ${alpha})`
       ctx.fill()
     })
     requestAnimationFrame(draw)
@@ -194,6 +227,25 @@ function initParticles() {
   window.addEventListener('resize', resize)
   init()
   draw()
+}
+
+// --- Scroll reveal ---
+function initScrollReveal() {
+  const motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  if (!motionOK) {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'))
+    return
+  }
+  document.querySelectorAll('.reveal.visible').forEach(el => el.classList.remove('visible'))
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible')
+        observer.unobserve(entry.target)
+      }
+    })
+  }, { threshold: 0.15 })
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
 }
 
 // --- Language switching ---
@@ -289,6 +341,7 @@ function init() {
   if (savedLang !== 'es') renderAll()
 
   initParticles()
+  initScrollReveal()
 }
 
 init()
