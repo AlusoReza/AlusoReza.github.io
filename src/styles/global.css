@@ -935,7 +935,7 @@ html:not(.js-loading) .content {
   height: 2px;
   background-color: var(--color-text-muted);
   border-radius: 1px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
 }
 
 .sidebar-toggle:hover span {
@@ -1052,6 +1052,23 @@ html:not(.js-loading) .content {
 @media (max-width: 1235px) {
   .sidebar-toggle {
     display: flex;
+    transition: left 0.3s ease;
+  }
+
+  .sidebar-toggle.open {
+    left: calc(var(--sidebar-width) + 10px);
+  }
+
+  .sidebar-toggle.open span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  .sidebar-toggle.open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .sidebar-toggle.open span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
   }
 
   .lang-switcher-floating {

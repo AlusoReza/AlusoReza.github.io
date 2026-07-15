@@ -298,6 +298,7 @@ function openSidebar() {
   if (!sidebar || !sidebarOverlay) return
   sidebar.classList.add('open')
   sidebarOverlay.classList.add('open')
+  if (sidebarToggle) sidebarToggle.classList.add('open')
   document.body.style.overflow = 'hidden'
 }
 
@@ -305,6 +306,7 @@ function closeSidebar() {
   if (!sidebar || !sidebarOverlay) return
   sidebar.classList.remove('open')
   sidebarOverlay.classList.remove('open')
+  if (sidebarToggle) sidebarToggle.classList.remove('open')
   document.body.style.overflow = ''
 }
 

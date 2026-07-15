@@ -183,3 +183,15 @@ Global workflow summary. Each entry links to the detailed day log.
 ### Session 37: Design refinement — darker palette, scroll-reveal, particle dimming
 **Prompt:** Multiple visual improvements: darker background (intermediate), restore scroll-reveal, fix duplicate titles, whiter badges, transparent sidebar with particle dimming on desktop.
 **Plan:** 8 files: darker palette (#0a1527), .reveal/.stagger-item system with IntersectionObserver (re-triggers on page switch), remove duplicate `<h1 class="section-heading">` from 5 components, sidebar transparent desktop/solid mobile, particle dimming with flat trough at CV button width. Commit `35be5cf`.
+
+### Session 38: Loading system overhaul + page persistence + footer conditional
+**Prompt:** Loading screen broken (content flashes visible), sidebar shows on mobile during load. Footer only on `sobre`/`hab` pages. Language and page persistence via localStorage.
+**Plan:** `<html class="js-loading">` + 500ms timer, spinner, `.js-loading .reveal` override, localStorage for `currentPage`/`preferredLang`, footer toggle in `navigateTo()`. 3 files.
+
+### Session 39: Spinner threshold + loading fix + IntersectionObserver leak
+**Prompt:** Spinner appears too late (500ms→300ms). `.js-loading .reveal` override blocks future scroll-reveal permanently. Fix: remove override, hide sidebar during load.
+**Plan:** Timer 500→300ms, remove `.js-loading .reveal` override, hide sidebar during load, `scrollObserver` global with `disconnect()` to fix leak, `.visible` reset on all `.reveal` elements. 3 files.
+
+### Session 40: Mobile responsive polish + sidebar toggle slide + 10px gap
+**Prompt:** Mobile viewport issues (100vh), sidebar toggle should slide+morph to X, 10px gap between sidebar and X.
+**Plan:** `100dvh` fallback, `viewport-fit=cover`, safe-area insets, `.sidebar-toggle.open` slide to `calc(var(--sidebar-width) + 10px)` + X morph, `matchMedia` listener for 1236px, `is-resizing` debounce. Commits `6c06a60` + `f3cbcb4`.
