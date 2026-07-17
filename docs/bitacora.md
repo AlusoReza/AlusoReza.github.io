@@ -263,3 +263,7 @@ Global workflow summary. Each entry links to the detailed day log.
 **Prompt:** When widening from mobile to desktop, contents superimpose multiple times and page needs reload.
 **Root cause:** 45px hybrid zone (1235-1280px) where sidebar is desktop mode but MobileProfile still visible + `transitionend` fragility + `sidebar-locked` discontinuity.
 **Plan:** Changed `mqlExit` from 1280px to 1235px (synced with `@media`). Replaced `transitionend` with `setTimeout(250)`. Added `transition: none` on sidebar elements during lock. Changed `max-height` delay to 0.25s to sync with timer.
+
+### Session 65: Fix MobileProfile — grid 0fr/1fr + overflow clip + remove transform
+**Prompt:** MobileProfile content gets cut off in mobile mode and doesn't stay static after transition.
+**Plan:** Changed from `max-height` to `display: grid; grid-template-rows: 0fr/1fr` for cross-browser height animation. Changed `overflow: hidden` → `overflow: clip` to eliminate scroll-container clipping. Removed `transform: translateY(-16px)` — grid + opacity alone is sufficient, no vertical slide needed.

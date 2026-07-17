@@ -218,6 +218,17 @@ html:not(.js-loading) .content {
 
 /* Mobile profile: JS-driven sequential fade, synced with sidebar-locked */
 .mobile-profile {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: clip;
+  opacity: 0;
+  transition:
+    grid-template-rows 0.35s ease,
+    opacity 0.35s ease;
+}
+
+.mobile-profile-inner {
+  min-height: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -226,25 +237,14 @@ html:not(.js-loading) .content {
   padding-bottom: 24px;
   margin-bottom: 8px;
   border-bottom: 1px solid var(--color-border);
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(-16px);
-  transition:
-    opacity 0.35s ease,
-    transform 0.35s ease,
-    max-height 0.35s ease;
 }
 
 .mobile-profile--visible {
-  max-height: 500px;
-  overflow: visible;
+  grid-template-rows: 1fr;
   opacity: 1;
-  transform: translateY(0);
   transition:
-    opacity 0.35s ease,
-    transform 0.35s ease,
-    max-height 0.35s ease;
+    grid-template-rows 0.35s ease,
+    opacity 0.35s ease;
 }
 
 .mobile-profile-img {
