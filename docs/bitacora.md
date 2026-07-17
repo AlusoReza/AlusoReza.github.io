@@ -219,3 +219,7 @@ Global workflow summary. Each entry links to the detailed day log.
 ### Session 46: Content compression threshold — fix right padding + add min-width
 **Prompt:** On large screens, content compresses immediately on viewport resize because right padding (`4vw`) shrinks proportionally. User wants layout stable until space2 reaches minimum critical size.
 **Plan:** Fix right padding to constant `40px` across all desktop breakpoints. Add `min-width: 940px` to `.content` at ≥1400px. Content stays stable ≥1400px, no compression.
+
+### Session 47: Dynamic right padding — content constant until 40px threshold
+**Prompt:** Content should not move at all while resizing. Right padding grows to absorb extra space; only when it reaches 40px does content compress.
+**Plan:** Add `clamp(40px, calc(0.9vw - 342px), 110px)` to `.content` in `@media (min-width: 1400px)`. Remove redundant `.content` overrides from 1800px+ and 2600px+ blocks.
