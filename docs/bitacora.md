@@ -215,3 +215,7 @@ Global workflow summary. Each entry links to the detailed day log.
 ### Session 45: CSS cleanup — duplicates, dead code, reorganization
 **Prompt:** Analyze full CSS, identify duplicates (`.content` was duplicated), merge rules, remove dead CSS, reorganize into 19 numbered sections with detailed comments.
 **Plan:** Merge `.content` into one rule. Remove ~90 lines of dead CSS (Contact section, Tech Skills Grid, unused keyframes, redundant mobile overrides). Reorganize entire file into 19 sections with comments per selector. Net -14 lines.
+
+### Session 46: Content compression threshold — fix right padding + add min-width
+**Prompt:** On large screens, content compresses immediately on viewport resize because right padding (`4vw`) shrinks proportionally. User wants layout stable until space2 reaches minimum critical size.
+**Plan:** Fix right padding to constant `40px` across all desktop breakpoints. Add `min-width: 940px` to `.content` at ≥1400px. Content stays stable ≥1400px, no compression.

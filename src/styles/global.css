@@ -178,7 +178,7 @@ body {
   z-index: 2;
   display: flex;
   flex-direction: column;
-  padding: clamp(24px, 4vh, 50px) clamp(10px, 4vw, 40px) clamp(24px, 4vh, 50px) clamp(10px, 4vw, 10px);
+  padding: clamp(24px, 4vh, 50px) 40px clamp(24px, 4vh, 50px) clamp(10px, 4vw, 10px);
   transition: padding 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   opacity: 0;
   transition: opacity 0.4s ease;
@@ -996,6 +996,9 @@ html:not(.js-loading) .content {
     flex: 0 0 var(--sidebar-width);
     width: var(--sidebar-width);
   }
+  .content {
+    min-width: 940px;
+  }
 }
 
 /*This section works for 4k windows/monitor and so on */
@@ -1014,7 +1017,7 @@ html:not(.js-loading) .content {
   }
 
   .content {
-    padding: clamp(35px, 4vh, 60px) clamp(130px, 4vw, 50px) clamp(35px, 4vh, 60px) clamp(40px, 4vw, 50px);
+    padding: clamp(35px, 4vh, 60px) 110px clamp(35px, 4vh, 60px) clamp(40px, 4vw, 50px);
   }
 
 }
@@ -1036,7 +1039,7 @@ html:not(.js-loading) .content {
     padding: clamp(80px, 6vh, 77px) clamp(30px, 3vw, 40px) clamp(80px, 6vh, 77px) clamp(30px, 3vw, 40px);
   }
   .content {
-    padding: clamp(35px, 4vh, 60px) clamp(40px, 4vw, 50px) clamp(35px, 4vh, 60px) clamp(40px, 4vw, 50px);
+    padding: clamp(35px, 4vh, 60px) 40px clamp(35px, 4vh, 60px) clamp(40px, 4vw, 50px);
   }
 }
 
