@@ -1,14 +1,32 @@
+/*
+Global state: manages the core application state — parsed data, active language, current page, and transition lock.
+    - DATA: Objeto JSON completo parseado del atributo data-data del <body>. Es la fuente única de toda la data del sitio (perfil, skills, proyectos, etc.). Se serializa en Astro y se lee en cliente sin fetch.
+    - currentLang: Idioma activo ('es' o 'en'). Se persiste en localStorage bajo la clave 'preferredLang'. Controla qué traducciones se muestran en toda la UI.
+    - currentPage: ID de la página activa actualmente ('sobre', 'hab', etc.). Se usa para renderizar la sección correcta, marcar el nav activo y controlar qué páginas están visibles.
+    - isTransitioning: Flag booleano de bloqueo. Impide clics múltiples durante la animación de transición entre páginas. Se pone true al iniciar y false al terminar la transición (350ms).
+*/
 const DATA = JSON.parse(document.body.dataset.data)
 let currentLang = localStorage.getItem('preferredLang') || 'es'
 let currentPage = 'sobre'
 let isTransitioning = false
 
+/*
+t(field): Helper de traducción. Resuelve un campo bilingüe {es, en} o un string plano al idioma actual. Es la función más usada del archivo — toda traducción de contenido dinámico pasa por aquí.
+    - field: Puede ser un string (devuelto tal cual) o un objeto {es: "...", en: "..."}. Si es null/undefined, devuelve string vacío.
+Otros: Si el idioma actual no existe en el objeto, hace fallback a 'es', luego a 'en', luego a ''.
+*/
 function t(field) {
   if (!field) return ''
   if (typeof field === 'string') return field
   return field[currentLang] || field.es || field.en || ''
 }
 
+/*
+translateUI(): Traduce todos los elementos estáticos del DOM que tienen un atributo data-i18n. Busca las traducciones en DATA.lang[currentLang] y las inyecta como innerHTML. Se llama en init() y en renderAll() tras cambiar idioma.
+    - data: Referencia a DATA.lang — el objeto que contiene todas las traducciones de la UI estática (nav, about, contact, etc.).
+    - key: La clave i18n del elemento actual (ej: 'nav-sobre', 'contact-email'). Se extrae de el.dataset.i18n.
+Otros: Manejo especial para 'sobre-text' — separa el texto por doble salto de línea (\n\n) y lo envuelve en párrafos <p> con clase 'about-paragraph reveal' para que cada párrafo tenga su propia animación de scroll reveal.
+*/
 function translateUI() {
   const data = DATA.lang
   if (!data) return
@@ -24,6 +42,10 @@ function translateUI() {
   })
 }
 
+/*
+renderAll(): Orquestador maestro de renderizado. Llama a translateUI() para traducir la UI estática, luego renderiza cada sección dinámica (skills, proyectos, educación, experiencia, certificados) con su función de renderizado correspondiente. También controla la visibilidad de secciones vacías y reinicia el scroll reveal. Se llama al init, al cambiar idioma y tras cualquier cambio de datos.
+Otros: No tiene variables locales — delega todo a renderSection(), toggleSection() e initScrollReveal(). Es el punto de entrada único para re-renderizar toda la página.
+*/
 function renderAll() {
   translateUI()
   renderSection('skills', DATA.skills.personality, renderPersonalityItem)
@@ -36,12 +58,22 @@ function renderAll() {
   initScrollReveal()
 }
 
+/*
+renderSection(name, items, renderFn): Renderizador genérico de secciones. Busca un contenedor por su atributo data-section, y lo rellena concatenando el HTML generado por renderFn para cada item. Es la función base que usan todas las secciones dinámicas.
+    - container: Elemento DOM encontrado con querySelector(`[data-section="${name}"]`). Si no existe, la función aborta silenciosamente.
+Otros: Usa (items || []) como fallback por si el array es null/undefined, evitando errores en secciones sin datos.
+*/
 function renderSection(name, items, renderFn) {
   const container = document.querySelector(`[data-section="${name}"]`)
   if (!container) return
   container.innerHTML = (items || []).map(renderFn).join('')
 }
 
+/*
+renderPersonalityItem(s): Renderiza un único ítem de skill/personalidad como HTML. Devuelve un div con título en negrita y descripción. Cada ítem tiene las clases 'stagger-item' y 'reveal' para la animación de entrada escalonada.
+    - s: Objeto del JSON con campos {title: {es, en}, description: {es, en}}. Se procesa con t() para resolver el idioma actual.
+Otros: Es la función de renderizado más simple del archivo — solo devuelve un template literal sin lógica condicional.
+*/
 function renderPersonalityItem(s) {
   return `<div class="skill-personality-item stagger-item reveal">
     <strong>${t(s.title)}</strong>
@@ -49,6 +81,11 @@ function renderPersonalityItem(s) {
   </div>`
 }
 
+/*
+renderEducationItem(item): Renderiza una tarjeta de educación completa como HTML. Construye la tarjeta incrementalmente: header con título y fecha, institución, descripción y lista de logros. Diseñada para el JSON de educación que puede tener campos opcionales.
+    - html: Acumulador de string. Se va construyendo paso a paso con += y se devuelve al final. Es el patrón usado en todas las funciones de renderizado de tarjetas.
+Otros: La lista (item.list) solo se renderiza si existe y tiene elementos. Cada ítem de la lista también pasa por t() para soporte bilingüe.
+*/
 function renderEducationItem(item) {
   let html = `<div class="card-item stagger-item reveal">
     <div class="card-header">
@@ -66,6 +103,11 @@ function renderEducationItem(item) {
   return html
 }
 
+/*
+renderProjectItem(proj): Renderiza una tarjeta de proyecto como HTML. Incluye título, descripción y enlaces externos. Los enlaces se abren en nueva pestaña con rel="noopener noreferrer" por seguridad.
+    - html: Acumulador de string. Se construye el template del proyecto y se devuelve al final.
+Otros: Los links son opcionales — solo se renderiza el div 'project-links' si proj.links existe y tiene elementos. Cada link tiene target="_blank" para no navegar fuera del portfolio.
+*/
 function renderProjectItem(proj) {
   let html = `<div class="project-card stagger-item reveal">
     <h3>${proj.title}</h3>
@@ -79,6 +121,11 @@ function renderProjectItem(proj) {
   return html
 }
 
+/*
+renderExperienceItem(item): Renderiza una tarjeta de experiencia laboral como HTML. Estructura similar a renderEducationItem pero sin campo de lista. Usa 'company' en lugar de 'institution'.
+    - html: Acumulador de string. Construye header con título + fecha, empresa y descripción.
+Otros: Es prácticamente un clon de renderCertificateItem con 'company' en lugar de 'institution'. Ambas comparten la misma estructura de tarjeta.
+*/
 function renderExperienceItem(item) {
   let html = `<div class="card-item stagger-item reveal">
     <div class="card-header">
@@ -91,6 +138,11 @@ function renderExperienceItem(item) {
   return html
 }
 
+/*
+renderCertificateItem(item): Renderiza una tarjeta de certificado como HTML. Estructura idéntica a renderExperienceItem pero usando 'institution' en lugar de 'company'. Diseñada para certificados con título, fecha, institución emisora y descripción.
+    - html: Acumulador de string. Construye la tarjeta completa del certificado.
+Otros: No incluye URL — los certificados no tienen enlaces (regla definida en hard limits de tech-stack.md).
+*/
 function renderCertificateItem(item) {
   let html = `<div class="card-item stagger-item reveal">
     <div class="card-header">
@@ -103,11 +155,21 @@ function renderCertificateItem(item) {
   return html
 }
 
+/*
+toggleSection(id, arr): Oculta o muestra una sección del DOM depending on si tiene datos. Si el array está vacío o es null/undefined, la sección se oculta con display:none. Se usa para secciones que pueden estar vacías (experiencia, certificados).
+    - el: Elemento DOM encontrado por getElementById(id). Si no existe, la función no hace nada.
+Otros: Al asignar display:'' (string vacío), se elimina el estilo inline y la sección vuelve a su display por defecto definido en CSS.
+*/
 function toggleSection(id, arr) {
   const el = document.getElementById(id)
   if (el) el.style.display = (!arr || arr.length === 0) ? 'none' : ''
 }
 
+/*
+updateScrollbar(): Controla la visibilidad de la scrollbar del contenedor de contenido. Si el contenido es más corto que el viewport (ratio > 0.9), oculta la scrollbar añadiendo la clase 'scrollbar-hidden'. Se llama al cambiar de página y al hacer resize.
+    - el: El contenedor scrollable #content. Si no existe, la función aborta.
+    - ratio: Proporción clientHeight / scrollHeight. Un valor > 0.9 significa que el contenido cabe casi completamente en el viewport, por lo que la scrollbar no es necesaria.
+*/
 function updateScrollbar() {
   const el = document.getElementById('content')
   if (!el) return
@@ -115,6 +177,15 @@ function updateScrollbar() {
   el.classList.toggle('scrollbar-hidden', ratio > 0.9)
 }
 
+/*
+navigateTo(pageId): Sistema de navegación entre páginas con transiciones animadas. Oculta la página actual con animación de salida (350ms) y muestra la nueva con animación de entrada. También actualiza el nav activo, el footer y el estado en localStorage. Es la función central de la arquitectura de SPA del sitio.
+    - oldPage: Página DOM actualmente visible (data-page="${currentPage}"). Se busca antes de cambiar currentPage.
+    - newPage: Página DOM destino (data-page="${pageId}"). Si no existe, la función aborta.
+    - contentEl: Contenedor scrollable #content. Se hace scroll al top antes de mostrar la nueva página.
+    - motionOK: Booleano. Verdadero si el usuario NO tiene prefer-reduced-motion activado. Determina si se usa animación CSS o transición instantánea.
+    - footer: Elemento .site-footer. Se oculta en páginas que no son 'sobre' o 'hab' (las que tienen sidebar).
+Otros: La transición tiene 3 caminos: (1) con animación — añade clase 'exiting' y espera 350ms, (2) sin motion — cambio instantáneo, (3) sin oldPage — primera carga, solo muestra. El flag isTransitioning se gestiona internamente.
+*/
 function navigateTo(pageId) {
   if (pageId === currentPage || isTransitioning) return
   isTransitioning = true
@@ -167,6 +238,39 @@ function navigateTo(pageId) {
 }
 
 // --- Particle system ---
+/*
+initParticles(): Sistema de partículas flotantes en un canvas HTML. Crea partículas verdes semi-transparentes que se mueven lentamente por toda la pantalla. Las partículas se atenúan (dimming) cuando pasan sobre el sidebar, el botón de CV y el botón de idioma flotante, creando un efecto de profundidad. El número de partículas se adapta al tamaño de pantalla.
+    - canvas: Elemento canvas #particle-canvas. Si no existe, la función aborta.
+    - ctx: Contexto de dibujo 2D del canvas. Se usa para clearRect, arc y fill.
+    - particles: Array de objetos partícula. Cada partícula tiene {x, y, vx, vy, r, a} (posición, velocidad, radio, alpha).
+    - w, h: Ancho y alto del canvas (igual a window.innerWidth/innerHeight). Se actualizan en resize.
+    - sidebar: Elemento .sidebar. Se usa para calcular el ancho del sidebar y aplicar dimming a las partículas que pasan por detrás.
+    - cvBtn: Elemento .sidebar-cv-btn. Se usa para calcular la zona de dimming alrededor del botón de descarga de CV.
+    - langSwitch: Elemento #lang-switcher-floating. Se usa para calcular la zona de dimming alrededor del botón de idioma flotante.
+
+ Funciones internas:
+    - resize(): Actualiza w y h al tamaño de la ventana. Se llama en cada resize del navegador.
+    - createParticle(): Crea una partícula con posición y velocidad aleatoria dentro del canvas.
+    - init(): Inicializa el canvas y crea el array de partículas. El count se adapta al área de pantalla (w*h/12000, máximo 80).
+    - draw(): Bucle de renderizado principal. Limpia el canvas, mueve cada partícula, calcula el alpha según proximidad a sidebar/CV/langSwitch, y dibuja el círculo. Se ejecuta con requestAnimationFrame.
+
+    Variables internas de draw():
+    - sidebarW: Ancho del sidebar en píxeles. Base para calcular la zona de dimming.
+    - SIDEBAR_DIM: Factor mínimo de opacidad (0.05 = 5%). Las partículas nunca desaparecen del todo sobre el sidebar.
+    - troughLeft, troughRight: Límites de la zona "trough" alrededor del botón CV donde las partículas están más opacas. Se calculan a partir de cvRect o como fallback: centro ± 100px.
+    - cvRect: Bounding rect del botón CV. Se usa para calcular troughLeft/troughRight con precisión.
+    - alpha: Opacidad calculada de cada partícula. Se modifica según la zona (sidebar, trough, langSwitch).
+    - t: Factor de interpolación lineal para el fade entre zona opaca y zona transparente.
+
+ Variables internas del bloque langSwitch:
+    - lr: Bounding rect del switcher de idioma.
+    - cx, cy: Centro del switcher de idioma en coordenadas de pantalla.
+    - hw, hh: Semiancho y semialto del switcher + 5px de margen. Define el área de influencia rectangular.
+    - dx, dy: Distancia del punto más cercano del rectángulo del switcher a la partícula (eje X e Y).
+    - dist: Distancia euclídea desde la partícula hasta el borde del switcher. Si es < 20px, se aplica dimming proporcional.
+
+Otros: El canvas se resize automáticamente con la ventana. Las partículas envuelven (wrap) cuando salen del canvas — si x < 0 aparece por la derecha y viceversa. El color es rgba(100, 255, 218) — verde aguamarina.
+*/
 function initParticles() {
   const canvas = document.getElementById('particle-canvas')
   if (!canvas) return
@@ -266,6 +370,11 @@ function initParticles() {
 // --- Scroll reveal ---
 let scrollObserver = null
 
+/*
+initScrollReveal(): Inicializa el sistema de scroll reveal usando IntersectionObserver. Los elementos con clase 'reveal' se hacen visibles (añaden 'visible') cuando entran en el viewport. Se llama al init, al cambiar de página y tras renderAll(). Si el usuario tiene prefers-reduced-motion, todos los elementos se muestran inmediatamente sin animación.
+    - motionOK: Booleano. Verdadero si el usuario NO tiene prefer-reduced-motion activado. Si es false, todos los .reveal reciben 'visible' directamente.
+Otros: Se desconecta el observer anterior (scrollObserver.disconnect()) y se eliminan las clases 'visible' existentes antes de re-observar. Esto evita duplicados al cambiar de página. El threshold de 0.15 significa que el 15% del elemento debe ser visible para trigger.
+*/
 function initScrollReveal() {
   const motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches
   if (!motionOK) {
@@ -286,6 +395,10 @@ function initScrollReveal() {
 }
 
 // --- Language switching ---
+/*
+changeLanguage(lang): Cambia el idioma activo de toda la aplicación. Actualiza currentLang, re-renderiza todas las secciones con renderAll(), actualiza la clase 'active' en los botones de idioma, persiste la selección en localStorage y actualiza el atributo lang del <html>. Se llama al clicar los botones ES/EN.
+Otros: Si el idioma solicitado es igual al actual, la función aborta (no re-renderiza innecesariamente). La persistencia en localStorage permite que al recargar la página se mantenga el idioma elegido.
+*/
 function changeLanguage(lang) {
   if (lang === currentLang) return
   currentLang = lang
@@ -296,11 +409,12 @@ function changeLanguage(lang) {
   document.documentElement.lang = lang
 }
 
+// --- Event listeners: language buttons ---
 document.querySelectorAll('[data-lang]').forEach(btn => {
   btn.addEventListener('click', () => changeLanguage(btn.dataset.lang))
 })
 
-// --- Nav clicks ---
+// --- Event listeners: nav clicks ---
 document.querySelectorAll('[data-nav]').forEach(btn => {
   btn.addEventListener('click', () => {
     navigateTo(btn.dataset.nav)
@@ -313,6 +427,10 @@ const sidebar = document.getElementById('sidebar')
 const sidebarToggle = document.getElementById('sidebar-toggle')
 const sidebarOverlay = document.getElementById('sidebar-overlay')
 
+/*
+openSidebar(): Abre el sidebar móvil añadiendo la clase 'open' al sidebar, al overlay y al toggle. Bloquea el scroll del body con overflow:hidden para que el contenido de detrás no se pueda scrollear mientras el sidebar está abierto.
+Otros: Si sidebar o sidebarOverlay no existen (desktop), la función aborta silenciosamente.
+*/
 function openSidebar() {
   if (!sidebar || !sidebarOverlay) return
   sidebar.classList.add('open')
@@ -321,6 +439,10 @@ function openSidebar() {
   document.body.style.overflow = 'hidden'
 }
 
+/*
+closeSidebar(): Cierra el sidebar móvil eliminando la clase 'open' del sidebar, overlay y toggle. Restaura el scroll del body eliminando el overflow:hidden. Se llama al clicar fuera del sidebar, al pulsar Escape, al navegar a una página, y al superar 1235px de ancho.
+Otros: Misma lógica de guard que openSidebar — aborta si los elementos no existen.
+*/
 function closeSidebar() {
   if (!sidebar || !sidebarOverlay) return
   sidebar.classList.remove('open')
@@ -329,12 +451,17 @@ function closeSidebar() {
   document.body.style.overflow = ''
 }
 
+/*
+toggleSidebar(): Alterna el estado del sidebar móvil. Comprueba si tiene la clase 'open' y llama a closeSidebar() o openSidebar() según corresponda. Se usa como handler del botón hamburguesa.
+    - isOpen: Booleano que indica si el sidebar está actualmente abierto. Se comprueba con optional chaining (sidebar?.classList.contains).
+*/
 function toggleSidebar() {
   const isOpen = sidebar?.classList.contains('open')
   if (isOpen) closeSidebar()
   else openSidebar()
 }
 
+// --- Event listeners: sidebar ---
 if (sidebarToggle) sidebarToggle.addEventListener('click', toggleSidebar)
 if (sidebarOverlay) sidebarOverlay.addEventListener('click', closeSidebar)
 
@@ -366,6 +493,18 @@ if (backToTop && contentEl) {
 }
 
 // --- Init ---
+/*
+init(): Inicialización maestra de toda la aplicación. Se ejecuta al final del archivo y es el punto de entrada único. Restaura el estado persistido (idioma y página), renderiza la UI, inicia el sistema de partículas, oculta el spinner de carga y configura los event listeners de resize. Diseñada para que la app arranche exactamente donde el usuario la dejó.
+    - savedLang: Idioma guardado en localStorage. Si no existe, usa 'es' como fallback.
+    - savedPage: Página guardada en localStorage. Si no existe, usa 'sobre' como fallback.
+    - validPage: Página validada — comprueba que el data-page existe en el DOM. Si no existe (página eliminada), cae a 'sobre'. Evita mostrar una página que ya no está en el HTML.
+    - activePage: Elemento DOM de la página guardada. Se le añade la clase 'active' para mostrarla.
+    - activeNav: Elemento DOM del enlace de nav correspondiente a la página guardada. Se marca como activo.
+    - footer: Elemento .site-footer. Se oculta si la página guardada no es 'sobre' o 'hab'.
+    - spinner: Elemento #loading-spinner. Se le añade la clase 'done' para iniciar la animación de ocultación, pero solo si el <html> tiene la clase 'show-spinner' (indicando que JS cargó correctamente).
+
+Otros: clearTimeout(window.__spinnerTimer) cancela el timer de fallback del spinner (por si JS carga lento). Al final, se elimina 'js-loading' del <html> para activar las transiciones CSS que estaban pausadas.
+*/
 function init() {
   clearTimeout(window.__spinnerTimer)
 
@@ -405,6 +544,7 @@ function init() {
   window.addEventListener('resize', updateScrollbar)
 }
 
+// --- Resize debounce ---
 let resizeTimer
 window.addEventListener('resize', () => {
   document.documentElement.classList.add('is-resizing')
