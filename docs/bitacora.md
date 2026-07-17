@@ -235,3 +235,12 @@ Global workflow summary. Each entry links to the detailed day log.
 ### Session 50: Restore content padding overrides per breakpoint via CSS variables
 **Prompt:** On large screens, user still can't modify content padding via media queries. Needs per-breakpoint control.
 **Plan:** Add `.content { --content-pad-right: ... }` overrides in 1400px+, 1800px+, 2600px+ media queries using the same values from sessions 46-48.
+
+### Session 51: Mobile profile split — profile above content, nav-only sidebar
+**Prompt:** On mobile, photo/name/description/CV should appear above the content area. Hamburger sidebar should only contain navigation links + language switcher.
+**Plan:** Create `MobileProfile.astro` component, add to `.content` as first child. CSS: hidden on desktop, centered flex layout on mobile. `.sidebar-top > :not(.sidebar-nav)` hidden on mobile to keep only nav in sidebar.
+
+### Session 52: Fix mobile sidebar — mask-image + overflow-y
+**Prompt:** Navigation bar broken on mobile. Sidebar content doesn't appear and X close button doesn't work.
+**Root cause:** `.sidebar-inner` mask-image depends on `--sidebar-fade` which is 0 on mobile, making content invisible. Override was removed in session 45 refactor.
+**Fix:** Added `mask-image: none; overflow-y: auto` to `.sidebar-inner` in mobile media query only.

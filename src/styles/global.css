@@ -206,6 +206,11 @@ html:not(.js-loading) .content {
   flex-direction: column;
 }
 
+/* Mobile profile: hidden on desktop, shown on mobile above content */
+.mobile-profile {
+  display: none;
+}
+
 /* Content scrollbar: thin 6px accent-colored thumb */
 .content::-webkit-scrollbar {
   width: 6px;
@@ -1076,7 +1081,7 @@ html:not(.js-loading) .content {
   }
 
   .sidebar-toggle.open span:nth-child(3) {
-    transform: translateY(-6px) rotate(-44px);
+    transform: translateY(-6px) rotate(-45deg);
   }
 
   /* Hide floating lang-switcher (sidebar lang-switcher is visible instead) */
@@ -1167,6 +1172,12 @@ html:not(.js-loading) .content {
     transform: translateX(0);
   }
 
+  /* Sidebar inner: remove mask (hidden by --sidebar-fade=0 on mobile), allow scroll */
+  .sidebar-inner {
+    mask-image: none;
+    overflow-y: auto;
+  }
+
   /* Content: no left margin, reduced padding on mobile */
   .content {
     margin-left: 0;
@@ -1174,6 +1185,107 @@ html:not(.js-loading) .content {
     --content-pad-right: clamp(16px, 3vw, 24px);
     --content-pad-bottom: clamp(24px, 4vh, 60px);
     --content-pad-left: clamp(16px, 3vw, 24px);
+  }
+
+  /* Mobile profile: visible above content */
+  .mobile-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+    padding-bottom: 24px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .mobile-profile-img {
+    width: 120px;
+    height: 150px;
+    border: 2px solid var(--color-accent);
+    object-fit: cover;
+  }
+
+  .mobile-profile-name {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--color-text-bright);
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+  }
+
+  .mobile-profile-name-last {
+    transform: translateX(20px);
+  }
+
+  .mobile-profile-desc {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .mobile-profile-desc strong {
+    color: var(--color-text);
+  }
+
+  .mobile-profile-social {
+    display: flex;
+    gap: 12px;
+  }
+
+  .mobile-profile-social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 9999px;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .mobile-profile-social a:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+  }
+
+  .mobile-profile-cv-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border: 1px solid var(--color-accent);
+    border-radius: 4px;
+    color: var(--color-accent);
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    background: transparent;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+  }
+
+  .mobile-profile-cv-btn:hover {
+    background-color: var(--color-accent-muted);
+    transform: translateY(-2px);
+  }
+
+  /* Sidebar: hide profile parts, keep only nav + lang */
+  .sidebar-top > :not(.sidebar-nav) {
+    display: none;
   }
 
   /* Personality grid: single column on mobile */

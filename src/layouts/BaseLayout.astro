@@ -1,5 +1,6 @@
 ---
 import Profile from '../components/Profile.astro'
+import MobileProfile from '../components/MobileProfile.astro'
 import nav from '../data/nav.json'
 import about from '../data/about.json'
 import sections from '../data/sections.json'
@@ -56,6 +57,7 @@ const dataBundle = JSON.stringify({ lang, skills, education, projects, experienc
       </div>
     </aside>
     <main class="content" id="content">
+      <MobileProfile />
       <div class="content-body">
         <div class="lang-switcher-floating" id="lang-switcher-floating">
           <button class="sidebar-lang-btn" data-lang="es">ES</button>
