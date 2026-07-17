@@ -203,3 +203,15 @@ Global workflow summary. Each entry links to the detailed day log.
 ### Session 43: Sidebar-inner top padding tuning
 **Prompt:** Sidebar content offset visual balance. Tested `clamp(50px, 6vh, 77px)` but user preferred `clamp(80px, 6vh, 77px)`.
 **Plan:** Adjust `.sidebar-inner` top padding. Final value: `clamp(80px, 6vh, 77px) clamp(30px, 3vw, 40px)`.
+
+## 2026-07-17
+
+[Detailed log →](logs/2026-07-17.md)
+
+### Session 44: Unify "About me" into single block + fix language switch bug
+**Prompt:** Merge sobre-p1/p2/p3 into a single sobre-text field with paragraph breaks controlled from component code. Fix bug where about text disappears on language switch.
+**Plan:** Merge 3 JSON keys into `sobre-text` with `\n\n` separators. Render from About.astro via `split('\n\n').map()`. Handle same in `translateUI()`. Fix: remove duplicate `translateUI()` call in `changeLanguage()` that broke IntersectionObserver.
+
+### Session 45: CSS cleanup — duplicates, dead code, reorganization
+**Prompt:** Analyze full CSS, identify duplicates (`.content` was duplicated), merge rules, remove dead CSS, reorganize into 19 numbered sections with detailed comments.
+**Plan:** Merge `.content` into one rule. Remove ~90 lines of dead CSS (Contact section, Tech Skills Grid, unused keyframes, redundant mobile overrides). Reorganize entire file into 19 sections with comments per selector. Net -14 lines.

@@ -54,7 +54,9 @@ const tools = skills.tools || []
     </div>
   </div>
 
-  <p class="about-paragraph reveal" data-i18n="sobre-p1" set:html={t('sobre-p1')}></p>
-  <p class="about-paragraph reveal" data-i18n="sobre-p2" set:html={t('sobre-p2')}></p>
-  <p class="about-paragraph reveal" data-i18n="sobre-p3" set:html={t('sobre-p3')}></p>
+  <div data-i18n="sobre-text" data-section="about-text">
+    {t('sobre-text').split('\n\n').map(p => (
+      <p class="about-paragraph reveal" set:html={p}></p>
+    ))}
+  </div>
 </div>

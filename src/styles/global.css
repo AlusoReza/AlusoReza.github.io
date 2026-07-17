@@ -1,3 +1,13 @@
+/*
+================================================================
+PORTFOLIO — Global Stylesheet
+================================================================
+*/
+
+/* ========================
+   0. Design Tokens
+   ======================== */
+
 @import "tailwindcss";
 
 @theme {
@@ -32,10 +42,16 @@
   --transition-speed: 0.35s;
 }
 
+/* ========================
+   1. Base / Reset
+   ======================== */
+
+/* Smooth scroll behavior */
 html {
   scroll-behavior: smooth;
 }
 
+/* Body: full-viewport SPA shell, dark background, hidden overflow */
 body {
   font-family: var(--font-body);
   background-color: var(--color-bg);
@@ -48,7 +64,11 @@ body {
   height: 100dvh;
 }
 
-/* Loading spinner — base: invisible */
+/* ========================
+   2. Loading System
+   ======================== */
+
+/* Loading overlay: full-screen centered spinner, invisible by default */
 .loading-spinner {
   position: fixed;
   inset: 0;
@@ -62,19 +82,19 @@ body {
   pointer-events: none;
 }
 
-/* Show after 500ms timer fires */
+/* Show spinner after 300ms timer fires (prevents flash on fast loads) */
 .show-spinner .loading-spinner {
   opacity: 1;
   pointer-events: auto;
 }
 
-/* Hide when init() completes */
+/* Hide spinner when init() completes */
 .loading-spinner.done {
   opacity: 0;
   pointer-events: none;
 }
 
-/* Spinner circle */
+/* Spinner circle: rotating accent-colored ring */
 .spinner {
   width: 40px;
   height: 40px;
@@ -88,45 +108,24 @@ body {
   to { transform: rotate(360deg); }
 }
 
-/* Content fades in when done */
-.content {
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
+/* ========================
+   3. Scroll-Reveal
+   ======================== */
 
-html:not(.js-loading) .content {
-  opacity: 1;
-}
-
-/* Footer hidden during loading */
-.js-loading .site-footer {
-  display: none;
-}
-
-/* Sidebar + toggle hidden during loading */
-.js-loading .sidebar,
-.js-loading .sidebar-toggle {
-  opacity: 0 !important;
-}
-
-/* Disable sidebar transitions during resize */
-.is-resizing .sidebar,
-.is-resizing .sidebar-overlay {
-  transition: none !important;
-}
-
-/* Scroll-reveal system */
+/* Base state: hidden below viewport, slides up when visible */
 .reveal {
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.1s ease, transform 0.1s ease;
 }
 
+/* Visible state: fully opaque, no transform */
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
+/* Stagger delay: each child appears 80ms after the previous */
 .stagger-item:nth-child(1) { transition-delay: 0s; }
 .stagger-item:nth-child(2) { transition-delay: 0.08s; }
 .stagger-item:nth-child(3) { transition-delay: 0.16s; }
@@ -134,6 +133,7 @@ html:not(.js-loading) .content {
 .stagger-item:nth-child(5) { transition-delay: 0.32s; }
 .stagger-item:nth-child(6) { transition-delay: 0.4s; }
 
+/* Reduced motion: reveal elements immediately, skip animation */
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;
@@ -142,7 +142,11 @@ html:not(.js-loading) .content {
   }
 }
 
-/* Particle canvas */
+/* ========================
+   4. Particle Canvas
+   ======================== */
+
+/* Full-screen fixed canvas behind all content, non-interactive */
 #particle-canvas {
   position: fixed;
   inset: 0;
@@ -150,7 +154,11 @@ html:not(.js-loading) .content {
   pointer-events: none;
 }
 
-/* Layout: 2 columns */
+/* ========================
+   5. Layout — App Shell
+   ======================== */
+
+/* Two-column flex container: sidebar + content, centered, full viewport */
 .app-layout {
   display: flex;
   height: 100vh;
@@ -159,7 +167,61 @@ html:not(.js-loading) .content {
   margin: 0 auto;
 }
 
-/* Sidebar */
+/* Content area: right column, scrollable, fades in after loading */
+.content {
+  flex: 1;
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(24px, 4vh, 50px) clamp(10px, 4vw, 40px) clamp(24px, 4vh, 50px) clamp(10px, 4vw, 10px);
+  transition: padding 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+/* Show content once JS loading class is removed */
+html:not(.js-loading) .content {
+  opacity: 1;
+}
+
+/* Content body: inner wrapper for pages, footer, and floating lang-switcher */
+.content-body {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Content scrollbar: thin 6px accent-colored thumb */
+.content::-webkit-scrollbar {
+  width: 6px;
+}
+.content::-webkit-scrollbar-track {
+  background: transparent;
+}
+.content::-webkit-scrollbar-thumb {
+  background-color: var(--color-border);
+  border-radius: 3px;
+}
+
+/* Hide scrollbar when content fits (no scroll needed) */
+.content.scrollbar-hidden {
+  scrollbar-width: none;
+}
+.content.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+/* ========================
+   6. Sidebar
+   ======================== */
+
+/* 6a. Container — transparent on desktop, fades with viewport width */
 .sidebar {
   position: relative;
   flex: 0 0 calc(var(--sidebar-width) * var(--sidebar-fade));
@@ -181,13 +243,14 @@ html:not(.js-loading) .content {
   display: none;
 }
 
+/* Inner wrapper: absolutely positioned, wider than sidebar for gradient overhang */
 .sidebar-inner {
   position: absolute;
   top: 0;
   left: 0;
   width: calc(var(--sidebar-width) + 60px);
   height: 100%;
-  padding: clamp(80px, 6vh, 77px) clamp(30px, 3vw, 40px);
+  padding: clamp(80px, 6vh, 77px) clamp(30px, 3vw, 40px) clamp(80px, 6vh, 77px) clamp(30px, 3vw, 40px);
   box-sizing: border-box;
   overflow-y: auto;
   overflow-x: hidden;
@@ -199,24 +262,14 @@ html:not(.js-loading) .content {
   display: none;
 }
 
-@media (max-width: 1135px) {
-  .sidebar {
-    flex: 0 0 var(--sidebar-width);
-    width: var(--sidebar-width);
-    opacity: 1;
-  }
-  .sidebar-inner {
-    mask-image: none;
-  }
-}
-
+/* Top section: vertical stack for profile image, name, desc, social */
 .sidebar-top {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-/* Foto tipo cv perfil*/
+/* 6b. Profile — portrait photo with accent border */
 .sidebar-profile-img {
   width: 140px;
   height: 170px;
@@ -225,6 +278,7 @@ html:not(.js-loading) .content {
   margin-bottom: 15px;
 }
 
+/* Full name: two-line display with last name offset right */
 .sidebar-name {
   display: flex;
   flex-direction: column;
@@ -238,10 +292,12 @@ html:not(.js-loading) .content {
   line-height: 1.2;
 }
 
+/* Last name indented 20px right for visual hierarchy */
 .sidebar-name-last {
   transform: translateX(20px);
 }
 
+/* Professional subtitle (e.g. "Desarrollador de software") */
 .sidebar-desc {
   font-size: 0.9rem;
   color: var(--color-text-muted);
@@ -253,13 +309,14 @@ html:not(.js-loading) .content {
   color: var(--color-text);
 }
 
-/* Social links in sidebar */
+/* 6c. Social Links — circular icon buttons */
 .sidebar-social {
   display: flex;
   gap: 12px;
   margin-top: 13px;
 }
 
+/* Individual social icon circle */
 .sidebar-social a {
   display: flex;
   align-items: center;
@@ -275,12 +332,14 @@ html:not(.js-loading) .content {
   font-weight: 600;
 }
 
+/* Social icon hover: accent color + lift */
 .sidebar-social a:hover {
   color: var(--color-accent);
   border-color: var(--color-accent);
   transform: translateY(-2px);
 }
 
+/* 6d. CV Download Button — accent-bordered outline button */
 .sidebar-cv-btn {
   display: inline-flex;
   align-items: center;
@@ -301,12 +360,13 @@ html:not(.js-loading) .content {
   letter-spacing: 0.5px;
 }
 
+/* CV button hover: subtle accent background + lift */
 .sidebar-cv-btn:hover {
   background-color: var(--color-accent-muted);
   transform: translateY(-2px);
 }
 
-/* Nav list in sidebar */
+/* 6e. Navigation — vertical list of page links */
 .sidebar-nav {
   display: flex;
   flex-direction: column;
@@ -316,6 +376,7 @@ html:not(.js-loading) .content {
   padding: 0;
 }
 
+/* Individual nav link: muted text with accent line prefix */
 .sidebar-nav-link {
   display: flex;
   align-items: center;
@@ -333,6 +394,7 @@ html:not(.js-loading) .content {
   font-family: var(--font-body);
 }
 
+/* Accent line: 12px horizontal bar that grows on hover/active */
 .sidebar-nav-link::before {
   content: '';
   display: inline-block;
@@ -342,19 +404,31 @@ html:not(.js-loading) .content {
   transition: all 0.25s ease;
 }
 
+/* Hover + active: bright text */
 .sidebar-nav-link:hover,
 .sidebar-nav-link.active {
   color: var(--color-text-bright);
 }
 
+/* Hover + active: line grows to 28px and turns accent color */
 .sidebar-nav-link:hover::before,
 .sidebar-nav-link.active::before {
   width: 28px;
   background-color: var(--color-accent);
 }
 
-/* Lang switcher in sidebar */
+/* 6f. Language Switcher — ES/EN toggle buttons */
 
+/* Sidebar lang buttons (visible when sidebar is visible) */
+.sidebar-lang {
+  display: flex;
+  gap: 4px;
+  margin-top: 19px;
+  opacity: calc(1 - var(--sidebar-fade));
+  transition: opacity 0.3s ease;
+}
+
+/* Individual lang button: bordered pill */
 .sidebar-lang-btn {
   background: none;
   border: 1px solid var(--color-border);
@@ -373,12 +447,13 @@ html:not(.js-loading) .content {
   border-color: var(--color-accent);
 }
 
+/* Active lang: accent border + bright text */
 .sidebar-lang-btn.active {
   color: var(--color-text);
   border-color: var(--color-accent);
 }
 
-/* Floating lang switcher (desktop, inside content-body) */
+/* Floating lang switcher: absolute-positioned in content area, fades with sidebar */
 .lang-switcher-floating {
   display: flex;
   position: absolute;
@@ -390,525 +465,11 @@ html:not(.js-loading) .content {
   transition: opacity 0.3s ease;
 }
 
-.sidebar-lang {
-  display: flex;
-  gap: 4px;
-  margin-top: 19px;
-  opacity: calc(1 - var(--sidebar-fade));
-  transition: opacity 0.3s ease;
-}
-
-/* Content area */
-.content {
-  flex: 1;
-  height: 100vh;
-  height: 100dvh;
-  overflow-y: auto;
-  overflow-x: hidden;
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  padding: clamp(24px, 4vh, 50px) clamp(20px, 4vw, 40px);
-  transition: padding 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Content body */
-.content-body {
-  position: relative;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.content::-webkit-scrollbar {
-  width: 6px;
-}
-.content::-webkit-scrollbar-track {
-  background: transparent;
-}
-.content::-webkit-scrollbar-thumb {
-  background-color: var(--color-border);
-  border-radius: 3px;
-}
-
-.content.scrollbar-hidden {
-  scrollbar-width: none;
-}
-.content.scrollbar-hidden::-webkit-scrollbar {
-  display: none;
-}
-
-/* Page system */
-.page {
-  display: none;
-  opacity: 0;
-  transform: translateX(40px);
-  transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
-  width: 100%;
-  max-width: 115%;
-  padding-top: 40px;
-}
-
-.page.active {
-  display: block;
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.page.exiting {
-  display: block;
-  position: absolute;
-  width: 100%;
-  max-width: 115%;
-  opacity: 0;
-  transform: translateX(-40px);
-  pointer-events: none;
-}
-
-@keyframes slide-in-right {
-  from { opacity: 0; transform: translateX(40px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes slide-out-left {
-  from { opacity: 1; transform: translateX(0); }
-  to { opacity: 0; transform: translateX(-40px); }
-}
-
-/* Section titles */
-.section-title {
-  font-family: var(--font-display);
-  color: var(--color-accent);
-  font-size: 1.265rem;
-  font-weight: 500;
-  margin: 0 0 17px 0;
-  letter-spacing: 0.5px;
-  text-transform: lowercase;
-}
-
-.section-title::before {
-  content: '// ';
-  color: var(--color-text-muted);
-}
-
-.section-heading {
-  font-family: var(--font-display);
-  color: var(--color-text-bright);
-  font-size: 1.85rem;
-  font-weight: 700;
-  margin: 4px 0 24px 0;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-}
-
-/* About paragraphs */
-.about-paragraph {
-  margin: 1em 0;
-  font-size: 1rem;
-  color: var(--color-text-muted);
-  line-height: 1.7;
-  text-align: justify;
-}
-
-.about-paragraph:last-child {
-  margin-bottom: 0;
-}
-
-/* Compact skills badges in About */
-.about-skills {
-  margin: 15px 0 24px;
-}
-
-.about-skills-group {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 12px;
-}
-
-.about-skills-label {
-  font-family: var(--font-display);
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--color-accent);
-  letter-spacing: 0.5px;
-  display: block;
-  width: 100%;
-  margin-bottom: 6px;
-}
-
-.about-skills-badges {
-  display: inline-flex;
-  flex-wrap: wrap;
-  gap: 7px;
-}
-
-.about-skill-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 5px 13px;
-  font-size: 0.95rem;
-  color: var(--color-text);
-  background-color: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-  transition: border-color 0.2s ease;
-  white-space: nowrap;
-}
-
-.about-skill-badge:hover {
-  border-color: var(--color-accent);
-}
-
-.about-skill-badge img {
-  width: 19px;
-  height: 19px;
-  object-fit: contain;
-}
-
-.about-skill-fallback {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 17px;
-  height: 17px;
-  font-size: 0.65rem;
-  font-weight: 700;
-  color: var(--color-text);
-  border: 1px dashed var(--color-border);
-  border-radius: 2px;
-}
-
-.about-paragraph strong {
-  color: var(--color-text);
-}
-
-/* Personality note */
-.personality-note {
-  font-size: 1rem;
-  color: var(--color-text-muted);
-  margin-bottom: 20px;
-  padding-left: 15px;
-  border-left: 2px solid var(--color-accent);
-  font-style: italic;
-  line-height: 1.6;
-  text-align: justify;
-}
-
-.personality-note strong {
-  color: var(--color-text);
-}
-
-/* Card system (education, experience, certificates) */
-.card-item {
-  margin-bottom: 24px;
-  padding: 24px;
-  border-radius: 4px;
-  background-color: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: default;
-}
-
-.card-item:hover {
-  background-color: var(--color-bg-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-}
-
-.card-header {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-}
-
-.card-title {
-  font-family: var(--font-display);
-  color: var(--color-text-bright);
-  font-size: 1.15rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
-
-.card-date {
-  font-size: 0.8rem;
-  color: var(--color-text-muted);
-  font-weight: 500;
-  white-space: nowrap;
-  padding: 4px 10px;
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-}
-
-.card-sub {
-  margin: 10px 0 6px 0;
-  font-weight: 500;
-  color: var(--color-accent);
-  font-size: 0.95rem;
-}
-
-.card-desc {
-  margin: 8px 0 0 0;
-  font-size: 0.95rem;
-  color: var(--color-text-muted);
-  line-height: 1.6;
-  text-align: justify;
-}
-
-.card-desc strong {
-  color: var(--color-text);
-}
-
-.card-list {
-  margin: 12px 0 0 0;
-  padding-left: 20px;
-  list-style-type: none;
-  color: var(--color-text-muted);
-  font-size: 0.9rem;
-}
-
-.card-list li {
-  margin-bottom: 4px;
-  position: relative;
-  padding-left: 16px;
-}
-
-.card-list li::before {
-  content: '▹';
-  position: absolute;
-  left: 0;
-  color: var(--color-accent);
-}
-
-/* Project card */
-.project-card {
-  border: 1px solid var(--color-border);
-  padding: 28px;
-  border-radius: 4px;
-  background-color: var(--color-bg-card);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.project-card:hover {
-  background-color: var(--color-bg-hover);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-}
-
-.project-card h3 {
-  margin: 0 0 10px 0;
-  color: var(--color-text-bright);
-  font-family: var(--font-display);
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-
-.project-card p {
-  margin: 0;
-  color: var(--color-text-muted);
-  font-size: 0.95rem;
-  line-height: 1.6;
-  text-align: justify;
-}
-
-.project-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 20px;
-}
-
-.link-outline {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  border: 1px solid var(--color-border);
-  color: var(--color-text-muted);
-  text-decoration: none;
-  font-size: 0.85rem;
-  border-radius: 4px;
-  transition: all 0.3s ease;
-}
-
-.link-outline:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-  background-color: var(--color-accent-muted);
-}
-
-/* Contact section */
-.contact-section {
-  max-width: 540px;
-}
-
-.contact-subtitle {
-  margin: 16px 0 32px;
-  color: var(--color-text-muted);
-  font-size: 0.95rem;
-  line-height: 1.7;
-  text-align: justify;
-}
-
-.contact-subtitle strong {
-  color: var(--color-text);
-  display: block;
-  margin-top: 12px;
-  font-size: 1rem;
-}
-
-.contact-buttons {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.contact-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 24px;
-  border-radius: 4px;
-  text-decoration: none;
-  font-family: var(--font-display);
-  font-size: 0.85rem;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  letter-spacing: 0.3px;
-}
-
-.contact-btn-primary {
-  border: 1px solid var(--color-accent);
-  color: var(--color-accent);
-  background: transparent;
-}
-
-.contact-btn-primary:hover {
-  background-color: var(--color-accent-muted);
-  transform: translateY(-2px);
-}
-
-.contact-btn-secondary {
-  border: 1px solid var(--color-border);
-  color: var(--color-text-muted);
-  background: transparent;
-}
-
-.contact-btn-secondary:hover {
-  color: var(--color-accent);
-  border-color: var(--color-accent);
-  background-color: var(--color-accent-muted);
-  transform: translateY(-2px);
-}
-
-/* Tech skills grid */
-.skills-section {
-  margin-bottom: 40px;
-}
-
-.skills-section h3 {
-  font-family: var(--font-display);
-  color: var(--color-text);
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 0 0 16px 0;
-  letter-spacing: -0.01em;
-}
-
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-  gap: 14px;
-}
-
-.skill-tech-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  padding: 16px 10px;
-  border-radius: 4px;
-  background-color: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  transition: all 0.3s ease;
-}
-
-.skill-tech-item:hover {
-  border-color: var(--color-accent);
-  background-color: var(--color-bg-hover);
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
-}
-
-.skill-tech-item img {
-  width: 32px;
-  height: 32px;
-  object-fit: contain;
-}
-
-.skill-tech-item .skill-tech-fallback {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.65rem;
-  font-weight: 700;
-  color: var(--color-text-muted);
-  border: 1px dashed var(--color-border);
-  border-radius: 4px;
-}
-
-.skill-tech-item span {
-  font-size: 0.8rem;
-  color: var(--color-text-muted);
-  font-weight: 500;
-  text-align: center;
-}
-
-/* Personality skills grid */
-.skills-personality-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-.skill-personality-item {
-  background-color: var(--color-bg-card);
-  padding: 20px;
-  border-radius: 4px;
-  border: 1px solid var(--color-border);
-  transition: border-color 0.3s ease, background-color 0.3s ease;
-}
-
-.skill-personality-item:hover {
-  border-color: var(--color-accent);
-  background-color: var(--color-bg-hover);
-}
-
-.skill-personality-item strong {
-  font-family: var(--font-display);
-  color: var(--color-accent);
-  display: block;
-  margin-bottom: 6px;
-  font-weight: 600;
-  font-size: 1rem;
-}
-
-.skill-personality-item p {
-  margin: 0;
-  font-size: 0.9rem;
-  color: var(--color-text-muted);
-  line-height: 1.5;
-  text-align: justify;
-}
-
-/* Mobile sidebar toggle */
+/* ========================
+   7. Mobile Sidebar Toggle
+   ======================== */
+
+/* Hamburger button: hidden on desktop, fixed top-left on mobile */
 .sidebar-toggle {
   display: none;
   position: fixed;
@@ -929,6 +490,7 @@ html:not(.js-loading) .content {
   background-color: var(--color-bg);
 }
 
+/* Hamburger bars */
 .sidebar-toggle span {
   display: block;
   width: 18px;
@@ -938,15 +500,408 @@ html:not(.js-loading) .content {
   transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
 }
 
+/* Hamburger hover: accent color */
 .sidebar-toggle:hover span {
   background-color: var(--color-accent);
 }
 
+/* Dark overlay behind mobile sidebar */
 .sidebar-overlay {
   display: none;
 }
 
-/* Back to top */
+/* ========================
+   8. Page System (SPA)
+   ======================== */
+
+/* Base page state: hidden, offset right, ready to slide in */
+.page {
+  display: none;
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
+  width: 100%;
+  max-width: 115%;
+  padding-top: 40px;
+}
+
+/* Active page: visible, centered, fully opaque */
+.page.active {
+  display: block;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Exiting page: slides left and fades out, non-interactive */
+.page.exiting {
+  display: block;
+  position: absolute;
+  width: 100%;
+  max-width: 115%;
+  opacity: 0;
+  transform: translateX(-40px);
+  pointer-events: none;
+}
+
+/* ========================
+   9. Section Titles
+   ======================== */
+
+/* Section eyebrow: accent-colored with "// " prefix (code comment aesthetic) */
+.section-title {
+  font-family: var(--font-display);
+  color: var(--color-accent);
+  font-size: 1.265rem;
+  font-weight: 500;
+  margin: 0 0 17px 0;
+  letter-spacing: 0.5px;
+  text-transform: lowercase;
+}
+
+/* "// " prefix before section title text */
+.section-title::before {
+  content: '// ';
+  color: var(--color-text-muted);
+}
+
+/* Section heading: large bright display text (e.g. "Habilidades") */
+.section-heading {
+  font-family: var(--font-display);
+  color: var(--color-text-bright);
+  font-size: 1.85rem;
+  font-weight: 700;
+  margin: 4px 0 24px 0;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+/* ========================
+   10. About Section
+   ======================== */
+
+/* About text paragraphs: muted, justified, with 1em spacing */
+.about-paragraph {
+  margin: 1em 0;
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  text-align: justify;
+}
+
+/* Remove bottom margin on last paragraph */
+.about-paragraph:last-child {
+  margin-bottom: 0;
+}
+
+/* Bold text within about paragraphs: bright color */
+.about-paragraph strong {
+  color: var(--color-text);
+}
+
+/* Skills container: wraps all three skill groups (languages, frameworks, tools) */
+.about-skills {
+  margin: 15px 0 24px;
+}
+
+/* Individual skill group: label + badges in a row */
+.about-skills-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+/* Skill group label: accent-colored display font (e.g. "Lenguajes") */
+.about-skills-label {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  letter-spacing: 0.5px;
+  display: block;
+  width: 100%;
+  margin-bottom: 6px;
+}
+
+/* Badge container: inline-flex row of skill badges */
+.about-skills-badges {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+/* Individual skill badge: bordered pill with icon + name */
+.about-skill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 13px;
+  font-size: 0.95rem;
+  color: var(--color-text);
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  transition: border-color 0.2s ease;
+  white-space: nowrap;
+}
+
+/* Badge hover: accent border */
+.about-skill-badge:hover {
+  border-color: var(--color-accent);
+}
+
+/* Badge icon: 19px square */
+.about-skill-badge img {
+  width: 19px;
+  height: 19px;
+  object-fit: contain;
+}
+
+/* Fallback badge for skills without CDN logo: dashed border + 2-letter abbreviation */
+.about-skill-fallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 17px;
+  height: 17px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--color-text);
+  border: 1px dashed var(--color-border);
+  border-radius: 2px;
+}
+
+/* ========================
+   11. Skills Section
+   ======================== */
+
+/* Personality note: italic quote with left accent border */
+.personality-note {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  margin-bottom: 20px;
+  padding-left: 15px;
+  border-left: 2px solid var(--color-accent);
+  font-style: italic;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+.personality-note strong {
+  color: var(--color-text);
+}
+
+/* Personality skills grid: 2-column layout */
+.skills-personality-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Individual personality skill card */
+.skill-personality-item {
+  background-color: var(--color-bg-card);
+  padding: 20px;
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Personality card hover: accent border + lighter background */
+.skill-personality-item:hover {
+  border-color: var(--color-accent);
+  background-color: var(--color-bg-hover);
+}
+
+/* Personality card title: accent display font */
+.skill-personality-item strong {
+  font-family: var(--font-display);
+  color: var(--color-accent);
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* Personality card description */
+.skill-personality-item p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  text-align: justify;
+}
+
+/* ========================
+   12. Card System
+   ======================== */
+/* Shared by: Education, Experience, Certificates */
+
+/* Card container: bordered, hoverable, with lift + shadow */
+.card-item {
+  margin-bottom: 24px;
+  padding: 24px;
+  border-radius: 4px;
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: default;
+}
+
+/* Card hover: lighter background + lift + deeper shadow */
+.card-item:hover {
+  background-color: var(--color-bg-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Card header: flex row with title on left, date on right */
+.card-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Card title: bright display font */
+.card-title {
+  font-family: var(--font-display);
+  color: var(--color-text-bright);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Card date badge: bordered pill, muted text */
+.card-date {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+  white-space: nowrap;
+  padding: 4px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+}
+
+/* Card subtitle: institution or company name, accent-colored */
+.card-sub {
+  margin: 10px 0 6px 0;
+  font-weight: 500;
+  color: var(--color-accent);
+  font-size: 0.95rem;
+}
+
+/* Card description: muted body text */
+.card-desc {
+  margin: 8px 0 0 0;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  text-align: justify;
+}
+
+/* Bold text within card descriptions */
+.card-desc strong {
+  color: var(--color-text);
+}
+
+/* Card list: custom bullet points with accent triangles */
+.card-list {
+  margin: 12px 0 0 0;
+  padding-left: 20px;
+  list-style-type: none;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.card-list li {
+  margin-bottom: 4px;
+  position: relative;
+  padding-left: 16px;
+}
+
+/* Accent triangle bullet */
+.card-list li::before {
+  content: '\25B9';
+  position: absolute;
+  left: 0;
+  color: var(--color-accent);
+}
+
+/* ========================
+   13. Project Card
+   ======================== */
+
+/* Project card: bordered container with hover lift */
+.project-card {
+  border: 1px solid var(--color-border);
+  padding: 28px;
+  border-radius: 4px;
+  background-color: var(--color-bg-card);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Project card hover: lighter + lift + shadow */
+.project-card:hover {
+  background-color: var(--color-bg-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Project title */
+.project-card h3 {
+  margin: 0 0 10px 0;
+  color: var(--color-text-bright);
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* Project description */
+.project-card p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+/* Project links: flex row of outline buttons */
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+/* Outline link button: bordered pill */
+.link-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+/* Link hover: accent border + color + subtle background */
+.link-outline:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background-color: var(--color-accent-muted);
+}
+
+/* ========================
+   14. Back to Top
+   ======================== */
+
+/* Floating circular button: bottom-right, hidden by default */
 .back-to-top {
   position: fixed;
   bottom: max(28px, calc(env(safe-area-inset-bottom) + 12px));
@@ -968,18 +923,24 @@ html:not(.js-loading) .content {
   transition: all 0.3s ease;
 }
 
+/* Back-to-top hover: accent border + lift */
 .back-to-top:hover {
   transform: translateY(-3px);
   border-color: var(--color-accent);
   background-color: var(--color-bg-hover);
 }
 
+/* Back-to-top visible: shown when scrolled past 300px */
 .back-to-top.show {
   opacity: 1;
   visibility: visible;
 }
 
-/* Footer text */
+/* ========================
+   15. Footer
+   ======================== */
+
+/* Footer text: thin top border, muted small text */
 .site-footer {
   margin-top: 15px;
   padding-top: 10px;
@@ -990,14 +951,43 @@ html:not(.js-loading) .content {
   max-width: 115%;
 }
 
+/* Hidden footer: only shown on About and Skills pages */
 .site-footer.hidden {
   display: none;
 }
 
-/* Large screens — proportional scaling */
+/* ========================
+   16. Global State Classes
+   ======================== */
+
+/* Sidebar + toggle hidden during initial page load */
+.js-loading .sidebar,
+.js-loading .sidebar-toggle {
+  opacity: 0 !important;
+}
+
+/* Footer hidden during initial page load */
+.js-loading .site-footer {
+  display: none;
+}
+
+/* Disable sidebar transitions during viewport resize (prevents jitter) */
+.is-resizing .sidebar,
+.is-resizing .sidebar-overlay {
+  transition: none !important;
+}
+
+/* ========================
+   17. Responsive — Large Screens
+   ======================== 
+*/
+
+/* This section works for 1080p windows/monitor and so on */
+/* 1400px+: wider sidebar, wider max-width */
 @media (min-width: 1400px) {
   :root {
-    --sidebar-width: clamp(320px, 22vw, 420px);
+    /*Dilimiter container max with, this + inner content padding changes content distribution through the screen*/
+    --sidebar-width: clamp(290px, 22vw, 330px);
   }
   .app-layout {
     max-width: 90vw;
@@ -1008,26 +998,28 @@ html:not(.js-loading) .content {
   }
 }
 
+/*This section works for 4k windows/monitor and so on */
+/* 1800px+: larger root font, even wider layout, sidebar padding increase */
 @media (min-width: 1800px) {
-  :root {
-    --sidebar-width: clamp(380px, 22vw, 550px);
-  }
   html {
     font-size: 18px;
   }
   .app-layout {
-    max-width: min(88vw, 2000px);
+    max-width: min(88vw, 2100px);
   }
   .sidebar {
     flex: 0 0 var(--sidebar-width);
     width: var(--sidebar-width);
-    padding: clamp(40px, 5vh, 70px) clamp(35px, 3vw, 40px);
+    padding: clamp(80px, 6vh, 77px) clamp(30px, 3vw, 40px) clamp(80px, 6vh, 77px) clamp(30px, 3vw, 40px);
   }
+
   .content {
-    padding: clamp(30px, 4vh, 50px) clamp(30px, 4vw, 40px);
+    padding: clamp(35px, 4vh, 60px) clamp(130px, 4vw, 50px) clamp(35px, 4vh, 60px) clamp(40px, 4vw, 50px);
   }
+
 }
 
+/* 2600px+: largest breakpoint, 20px root font, max-width 2400px */
 @media (min-width: 2600px) {
   :root {
     --sidebar-width: clamp(420px, 20vw, 650px);
@@ -1041,15 +1033,21 @@ html:not(.js-loading) .content {
   .sidebar {
     flex: 0 0 var(--sidebar-width);
     width: var(--sidebar-width);
-    padding: clamp(50px, 5vh, 80px) clamp(40px, 3vw, 50px);
+    padding: clamp(80px, 6vh, 77px) clamp(30px, 3vw, 40px) clamp(80px, 6vh, 77px) clamp(30px, 3vw, 40px);
   }
   .content {
-    padding: clamp(35px, 4vh, 60px) clamp(40px, 4vw, 50px);
+    padding: clamp(35px, 4vh, 60px) clamp(40px, 4vw, 50px) clamp(35px, 4vh, 60px) clamp(40px, 4vw, 50px);
   }
 }
 
-/* Mobile responsive */
+/* ========================
+   18. Responsive — Mobile
+   ======================== */
+
+/* 1235px and below: sidebar becomes fixed drawer, hamburger toggle appears */
 @media (max-width: 1235px) {
+
+  /* Hamburger button: visible, slides right when sidebar is open */
   .sidebar-toggle {
     display: flex;
     transition: left 0.3s ease;
@@ -1059,6 +1057,7 @@ html:not(.js-loading) .content {
     left: calc(var(--sidebar-width) + 10px);
   }
 
+  /* Hamburger morphs to X when open */
   .sidebar-toggle.open span:nth-child(1) {
     transform: translateY(6px) rotate(45deg);
   }
@@ -1068,13 +1067,15 @@ html:not(.js-loading) .content {
   }
 
   .sidebar-toggle.open span:nth-child(3) {
-    transform: translateY(-6px) rotate(-45deg);
+    transform: translateY(-6px) rotate(-44px);
   }
 
+  /* Hide floating lang-switcher (sidebar lang-switcher is visible instead) */
   .lang-switcher-floating {
     display: none;
   }
 
+  /* Dark overlay behind sidebar */
   .sidebar-overlay {
     display: block;
     position: fixed;
@@ -1091,6 +1092,7 @@ html:not(.js-loading) .content {
     pointer-events: auto;
   }
 
+  /* Pages and footer: full width on mobile */
   .page,
   .page.exiting,
   .site-footer {
@@ -1098,6 +1100,7 @@ html:not(.js-loading) .content {
     max-width: 100%;
   }
 
+  /* About skill labels: inline on mobile to save vertical space */
   .about-skills-label {
     display: inline;
     white-space: nowrap;
@@ -1105,11 +1108,13 @@ html:not(.js-loading) .content {
     margin-bottom: 0;
   }
 
+  /* Sidebar profile image: slightly smaller on mobile */
   .sidebar-profile-img {
     width: 120px;
     height: 150px;
   }
 
+  /* Sidebar typography: slightly smaller on mobile */
   .sidebar-name {
     font-size: 1.6rem;
   }
@@ -1134,6 +1139,7 @@ html:not(.js-loading) .content {
     font-size: 0.75rem;
   }
 
+  /* Sidebar: fixed position, hidden off-screen by default */
   .sidebar {
     width: var(--sidebar-width);
     flex: 0 0 var(--sidebar-width);
@@ -1146,39 +1152,28 @@ html:not(.js-loading) .content {
     background-color: var(--color-bg);
   }
 
+  /* Sidebar open: slides into view */
   .sidebar.open {
     opacity: 1;
     transform: translateX(0);
   }
 
+  /* Content: no left margin, reduced padding on mobile */
   .content {
     margin-left: 0;
-    padding: clamp(24px, 4vh, 60px) clamp(16px, 3vw, 24px);
+    padding: clamp(24px, 4vh, 60px) clamp(16px, 3vw, 24px) clamp(24px, 4vh, 60px) clamp(16px, 3vw, 24px);
   }
 
-  .skills-grid {
-    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-    gap: 10px;
-  }
-
+  /* Personality grid: single column on mobile */
   .skills-personality-grid {
     grid-template-columns: 1fr;
   }
-
-  .contact-buttons {
-    flex-direction: column;
-  }
 }
 
+/* 480px and below: smallest screens, further size reductions */
 @media (max-width: 480px) {
   .content {
-    padding: 56px 16px 24px;
-  }
-
-  .page,
-  .page.exiting {
-    width: 100%;
-    max-width: 100%;
+    padding: 56px 16px 24px 16px;
   }
 
   .section-heading {
@@ -1244,10 +1239,6 @@ html:not(.js-loading) .content {
     font-size: 0.85rem;
   }
 
-  .skill-tech-item span {
-    font-size: 0.75rem;
-  }
-
   .back-to-top {
     font-size: 1.1rem;
   }
@@ -1263,24 +1254,13 @@ html:not(.js-loading) .content {
   .project-card {
     padding: 20px;
   }
-
-  .skills-grid {
-    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-    gap: 8px;
-  }
-
-  .skill-tech-item {
-    padding: 12px 8px;
-  }
-
-  .skill-tech-item img,
-  .skill-tech-item .skill-tech-fallback {
-    width: 26px;
-    height: 26px;
-  }
 }
 
-/* Accessibility: reduced motion */
+/* ========================
+   19. Accessibility
+   ======================== */
+
+/* Reduced motion: disable all transitions and animations globally */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     transition-duration: 0.01ms !important;

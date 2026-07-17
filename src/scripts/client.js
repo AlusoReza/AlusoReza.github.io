@@ -15,7 +15,11 @@ function translateUI() {
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.dataset.i18n
     if (data[currentLang] && data[currentLang][key]) {
-      el.innerHTML = data[currentLang][key]
+      if (key === 'sobre-text') {
+        el.innerHTML = data[currentLang][key].split('\n\n').map(p => `<p class="about-paragraph reveal">${p}</p>`).join('')
+      } else {
+        el.innerHTML = data[currentLang][key]
+      }
     }
   })
 }
@@ -274,7 +278,6 @@ function changeLanguage(lang) {
   document.querySelectorAll(`[data-lang="${lang}"]`).forEach(btn => btn.classList.add('active'))
   localStorage.setItem('preferredLang', lang)
   document.documentElement.lang = lang
-  translateUI()
 }
 
 document.querySelectorAll('[data-lang]').forEach(btn => {
