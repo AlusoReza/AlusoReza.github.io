@@ -227,3 +227,11 @@ Global workflow summary. Each entry links to the detailed day log.
 ### Session 48: Fix broken dynamic padding formula
 **Prompt:** Previous formula `calc(0.9vw - 342px)` resolved to 90px at ALL viewports (0.9vw too small). Content still compressing.
 **Plan:** Correct formula: `clamp(58px, calc(13vw - 124px), 320px)`. Content width now constant at 940px across ≥1400px.
+
+### Session 49: CSS custom properties for content padding + fix layout morphology bug
+**Prompt:** User can no longer change content morphology by modifying padding. Wants to control content padding to expand/contract on screen.
+**Plan:** Add CSS custom properties (`--content-pad-*`, `--app-max-width`) in `:root`. Remove `min-width: 940px` and `max-width: 115%` on `.page`. User now controls layout from one place.
+
+### Session 50: Restore content padding overrides per breakpoint via CSS variables
+**Prompt:** On large screens, user still can't modify content padding via media queries. Needs per-breakpoint control.
+**Plan:** Add `.content { --content-pad-right: ... }` overrides in 1400px+, 1800px+, 2600px+ media queries using the same values from sessions 46-48.
