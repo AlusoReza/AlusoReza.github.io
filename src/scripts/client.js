@@ -175,6 +175,7 @@ function initParticles() {
   let w, h
   const sidebar = document.querySelector('.sidebar')
   const cvBtn = document.querySelector('.sidebar-cv-btn')
+  const langSwitch = document.getElementById('lang-switcher-floating')
 
   function resize() {
     w = canvas.width = window.innerWidth
@@ -231,6 +232,21 @@ function initParticles() {
             const t = Math.min(1, (p.x - troughRight) / (sidebarW - troughRight))
             alpha = p.a * (SIDEBAR_DIM + (1 - SIDEBAR_DIM) * t)
           }
+        }
+      }
+
+      if (langSwitch) {
+        const lr = langSwitch.getBoundingClientRect()
+        const cx = (lr.left + lr.right) / 2
+        const cy = (lr.top + lr.bottom) / 2
+        const hw = (lr.right - lr.left) / 2 + 5
+        const hh = (lr.bottom - lr.top) / 2 + 5
+        const dx = Math.max(0, Math.abs(p.x - cx) - hw)
+        const dy = Math.max(0, Math.abs(p.y - cy) - hh)
+        const dist = Math.sqrt(dx * dx + dy * dy)
+        if (dist < 20) {
+          const t = dist / 20
+          alpha *= 0.08 + 0.92 * t
         }
       }
 
