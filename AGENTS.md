@@ -100,11 +100,14 @@ public/
 - **No committing certificate PDFs** — everything inside `docs/certificates/` except `.gitkeep` is gitignored.
 - **No removing `docs/certificates/.gitkeep`** — keeps the empty folder tracked.
 - **No frameworks or build tools beyond Astro** — no npm packages beyond Astro & its deps.
+- **No committing or pushing without explicit user approval** — never run `git commit`, `git push`, `gh pr create`, or any git operation that modifies remote state without the user's explicit, prior written approval.
+- **No extrapolating commit approval** — even if the user approves a commit in one session, that approval does NOT carry over to future sessions or instructions. Every commit requires fresh, explicit approval.
 
 ## Workflow
 - Before a non-trivial task, propose a plan and wait for approval.
 - One task at a time; when finished, state what was changed for review.
 - If not at least 80% sure, ask. Do not guess or invent.
+- **Commit policy (CRITICAL — absolute rule):** The agent must NEVER commit, push, or create PRs without the user's explicit, prior written approval. Before any git operation that modifies state (`git commit`, `git push`, `gh pr create`), present the full list of changes and ask for confirmation. Even if the user approved a commit once, that approval does NOT carry over — every commit requires fresh, explicit approval. No exceptions.
 - **Adding a certificate:**
   1. Drop the PDF into `docs/certificates/`
   2. Ask: "Add the certificate from `docs/certificates/file-name.pdf`"
@@ -131,6 +134,11 @@ public/
   3. **No exceptions.** This check runs after EVERY build, whether or not a prior session exists. If no changes are detected by `git diff`, state this explicitly in `### Changes`.
 - **Contexto histórico:** Si el usuario pregunta o hace referencia a algo trabajado en sesiones anteriores y no está en tu ventana de contexto actual, escanea automáticamente `docs/logs/` y `docs/bitacora.md` para reconstruir el contexto antes de responder.
 - **Post-MCP installation:** Cuando se instale un nuevo MCP server, revisar `.agents/tests/` para identificar checks que el MCP cubre automáticamente. Marcarlos como `[OBSOLETO — cubierto por {MCP}]` y retirarlos del runner en la siguiente ventana de mantenimiento.
+
+## Mandatory review and context preservation
+
+- **Review before action (CRITICAL):** Before executing any non-trivial instruction, the agent MUST review `AGENTS.md` and the relevant `spec/constitution/` file(s) (`mission.md`, `tech-stack.md`) to ensure compliance with all project rules. This review happens every time, even if the agent has context from previous turns in the same session.
+- **Context preservation:** The agent must keep the full content of `AGENTS.md` and `spec/constitution/` files in its active context window at all times, regardless of context compression, summarization, or truncation. If context has been compressed, the agent MUST re-read these files before proceeding with any task. These files are the single source of truth for agent behavior — they are never optional.
 
 ## Tests
 - **"Comprueba MCP"** → the agent runs `.agents/tests/run-all.ps1`.

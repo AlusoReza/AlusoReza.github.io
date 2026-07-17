@@ -74,3 +74,5 @@
 - **No frameworks or build tools beyond Astro** — no npm packages beyond Astro & its deps.
 - **No `!important` outside the `prefers-reduced-motion` block** — the universal `!important` override is intentional and exclusive to that block.
 - **No hardcoded color values outside `:root`** — use `var(--color-*)` throughout.
+- **No commits without user approval** — never run `git commit`, `git push`, `gh pr create`, or any git operation that modifies remote state without the user's explicit, prior written approval.
+- **No extrapolating commit approval** — even if the user approves a commit in one session, that approval does NOT carry over. Every commit requires fresh, explicit approval.

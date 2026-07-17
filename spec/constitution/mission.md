@@ -20,6 +20,7 @@ A static bilingual (ES/EN) single-page portfolio for Alonso Suárez Reza — a s
 - **Static-first** — Everything that can be built at compile time should be; the client only hydrates when necessary.
 - **Data-driven** — Content lives in JSON, not in components. Editing a JSON updates the entire site.
 - **Minimum viable dependencies** — Astro 5 and its built-in tooling. No npm packages beyond that.
+- **User control over version control** — The agent never commits, pushes, or creates PRs without explicit, prior user approval. Approval is per-action, never extrapolated.
 
 ## What NOT
 
