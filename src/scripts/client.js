@@ -476,24 +476,17 @@ mql.addEventListener('change', (e) => {
   if (!e.matches) closeSidebar()
 })
 
-// --- MobileProfile transition (dual breakpoint, synced with sidebar) ---
+// --- MobileProfile transition (synced with sidebar-locked) ---
 const mobileProfile = document.querySelector('.mobile-profile')
-
-// 1235px: exit zone — syncs with @media (max-width: 1235px) sidebar switch
-const mqlExit = window.matchMedia('(max-width: 1235px)')
-// 1180px: enter zone — start showing after sidebar disappears (1236px)
-const mqlEnter = window.matchMedia('(max-width: 1180px)')
-
-let wasInExitZone = mqlExit.matches
-let wasInEnterZone = mqlEnter.matches
-
+const mqlBreakpoint = window.matchMedia('(max-width: 1235px)')
+let wasBelow = mqlBreakpoint.matches
 let sidebarUnlockTimer = null
 
 function handleMobileProfile() {
-  const inExitZone = mqlExit.matches
-  const inEnterZone = mqlEnter.matches
+  const isBelow = mqlBreakpoint.matches
 
-  if (!inExitZone && wasInExitZone) {
+  if (!isBelow && wasBelow) {
+    // Growing past 1235px: hide mobile profile, lock sidebar
     if (mobileProfile?.classList.contains('mobile-profile--visible')) {
       mobileProfile.classList.remove('mobile-profile--visible')
       document.documentElement.classList.add('sidebar-locked')
@@ -502,10 +495,10 @@ function handleMobileProfile() {
       sidebarUnlockTimer = setTimeout(() => {
         document.documentElement.classList.remove('sidebar-locked')
         sidebarUnlockTimer = null
-      }, 250)
+      }, 350)
     }
-  }
-  if (inEnterZone && !wasInEnterZone) {
+  } else if (isBelow && !wasBelow) {
+    // Shrinking past 1235px: show mobile profile, unlock sidebar
     if (sidebarUnlockTimer) {
       clearTimeout(sidebarUnlockTimer)
       sidebarUnlockTimer = null
@@ -514,14 +507,12 @@ function handleMobileProfile() {
     mobileProfile?.classList.add('mobile-profile--visible')
   }
 
-  wasInExitZone = inExitZone
-  wasInEnterZone = inEnterZone
+  wasBelow = isBelow
 }
 
-mqlExit.addEventListener('change', handleMobileProfile)
-mqlEnter.addEventListener('change', handleMobileProfile)
+mqlBreakpoint.addEventListener('change', handleMobileProfile)
 
-if (mql.matches) {
+if (mqlBreakpoint.matches) {
   mobileProfile?.classList.add('mobile-profile--visible')
 }
 
