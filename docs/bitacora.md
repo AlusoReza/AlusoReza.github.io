@@ -244,3 +244,22 @@ Global workflow summary. Each entry links to the detailed day log.
 **Prompt:** Navigation bar broken on mobile. Sidebar content doesn't appear and X close button doesn't work.
 **Root cause:** `.sidebar-inner` mask-image depends on `--sidebar-fade` which is 0 on mobile, making content invisible. Override was removed in session 45 refactor.
 **Fix:** Added `mask-image: none; overflow-y: auto` to `.sidebar-inner` in mobile media query only.
+
+### Session 53: Fix page entry transition — new content now animates in
+**Prompt:** New page content appears instantly without animation when navigating. Old page slides out but new one pops in.
+**Root cause:** `display: block` and `.active` class added in the same `requestAnimationFrame` — browser never painted the intermediate state (`opacity: 0, translateX: 40px`), so CSS transition never fired.
+**Fix:** Double `requestAnimationFrame` in `client.js` to force the browser to render the initial state before triggering the transition.
+
+### Sessions 54-62: MobileProfile animation — CSS transitions → dual breakpoint JS
+**Prompt:** MobileProfile needs smooth animated transition synced with sidebar fade. No overlap, no layout jumps.
+**Journey:** CSS transitions → clip-path → position:absolute → JS matchMedia → Web Animations API → dual breakpoint.
+**Final approach (S62):** Two `matchMedia` breakpoints (1280px exit, 1180px enter) + `max-height` CSS transition. Element always in layout at 0 height on desktop (`max-height: 0; overflow: hidden`). JS adds/removes `.mobile-profile--visible` class. 100px transition zone ensures animations complete before layout changes.
+
+### Session 63: Two-phase disappear — transitionend + sidebar lock
+**Prompt:** MobileProfile disappears too slowly when viewport widens, overlapping with sidebar appearance. User requested: delay sidebar until content fully disappears.
+**Plan:** CSS: `html.sidebar-locked { --sidebar-fade: 0; }` freezes sidebar. JS: On exit zone, adds `sidebar-locked` + `transitionend` listener on MobileProfile. When `opacity` transition ends → removes lock → sidebar appears via its own transitions. Two-phase: visual fade first (0.2s), then layout collapse (`max-height 0s 0.2s` delay), then sidebar appears.
+
+### Session 64: Fix mobile→desktop — eliminate hybrid zone + setTimeout
+**Prompt:** When widening from mobile to desktop, contents superimpose multiple times and page needs reload.
+**Root cause:** 45px hybrid zone (1235-1280px) where sidebar is desktop mode but MobileProfile still visible + `transitionend` fragility + `sidebar-locked` discontinuity.
+**Plan:** Changed `mqlExit` from 1280px to 1235px (synced with `@media`). Replaced `transitionend` with `setTimeout(250)`. Added `transition: none` on sidebar elements during lock. Changed `max-height` delay to 0.25s to sync with timer.

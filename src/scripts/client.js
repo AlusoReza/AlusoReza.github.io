@@ -201,7 +201,9 @@ function navigateTo(pageId) {
 
   newPage.style.display = 'block'
   requestAnimationFrame(() => {
-    newPage.classList.add('active')
+    requestAnimationFrame(() => {
+      newPage.classList.add('active')
+    })
   })
 
   currentPage = pageId
@@ -473,6 +475,55 @@ const mql = window.matchMedia('(max-width: 1235px)')
 mql.addEventListener('change', (e) => {
   if (!e.matches) closeSidebar()
 })
+
+// --- MobileProfile transition (dual breakpoint, synced with sidebar) ---
+const mobileProfile = document.querySelector('.mobile-profile')
+
+// 1235px: exit zone — syncs with @media (max-width: 1235px) sidebar switch
+const mqlExit = window.matchMedia('(max-width: 1235px)')
+// 1180px: enter zone — start showing after sidebar disappears (1236px)
+const mqlEnter = window.matchMedia('(max-width: 1180px)')
+
+let wasInExitZone = mqlExit.matches
+let wasInEnterZone = mqlEnter.matches
+
+let sidebarUnlockTimer = null
+
+function handleMobileProfile() {
+  const inExitZone = mqlExit.matches
+  const inEnterZone = mqlEnter.matches
+
+  if (!inExitZone && wasInExitZone) {
+    if (mobileProfile?.classList.contains('mobile-profile--visible')) {
+      mobileProfile.classList.remove('mobile-profile--visible')
+      document.documentElement.classList.add('sidebar-locked')
+
+      if (sidebarUnlockTimer) clearTimeout(sidebarUnlockTimer)
+      sidebarUnlockTimer = setTimeout(() => {
+        document.documentElement.classList.remove('sidebar-locked')
+        sidebarUnlockTimer = null
+      }, 250)
+    }
+  }
+  if (inEnterZone && !wasInEnterZone) {
+    if (sidebarUnlockTimer) {
+      clearTimeout(sidebarUnlockTimer)
+      sidebarUnlockTimer = null
+    }
+    document.documentElement.classList.remove('sidebar-locked')
+    mobileProfile?.classList.add('mobile-profile--visible')
+  }
+
+  wasInExitZone = inExitZone
+  wasInEnterZone = inEnterZone
+}
+
+mqlExit.addEventListener('change', handleMobileProfile)
+mqlEnter.addEventListener('change', handleMobileProfile)
+
+if (mql.matches) {
+  mobileProfile?.classList.add('mobile-profile--visible')
+}
 
 // --- Back to top ---
 const backToTop = document.getElementById('back-to-top')
