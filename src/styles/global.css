@@ -259,9 +259,9 @@ html:not(.js-loading) .content {
   left: 0;
   width: calc(var(--sidebar-width) + 60px);
   height: 100%;
-  padding: clamp(80px, 6vh, 77px) clamp(30px, 3vw, 40px) clamp(80px, 6vh, 77px) clamp(30px, 3vw, 40px);
+  padding: clamp(80px, 6vh, 80px) clamp(30px, 3vw, 40px) clamp(20px, 6vh, 77px) clamp(30px, 3vw, 40px);
   box-sizing: border-box;
-  overflow-y: auto;
+  overflow-y: hidden;
   overflow-x: hidden;
   scrollbar-width: none;
   mask-image: linear-gradient(to right, black 0%, black calc(var(--sidebar-fade) * 100% - 60px), transparent calc(var(--sidebar-fade) * 100%));
