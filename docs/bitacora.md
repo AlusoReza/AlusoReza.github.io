@@ -223,3 +223,7 @@ Global workflow summary. Each entry links to the detailed day log.
 ### Session 47: Dynamic right padding — content constant until 40px threshold
 **Prompt:** Content should not move at all while resizing. Right padding grows to absorb extra space; only when it reaches 40px does content compress.
 **Plan:** Add `clamp(40px, calc(0.9vw - 342px), 110px)` to `.content` in `@media (min-width: 1400px)`. Remove redundant `.content` overrides from 1800px+ and 2600px+ blocks.
+
+### Session 48: Fix broken dynamic padding formula
+**Prompt:** Previous formula `calc(0.9vw - 342px)` resolved to 90px at ALL viewports (0.9vw too small). Content still compressing.
+**Plan:** Correct formula: `clamp(58px, calc(13vw - 124px), 320px)`. Content width now constant at 940px across ≥1400px.

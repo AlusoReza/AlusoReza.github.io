@@ -998,7 +998,7 @@ html:not(.js-loading) .content {
   }
   .content {
     min-width: 940px;
-    padding: clamp(24px, 4vh, 50px) clamp(90px, calc(0.9vw - 342px), 110px) clamp(24px, 4vh, 50px) clamp(10px, 4vw, 10px);
+    padding: clamp(24px, 4vh, 50px) clamp(58px, calc(13vw - 124px), 320px) clamp(24px, 4vh, 50px) clamp(10px, 4vw, 10px);
   }
 }
 
