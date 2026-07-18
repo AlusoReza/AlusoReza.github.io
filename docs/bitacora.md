@@ -275,3 +275,13 @@ Global workflow summary. Each entry links to the detailed day log.
 ### Session 67: Fix mobile sidebar close — add slide-out transition
 **Prompt:** Clicking X to close mobile sidebar disappears instantly without animation. Close should match the open slide-in.
 **Plan:** Added `.sidebar:not(.open)` CSS rule with explicit `transform: translateX(-100%); transition: transform 0.3s ease`. Added early return guard in `closeSidebar()` to prevent race condition from double-calls cancelling the animation.
+
+### Session 68: Fix sidebar close — CSS cascade bug
+**Prompt:** Sidebar still disappears without animation when clicking X. Previous session's `.sidebar:not(.open)` fix didn't solve it.
+**Root cause:** `.sidebar:not(.open)` and `.sidebar.open` have same specificity (0,1,1). Source order wins → `.sidebar:not(.open)` overrides `.sidebar.open` even when `.open` IS present, so transform never changes.
+**Fix:** Removed `.sidebar:not(.open)` rule. Base mobile `.sidebar` already sets `transform: translateX(-100%); transition: transform 0.3s ease`. `.sidebar.open` overrides to `0`. Both directions now animate.
+
+### Session 69: Fix sidebar close — opacity snapping to 0
+**Prompt:** Sidebar close still disappears without animation after removing `.sidebar:not(.open)`.
+**Root cause:** Base `.sidebar` has `opacity: var(--sidebar-fade)` = 0 on mobile. Mobile media query doesn't override it. When `.open` removed, opacity snaps to 0 instantly (not animated), hiding the sidebar before transform animation is visible.
+**Fix:** Added `opacity: 1` to mobile `.sidebar` rule. On mobile, visibility is controlled by `transform` only — `--sidebar-fade` opacity is irrelevant for the fixed drawer.
