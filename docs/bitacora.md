@@ -267,3 +267,11 @@ Global workflow summary. Each entry links to the detailed day log.
 ### Session 65: Fix MobileProfile — grid 0fr/1fr + overflow clip + remove transform
 **Prompt:** MobileProfile content gets cut off in mobile mode and doesn't stay static after transition.
 **Plan:** Changed from `max-height` to `display: grid; grid-template-rows: 0fr/1fr` for cross-browser height animation. Changed `overflow: hidden` → `overflow: clip` to eliminate scroll-container clipping. Removed `transform: translateY(-16px)` — grid + opacity alone is sufficient, no vertical slide needed.
+
+### Session 66: Fix lang-switcher flash during desktop→mobile transition
+**Prompt:** Floating lang-switcher appears momentarily in the sidebar area while the sidebar slides off-screen when resizing past 1235px.
+**Plan:** Added `html.sidebar-locked .lang-switcher-floating { opacity: 0; transition: none; }` CSS rule. Applied `sidebar-locked` in both directions (mobile→desktop existing, desktop→mobile new) with timed removal (350ms/300ms).
+
+### Session 67: Fix mobile sidebar close — add slide-out transition
+**Prompt:** Clicking X to close mobile sidebar disappears instantly without animation. Close should match the open slide-in.
+**Plan:** Added `.sidebar:not(.open)` CSS rule with explicit `transform: translateX(-100%); transition: transform 0.3s ease`. Added early return guard in `closeSidebar()` to prevent race condition from double-calls cancelling the animation.

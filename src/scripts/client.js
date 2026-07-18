@@ -208,6 +208,8 @@ function navigateTo(pageId) {
 
   currentPage = pageId
   localStorage.setItem('currentPage', pageId)
+  updateMobileProfile()
+  sidebar?.classList.toggle('sidebar--about', pageId === 'sobre')
 
   const footer = document.querySelector('.site-footer')
   if (footer) footer.classList.toggle('hidden', !['sobre', 'hab'].includes(pageId))
@@ -241,35 +243,35 @@ function navigateTo(pageId) {
 
 // --- Particle system ---
 /*
-initParticles(): Sistema de partículas flotantes en un canvas HTML. Crea partículas verdes semi-transparentes que se mueven lentamente por toda la pantalla. Las partículas se atenúan (dimming) cuando pasan sobre el sidebar, el botón de CV y el botón de idioma flotante, creando un efecto de profundidad. El número de partículas se adapta al tamaño de pantalla.
+initParticles(): Sistema de partículas flotantes en un canvas HTML. Crea partículas verdes semi-transparentes que se mueven lentamente por toda la pantalla. Las partículas se atenúan (dimming) cuando pasan sobre el sidebar, el botón de CV y el botón hamburguesa, creando un efecto de profundidad. El número de partículas se adapta al tamaño de pantalla.
     - canvas: Elemento canvas #particle-canvas. Si no existe, la función aborta.
     - ctx: Contexto de dibujo 2D del canvas. Se usa para clearRect, arc y fill.
     - particles: Array de objetos partícula. Cada partícula tiene {x, y, vx, vy, r, a} (posición, velocidad, radio, alpha).
     - w, h: Ancho y alto del canvas (igual a window.innerWidth/innerHeight). Se actualizan en resize.
     - sidebar: Elemento .sidebar. Se usa para calcular el ancho del sidebar y aplicar dimming a las partículas que pasan por detrás.
     - cvBtn: Elemento .sidebar-cv-btn. Se usa para calcular la zona de dimming alrededor del botón de descarga de CV.
-    - langSwitch: Elemento #lang-switcher-floating. Se usa para calcular la zona de dimming alrededor del botón de idioma flotante.
+    - hamburger: Elemento #sidebar-toggle. Se usa para calcular la zona de dimming alrededor del botón hamburguesa.
 
  Funciones internas:
     - resize(): Actualiza w y h al tamaño de la ventana. Se llama en cada resize del navegador.
     - createParticle(): Crea una partícula con posición y velocidad aleatoria dentro del canvas.
     - init(): Inicializa el canvas y crea el array de partículas. El count se adapta al área de pantalla (w*h/12000, máximo 80).
-    - draw(): Bucle de renderizado principal. Limpia el canvas, mueve cada partícula, calcula el alpha según proximidad a sidebar/CV/langSwitch, y dibuja el círculo. Se ejecuta con requestAnimationFrame.
+    - draw(): Bucle de renderizado principal. Limpia el canvas, mueve cada partícula, calcula el alpha según proximidad a sidebar/CV/hamburger, y dibuja el círculo. Se ejecuta con requestAnimationFrame.
 
     Variables internas de draw():
     - sidebarW: Ancho del sidebar en píxeles. Base para calcular la zona de dimming.
     - SIDEBAR_DIM: Factor mínimo de opacidad (0.05 = 5%). Las partículas nunca desaparecen del todo sobre el sidebar.
     - troughLeft, troughRight: Límites de la zona "trough" alrededor del botón CV donde las partículas están más opacas. Se calculan a partir de cvRect o como fallback: centro ± 100px.
     - cvRect: Bounding rect del botón CV. Se usa para calcular troughLeft/troughRight con precisión.
-    - alpha: Opacidad calculada de cada partícula. Se modifica según la zona (sidebar, trough, langSwitch).
+    - alpha: Opacidad calculada de cada partícula. Se modifica según la zona (sidebar, trough, hamburger).
     - t: Factor de interpolación lineal para el fade entre zona opaca y zona transparente.
 
- Variables internas del bloque langSwitch:
-    - lr: Bounding rect del switcher de idioma.
-    - cx, cy: Centro del switcher de idioma en coordenadas de pantalla.
-    - hw, hh: Semiancho y semialto del switcher + 5px de margen. Define el área de influencia rectangular.
-    - dx, dy: Distancia del punto más cercano del rectángulo del switcher a la partícula (eje X e Y).
-    - dist: Distancia euclídea desde la partícula hasta el borde del switcher. Si es < 20px, se aplica dimming proporcional.
+ Variables internas del bloque hamburger:
+    - hr: Bounding rect del botón hamburguesa.
+    - cx, cy: Centro del hamburguesa en coordenadas de pantalla.
+    - hw, hh: Semiancho y semialto del hamburguesa + 5px de margen. Define el área de influencia rectangular.
+    - dx, dy: Distancia del punto más cercano del rectángulo del hamburguesa a la partícula (eje X e Y).
+    - dist: Distancia euclídea desde la partícula hasta el borde del hamburguesa. Si es < 20px, se aplica dimming proporcional.
 
 Otros: El canvas se resize automáticamente con la ventana. Las partículas envuelven (wrap) cuando salen del canvas — si x < 0 aparece por la derecha y viceversa. El color es rgba(100, 255, 218) — verde aguamarina.
 */
@@ -281,7 +283,7 @@ function initParticles() {
   let w, h
   const sidebar = document.querySelector('.sidebar')
   const cvBtn = document.querySelector('.sidebar-cv-btn')
-  const langSwitch = document.getElementById('lang-switcher-floating')
+  const hamburger = document.getElementById('sidebar-toggle')
 
   function resize() {
     w = canvas.width = window.innerWidth
@@ -341,12 +343,12 @@ function initParticles() {
         }
       }
 
-      if (langSwitch) {
-        const lr = langSwitch.getBoundingClientRect()
-        const cx = (lr.left + lr.right) / 2
-        const cy = (lr.top + lr.bottom) / 2
-        const hw = (lr.right - lr.left) / 2 + 5
-        const hh = (lr.bottom - lr.top) / 2 + 5
+      if (hamburger) {
+        const hr = hamburger.getBoundingClientRect()
+        const cx = (hr.left + hr.right) / 2
+        const cy = (hr.top + hr.bottom) / 2
+        const hw = (hr.right - hr.left) / 2 + 5
+        const hh = (hr.bottom - hr.top) / 2 + 5
         const dx = Math.max(0, Math.abs(p.x - cx) - hw)
         const dy = Math.max(0, Math.abs(p.y - cy) - hh)
         const dist = Math.sqrt(dx * dx + dy * dy)
@@ -447,6 +449,7 @@ Otros: Misma lógica de guard que openSidebar — aborta si los elementos no exi
 */
 function closeSidebar() {
   if (!sidebar || !sidebarOverlay) return
+  if (!sidebar.classList.contains('open')) return
   sidebar.classList.remove('open')
   sidebarOverlay.classList.remove('open')
   if (sidebarToggle) sidebarToggle.classList.remove('open')
@@ -482,6 +485,22 @@ const mqlBreakpoint = window.matchMedia('(max-width: 1235px)')
 let wasBelow = mqlBreakpoint.matches
 let sidebarUnlockTimer = null
 
+/*
+updateMobileProfile(): Controla la visibilidad del mobile-profile solo en la página "Sobre mí". En otras páginas se oculta instantáneamente (sin transición) para evitar que la animación de colapso interfiera con el contenido.
+*/
+function updateMobileProfile() {
+  if (!mobileProfile) return
+  const shouldShow = mqlBreakpoint.matches && currentPage === 'sobre'
+  if (shouldShow) {
+    mobileProfile.classList.add('mobile-profile--visible')
+  } else {
+    mobileProfile.style.transition = 'none'
+    mobileProfile.classList.remove('mobile-profile--visible')
+    mobileProfile.offsetHeight
+    mobileProfile.style.transition = ''
+  }
+}
+
 function handleMobileProfile() {
   const isBelow = mqlBreakpoint.matches
 
@@ -498,13 +517,17 @@ function handleMobileProfile() {
       }, 350)
     }
   } else if (isBelow && !wasBelow) {
-    // Shrinking past 1235px: show mobile profile, unlock sidebar
+    // Shrinking past 1235px: lock sidebar during slide-out, show mobile profile
     if (sidebarUnlockTimer) {
       clearTimeout(sidebarUnlockTimer)
       sidebarUnlockTimer = null
     }
-    document.documentElement.classList.remove('sidebar-locked')
-    mobileProfile?.classList.add('mobile-profile--visible')
+    document.documentElement.classList.add('sidebar-locked')
+    updateMobileProfile()
+    sidebarUnlockTimer = setTimeout(() => {
+      document.documentElement.classList.remove('sidebar-locked')
+      sidebarUnlockTimer = null
+    }, 300)
   }
 
   wasBelow = isBelow
@@ -513,7 +536,7 @@ function handleMobileProfile() {
 mqlBreakpoint.addEventListener('change', handleMobileProfile)
 
 if (mqlBreakpoint.matches) {
-  mobileProfile?.classList.add('mobile-profile--visible')
+  updateMobileProfile()
 }
 
 // --- Back to top ---
@@ -571,6 +594,9 @@ function init() {
   translateUI()
 
   if (savedLang !== 'es') renderAll()
+
+  updateMobileProfile()
+  sidebar?.classList.toggle('sidebar--about', validPage === 'sobre')
 
   initParticles()
 

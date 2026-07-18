@@ -42,9 +42,9 @@ PORTFOLIO — Global Stylesheet
   --transition-speed: 0.35s;
 
   /* Content padding — adjust to expand/contract content area */
-  --content-pad-top: clamp(24px, 4vh, 50px);
+  --content-pad-top: clamp(12px, 4vh, 20px);
   --content-pad-right: clamp(30px, 3vw, 40px);
-  --content-pad-bottom: clamp(24px, 4vh, 50px);
+  --content-pad-bottom: clamp(10px, 4vh, 50px);
   --content-pad-left: clamp(10px, 4vw, 10px);
 
   /* Container max-width — total width of sidebar + content */
@@ -56,8 +56,12 @@ html.sidebar-locked {
 }
 
 html.sidebar-locked .sidebar,
-html.sidebar-locked .sidebar-inner,
+html.sidebar-locked .sidebar-inner {
+  transition: none;
+}
+
 html.sidebar-locked .lang-switcher-floating {
+  opacity: 0;
   transition: none;
 }
 
@@ -384,7 +388,7 @@ html:not(.js-loading) .content {
   left: 0;
   width: calc(var(--sidebar-width) + 60px);
   height: 100%;
-  padding: clamp(80px, 6vh, 80px) clamp(30px, 3vw, 40px) clamp(20px, 6vh, 77px) clamp(30px, 3vw, 40px);
+  padding: clamp(55px, 6vh, 70px) clamp(30px, 3vw, 40px) clamp(20px, 6vh, 77px) clamp(30px, 3vw, 40px);
   box-sizing: border-box;
   overflow-y: hidden;
   overflow-x: hidden;
@@ -553,18 +557,17 @@ html:not(.js-loading) .content {
 
 /* 6f. Language Switcher — ES/EN toggle buttons */
 
-/* Sidebar lang buttons (visible when sidebar is visible) */
+/* Sidebar lang buttons: hidden — language lives in floating switcher only */
 .sidebar-lang {
-  display: flex;
-  gap: 4px;
-  margin-top: 19px;
-  opacity: calc(1 - var(--sidebar-fade));
-  transition: opacity 0.3s ease;
+  display: none;
 }
 
-/* Individual lang button: bordered pill */
+/* Individual lang button: bordered pill with glass-morphism */
 .sidebar-lang-btn {
   background: none;
+  background-color: rgba(10, 21, 39, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--color-border);
   border-radius: 4px;
   padding: 4px 10px;
@@ -587,7 +590,7 @@ html:not(.js-loading) .content {
   border-color: var(--color-accent);
 }
 
-/* Floating lang switcher: absolute-positioned in content area, fades with sidebar */
+/* Floating lang switcher: visible on desktop, fades with sidebar */
 .lang-switcher-floating {
   display: flex;
   position: absolute;
@@ -615,13 +618,14 @@ html:not(.js-loading) .content {
   align-items: center;
   width: 36px;
   height: 36px;
-  background: none;
+  background-color: rgba(10, 21, 39, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--color-border);
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   gap: 4px;
   padding: 6px;
-  background-color: var(--color-bg);
 }
 
 /* Hamburger bars */
@@ -656,7 +660,6 @@ html:not(.js-loading) .content {
   transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
   width: 100%;
   max-width: 100%;
-  padding-top: 40px;
 }
 
 /* Active page: visible, centered, fully opaque */
@@ -1144,10 +1147,11 @@ html:not(.js-loading) .content {
   .sidebar {
     flex: 0 0 var(--sidebar-width);
     width: var(--sidebar-width);
-    padding: clamp(80px, 6vh, 77px) clamp(30px, 3vw, 40px) clamp(80px, 6vh, 77px) clamp(30px, 3vw, 40px);
+    padding: clamp(85px, 6vh, 85px) clamp(30px, 3vw, 40px) clamp(80px, 6vh, 77px) Va clamp(30px, 3vw, 40px);
   }
   .content {
     --content-pad-right: 110px;
+    --content-pad-top: 45px;
   }
 
 }
@@ -1182,14 +1186,9 @@ html:not(.js-loading) .content {
 /* 1235px and below: sidebar becomes fixed drawer, hamburger toggle appears */
 @media (max-width: 1235px) {
 
-  /* Hamburger button: visible, slides right when sidebar is open */
+  /* Hamburger button: visible on mobile */
   .sidebar-toggle {
     display: flex;
-    transition: left 0.3s ease;
-  }
-
-  .sidebar-toggle.open {
-    left: calc(var(--sidebar-width) + 10px);
   }
 
   /* Hamburger morphs to X when open */
@@ -1205,9 +1204,15 @@ html:not(.js-loading) .content {
     transform: translateY(-6px) rotate(-45deg);
   }
 
-  /* Hide floating lang-switcher (sidebar lang-switcher is visible instead) */
+  /* Floating lang-switcher: fixed top-right on mobile */
   .lang-switcher-floating {
-    display: none;
+    display: flex;
+    position: fixed;
+    top: max(16px, env(safe-area-inset-top));
+    right: 16px;
+    opacity: 1;
+    z-index: 100;
+    transition: none;
   }
 
   /* Dark overlay behind sidebar */
@@ -1274,7 +1279,7 @@ html:not(.js-loading) .content {
     font-size: 0.75rem;
   }
 
-  /* Sidebar: fixed position, hidden off-screen by default */
+  /* Sidebar: fixed frosted panel with accent left border */
   .sidebar {
     width: var(--sidebar-width);
     flex: 0 0 var(--sidebar-width);
@@ -1284,7 +1289,10 @@ html:not(.js-loading) .content {
     transform: translateX(-100%);
     transition: transform 0.3s ease;
     z-index: 9;
-    background-color: var(--color-bg);
+    background-color: rgba(10, 21, 39, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-left: 2px solid var(--color-accent);
   }
 
   /* Sidebar open: slides into view */
@@ -1293,24 +1301,61 @@ html:not(.js-loading) .content {
     transform: translateX(0);
   }
 
-  /* Sidebar inner: remove mask (hidden by --sidebar-fade=0 on mobile), allow scroll */
+  /* Sidebar close: explicit slide-out */
+  .sidebar:not(.open) {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  /* Sidebar inner: remove mask, constrain to sidebar width, allow scroll */
   .sidebar-inner {
+    width: 100%;
     mask-image: none;
     overflow-y: auto;
+    overflow-x: hidden;
   }
 
   /* Content: no left margin, reduced padding on mobile */
   .content {
     margin-left: 0;
-    --content-pad-top: clamp(24px, 4vh, 60px);
+    --content-pad-top: max(56px, 4vh);
     --content-pad-right: clamp(16px, 3vw, 24px);
     --content-pad-bottom: clamp(24px, 4vh, 60px);
     --content-pad-left: clamp(16px, 3vw, 24px);
   }
 
-  /* Sidebar: hide profile parts, keep only nav + lang */
-  .sidebar-top > :not(.sidebar-nav) {
+  /* Sidebar: hide photo, social and CV — keep name + title + nav + lang */
+  .sidebar-top > .sidebar-profile-img,
+  .sidebar-top > .sidebar-social,
+  .sidebar-top > .sidebar-cv-btn {
     display: none;
+  }
+
+  /* Sidebar on About page: hide name + title (mobile profile has them) */
+  .sidebar--about .sidebar-name,
+  .sidebar--about .sidebar-desc {
+    display: none;
+  }
+
+  /* Sidebar nav: compact pill items */
+  .sidebar-nav {
+    gap: 2px;
+  }
+
+  .sidebar-nav-link {
+    padding: 8px 12px;
+    border-radius: 4px;
+  }
+
+  .sidebar-nav-link:hover {
+    background-color: rgba(100, 255, 218, 0.05);
+  }
+
+  .sidebar-nav-link.active {
+    background-color: rgba(100, 255, 218, 0.08);
+    border-left: 2px solid var(--color-accent);
+    padding-left: 10px;
+    color: var(--color-text-bright);
   }
 
   /* Personality grid: single column on mobile */
