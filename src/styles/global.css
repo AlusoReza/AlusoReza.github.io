@@ -69,6 +69,10 @@ html.sidebar-force {
   --sidebar-fade: 1;
 }
 
+html.sidebar-delayed .sidebar {
+  transition: opacity 0.3s ease 0.35s, flex 0.15s ease-out 0.35s, width 0.15s ease-out 0.35s, padding 0.15s ease-out 0.35s;
+}
+
 /* ========================
    1. Base / Reset
    ======================== */

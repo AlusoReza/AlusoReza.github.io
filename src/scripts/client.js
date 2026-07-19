@@ -505,11 +505,14 @@ function handleMobileProfile() {
   const isBelow = mqlBreakpoint.matches
 
   if (!isBelow && wasBelow) {
-    // Growing past 1234px: dead zone (1234-1235px) separates mobile-profile collapse from sidebar appear
-    // Just remove the class — no sidebar-locked needed
+    // Growing past 1234px: delay sidebar transitions 350ms (mobile-profile collapse time)
+    document.documentElement.classList.add('sidebar-delayed')
     if (mobileProfile?.classList.contains('mobile-profile--visible')) {
       mobileProfile.classList.remove('mobile-profile--visible')
     }
+    setTimeout(() => {
+      document.documentElement.classList.remove('sidebar-delayed')
+    }, 400)
   } else if (isBelow && !wasBelow) {
     // Shrinking past 1234px: lock sidebar during mobile-profile slide-in
     if (sidebarLockTimer) { clearTimeout(sidebarLockTimer); sidebarLockTimer = null }
