@@ -582,23 +582,29 @@ if (mobileProfileInner) {
     const nameInlineW = Array.from(spans).reduce((sum, s) => sum + s.scrollWidth, 0) + NAME_GAP
     name.classList.remove('mobile-profile-name--inline')
 
+    // Measure name width in stacked orientation
+    const nameStackedW = Math.max(...Array.from(spans).map(s => s.scrollWidth)) + NAME_GAP
+
+    const descW = desc.scrollWidth
+
+    // Two thresholds: stacked row vs inline row
+    const totalNeededStacked = PHOTO_W + Math.max(nameStackedW, descW) + actions.scrollWidth + (3 * COL_GAP)
+    const totalNeededInline = PHOTO_W + Math.max(nameInlineW, descW) + actions.scrollWidth + (3 * COL_GAP)
+
+    const shouldRow = w >= totalNeededStacked
     const nameFitsInline = w >= nameInlineW
+    const shouldInline = shouldRow ? (w >= totalNeededInline) : nameFitsInline
 
     // Toggle name inline layout — CSS transition handles the animation
-    name.classList.toggle('mobile-profile-name--inline', nameFitsInline)
-
-    // Calculate row layout using current name width
-    const nameW = nameFitsInline
-      ? nameInlineW
-      : Array.from(spans).reduce((sum, s) => sum + s.scrollWidth, 0) + NAME_GAP
-    const descW = desc.scrollWidth
-    const totalNeeded = PHOTO_W + Math.max(nameW, descW) + actions.scrollWidth + (3 * COL_GAP)
-    const shouldRow = w >= totalNeeded
+    name.classList.toggle('mobile-profile-name--inline', shouldInline)
 
     const wasRow = mobileProfileInner.classList.contains('mobile-profile-inner--row')
     if (shouldRow === wasRow) return
 
     if (flipAnimated) {
+      // Suppress parent transitions during FLIP
+      mobileProfileInner.style.transition = 'none'
+
       const oldImg = img.getBoundingClientRect()
       const oldText = text.getBoundingClientRect()
       const oldActions = actions.getBoundingClientRect()
@@ -615,26 +621,33 @@ if (mobileProfileInner) {
         [actions, oldActions, newActions]
       ]
 
+      let animCount = 0
       for (const [el, oldR, newR] of elements) {
         const dx = oldR.left - newR.left
         const dy = oldR.top - newR.top
         if (dx === 0 && dy === 0) continue
         el.style.transform = `translate(${dx}px, ${dy}px)`
         el.style.transition = 'none'
+        animCount++
       }
 
       mobileProfileInner.getBoundingClientRect()
 
       for (const [el] of elements) {
-        el.style.transition = 'transform 0.3s ease'
-        el.style.transform = ''
+        if (el.style.transform) {
+          el.style.transition = 'transform 0.3s ease'
+          el.style.transform = ''
+        }
       }
 
       const cleanup = () => {
+        animCount--
+        if (animCount > 0) return
         for (const [el] of elements) {
           el.style.transition = ''
           el.style.transform = ''
         }
+        mobileProfileInner.style.transition = ''
         mobileProfileInner.removeEventListener('transitionend', cleanup)
       }
       mobileProfileInner.addEventListener('transitionend', cleanup)

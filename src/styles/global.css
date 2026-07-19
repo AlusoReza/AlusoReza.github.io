@@ -253,9 +253,9 @@ html:not(.js-loading) .content {
 /* ========================
    5a. Mobile Profile — Responsive Layout
    ========================
-   STATE 3 (default < 650px): vertical stack, centered
-   STATE 2 (650–799px):       horizontal — photo | [name / desc] | actions
-   STATE 1 (≥800px):          full row — photo | name | desc | actions
+   STATE 3 (default):  vertical stack, centered (narrow viewport)
+   STATE 2 —row:       horizontal — photo | [name / desc] | actions (medium viewport)
+   STATE 1 —row:       horizontal — photo | name | desc | actions (wide viewport, name inline)
 */
 
 .mobile-profile-inner {
@@ -384,8 +384,8 @@ html:not(.js-loading) .content {
   transform: translateY(-2px);
 }
 
-/* STATE 2 — JS toggles .mobile-profile-inner--row when inner width ≥ 650px
-   Layout: photo | [name + desc (combined, centered)] | actions */
+/* STATE 2 — JS toggles .mobile-profile-inner--row when content fits in row layout
+   Shared by row (name stacked) and wide (name inline) states */
 .mobile-profile-inner--row {
   grid-template-columns: auto 1fr auto;
   justify-items: center;
@@ -405,6 +405,7 @@ html:not(.js-loading) .content {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
 .mobile-profile-inner--row .mobile-profile-actions {
