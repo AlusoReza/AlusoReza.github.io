@@ -561,7 +561,7 @@ if (window.innerWidth > DEAD_ZONE_MIN && window.innerWidth <= DEAD_ZONE_MAX) {
 
 // --- MobileProfile responsive layout (ResizeObserver) ---
 const mobileProfileInner = document.querySelector('.mobile-profile-inner')
-const PHOTO_W = 200
+const PHOTO_W = 220
 const NAME_GAP = 8
 const COL_GAP = 20
 
