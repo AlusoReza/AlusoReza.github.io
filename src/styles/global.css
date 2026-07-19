@@ -312,6 +312,10 @@ html:not(.js-loading) .content {
   color: var(--color-text);
 }
 
+.mobile-profile-desc--standalone {
+  display: none;
+}
+
 .mobile-profile-social {
   display: flex;
   gap: 12px;
@@ -362,85 +366,42 @@ html:not(.js-loading) .content {
 }
 
 /* STATE 2 — JS toggles .mobile-profile-inner--row when inner width ≥ 650px
-   Layout: photo | [name / desc stacked] | actions */
+   Layout: photo | [name + desc (combined, centered)] | actions */
 .mobile-profile-inner--row {
   grid-template-columns: auto 1fr auto;
-  grid-template-rows: auto auto;
-  justify-items: start;
-  text-align: left;
+  justify-items: center;
+  text-align: center;
   align-items: center;
   gap: 4px 20px;
 }
 
 .mobile-profile-inner--row .mobile-profile-img {
   grid-column: 1;
-  grid-row: 1 / 3;
+  grid-row: 1;
 }
 
 .mobile-profile-inner--row .mobile-profile-text {
   grid-column: 2;
   grid-row: 1;
-}
-
-.mobile-profile-inner--row .mobile-profile-desc {
-  grid-column: 2;
-  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .mobile-profile-inner--row .mobile-profile-actions {
   grid-column: 3;
-  grid-row: 1 / 3;
+  grid-row: 1;
   align-items: center;
 }
 
 .mobile-profile-inner--row .mobile-profile-name {
-  align-items: flex-start;
+  flex-direction: row;
+  gap: 8px;
+  align-items: baseline;
 }
 
 /* >>> PHOTO SIZES: Adjust width/height below for horizontal layout photo */
 .mobile-profile-inner--row .mobile-profile-img {
-  width: 200px;
-  height: 225px;
-}
-
-/* STATE 1 — JS toggles .mobile-profile-inner--wide when inner width ≥ 800px
-   Layout: photo | name | desc (fills middle) | actions */
-.mobile-profile-inner--wide {
-  grid-template-columns: auto auto 1fr auto;
-  grid-template-rows: auto;
-  justify-items: center;
-  text-align: center;
-  align-items: center;
-}
-
-/* STATE 1 children — override STATE 2 grid placement */
-.mobile-profile-inner--wide .mobile-profile-img {
-  grid-column: 1;
-  grid-row: 1;
-}
-
-.mobile-profile-inner--wide .mobile-profile-text {
-  grid-column: 2;
-  grid-row: 1;
-}
-
-.mobile-profile-inner--wide .mobile-profile-desc {
-  grid-column: 3;
-  grid-row: 1;
-}
-
-.mobile-profile-inner--wide .mobile-profile-actions {
-  grid-column: 4;
-  grid-row: 1;
-  align-items: center;
-}
-
-.mobile-profile-inner--wide .mobile-profile-name {
-  align-items: flex-start;
-}
-
-/* >>> PHOTO SIZES: Adjust width/height below for horizontal layout photo */
-.mobile-profile-inner--wide .mobile-profile-img {
   width: 200px;
   height: 225px;
 }

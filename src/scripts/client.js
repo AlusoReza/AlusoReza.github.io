@@ -541,21 +541,22 @@ if (mqlBreakpoint.matches) {
 
 // --- MobileProfile responsive layout (ResizeObserver) ---
 const mobileProfileInner = document.querySelector('.mobile-profile-inner')
-const PROFILE_ROW_MIN = 650
 const PHOTO_W = 200
+const NAME_GAP = 8
 const COL_GAP = 20
 
 if (mobileProfileInner) {
-  const text = mobileProfileInner.querySelector('.mobile-profile-text')
+  const name = mobileProfileInner.querySelector('.mobile-profile-name')
   const desc = mobileProfileInner.querySelector('.mobile-profile-desc')
   const actions = mobileProfileInner.querySelector('.mobile-profile-actions')
 
   const profileObserver = new ResizeObserver(entries => {
     const w = entries[0].contentRect.width
-    mobileProfileInner.classList.toggle('mobile-profile-inner--row', w >= PROFILE_ROW_MIN)
-
-    const totalNeeded = PHOTO_W + text.scrollWidth + desc.scrollWidth + actions.scrollWidth + (3 * COL_GAP)
-    mobileProfileInner.classList.toggle('mobile-profile-inner--wide', w >= totalNeeded)
+    const spans = name.querySelectorAll('span')
+    const nameW = Array.from(spans).reduce((sum, s) => sum + s.scrollWidth, 0) + NAME_GAP
+    const descW = desc.scrollWidth
+    const totalNeeded = PHOTO_W + Math.max(nameW, descW) + actions.scrollWidth + (3 * COL_GAP)
+    mobileProfileInner.classList.toggle('mobile-profile-inner--row', w >= totalNeeded)
   })
   profileObserver.observe(mobileProfileInner)
 }

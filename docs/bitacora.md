@@ -301,3 +301,7 @@ Global workflow summary. Each entry links to the detailed day log.
 ### Session 72: Fix mobile profile text positioning and reflow
 **Prompt:** Title overlaps name, text changes size during resize, remove last name translateX, ensure texts don't reflow.
 **Plan:** 4 CSS fixes: gap between name/desc, remove translateX, `white-space: nowrap` on name spans + desc, `flex: 0 0 auto` on name in text--row to prevent shrinking.
+
+### Session 75: Dual-desc with show/hide
+**Prompt:** STATE 1 and STATE 2 overlap, title stuck to name, name in STATE 2 vertical instead of horizontal. Solution: two desc elements — inline (STATE 2) and standalone (STATE 1) — with CSS show/hide per state.
+**Plan:** HTML: add `--inline` desc inside text block, rename original to `--standalone`. CSS: default hide standalone, STATE 2 show inline + centered combined block + name horizontal, STATE 1 show standalone + commit layout. JS: measure standalone for threshold.
