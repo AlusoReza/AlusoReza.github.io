@@ -449,7 +449,7 @@ html:not(.js-loading) .content {
   overflow: visible;
   scrollbar-width: none;
   opacity: var(--sidebar-fade);
-  transition: opacity 0.3s ease 0.05s, flex 0.15s ease-out 0.05s, width 0.15s ease-out 0.05s, padding 0.15s ease-out 0.05s;
+  transition: opacity 0.3s ease 0.05s, flex 0.15s ease-out, width 0.15s ease-out, padding 0.15s ease-out;
 }
 
 .sidebar::-webkit-scrollbar {
