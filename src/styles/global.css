@@ -70,7 +70,10 @@ html.sidebar-force {
 }
 
 html.sidebar-delayed .sidebar {
-  transition: opacity 0.3s ease 0.35s, flex 0.15s ease-out 0.35s, width 0.15s ease-out 0.35s, padding 0.15s ease-out 0.35s;
+  flex: 0 0 0 !important;
+  width: 0 !important;
+  opacity: 0 !important;
+  overflow: hidden;
 }
 
 /* ========================
@@ -453,7 +456,7 @@ html:not(.js-loading) .content {
   overflow: visible;
   scrollbar-width: none;
   opacity: var(--sidebar-fade);
-  transition: opacity 0.3s ease 0.05s, flex 0.15s ease-out, width 0.15s ease-out, padding 0.15s ease-out;
+  transition: opacity 0.3s ease, flex 0.15s ease-out, width 0.15s ease-out, padding 0.15s ease-out;
 }
 
 .sidebar::-webkit-scrollbar {
