@@ -65,6 +65,10 @@ html.sidebar-locked .lang-switcher-floating {
   transition: none;
 }
 
+html.sidebar-force {
+  --sidebar-fade: 1;
+}
+
 /* ========================
    1. Base / Reset
    ======================== */
@@ -445,7 +449,7 @@ html:not(.js-loading) .content {
   overflow: visible;
   scrollbar-width: none;
   opacity: var(--sidebar-fade);
-  transition: opacity 0.3s ease, flex 0.15s ease-out, width 0.15s ease-out, padding 0.15s ease-out;
+  transition: opacity 0.3s ease 0.05s, flex 0.15s ease-out 0.05s, width 0.15s ease-out 0.05s, padding 0.15s ease-out 0.05s;
 }
 
 .sidebar::-webkit-scrollbar {

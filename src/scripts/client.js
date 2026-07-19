@@ -479,11 +479,11 @@ mql.addEventListener('change', (e) => {
   if (!e.matches) closeSidebar()
 })
 
-// --- MobileProfile transition (synced with sidebar-locked) ---
+// --- MobileProfile transition (dead zone 1234-1235px, no sidebar-locked needed) ---
 const mobileProfile = document.querySelector('.mobile-profile')
-const mqlBreakpoint = window.matchMedia('(max-width: 1235px)')
+const mqlBreakpoint = window.matchMedia('(max-width: 1234px)')
 let wasBelow = mqlBreakpoint.matches
-let sidebarUnlockTimer = null
+let sidebarLockTimer = null
 
 /*
 updateMobileProfile(): Controla la visibilidad del mobile-profile solo en la página "Sobre mí". En otras páginas se oculta instantáneamente (sin transición) para evitar que la animación de colapso interfiera con el contenido.
@@ -505,22 +505,20 @@ function handleMobileProfile() {
   const isBelow = mqlBreakpoint.matches
 
   if (!isBelow && wasBelow) {
-    // Growing past 1235px: hide mobile profile (CSS --sidebar-fade handles transition)
+    // Growing past 1234px: dead zone (1234-1235px) separates mobile-profile collapse from sidebar appear
+    // Just remove the class — no sidebar-locked needed
     if (mobileProfile?.classList.contains('mobile-profile--visible')) {
       mobileProfile.classList.remove('mobile-profile--visible')
     }
   } else if (isBelow && !wasBelow) {
-    // Shrinking past 1235px: lock sidebar during slide-out, show mobile profile
-    if (sidebarUnlockTimer) {
-      clearTimeout(sidebarUnlockTimer)
-      sidebarUnlockTimer = null
-    }
+    // Shrinking past 1234px: lock sidebar during mobile-profile slide-in
+    if (sidebarLockTimer) { clearTimeout(sidebarLockTimer); sidebarLockTimer = null }
     document.documentElement.classList.add('sidebar-locked')
     updateMobileProfile()
-    sidebarUnlockTimer = setTimeout(() => {
+    sidebarLockTimer = setTimeout(() => {
       document.documentElement.classList.remove('sidebar-locked')
-      sidebarUnlockTimer = null
-    }, 300)
+      sidebarLockTimer = null
+    }, 350)
   }
 
   wasBelow = isBelow
@@ -530,6 +528,32 @@ mqlBreakpoint.addEventListener('change', handleMobileProfile)
 
 if (mqlBreakpoint.matches) {
   updateMobileProfile()
+}
+
+// --- Dead zone safety (1234-1235px): force sidebar if stuck in dead zone ---
+const DEAD_ZONE_MIN = 1234
+const DEAD_ZONE_MAX = 1235
+const DEAD_ZONE_TIMEOUT = 500
+let deadZoneTimer = null
+
+function checkDeadZone() {
+  const w = window.innerWidth
+  if (w > DEAD_ZONE_MIN && w <= DEAD_ZONE_MAX) {
+    if (!deadZoneTimer) {
+      deadZoneTimer = setTimeout(() => {
+        document.documentElement.classList.add('sidebar-force')
+        deadZoneTimer = null
+      }, DEAD_ZONE_TIMEOUT)
+    }
+  } else {
+    if (deadZoneTimer) { clearTimeout(deadZoneTimer); deadZoneTimer = null }
+    document.documentElement.classList.remove('sidebar-force')
+  }
+}
+
+// Init: si el viewport ya está en dead zone, forzar sidebar
+if (window.innerWidth > DEAD_ZONE_MIN && window.innerWidth <= DEAD_ZONE_MAX) {
+  document.documentElement.classList.add('sidebar-force')
 }
 
 // --- MobileProfile responsive layout (ResizeObserver) ---
@@ -635,6 +659,7 @@ window.addEventListener('resize', () => {
   resizeTimer = setTimeout(() => {
     document.documentElement.classList.remove('is-resizing')
   }, 150)
+  checkDeadZone()
 })
 
 init()
