@@ -539,6 +539,27 @@ if (mqlBreakpoint.matches) {
   updateMobileProfile()
 }
 
+// --- MobileProfile responsive layout (ResizeObserver) ---
+const mobileProfileInner = document.querySelector('.mobile-profile-inner')
+const PROFILE_ROW_MIN = 650
+const PHOTO_W = 200
+const COL_GAP = 20
+
+if (mobileProfileInner) {
+  const text = mobileProfileInner.querySelector('.mobile-profile-text')
+  const desc = mobileProfileInner.querySelector('.mobile-profile-desc')
+  const actions = mobileProfileInner.querySelector('.mobile-profile-actions')
+
+  const profileObserver = new ResizeObserver(entries => {
+    const w = entries[0].contentRect.width
+    mobileProfileInner.classList.toggle('mobile-profile-inner--row', w >= PROFILE_ROW_MIN)
+
+    const totalNeeded = PHOTO_W + text.scrollWidth + desc.scrollWidth + actions.scrollWidth + (3 * COL_GAP)
+    mobileProfileInner.classList.toggle('mobile-profile-inner--wide', w >= totalNeeded)
+  })
+  profileObserver.observe(mobileProfileInner)
+}
+
 // --- Back to top ---
 const backToTop = document.getElementById('back-to-top')
 const contentEl = document.getElementById('content')

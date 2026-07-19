@@ -285,3 +285,19 @@ Global workflow summary. Each entry links to the detailed day log.
 **Prompt:** Sidebar close still disappears without animation after removing `.sidebar:not(.open)`.
 **Root cause:** Base `.sidebar` has `opacity: var(--sidebar-fade)` = 0 on mobile. Mobile media query doesn't override it. When `.open` removed, opacity snaps to 0 instantly (not animated), hiding the sidebar before transform animation is visible.
 **Fix:** Added `opacity: 1` to mobile `.sidebar` rule. On mobile, visibility is controlled by `transform` only — `--sidebar-fade` opacity is irrelevant for the fixed drawer.
+
+## 2026-07-19
+
+[Detailed log →](logs/2026-07-19.md)
+
+### Session 70: Responsive MobileProfile layout
+**Prompt:** Redesign MobileProfile to be responsive within mobile range (0–1235px). Content should go horizontal at wider widths and progressively stack vertically. Don't touch PC↔mobile transition. Photo must not be too small.
+**Plan:** 3-state flexbox system: STATE 3 (<500px) vertical centered (120×150px photo), STATE 2 (500–699px) two-row (100×125px photo), STATE 1 (700–1235px) full horizontal row. HTML restructured with `.mobile-profile-text` and `.mobile-profile-actions` wrappers. CSS comments for photo size customization.
+
+### Session 71: JS-driven responsive MobileProfile layout
+**Prompt:** User wants 3 layout states detected by JS ResizeObserver: (1) 4 columns Photo|Name|Title|Actions, (2) 3 columns Photo|Name/Title|Actions, (3) all vertical. Social buttons always above CV button.
+**Plan:** Replace CSS media query breakpoints with JS-toggled classes. ResizeObserver on `.mobile-profile-inner` measures actual width. ≥650px → `.mobile-profile-inner--row` (3 cols). ≥800px → `.mobile-profile-text--row` (4 cols). Actions always `flex-direction: column`.
+
+### Session 72: Fix mobile profile text positioning and reflow
+**Prompt:** Title overlaps name, text changes size during resize, remove last name translateX, ensure texts don't reflow.
+**Plan:** 4 CSS fixes: gap between name/desc, remove translateX, `white-space: nowrap` on name spans + desc, `flex: 0 0 auto` on name in text--row to prevent shrinking.
