@@ -505,16 +505,9 @@ function handleMobileProfile() {
   const isBelow = mqlBreakpoint.matches
 
   if (!isBelow && wasBelow) {
-    // Growing past 1235px: hide mobile profile, lock sidebar
+    // Growing past 1235px: hide mobile profile (CSS --sidebar-fade handles transition)
     if (mobileProfile?.classList.contains('mobile-profile--visible')) {
       mobileProfile.classList.remove('mobile-profile--visible')
-      document.documentElement.classList.add('sidebar-locked')
-
-      if (sidebarUnlockTimer) clearTimeout(sidebarUnlockTimer)
-      sidebarUnlockTimer = setTimeout(() => {
-        document.documentElement.classList.remove('sidebar-locked')
-        sidebarUnlockTimer = null
-      }, 350)
     }
   } else if (isBelow && !wasBelow) {
     // Shrinking past 1235px: lock sidebar during slide-out, show mobile profile

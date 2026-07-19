@@ -1179,8 +1179,7 @@ html:not(.js-loading) .content {
   display: none;
 }
 
-/* Disable sidebar transitions during viewport resize (prevents jitter) */
-.is-resizing .sidebar,
+/* Disable sidebar overlay transitions during viewport resize (prevents jitter) */
 .is-resizing .sidebar-overlay {
   transition: none !important;
 }
