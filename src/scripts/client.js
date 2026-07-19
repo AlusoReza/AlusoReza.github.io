@@ -577,6 +577,10 @@ if (mobileProfileInner) {
     const w = entries[0].contentRect.width
     const spans = name.querySelectorAll('span')
 
+    // Capture name position BEFORE measurement — measurement temporarily
+    // toggles --inline which forces name to stacked, corrupting the rect
+    const oldNameRect = name.getBoundingClientRect()
+
     // Measure name width in inline orientation (temporarily toggle)
     name.classList.add('mobile-profile-name--inline')
     const nameInlineW = Array.from(spans).reduce((sum, s) => sum + s.scrollWidth, 0) + NAME_GAP
@@ -595,11 +599,26 @@ if (mobileProfileInner) {
     const nameFitsInline = w >= nameInlineW
     const shouldInline = shouldRow ? (w >= totalNeededInline) : nameFitsInline
 
-    // Toggle name inline layout — CSS transition handles the animation
+    // Toggle name inline layout
     name.classList.toggle('mobile-profile-name--inline', shouldInline)
 
     const wasRow = mobileProfileInner.classList.contains('mobile-profile-inner--row')
-    if (shouldRow === wasRow) return
+
+    if (shouldRow === wasRow) {
+      // Grid NOT changing — compensate vertical shift for name layout change
+      if (flipAnimated) {
+        const newNameRect = name.getBoundingClientRect()
+        const dy = oldNameRect.top - newNameRect.top
+        if (dy !== 0) {
+          name.style.transition = 'none'
+          name.style.transform = `translateY(${dy}px)`
+          name.getBoundingClientRect()
+          name.style.transition = 'transform 0.2s ease-out'
+          name.style.transform = ''
+        }
+      }
+      return
+    }
 
     if (flipAnimated) {
       // Suppress parent transitions during FLIP

@@ -313,3 +313,21 @@ Global workflow summary. Each entry links to the detailed day log.
 ### Session 79: Fix dynamic name layout breaking animations
 **Prompt:** Dynamic name feature caused teleporting + jittering on resize. Two FLIPs fought over the same `name` element.
 **Fix:** Removed separate name FLIP — CSS `flex-direction` transition handles name layout. Used `.mobile-profile-text` container for row FLIP instead of `name` child. Name no longer in FLIP `elements` array, so no `style.transform`/`style.transition` conflicts.
+
+### Session 80: 3-state mobile profile layout
+**Prompt:** Add medium viewport state between vertical and row+inline. Name should try inline first, stack when too wide. Row threshold uses stacked name width.
+**Fix:** Two thresholds: `totalNeededStacked` (enters row) vs `totalNeededInline` (name goes inline in row). `shouldInline = shouldRow ? w >= totalNeededInline : nameFitsInline`. Fix `NodeList.map()` crash. FLIP cleanup with `animCount` + parent transition suppression.
+
+### Session 81: Fix name FLIP infinite loop
+**Prompt:** Content oscillates between top-right corner and original position in an infinite loop.
+**Root cause:** `oldNameRect` captured AFTER measurement code that temporarily toggles `--inline`, always forcing name to stacked state. Created false position delta that triggered FLIP on every callback even when state hadn't changed.
+**Fix:** Moved `oldNameRect` capture BEFORE measurement code to capture actual current state.
+
+### Session 82: Remove name FLIP — CSS transition handles name layout
+**Prompt:** Name appears to fly in from top-right instead of transitioning in place.
+**Root cause:** FLIP calculates large delta between stacked (higher, centered) and inline (lower, wider) positions. Animation shows full displacement, producing unwanted "flight" effect.
+**Fix:** Removed name FLIP entirely (25 lines + `nameFlipAnimating` flag + `oldNameRect`). Simple `if (shouldRow === wasRow) return` — CSS `transition: flex-direction 0.3s ease, gap 0.3s ease, align-items 0.3s ease` handles name layout change smoothly. Grid FLIP (vertical↔row) preserved.
+
+### Session 83: Revert + name Y-compensation animation
+**Prompt:** User wants to revert to commit `7be97f1` and add a proper animation for name layout changes. CSS transition doesn't work because `flex-direction` is discrete (doesn't interpolate).
+**Fix:** Reverted `client.js` to `7be97f1`. Added `oldNameRect` capture before measurement (loop fix). Added Y-compensation: captures `dy` between stacked/inline positions, applies `translateY(dy)` instant, animates to `translateY(0)` with `0.2s ease-out`. Only compensates vertical axis — horizontal handled by CSS centering.
