@@ -288,6 +288,7 @@ html:not(.js-loading) .content {
   height: 150px;
   border: 2px solid var(--color-accent);
   object-fit: cover;
+  transition: width 0.3s ease, height 0.3s ease;
 }
 
 .mobile-profile-name {
@@ -301,6 +302,7 @@ html:not(.js-loading) .content {
   color: var(--color-text-bright);
   letter-spacing: -0.03em;
   line-height: 1.2;
+  transition: flex-direction 0.3s ease, gap 0.3s ease, align-items 0.3s ease;
 }
 
 .mobile-profile-name span {
@@ -309,6 +311,12 @@ html:not(.js-loading) .content {
 
 .mobile-profile-name-last {
   /* intentionally no offset — see session 72 */
+}
+
+.mobile-profile-name--inline {
+  flex-direction: row;
+  gap: 8px;
+  align-items: baseline;
 }
 
 .mobile-profile-desc {
@@ -403,12 +411,6 @@ html:not(.js-loading) .content {
   grid-column: 3;
   grid-row: 1;
   align-items: center;
-}
-
-.mobile-profile-inner--row .mobile-profile-name {
-  flex-direction: row;
-  gap: 8px;
-  align-items: baseline;
 }
 
 /* >>> PHOTO SIZES: Adjust width/height below for horizontal layout photo */

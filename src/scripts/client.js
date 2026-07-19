@@ -567,16 +567,81 @@ const COL_GAP = 20
 
 if (mobileProfileInner) {
   const name = mobileProfileInner.querySelector('.mobile-profile-name')
+  const text = mobileProfileInner.querySelector('.mobile-profile-text')
   const desc = mobileProfileInner.querySelector('.mobile-profile-desc')
   const actions = mobileProfileInner.querySelector('.mobile-profile-actions')
+  const img = mobileProfileInner.querySelector('.mobile-profile-img')
+  let flipAnimated = false
 
   const profileObserver = new ResizeObserver(entries => {
     const w = entries[0].contentRect.width
     const spans = name.querySelectorAll('span')
-    const nameW = Array.from(spans).reduce((sum, s) => sum + s.scrollWidth, 0) + NAME_GAP
+
+    // Measure name width in inline orientation (temporarily toggle)
+    name.classList.add('mobile-profile-name--inline')
+    const nameInlineW = Array.from(spans).reduce((sum, s) => sum + s.scrollWidth, 0) + NAME_GAP
+    name.classList.remove('mobile-profile-name--inline')
+
+    const nameFitsInline = w >= nameInlineW
+
+    // Toggle name inline layout — CSS transition handles the animation
+    name.classList.toggle('mobile-profile-name--inline', nameFitsInline)
+
+    // Calculate row layout using current name width
+    const nameW = nameFitsInline
+      ? nameInlineW
+      : Array.from(spans).reduce((sum, s) => sum + s.scrollWidth, 0) + NAME_GAP
     const descW = desc.scrollWidth
     const totalNeeded = PHOTO_W + Math.max(nameW, descW) + actions.scrollWidth + (3 * COL_GAP)
-    mobileProfileInner.classList.toggle('mobile-profile-inner--row', w >= totalNeeded)
+    const shouldRow = w >= totalNeeded
+
+    const wasRow = mobileProfileInner.classList.contains('mobile-profile-inner--row')
+    if (shouldRow === wasRow) return
+
+    if (flipAnimated) {
+      const oldImg = img.getBoundingClientRect()
+      const oldText = text.getBoundingClientRect()
+      const oldActions = actions.getBoundingClientRect()
+
+      mobileProfileInner.classList.toggle('mobile-profile-inner--row', shouldRow)
+
+      const newImg = img.getBoundingClientRect()
+      const newText = text.getBoundingClientRect()
+      const newActions = actions.getBoundingClientRect()
+
+      const elements = [
+        [img, oldImg, newImg],
+        [text, oldText, newText],
+        [actions, oldActions, newActions]
+      ]
+
+      for (const [el, oldR, newR] of elements) {
+        const dx = oldR.left - newR.left
+        const dy = oldR.top - newR.top
+        if (dx === 0 && dy === 0) continue
+        el.style.transform = `translate(${dx}px, ${dy}px)`
+        el.style.transition = 'none'
+      }
+
+      mobileProfileInner.getBoundingClientRect()
+
+      for (const [el] of elements) {
+        el.style.transition = 'transform 0.3s ease'
+        el.style.transform = ''
+      }
+
+      const cleanup = () => {
+        for (const [el] of elements) {
+          el.style.transition = ''
+          el.style.transform = ''
+        }
+        mobileProfileInner.removeEventListener('transitionend', cleanup)
+      }
+      mobileProfileInner.addEventListener('transitionend', cleanup)
+    } else {
+      mobileProfileInner.classList.toggle('mobile-profile-inner--row', shouldRow)
+      flipAnimated = true
+    }
   })
   profileObserver.observe(mobileProfileInner)
 }

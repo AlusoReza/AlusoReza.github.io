@@ -305,3 +305,11 @@ Global workflow summary. Each entry links to the detailed day log.
 ### Session 75: Dual-desc with show/hide
 **Prompt:** STATE 1 and STATE 2 overlap, title stuck to name, name in STATE 2 vertical instead of horizontal. Solution: two desc elements — inline (STATE 2) and standalone (STATE 1) — with CSS show/hide per state.
 **Plan:** HTML: add `--inline` desc inside text block, rename original to `--standalone`. CSS: default hide standalone, STATE 2 show inline + centered combined block + name horizontal, STATE 1 show standalone + commit layout. JS: measure standalone for threshold.
+
+### Session 78: FLIP animation for mobile profile layout switch
+**Prompt:** Add animated transition when MobileProfile switches between horizontal and vertical states on smaller screens.
+**Plan:** FLIP technique — capture element positions before class toggle, apply inverted transforms, animate to final positions with `transition: transform 0.3s ease`. Photo dimensions animated via CSS `transition: width/height`. First measurement skipped (no animation on initial render). `prefers-reduced-motion` covered by existing CSS global rule.
+
+### Session 79: Fix dynamic name layout breaking animations
+**Prompt:** Dynamic name feature caused teleporting + jittering on resize. Two FLIPs fought over the same `name` element.
+**Fix:** Removed separate name FLIP — CSS `flex-direction` transition handles name layout. Used `.mobile-profile-text` container for row FLIP instead of `name` child. Name no longer in FLIP `elements` array, so no `style.transform`/`style.transition` conflicts.
