@@ -331,3 +331,30 @@ Global workflow summary. Each entry links to the detailed day log.
 ### Session 83: Revert + name Y-compensation animation
 **Prompt:** User wants to revert to commit `7be97f1` and add a proper animation for name layout changes. CSS transition doesn't work because `flex-direction` is discrete (doesn't interpolate).
 **Fix:** Reverted `client.js` to `7be97f1`. Added `oldNameRect` capture before measurement (loop fix). Added Y-compensation: captures `dy` between stacked/inline positions, applies `translateY(dy)` instant, animates to `translateY(0)` with `0.2s ease-out`. Only compensates vertical axis — horizontal handled by CSS centering.
+
+### Session 85: Remove snap system + dead zone — CSS-only sidebar
+**Prompt:** Eliminate the snap system (`snapSidebarIfStuck`, `sidebar-snap-mobile`, `no-transition`, `sidebar-force`, dead zone) and make sidebar fully CSS-driven via `clamp()`. Ensure transitions remain sequential.
+**Plan:** Remove all snap-related JS (~30 lines), remove dead zone JS (~26 lines), remove `html.sidebar-force` CSS, add 2 init classes (`sidebar-init-mobile/desktop`). Keep `handleMobileProfile()` with `sidebar-delayed`/`sidebar-locked` for sequential mobile↔desktop transitions.
+**Commit:** `99c7499` — `refactor: remove snap system and dead zone, CSS-only sidebar transitions`
+
+### Session 86: Fix sidebar flash on breakpoint crossing
+**Prompt:** Sidebar panel flashes on top of all content when resizing past 1235px (desktop↔mobile).
+**Root cause:** `transition: transform 0.3s ease` in media query animates `none → translateX(-100%)` over 0.3s, leaving sidebar visible at opacity:1 during the transition.
+**Fix:** Add `sidebar-no-transition` class for 2 rAF frames (~33ms) when the 1235px media query changes. CSS forces `transition: none !important` on sidebar, making it snap instantly to off-screen.
+**Commit:** `f372e3e` — `fix: suppress sidebar flash when crossing 1235px breakpoint`
+
+### Session 87: Snap sidebar fade on resize end
+**Prompt:** Sidebar stuck at intermediate state (44% at 1280px) when user stops resizing in fade zone.
+**Fix:** Add `snapSidebarFade()` in resize debounce — sets `--sidebar-fade` inline to 0 or 1 based on midpoint (1286px). Removed when viewport exits fade zone.
+**Commit:** `e86ded1` — `fix: snap sidebar to nearest extreme on resize end in fade zone`
+
+### Session 88: Bugs.md cleanup — deduplication and triage
+**Prompt:** Clean up `spec/constitution/bugs.md` — 100+ duplicated entries from repeated test runs.
+**Fix:** Complete rewrite from 865→120 lines. Deduplicated automatic findings, organized by status (Fixed/Info/False positive), added Sessions 85-87 sidebar bugs as fixed.
+**Build:** `npm run build` — 656ms, 0 errors.
+
+### Session 89: Fix test suite -- encoding + stale file references
+**Prompt:** Fix all test scripts so they pass (0 FAILs). Non-ASCII characters break PowerShell on Windows, and file references are stale after project restructuring.
+**Fix:** Rewrote all 7 .ps1 scripts with ASCII-only characters. Updated file references (Nav.astro -> LangSwitcher.astro, lang.json -> nav.json+sections.json+about.json, Contact.astro removed). Fixed !important filter to exclude sidebar state classes and global state classes. Fixed init() detection to find global function. Updated profile.json and skills.json schemas.
+**Results:** 0 FAILs, 57 PASS, 18 WARN (all known/intentional).
+**Build:** `npm run build` — 631ms, 0 errors.

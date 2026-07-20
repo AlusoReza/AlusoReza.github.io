@@ -496,7 +496,8 @@ updateMobileProfile(): Controla la visibilidad del mobile-profile solo en la pá
 */
 function updateMobileProfile() {
   if (!mobileProfile) return
-  const shouldShow = mqlBreakpoint.matches && currentPage === 'sobre'
+  const html = document.documentElement
+  const shouldShow = (mqlBreakpoint.matches || html.classList.contains('sidebar-midpoint-mode')) && currentPage === 'sobre'
   if (shouldShow) {
     mobileProfile.classList.add('mobile-profile--visible')
   } else {
@@ -734,32 +735,72 @@ function init() {
   if (initW > 1235 && initW < 1337) {
     const initClass = initW < 1286 ? 'sidebar-init-mobile' : 'sidebar-init-desktop'
     document.documentElement.classList.add(initClass)
+    if (initW < 1286) {
+      document.documentElement.classList.add('sidebar-midpoint-mode')
+      setTimeout(() => { updateMobileProfile() }, 350)
+    }
     window.addEventListener('resize', function () {
-      document.documentElement.classList.remove('sidebar-init-mobile', 'sidebar-init-desktop')
+      document.documentElement.classList.remove('sidebar-init-mobile', 'sidebar-init-desktop', 'sidebar-midpoint-mode')
     }, { once: true })
   }
 }
 
-// --- Resize debounce ---
+// --- Resize debounce + snap on mouseup ---
 let resizeTimer
+
+document.addEventListener('mouseup', () => {
+  const html = document.documentElement
+  if (html.classList.contains('is-resizing')) {
+    clearTimeout(resizeTimer)
+    html.classList.remove('is-resizing')
+    snapSidebarFade()
+  }
+})
 
 function snapSidebarFade() {
   const w = window.innerWidth
   const html = document.documentElement
-  if (w >= 1236 && w <= 1336) {
-    html.style.setProperty('--sidebar-fade', w < 1286 ? '0' : '1')
+  if (w >= 1286 && w <= 1336) {
+    html.classList.remove('sidebar-midpoint-mode')
+    html.style.setProperty('--sidebar-fade', '1')
+  } else if (w >= 1236 && w < 1286) {
+    html.classList.add('sidebar-no-transition')
+    html.style.setProperty('--sidebar-fade', '0')
+    html.classList.add('sidebar-midpoint-mode')
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        html.classList.remove('sidebar-no-transition')
+      })
+    })
+    setTimeout(() => { updateMobileProfile() }, 350)
   } else {
+    html.classList.remove('sidebar-midpoint-mode')
     html.style.removeProperty('--sidebar-fade')
   }
 }
 
 window.addEventListener('resize', () => {
-  document.documentElement.classList.add('is-resizing')
+  const html = document.documentElement
+  const wasInMidpoint = html.classList.contains('sidebar-midpoint-mode')
+
+  html.style.removeProperty('--sidebar-fade')
+  html.classList.add('is-resizing')
+
+  if (wasInMidpoint) {
+    html.classList.remove('sidebar-midpoint-mode')
+    if (mobileProfile?.classList.contains('mobile-profile--visible')) {
+      mobileProfile.style.transition = 'none'
+      mobileProfile.classList.remove('mobile-profile--visible')
+      mobileProfile.offsetHeight
+      mobileProfile.style.transition = ''
+    }
+  }
+
   clearTimeout(resizeTimer)
   resizeTimer = setTimeout(() => {
-    document.documentElement.classList.remove('is-resizing')
+    html.classList.remove('is-resizing')
     snapSidebarFade()
-  }, 150)
+  }, 1000)
 })
 
 init()

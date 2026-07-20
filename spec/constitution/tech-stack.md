@@ -55,14 +55,27 @@
 | `--font-display` | `'Space Grotesk', sans-serif` | Display (h1, h2, badges, labels) |
 | `--font-body` | `'Inter', -apple-system, ...` | Body text |
 
+### Layout tokens
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `--sidebar-width` | `clamp(240px, 23vw, 320px)` | Fluid sidebar width |
+| `--sidebar-fade` | `clamp(0, (100vw - 1236px) / 100px, 1)` | Sidebar opacity/width fade (0=hidden, 1=visible) |
+| `--app-max-width` | `1250px` | Max width of sidebar+content wrapper |
+| `--content-pad-top` | `max(56px, 4vh)` | Content top padding |
+| `--content-pad-right` | `clamp(40px, calc(13vw - 124px), 320px)` | Content right padding (fluid) |
+| `--content-pad-bottom` | `clamp(24px, 4vh, 60px)` | Content bottom padding |
+| `--content-pad-left` | `clamp(16px, 3vw, 24px)` | Content left padding |
+
 ## Visual design
 
 - **Theme:** Dark GitHub theme, no light theme toggle (planned).
-- **Layout:** Single column, max-width 850px, centered. Sticky nav with backdrop blur.
+- **Layout:** 2-column (fixed sidebar + scrollable content). Max-width 1250px via `--app-max-width`. Sticky nav with backdrop blur.
+- **Sidebar:** CSS-driven fluid fade via `--sidebar-fade` clamp. At ≥1336px fully visible (desktop). Between 1236-1336px fades from 0 to 1. At ≤1235px switches to fixed-position mobile drawer with hamburger toggle. See `spec/features/15-sidebar-architecture/` for full details.
 - **Signature motif:** Computational grid on hero (28px spacing, 2% white opacity, linear-gradient fade).
 - **Badges:** Language badges (border-left accent) + tool badges (solid background, glow hover). AI Agents badge in `#10a37f`.
 - **Reveal animations:** Scroll-triggered `.reveal` / `.reveal.active` with 0.8s ease-out, 30px Y offset.
-- **Responsive:** 650px (tablet) and 480px (small mobile) breakpoints.
+- **Responsive:** Primary breakpoint at 1235px (sidebar/mobile switch). Secondary at 650px/800px (MobileProfile internal layout states). Additional at 480px (smallest screens).
 - **Accessibility:** `prefers-reduced-motion` respected in CSS (universal `!important` override) and JS (no scroll listener).
 
 ## Hard limits

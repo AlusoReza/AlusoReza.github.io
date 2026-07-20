@@ -10,22 +10,22 @@ $allOutput = @()
 $global:allFails = @()
 $global:allWarns = @()
 $global:manualItems = @(
-    @{ check = "Data architecture"; desc = "Verify that data-data → JSON.parse → renderAll() works without console errors." },
-    @{ check = "Known bug regression"; desc = "Check spec/constitution/bugs.md — bugs marked as ✅ Arreglado should remain fixed." },
+    @{ check = "Data architecture"; desc = "Verify that data-data -> JSON.parse -> renderAll() works without console errors." },
+    @{ check = "Known bug regression"; desc = "Check spec/constitution/bugs.md - bugs marked as fixed should remain fixed." },
     @{ check = "Static fallback freshness"; desc = "Verify that Astro static fallback text in .astro files matches latest lang.json strings." },
-    @{ check = "Badge CSS — no orphan classes"; desc = "Every new badge class (b-xml-json, b-batch-bash, b-opencode-claude, etc.) must exist in CSS." }
+    @{ check = "Badge CSS - no orphan classes"; desc = "Every new badge class (b-xml-json, b-batch-bash, b-opencode-claude, etc.) must exist in CSS." }
 )
 
 function Title($t) {
-    Write-Host "`n`n════════════════════════════════════════════" -ForegroundColor Magenta
+    Write-Host "`n`n========================================" -ForegroundColor Magenta
     Write-Host "  $t" -ForegroundColor Magenta
-    Write-Host "════════════════════════════════════════════" -ForegroundColor Magenta
+    Write-Host "========================================" -ForegroundColor Magenta
 }
 
 function Run-Test($name, $script) {
     $path = "$testsDir\$script"
     if (-not (Test-Path $path)) {
-        Write-Host "`n  [SKIP] $script — not found" -ForegroundColor DarkGray
+        Write-Host "`n  [SKIP] $script - not found" -ForegroundColor DarkGray
         return @()
     }
     Write-Host "`n  >>> Running $script..." -ForegroundColor Cyan
@@ -44,12 +44,12 @@ function Run-Test($name, $script) {
     }
 }
 
-# ─── BANNER ───
-Write-Host "╔══════════════════════════════════════════╗" -ForegroundColor Magenta
-Write-Host "║    RUN-ALL — Complete test suite         ║" -ForegroundColor Magenta
-Write-Host "╚══════════════════════════════════════════╝" -ForegroundColor Magenta
+# --- BANNER ---
+Write-Host "========================================" -ForegroundColor Magenta
+Write-Host "    RUN-ALL - Complete test suite" -ForegroundColor Magenta
+Write-Host "========================================" -ForegroundColor Magenta
 
-# ─── RUN ALL ───
+# --- RUN ALL ---
 Run-Test "Astro MCP" "check-mcp.ps1"
 Run-Test "Frontend Design" "check-frontend-design.ps1"
 Run-Test "JS Logic" "check-js-logic.ps1"
@@ -57,31 +57,31 @@ Run-Test "CSS Logic" "check-css-logic.ps1"
 Run-Test "JSON Schema" "check-json-schema.ps1"
 Run-Test "Paths" "check-paths.ps1"
 
-# ─── [MANUAL] ───
-Write-Host "`n`n════════════════════════════════════════════" -ForegroundColor Yellow
-Write-Host "  [MANUAL] — Deep logic review" -ForegroundColor Yellow
-Write-Host "════════════════════════════════════════════" -ForegroundColor Yellow
+# --- [MANUAL] ---
+Write-Host "`n`n========================================" -ForegroundColor Yellow
+Write-Host "  [MANUAL] - Deep logic review" -ForegroundColor Yellow
+Write-Host "========================================" -ForegroundColor Yellow
 
 foreach ($item in $global:manualItems) {
-    Write-Host "`n  □ $($item.check)" -ForegroundColor Yellow
+    Write-Host "`n  - $($item.check)" -ForegroundColor Yellow
     Write-Host "    $($item.desc)" -ForegroundColor DarkGray
 }
 Write-Host "`n  (The agent must review these items manually)" -ForegroundColor DarkGray
 
-# ─── SAVE TO bugs.md ───
-Write-Host "`n`n════════════════════════════════════════════" -ForegroundColor Cyan
+# --- SAVE TO bugs.md ---
+Write-Host "`n`n========================================" -ForegroundColor Cyan
 Write-Host "  Saving findings to bugs.md..." -ForegroundColor Cyan
-Write-Host "════════════════════════════════════════════" -ForegroundColor Cyan
+Write-Host "========================================" -ForegroundColor Cyan
 
 $sessionDate = Get-Date -Format "yyyy-MM-dd"
 $sessionNum = "?"
 
 # Read current session number from last log
-$logFile = "$root\docs\$sessionDate.md"
+$logFile = "$root\docs\logs\$sessionDate.md"
 if (Test-Path $logFile) {
     $logContent = Get-Content $logFile -Raw
-    $sessions = [regex]::Matches($logContent, 'Sesión (\d+)')
-    if ($sessions.Count -gt 0) { $sessionNum = [int]$sessions[-1].Groups[1].Value + 1 }
+    $sessions = [regex]::Matches($logContent, 'Session (\d+)')
+    if ($sessions -and $sessions.Count -gt 0) { $sessionNum = [int]$sessions[$sessions.Count - 1].Groups[1].Value + 1 }
 }
 
 $totalFails = $global:allFails.Count
@@ -92,24 +92,24 @@ $existingCurated = ""
 $hasHeader = $false
 if (Test-Path $bugsFile) {
     $existingContent = Get-Content $bugsFile -Raw
-    $autoMarker = $existingContent.IndexOf("## 📡 Hallazgos automáticos")
+    $autoMarker = $existingContent.IndexOf("## Automatic findings")
     if ($autoMarker -ge 0) {
         $existingCurated = $existingContent.Substring(0, $autoMarker).TrimEnd()
     } else {
         $existingCurated = $existingContent.TrimEnd()
     }
-    $hasHeader = $existingCurated -match "^# Bugs conocidos"
+    $hasHeader = $existingCurated -match "^# Bugs known"
 }
 
 # Build header if it doesn't exist (first run)
 $header = if (-not $hasHeader) {
 @"
-# Bugs conocidos — Alonso Suárez Reza Portfolio
+# Bugs known - Alonso Suarez Reza Portfolio
 "@
 } else { "" }
 
 # Update Last scan line in curated content
-$existingCurated = $existingCurated -replace '(?m)^Último escaneo:.*', "Last scan: $sessionDate (Sesión $sessionNum)"
+$existingCurated = $existingCurated -replace '(?m)^Last scan:.*', "Last scan: $sessionDate (Session $sessionNum)"
 
 $bugsContent = if ($header) { "$header`n`n" } else { "" }
 $bugsContent += "$existingCurated`n`n"
@@ -120,11 +120,11 @@ foreach ($f in $global:allFails) {
     $src = $f.source
     $bugsContent += @"
 
-### $msg — ERROR
+### $msg -- ERROR
 - **Source:** $src
 - **Detected:** Session $sessionNum
 - **Description:** $msg
-- **Status:** ⏳ Pending
+- **Status:** Pending
 
 "@
 }
@@ -135,18 +135,18 @@ foreach ($w in $global:allWarns) {
     $src = $w.source
     $bugsContent += @"
 
-### $msg — WARNING
+### $msg -- WARNING
 - **Source:** $src
 - **Detected:** Session $sessionNum
 - **Description:** $msg
-- **Status:** ⏳ Pending
+- **Status:** Pending
 
 "@
 }
 
 $bugsContent += @"
 
-## 📡 Automatic findings (Session $sessionNum — $sessionDate)
+## Automatic findings (Session $sessionNum -- $sessionDate)
 
 "@
 
@@ -160,10 +160,10 @@ foreach ($f in $global:allFails) {
     $seenFail[$key] = $true
     $bugsContent += @"
 
-### $msg — ERROR
+### $msg -- ERROR
 - **Source:** $src
 - **Detected:** Session $sessionNum (automatic)
-- **Status:** ⏳ Pending
+- **Status:** Pending
 
 "@
 }
@@ -178,10 +178,10 @@ foreach ($w in $global:allWarns) {
     $seenWarn[$key] = $true
     $bugsContent += @"
 
-### $msg — WARNING
+### $msg -- WARNING
 - **Source:** $src
 - **Detected:** Session $sessionNum (automatic)
-- **Status:** ⏳ Pending
+- **Status:** Pending
 
 "@
 }
@@ -196,10 +196,10 @@ $bugsContent += @"
 $bugsContent | Out-File -FilePath $bugsFile -Encoding utf8
 Write-Host "  Findings saved to $bugsFile" -ForegroundColor Green
 
-# ─── GLOBAL SUMMARY ───
-Write-Host "`n`n════════════════════════════════════════════" -ForegroundColor Magenta
+# --- GLOBAL SUMMARY ---
+Write-Host "`n`n========================================" -ForegroundColor Magenta
 Write-Host "  GLOBAL SUMMARY" -ForegroundColor Magenta
-Write-Host "════════════════════════════════════════════" -ForegroundColor Magenta
+Write-Host "========================================" -ForegroundColor Magenta
 Write-Host "  Scripts run: 6" -ForegroundColor White
 Write-Host "  FAILs: $totalFails" -ForegroundColor $(if ($totalFails -gt 0) { "Red" } else { "Green" })
 Write-Host "  WARNs: $totalWarns" -ForegroundColor $(if ($totalWarns -gt 0) { "Yellow" } else { "Green" })

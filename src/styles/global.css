@@ -1197,9 +1197,161 @@ html:not(.js-loading) .content {
   display: none;
 }
 
-/* Disable sidebar overlay transitions during viewport resize (prevents jitter) */
+/* Disable sidebar + overlay transitions during viewport resize (prevents jitter) */
+html.is-resizing .sidebar,
+html.is-resizing .sidebar-inner {
+  transition: none !important;
+}
+
 .is-resizing .sidebar-overlay {
   transition: none !important;
+}
+
+/* ========================
+   Midpoint mobile mode (1236–1260px)
+   Duplicates the essential @media (max-width:1235px) rules so JS can
+   activate mobile layout in the dead zone without the media query.
+   ======================== */
+
+/* Sidebar: fixed frosted panel (same as mobile media query) */
+html.sidebar-midpoint-mode .sidebar {
+  width: var(--sidebar-width);
+  flex: 0 0 var(--sidebar-width);
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translateX(-100%);
+  opacity: 1;
+  transition: transform 0.3s ease;
+  z-index: 9;
+  background-color: rgba(10, 21, 39, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-left: 2px solid var(--color-accent);
+}
+
+/* Sidebar open: slides into view */
+html.sidebar-midpoint-mode .sidebar.open {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Sidebar inner: remove mask, constrain to sidebar width, allow scroll */
+html.sidebar-midpoint-mode .sidebar-inner {
+  width: 100%;
+  mask-image: none;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Hamburger button: visible */
+html.sidebar-midpoint-mode .sidebar-toggle {
+  display: flex;
+}
+
+/* Hamburger morphs to X when open */
+html.sidebar-midpoint-mode .sidebar-toggle.open span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+html.sidebar-midpoint-mode .sidebar-toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+
+html.sidebar-midpoint-mode .sidebar-toggle.open span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* Floating lang-switcher: fixed top-right */
+html.sidebar-midpoint-mode .lang-switcher-floating {
+  display: flex;
+  position: fixed;
+  top: max(16px, env(safe-area-inset-top));
+  right: 16px;
+  opacity: 1;
+  z-index: 100;
+  transition: none;
+}
+
+/* Dark overlay behind sidebar */
+html.sidebar-midpoint-mode .sidebar-overlay {
+  display: block;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 8;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+html.sidebar-midpoint-mode .sidebar-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Pages and footer: full width */
+html.sidebar-midpoint-mode .page,
+html.sidebar-midpoint-mode .page.exiting,
+html.sidebar-midpoint-mode .site-footer {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Content: no sidebar margin, reduced padding */
+html.sidebar-midpoint-mode .content {
+  margin-left: 0;
+  --content-pad-top: max(56px, 4vh);
+  --content-pad-right: clamp(16px, 3vw, 24px);
+  --content-pad-bottom: clamp(24px, 4vh, 60px);
+  --content-pad-left: clamp(16px, 3vw, 24px);
+}
+
+/* Hide desktop-only sidebar elements */
+html.sidebar-midpoint-mode .sidebar-top > .sidebar-profile-img,
+html.sidebar-midpoint-mode .sidebar-top > .sidebar-social,
+html.sidebar-midpoint-mode .sidebar-top > .sidebar-cv-btn {
+  display: none;
+}
+
+/* Sidebar on About page: hide name + title (mobile profile has them) */
+html.sidebar-midpoint-mode .sidebar--about .sidebar-name,
+html.sidebar-midpoint-mode .sidebar--about .sidebar-desc {
+  display: none;
+}
+
+/* Sidebar nav: compact pill items */
+html.sidebar-midpoint-mode .sidebar-nav {
+  gap: 2px;
+}
+
+html.sidebar-midpoint-mode .sidebar-nav-link {
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+html.sidebar-midpoint-mode .sidebar-nav-link:hover {
+  background-color: rgba(100, 255, 218, 0.05);
+}
+
+html.sidebar-midpoint-mode .sidebar-nav-link.active {
+  background-color: rgba(100, 255, 218, 0.08);
+  border-left: 2px solid var(--color-accent);
+  padding-left: 10px;
+  color: var(--color-text-bright);
+}
+
+/* About skill labels: inline */
+html.sidebar-midpoint-mode .about-skills-label {
+  display: inline;
+  white-space: nowrap;
+  width: auto;
+  margin-bottom: 0;
+}
+
+/* Personality grid: single column */
+html.sidebar-midpoint-mode .skills-personality-grid {
+  grid-template-columns: 1fr;
 }
 
 /* ========================
