@@ -198,13 +198,11 @@ body {
    5. Layout — App Shell
    ======================== */
 
-/* Two-column flex container: sidebar + content, centered, full viewport */
+/* Two-column flex container: sidebar + content, full viewport */
 .app-layout {
   display: flex;
   height: 100vh;
   height: 100dvh;
-  max-width: var(--app-max-width);
-  margin: 0 auto;
 }
 
 /* Content area: right column, scrollable, fades in after loading */
@@ -218,7 +216,7 @@ body {
   z-index: 2;
   display: flex;
   flex-direction: column;
-  padding: var(--content-pad-top) var(--content-pad-right) var(--content-pad-bottom) var(--content-pad-left);
+  padding: var(--content-pad-top) 0 var(--content-pad-bottom) var(--content-pad-left);
   opacity: 0;
   transition: opacity 0.4s ease, padding 0.15s ease-out;
 }
@@ -234,6 +232,10 @@ html:not(.js-loading) .content {
   flex: 1;
   display: flex;
   flex-direction: column;
+  max-width: var(--app-max-width);
+  margin: 0 auto;
+  width: 100%;
+  padding-right: var(--content-pad-right);
 }
 
 /* Mobile profile: JS-driven sequential fade, synced with sidebar-locked */
@@ -464,6 +466,7 @@ html:not(.js-loading) .content {
   overflow: visible;
   scrollbar-width: none;
   opacity: var(--sidebar-fade);
+  margin-left: calc((100vw - var(--app-max-width)) / 2);
   transition: opacity 0.3s ease, flex 0.15s ease-out, width 0.15s ease-out, padding 0.15s ease-out;
 }
 
@@ -685,7 +688,7 @@ html:not(.js-loading) .content {
   display: flex;
   position: absolute;
   top: 0;
-  right: 0;
+  right: var(--content-pad-right);
   z-index: 20;
   gap: 4px;
   opacity: var(--sidebar-fade);
@@ -1255,6 +1258,7 @@ html.sidebar-midpoint-mode .sidebar {
   position: fixed;
   top: 0;
   left: 0;
+  margin-left: 0;
   transform: translateX(-100%);
   opacity: 1;
   transition: transform 0.3s ease;
@@ -1397,9 +1401,7 @@ html.sidebar-midpoint-mode .skills-personality-grid {
   :root {
     /*Dilimiter container max with, this + inner content padding changes content distribution through the screen*/
     --sidebar-width: clamp(290px, 22vw, 330px);
-  }
-  .app-layout {
-    max-width: 90vw;
+    --app-max-width: 90vw;
   }
   .sidebar {
     flex: 0 0 var(--sidebar-width);
@@ -1413,8 +1415,8 @@ html.sidebar-midpoint-mode .skills-personality-grid {
   html {
     font-size: 18px;
   }
-  .app-layout {
-    max-width: min(88vw, 2100px);
+  :root {
+    --app-max-width: min(88vw, 2100px);
   }
   .sidebar {
     flex: 0 0 var(--sidebar-width);
@@ -1432,12 +1434,10 @@ html.sidebar-midpoint-mode .skills-personality-grid {
 @media (min-width: 2600px) {
   :root {
     --sidebar-width: clamp(420px, 20vw, 650px);
+    --app-max-width: min(85vw, 2400px);
   }
   html {
     font-size: 20px;
-  }
-  .app-layout {
-    max-width: min(85vw, 2400px);
   }
   .sidebar {
     flex: 0 0 var(--sidebar-width);
@@ -1555,6 +1555,7 @@ html.sidebar-midpoint-mode .skills-personality-grid {
     position: fixed;
     top: 0;
     left: 0;
+    margin-left: 0;
     transform: translateX(-100%);
     opacity: 1;
     transition: transform 0.3s ease;
