@@ -408,3 +408,8 @@ Global workflow summary. Each entry links to the detailed day log.
 **Prompt:** Two bugs found: (1) inline width='0' doesn't work because flex-basis overrides width in flex layout, (2) `is-resizing` has `transition: none !important` blocking JS transitions for1000ms.
 **Plan:** Control flex alongside width. Remove `is-resizing` + clearTimeout when removing sidebar-delayed at 400ms. Safe because resize is settled by then.
 **Build:** `npm run build` — 611ms, 0 errors. Tests: 0 FAILs.
+
+### Session 104: Scrollbar at viewport edge — move MobileProfile inside .content-body
+**Prompt:** User wants scrollbar at viewport's right edge. Previous uncommitted attempt broke sidebar centering, CV button overlap, and large-screen collapse.
+**Plan:** Move `<MobileProfile />` inside `.content-body` (inherits padding-right). Remove max-width from `.app-layout` (full viewport width). Center sidebar via `margin-left: calc((100vw - var(--app-max-width)) / 2)`. Center content via `.content-body { max-width; margin: auto }`. Update `--app-max-width` variable at large-screen breakpoints. Reset `margin-left:0` on fixed sidebar in mobile.
+**Build:** `npm run build` — 694ms, 0 errors. Tests: 0 FAILs.
