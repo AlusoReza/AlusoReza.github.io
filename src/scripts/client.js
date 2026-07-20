@@ -742,11 +742,23 @@ function init() {
 
 // --- Resize debounce ---
 let resizeTimer
+
+function snapSidebarFade() {
+  const w = window.innerWidth
+  const html = document.documentElement
+  if (w >= 1236 && w <= 1336) {
+    html.style.setProperty('--sidebar-fade', w < 1286 ? '0' : '1')
+  } else {
+    html.style.removeProperty('--sidebar-fade')
+  }
+}
+
 window.addEventListener('resize', () => {
   document.documentElement.classList.add('is-resizing')
   clearTimeout(resizeTimer)
   resizeTimer = setTimeout(() => {
     document.documentElement.classList.remove('is-resizing')
+    snapSidebarFade()
   }, 150)
 })
 
