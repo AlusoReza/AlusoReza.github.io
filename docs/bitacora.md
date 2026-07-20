@@ -373,3 +373,38 @@ Global workflow summary. Each entry links to the detailed day log.
 **Prompt:** Revert `.tech-grid` CSS Grid change (user wants fixed 76px items). Move "Perfil Profesional" title above the3 bio paragraphs.
 **Plan:** Revert `.tech-grid` to flexbox, restore `width: 76px` on `.tech-item`, revert 480px responsive. Move `<h2>` in About.astro. 2 files, 0 eliminated.
 **Build:** `npm run build` — 724ms, 0 errors. Tests: 0 FAILs.
+
+### Session 94: Fix card order + FLIP animation bugs
+**Prompt:** Restore original card order (remove partition grouping). Fix 4 FLIP animation bugs: motionOK undefined, .reveal transform conflict, stagger-item delays, transition fallback.
+**Plan:** Remove `partition()` in About.astro, declare global `motionOK`, rewrite `flipAnimate()` with explicit transitions, add `[data-flip]` CSS override with natural specificity. 3 files, 0 eliminated.
+**Build:** `npm run build` — 778ms, 0 errors. Tests: 0 FAILs.
+
+### Session 95: Cleanup orphaned CSS + rebuild verification
+**Prompt:** Context recovery. Cleanup orphaned `.about-intro` CSS rule (element removed in Session 94 but CSS was left behind). Rebuild and verify padding fix visually.
+**Plan:** Remove `.about-intro` rule from global.css. Rebuild with `npm run update`.
+**Build:** `npm run update` — 597ms, 0 errors. Pending visual verification.
+
+### Session 96: Fix FLIP animation — remove .reveal from FLIP elements + sidebar timeout
+**Prompt:** FLIP animation on tech grid not working. Root cause: `.reveal` and FLIP fight over `transform` property. Also: sidebar-delayed 400ms timeout causes unnecessary delay.
+**Plan:** Remove `reveal`/`stagger-item` from FLIP elements in About.astro. Add `.visible` to `[data-flip]` in `initScrollReveal()`. Reduce `sidebar-delayed` timeout to 50ms. Remove CSS override.
+**Build:** `npm run build` — 757ms, 0 errors. Tests: 0 FAILs.
+
+### Session 98: Fix sidebar snap — transition during sidebar-delayed
+**Prompt:** Sidebar snaps into view when maximizing instead of animating. `sidebar-delayed` forces `flex:0; width:0; opacity:0` with `!important` but no transition defined, so removal causes a jump.
+**Plan:** Add transition to `html.sidebar-delayed .sidebar` CSS rule. Force reflow after adding class in JS. Revert timeout to 400ms.
+**Build:** `npm run build` — 638ms, 0 errors. Tests: 0 FAILs.
+
+### Session 99: Sidebar animation speed — 0.15s too fast, 0.3s only on delayed
+**Prompt:** Sidebar animation from Session 98 works but is too fast (0.15s). Need 0.3s visible animation when appearing after `sidebar-delayed`, but keep 0.15s for normal resize.
+**Plan:** Change `sidebar-delayed` CSS transition from 0.15s to 0.3s. Reapply original 0.15s transition via inline style + rAF after removing delayed class.
+**Build:** `npm run build` — 736ms, 0 errors. Tests: 0 FAILs.
+
+### Session 100: Sidebar maximize animation — JS-driven width transition
+**Prompt:** CSS transitions complete while sidebar is hidden, so when it becomes visible there's no animation. Need JS-driven width animation after sidebar becomes visible. Gradual resize must keep working.
+**Plan:** Suppress transitions with `none !important` during delay. After removing class: set width=0, double rAF to paint, clear width → CSS variable drives 0.3s transition. Guarded by motionOK.
+**Build:** `npm run build` — 627ms, 0 errors. Tests: 0 FAILs.
+
+### Session 102: Sidebar maximize — fix flex-basis override + is-resizing block
+**Prompt:** Two bugs found: (1) inline width='0' doesn't work because flex-basis overrides width in flex layout, (2) `is-resizing` has `transition: none !important` blocking JS transitions for1000ms.
+**Plan:** Control flex alongside width. Remove `is-resizing` + clearTimeout when removing sidebar-delayed at 400ms. Safe because resize is settled by then.
+**Build:** `npm run build` — 611ms, 0 errors. Tests: 0 FAILs.

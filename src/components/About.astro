@@ -6,50 +6,36 @@ const languages = skills.languages || []
 const frameworks = skills.frameworks || []
 const tools = skills.tools || []
 
-function partition(items) {
-  const withLogo = items.filter(i => i.logo)
-  const textOnly = items.filter(i => !i.logo)
-  return { withLogo, textOnly }
-}
 const categories = [
-  { key: 'about-lang-label', label: 'Lenguajes', ...partition(languages) },
-  { key: 'about-frameworks-label', label: 'Frameworks', ...partition(frameworks) },
-  { key: 'about-tools-label', label: 'Herramientas', ...partition(tools) },
+  { key: 'about-lang-label', label: 'Lenguajes', items: languages },
+  { key: 'about-frameworks-label', label: 'Frameworks', items: frameworks },
+  { key: 'about-tools-label', label: 'Herramientas', items: tools },
 ]
 ---
 <div data-page="sobre" class="page">
-  <p class="about-intro reveal">
-    Desarrollador con formación científica, enfocado en backend, datos y desarrollo web moderno.
-    Combino pensamiento analítico con habilidades técnicas para construir soluciones eficientes y escalables.
-  </p>
+  <h2 class="section-title perfil-title" data-i18n="sec-perfil">Perfil Profesional</h2>
+  <div data-i18n="sobre-text" data-section="about-text">
+    {t('sobre-text').split('\n\n').map(p => (
+      <p class="about-paragraph reveal" set:html={p}></p>
+    ))}
+  </div>
 
   <div class="tech-showcase reveal">
     {categories.map(cat => (
-      <div class="tech-category">
+      <div class="tech-category" data-flip>
         <span class="tech-category-label" data-i18n={cat.key}>{cat.label}</span>
         <div class="tech-grid">
-          {cat.withLogo.map(s => (
-            <div class="tech-item reveal stagger-item">
-              <img src={s.logo} alt={s.name} loading="lazy" />
-              <span class="tech-item-name">{s.name}</span>
-            </div>
-          ))}
-          {cat.textOnly.map(s => (
-            <div class="tech-item tech-item--text-only reveal stagger-item">
-              <span class="tech-item-fallback">{s.name.slice(0,2).toUpperCase()}</span>
+          {cat.items.map(s => (
+            <div class={`tech-item${s.logo ? '' : ' tech-item--text-only'}`} data-flip>
+              {s.logo
+                ? <img src={s.logo} alt={s.name} loading="lazy" />
+                : <span class="tech-item-fallback">{s.name.slice(0,2).toUpperCase()}</span>
+              }
               <span class="tech-item-name">{s.name}</span>
             </div>
           ))}
         </div>
       </div>
-    ))}
-  </div>
-
-  <h2 class="section-title reveal" data-i18n="sec-hab-personal">Perfil Profesional</h2>
-
-  <div data-i18n="sobre-text" data-section="about-text">
-    {t('sobre-text').split('\n\n').map(p => (
-      <p class="about-paragraph reveal" set:html={p}></p>
     ))}
   </div>
 

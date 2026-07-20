@@ -1,10 +1,7 @@
 {
   "es": {
-    "sec-sobre": "Sobre mí",
-    "sec-hab": "Habilidades",
-    "sec-hab-tech": "Tecnologías",
-    "sec-hab-personal": "Perfil Profesional",
-    "sec-proy": "Proyecto Destacado",
+    "sec-perfil": "Perfil Profesional",
+    "sec-proy": "Proyectos personales",
     "sec-est": "Formación Académica",
     "sec-exp": "Experiencia",
     "sec-cert": "Certificados",
@@ -12,11 +9,8 @@
     "hab-ai": "También integro de manera profesional <strong>modelos de lenguaje (LLMs)</strong> y <strong>agentes de IA</strong> en flujos de desarrollo, automatización y análisis. Mi objetivo es dominar estas tecnologías emergentes aplicándolas a problemas reales con el mismo rigor técnico."
   },
   "en": {
-    "sec-sobre": "About me",
-    "sec-hab": "Skills",
-    "sec-hab-tech": "Technologies",
-    "sec-hab-personal": "Professional Profile",
-    "sec-proy": "Featured Project",
+    "sec-perfil": "Professional Profile",
+    "sec-proy": "Personal Projects",
     "sec-est": "Academic Background",
     "sec-exp": "Experience",
     "sec-cert": "Certificates",

@@ -42,9 +42,9 @@ PORTFOLIO — Global Stylesheet
   --transition-speed: 0.35s;
 
   /* Content padding — adjust to expand/contract content area */
-  --content-pad-top: clamp(12px, 4vh, 20px);
+  --content-pad-top: clamp(30px, 4vh, 32px);
   --content-pad-right: clamp(30px, 3vw, 40px);
-  --content-pad-bottom: clamp(10px, 4vh, 50px);
+  --content-pad-bottom: clamp(24px, 4vh, 50px);
   --content-pad-left: clamp(10px, 4vw, 10px);
 
   /* Container max-width — total width of sidebar + content */
@@ -78,6 +78,7 @@ html.sidebar-delayed .sidebar {
   width: 0 !important;
   opacity: 0 !important;
   overflow: hidden;
+  transition: none !important;
 }
 
 /* ========================
@@ -269,8 +270,8 @@ html:not(.js-loading) .content {
   justify-items: center;
   text-align: center;
   gap: 12px;
-  padding-bottom: 24px;
-  margin-bottom: 8px;
+  padding-bottom: 12px;
+  margin-bottom: 4px;
   border-bottom: 1px solid var(--color-border);
   transition: gap 0.3s ease;
 }
@@ -790,6 +791,13 @@ html:not(.js-loading) .content {
   color: var(--color-text-muted);
 }
 
+/* Perfil Profesional title: fades with sidebar on desktop, hidden on mobile */
+.perfil-title {
+  opacity: var(--sidebar-fade);
+  transition: opacity 0.3s ease, margin-bottom 0.3s ease;
+  margin-bottom: calc(17px * var(--sidebar-fade));
+}
+
 /* Section heading: large bright display text (e.g. "Habilidades") */
 .section-heading {
   font-family: var(--font-display);
@@ -828,15 +836,6 @@ html:not(.js-loading) .content {
    10b. Tech Grid
    ======================== */
 
-/* Intro paragraph */
-.about-intro {
-  margin: 0 0 28px 0;
-  font-size: 1rem;
-  color: var(--color-text-muted);
-  line-height: 1.7;
-  text-align: justify;
-}
-
 /* Category wrapper: adaptive grid —3 columns when they fit, stacks when narrow */
 .tech-showcase {
   display: grid;
@@ -848,6 +847,13 @@ html:not(.js-loading) .content {
 /* Individual category column */
 .tech-category {
   min-width: 0;
+  transition: transform 0.3s ease;
+}
+
+/* FLIP animation: suppress reveal/stagger during transform transitions */
+.tech-showcase [data-flip].tech-item,
+.tech-showcase [data-flip].tech-category {
+  transition: transform 0.3s ease;
 }
 
 /* Category label: accent-colored display font */
@@ -879,7 +885,7 @@ html:not(.js-loading) .content {
   border: 1px solid var(--color-border);
   border-radius: 4px;
   background-color: var(--color-bg-card);
-  transition: border-color 0.25s ease, background-color 0.25s ease;
+  transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.3s ease;
 }
 
 .tech-item:hover {
@@ -1328,7 +1334,7 @@ html.sidebar-midpoint-mode .site-footer {
 /* Content: no sidebar margin, reduced padding */
 html.sidebar-midpoint-mode .content {
   margin-left: 0;
-  --content-pad-top: max(56px, 4vh);
+  --content-pad-top: 18px;
   --content-pad-right: clamp(16px, 3vw, 24px);
   --content-pad-bottom: clamp(24px, 4vh, 60px);
   --content-pad-left: clamp(16px, 3vw, 24px);
@@ -1574,7 +1580,7 @@ html.sidebar-midpoint-mode .skills-personality-grid {
   /* Content: no left margin, reduced padding on mobile */
   .content {
     margin-left: 0;
-    --content-pad-top: max(56px, 4vh);
+    --content-pad-top: 18px;
     --content-pad-right: clamp(16px, 3vw, 24px);
     --content-pad-bottom: clamp(24px, 4vh, 60px);
     --content-pad-left: clamp(16px, 3vw, 24px);
@@ -1623,7 +1629,7 @@ html.sidebar-midpoint-mode .skills-personality-grid {
 /* 480px and below: smallest screens, further size reductions */
 @media (max-width: 480px) {
   .content {
-    --content-pad-top: 56px;
+    --content-pad-top: 18px;
     --content-pad-right: 16px;
     --content-pad-bottom: 24px;
     --content-pad-left: 16px;

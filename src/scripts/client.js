@@ -9,6 +9,7 @@ const DATA = JSON.parse(document.body.dataset.data)
 let currentLang = localStorage.getItem('preferredLang') || 'es'
 let currentPage = 'sobre'
 let isTransitioning = false
+const motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
 /*
 t(field): Helper de traducción. Resuelve un campo bilingüe {es, en} o un string plano al idioma actual. Es la función más usada del archivo — toda traducción de contenido dinámico pasa por aquí.
@@ -194,10 +195,10 @@ function navigateTo(pageId) {
   const newPage = document.querySelector(`[data-page="${pageId}"]`)
   if (!newPage) { isTransitioning = false; return }
 
+  if (oldPage?.querySelector('.tech-showcase')) storedRects.clear()
+
   const contentEl = document.getElementById('content')
   if (contentEl) contentEl.scrollTop = 0
-
-  const motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
   newPage.style.display = 'block'
   requestAnimationFrame(() => {
@@ -380,7 +381,6 @@ initScrollReveal(): Inicializa el sistema de scroll reveal usando IntersectionOb
 Otros: Se desconecta el observer anterior (scrollObserver.disconnect()) y se eliminan las clases 'visible' existentes antes de re-observar. Esto evita duplicados al cambiar de página. El threshold de 0.15 significa que el 15% del elemento debe ser visible para trigger.
 */
 function initScrollReveal() {
-  const motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches
   if (!motionOK) {
     document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'))
     return
@@ -396,6 +396,7 @@ function initScrollReveal() {
     })
   }, { threshold: 0.15 })
   document.querySelectorAll('.reveal').forEach(el => scrollObserver.observe(el))
+  document.querySelectorAll('[data-flip]').forEach(el => el.classList.add('visible'))
 }
 
 // --- Language switching ---
@@ -514,11 +515,27 @@ function handleMobileProfile() {
   if (!isBelow && wasBelow) {
     // Growing past 1234px: delay sidebar transitions 350ms (mobile-profile collapse time)
     document.documentElement.classList.add('sidebar-delayed')
+    document.querySelector('.sidebar')?.offsetHeight
     if (mobileProfile?.classList.contains('mobile-profile--visible')) {
       mobileProfile.classList.remove('mobile-profile--visible')
     }
     setTimeout(() => {
       document.documentElement.classList.remove('sidebar-delayed')
+      document.documentElement.classList.remove('is-resizing')
+      clearTimeout(resizeTimer)
+      const sidebar = document.querySelector('.sidebar')
+      if (sidebar && motionOK) {
+        sidebar.style.flex = '0 0 0'
+        sidebar.style.width = '0'
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            sidebar.style.flex = ''
+            sidebar.style.width = ''
+            sidebar.style.transition = 'opacity 0.3s ease, flex 0.3s ease, width 0.3s ease'
+            setTimeout(() => { sidebar.style.transition = '' }, 350)
+          })
+        })
+      }
     }, 400)
   } else if (isBelow && !wasBelow) {
     // Shrinking past 1234px: lock sidebar during mobile-profile slide-in
@@ -657,6 +674,56 @@ if (mobileProfileInner) {
     }
   })
   profileObserver.observe(mobileProfileInner)
+}
+
+// --- Tech Grid FLIP animation on resize ---
+const storedRects = new Map()
+
+function flipAnimate(container) {
+  if (!motionOK) return
+  const targets = container.querySelectorAll('[data-flip]')
+  if (!targets.length) return
+
+  if (storedRects.size === 0) {
+    targets.forEach(el => storedRects.set(el, el.getBoundingClientRect()))
+    return
+  }
+
+  const newRects = new Map()
+  targets.forEach(el => newRects.set(el, el.getBoundingClientRect()))
+
+  targets.forEach(el => {
+    const oldRect = storedRects.get(el)
+    const newRect = newRects.get(el)
+    if (!oldRect || !newRect) return
+    const dx = oldRect.left - newRect.left
+    const dy = oldRect.top - newRect.top
+    if (dx === 0 && dy === 0) return
+
+    el.style.transform = `translate(${dx}px, ${dy}px)`
+    el.style.transition = 'none'
+  })
+
+  container.getBoundingClientRect()
+
+  targets.forEach(el => {
+    if (el.style.transform) {
+      el.style.transition = 'transform 0.3s ease'
+      el.style.transform = ''
+    }
+  })
+
+  targets.forEach(el => storedRects.set(el, newRects.get(el)))
+}
+
+const techShowcase = document.querySelector('.tech-showcase')
+let techFlipTimer = null
+if (techShowcase) {
+  const techObserver = new ResizeObserver(() => {
+    clearTimeout(techFlipTimer)
+    techFlipTimer = setTimeout(() => flipAnimate(techShowcase), 60)
+  })
+  techObserver.observe(techShowcase)
 }
 
 // --- Back to top ---
