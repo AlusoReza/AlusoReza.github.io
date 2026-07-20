@@ -479,7 +479,7 @@ mql.addEventListener('change', (e) => {
   if (!e.matches) closeSidebar()
 })
 
-// --- MobileProfile transition (dead zone 1234-1235px, no sidebar-locked needed) ---
+// --- MobileProfile transition (sidebar-delayed/locked for sequential animations) ---
 const mobileProfile = document.querySelector('.mobile-profile')
 const mqlBreakpoint = window.matchMedia('(max-width: 1234px)')
 let wasBelow = mqlBreakpoint.matches
@@ -531,32 +531,6 @@ mqlBreakpoint.addEventListener('change', handleMobileProfile)
 
 if (mqlBreakpoint.matches) {
   updateMobileProfile()
-}
-
-// --- Dead zone safety (1234-1235px): force sidebar if stuck in dead zone ---
-const DEAD_ZONE_MIN = 1234
-const DEAD_ZONE_MAX = 1235
-const DEAD_ZONE_TIMEOUT = 500
-let deadZoneTimer = null
-
-function checkDeadZone() {
-  const w = window.innerWidth
-  if (w > DEAD_ZONE_MIN && w <= DEAD_ZONE_MAX) {
-    if (!deadZoneTimer) {
-      deadZoneTimer = setTimeout(() => {
-        document.documentElement.classList.add('sidebar-force')
-        deadZoneTimer = null
-      }, DEAD_ZONE_TIMEOUT)
-    }
-  } else {
-    if (deadZoneTimer) { clearTimeout(deadZoneTimer); deadZoneTimer = null }
-    document.documentElement.classList.remove('sidebar-force')
-  }
-}
-
-// Init: si el viewport ya está en dead zone, forzar sidebar
-if (window.innerWidth > DEAD_ZONE_MIN && window.innerWidth <= DEAD_ZONE_MAX) {
-  document.documentElement.classList.add('sidebar-force')
 }
 
 // --- MobileProfile responsive layout (ResizeObserver) ---
@@ -749,6 +723,15 @@ function init() {
   document.documentElement.classList.remove('js-loading')
 
   window.addEventListener('resize', updateScrollbar)
+
+  const initW = window.innerWidth
+  if (initW > 1235 && initW < 1337) {
+    const initClass = initW < 1286 ? 'sidebar-init-mobile' : 'sidebar-init-desktop'
+    document.documentElement.classList.add(initClass)
+    window.addEventListener('resize', function () {
+      document.documentElement.classList.remove('sidebar-init-mobile', 'sidebar-init-desktop')
+    }, { once: true })
+  }
 }
 
 // --- Resize debounce ---
@@ -759,7 +742,6 @@ window.addEventListener('resize', () => {
   resizeTimer = setTimeout(() => {
     document.documentElement.classList.remove('is-resizing')
   }, 150)
-  checkDeadZone()
 })
 
 init()

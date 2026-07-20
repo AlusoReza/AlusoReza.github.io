@@ -65,9 +65,8 @@ html.sidebar-locked .lang-switcher-floating {
   transition: none;
 }
 
-html.sidebar-force {
-  --sidebar-fade: 1;
-}
+html.sidebar-init-mobile { --sidebar-fade: 0; }
+html.sidebar-init-desktop { --sidebar-fade: 1; }
 
 html.sidebar-delayed .sidebar {
   flex: 0 0 0 !important;
