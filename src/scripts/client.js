@@ -477,6 +477,12 @@ document.addEventListener('keydown', (e) => {
 const mql = window.matchMedia('(max-width: 1235px)')
 mql.addEventListener('change', (e) => {
   if (!e.matches) closeSidebar()
+  document.documentElement.classList.add('sidebar-no-transition')
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      document.documentElement.classList.remove('sidebar-no-transition')
+    })
+  })
 })
 
 // --- MobileProfile transition (sidebar-delayed/locked for sequential animations) ---

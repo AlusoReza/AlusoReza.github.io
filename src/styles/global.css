@@ -68,6 +68,11 @@ html.sidebar-locked .lang-switcher-floating {
 html.sidebar-init-mobile { --sidebar-fade: 0; }
 html.sidebar-init-desktop { --sidebar-fade: 1; }
 
+html.sidebar-no-transition .sidebar,
+html.sidebar-no-transition .sidebar-inner {
+  transition: none !important;
+}
+
 html.sidebar-delayed .sidebar {
   flex: 0 0 0 !important;
   width: 0 !important;
