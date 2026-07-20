@@ -1635,7 +1635,7 @@ html.sidebar-midpoint-mode .skills-personality-grid {
 @media (max-width: 480px) {
   .content {
     --content-pad-top: 18px;
-    --content-pad-right: 16px;
+    --content-pad-right: 4px;
     --content-pad-bottom: 24px;
     --content-pad-left: 16px;
   }
