@@ -42,8 +42,8 @@ PORTFOLIO — Global Stylesheet
   --transition-speed: 0.35s;
 
   /* Content padding — adjust to expand/contract content area */
-  --content-pad-top: clamp(30px, 4vh, 32px);
-  --content-pad-right: clamp(30px, 3vw, 40px);
+  --content-pad-top: clamp(55px, 4vh, 55px);
+  --content-pad-right: clamp(35px, 3vw, 55px);
   --content-pad-bottom: clamp(24px, 4vh, 50px);
   --content-pad-left: clamp(10px, 4vw, 10px);
 
@@ -216,8 +216,8 @@ body {
   z-index: 2;
   display: flex;
   flex-direction: column;
-  padding: var(--content-pad-top) 0 var(--content-pad-bottom) var(--content-pad-left);
-  opacity: 0;
+  padding: var(--content-pad-top) var(--content-pad-right) var(--content-pad-bottom) var(--content-pad-left);
+  opacity: 0;Vale 
   transition: opacity 0.4s ease, padding 0.15s ease-out;
 }
 
@@ -244,6 +244,7 @@ html:not(.js-loading) .content {
   grid-template-rows: 0fr;
   overflow: clip;
   opacity: 0;
+  height: 0;
   transition:
     grid-template-rows 0.35s ease,
     opacity 0.35s ease;
@@ -251,6 +252,7 @@ html:not(.js-loading) .content {
 
 .mobile-profile--visible {
   grid-template-rows: 1fr;
+  height: auto;
   opacity: 1;
   transition:
     grid-template-rows 0.35s ease,
@@ -1421,11 +1423,11 @@ html.sidebar-midpoint-mode .skills-personality-grid {
   .sidebar {
     flex: 0 0 var(--sidebar-width);
     width: var(--sidebar-width);
-    padding: clamp(85px, 6vh, 85px) clamp(30px, 3vw, 40px) clamp(80px, 6vh, 77px) Va clamp(30px, 3vw, 40px);
-  }
+    margin-top: 10px;
+    }
   .content {
-    --content-pad-right: 110px;
-    --content-pad-top: 45px;
+    --content-pad-right: 130px;
+    --content-pad-top: 70px;
   }
 
 }
@@ -1584,7 +1586,7 @@ html.sidebar-midpoint-mode .skills-personality-grid {
   .content {
     margin-left: 0;
     --content-pad-top: 18px;
-    --content-pad-right: clamp(16px, 3vw, 24px);
+    --content-pad-right: clamp(8px, 3vw, 12px);
     --content-pad-bottom: clamp(24px, 4vh, 60px);
     --content-pad-left: clamp(16px, 3vw, 24px);
   }
