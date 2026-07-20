@@ -212,7 +212,7 @@ function navigateTo(pageId) {
   sidebar?.classList.toggle('sidebar--about', pageId === 'sobre')
 
   const footer = document.querySelector('.site-footer')
-  if (footer) footer.classList.toggle('hidden', !['sobre', 'hab'].includes(pageId))
+  if (footer) footer.classList.toggle('hidden', pageId !== 'sobre')
 
   document.querySelectorAll('.sidebar-nav-link').forEach(link => {
     link.classList.toggle('active', link.dataset.nav === pageId)
@@ -708,12 +708,12 @@ function init() {
   if (activeNav) activeNav.classList.add('active')
 
   const footer = document.querySelector('.site-footer')
-  if (footer) footer.classList.toggle('hidden', !['sobre', 'hab'].includes(validPage))
+  if (footer) footer.classList.toggle('hidden', validPage !== 'sobre')
 
   document.documentElement.lang = savedLang
   translateUI()
 
-  if (savedLang !== 'es') renderAll()
+  renderAll()
 
   updateMobileProfile()
   sidebar?.classList.toggle('sidebar--about', validPage === 'sobre')

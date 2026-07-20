@@ -824,78 +824,105 @@ html:not(.js-loading) .content {
   color: var(--color-text);
 }
 
-/* Skills container: wraps all three skill groups (languages, frameworks, tools) */
-.about-skills {
-  margin: 15px 0 24px;
+/* ========================
+   10b. Tech Grid
+   ======================== */
+
+/* Intro paragraph */
+.about-intro {
+  margin: 0 0 28px 0;
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  text-align: justify;
 }
 
-/* Individual skill group: label + badges in a row */
-.about-skills-group {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 12px;
+/* Category wrapper: adaptive grid —3 columns when they fit, stacks when narrow */
+.tech-showcase {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  margin-bottom: 28px;
 }
 
-/* Skill group label: accent-colored display font (e.g. "Lenguajes") */
-.about-skills-label {
+/* Individual category column */
+.tech-category {
+  min-width: 0;
+}
+
+/* Category label: accent-colored display font */
+.tech-category-label {
   font-family: var(--font-display);
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--color-accent);
   letter-spacing: 0.5px;
   display: block;
-  width: 100%;
-  margin-bottom: 6px;
+  margin-bottom: 12px;
 }
 
-/* Badge container: inline-flex row of skill badges */
-.about-skills-badges {
-  display: inline-flex;
+/* Grid container: horizontal flow, wraps as screen grows */
+.tech-grid {
+  display: flex;
   flex-wrap: wrap;
-  gap: 7px;
+  gap: 12px;
 }
 
-/* Individual skill badge: bordered pill with icon + name */
-.about-skill-badge {
-  display: inline-flex;
+/* Individual item: icon on top, name below — fixed 76px width */
+.tech-item {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 5px;
-  padding: 5px 13px;
-  font-size: 0.95rem;
-  color: var(--color-text);
-  background-color: var(--color-bg-card);
+  gap: 6px;
+  width: 76px;
+  padding: 12px 4px 10px;
   border: 1px solid var(--color-border);
   border-radius: 4px;
-  transition: border-color 0.2s ease;
-  white-space: nowrap;
+  background-color: var(--color-bg-card);
+  transition: border-color 0.25s ease, background-color 0.25s ease;
 }
 
-/* Badge hover: accent border */
-.about-skill-badge:hover {
+.tech-item:hover {
   border-color: var(--color-accent);
+  background-color: var(--color-bg-hover);
 }
 
-/* Badge icon: 19px square */
-.about-skill-badge img {
-  width: 19px;
-  height: 19px;
+/* Icon: 32px square */
+.tech-item img {
+  width: 32px;
+  height: 32px;
   object-fit: contain;
 }
 
-/* Fallback badge for skills without CDN logo: dashed border + 2-letter abbreviation */
-.about-skill-fallback {
-  display: inline-flex;
+/* Name below icon */
+.tech-item-name {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* Text-only fallback: same size, dashed border */
+.tech-item--text-only {
+  border-style: dashed;
+}
+
+.tech-item-fallback {
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 17px;
-  height: 17px;
-  font-size: 0.65rem;
+  width: 32px;
+  height: 32px;
+  font-size: 0.75rem;
   font-weight: 700;
-  color: var(--color-text);
+  font-family: var(--font-display);
+  color: var(--color-accent);
   border: 1px dashed var(--color-border);
-  border-radius: 2px;
+  border-radius: 4px;
 }
 
 /* ========================
@@ -1341,12 +1368,9 @@ html.sidebar-midpoint-mode .sidebar-nav-link.active {
   color: var(--color-text-bright);
 }
 
-/* About skill labels: inline */
-html.sidebar-midpoint-mode .about-skills-label {
-  display: inline;
-  white-space: nowrap;
-  width: auto;
-  margin-bottom: 0;
+/* Tech grid: tighter gap in midpoint mode */
+html.sidebar-midpoint-mode .tech-grid {
+  gap: 10px;
 }
 
 /* Personality grid: single column */
@@ -1480,12 +1504,9 @@ html.sidebar-midpoint-mode .skills-personality-grid {
     max-width: 100%;
   }
 
-  /* About skill labels: inline on mobile to save vertical space */
-  .about-skills-label {
-    display: inline;
-    white-space: nowrap;
-    width: auto;
-    margin-bottom: 0;
+  /* Tech grid: tighter gap on mobile */
+  .tech-grid {
+    gap: 10px;
   }
 
   /* Sidebar profile image: slightly smaller on mobile */
@@ -1616,15 +1637,24 @@ html.sidebar-midpoint-mode .skills-personality-grid {
     font-size: 1.21rem;
   }
 
-  .about-skill-badge {
-    font-size: 0.81rem;
-    padding: 4px 11px;
-    gap: 4px;
+  .tech-item {
+    width: 68px;
+    padding: 10px 3px 8px;
   }
 
-  .about-skill-badge img {
-    width: 17px;
-    height: 17px;
+  .tech-item img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .tech-item-name {
+    font-size: 0.65rem;
+  }
+
+  .tech-item-fallback {
+    width: 28px;
+    height: 28px;
+    font-size: 0.7rem;
   }
 
   .personality-note {

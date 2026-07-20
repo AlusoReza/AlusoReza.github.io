@@ -1,7 +1,6 @@
 {
   "es": {
     "nav-sobre": "Sobre mí",
-    "nav-hab": "Habilidades",
     "nav-proy": "Proyectos",
     "nav-est": "Estudios",
     "nav-exp": "Experiencia",
@@ -13,7 +12,6 @@
   },
   "en": {
     "nav-sobre": "About me",
-    "nav-hab": "Skills",
     "nav-proy": "Projects",
     "nav-est": "Education",
     "nav-exp": "Experience",

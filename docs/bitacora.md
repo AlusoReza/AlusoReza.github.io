@@ -358,3 +358,18 @@ Global workflow summary. Each entry links to the detailed day log.
 **Fix:** Rewrote all 7 .ps1 scripts with ASCII-only characters. Updated file references (Nav.astro -> LangSwitcher.astro, lang.json -> nav.json+sections.json+about.json, Contact.astro removed). Fixed !important filter to exclude sidebar state classes and global state classes. Fixed init() detection to find global function. Updated profile.json and skills.json schemas.
 **Results:** 0 FAILs, 57 PASS, 18 WARN (all known/intentional).
 **Build:** `npm run build` — 631ms, 0 errors.
+
+### Session 90: Merge About + Skills into single unified page
+**Prompt:** Fusionar "Sobre mí" y "Habilidades" en una sola página. Nueva estructura: intro → grid de tecnologías (icono+nombre por categoría) → bio → perfil profesional. Items sin logo al final, mismo tamaño. Título "Sobre mí" eliminado. Nav "Habilidades" eliminado.
+**Plan:** Reescribir About.astro con tech grid + personalidad. Eliminar Skills.astro. Nuevo CSS Tech Grid (10b), eliminar About Skills. Actualizar client.js footer condition. Quitar nav-hab de nav.json. 6 archivos tocados, 1 eliminado.
+**Build:** `npm run build` — 624ms, 0 errors. Tests: 0 FAILs.
+
+### Session 91: Fix 4 bugs — adaptive grid, nav gap, personality render
+**Prompt:** Fix bugs from Session 90: grid vertical instead of horizontal, "Perfil Profesional" title misplaced, personality skills invisible on load, ghost gap in sidebar nav.
+**Plan:** CSS Grid adaptive (`auto-fit, minmax(250px,1fr)`), remove stale `nav-hab` from Profile.astro, always call `renderAll()` in init(). 3 files, 0 eliminated.
+**Build:** `npm run build` — 685ms, 0 errors. Tests: 0 FAILs.
+
+### Session 92: Revert grid CSS + fix title position
+**Prompt:** Revert `.tech-grid` CSS Grid change (user wants fixed 76px items). Move "Perfil Profesional" title above the3 bio paragraphs.
+**Plan:** Revert `.tech-grid` to flexbox, restore `width: 76px` on `.tech-item`, revert 480px responsive. Move `<h2>` in About.astro. 2 files, 0 eliminated.
+**Build:** `npm run build` — 724ms, 0 errors. Tests: 0 FAILs.
