@@ -269,7 +269,7 @@ html:not(.js-loading) .content {
   grid-template-columns: 1fr;
   justify-items: center;
   text-align: center;
-  gap: 12px;
+  padding-top: 45px;
   padding-bottom: 12px;
   margin-bottom: 4px;
   border-bottom: 1px solid var(--color-border);
@@ -794,8 +794,10 @@ html:not(.js-loading) .content {
 /* Perfil Profesional title: fades with sidebar on desktop, hidden on mobile */
 .perfil-title {
   opacity: var(--sidebar-fade);
-  transition: opacity 0.3s ease, margin-bottom 0.3s ease;
+  transition: opacity 0.3s ease, margin-bottom 0.3s ease, max-height 0.3s ease;
   margin-bottom: calc(17px * var(--sidebar-fade));
+  max-height: calc(3em * var(--sidebar-fade));
+  overflow: hidden;
 }
 
 /* Section heading: large bright display text (e.g. "Habilidades") */
