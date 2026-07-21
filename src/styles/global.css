@@ -802,7 +802,8 @@ html:not(.js-loading) .content {
   transition: opacity 0.3s ease, margin-bottom 0.3s ease, max-height 0.3s ease;
   margin-bottom: calc(17px * var(--sidebar-fade));
   max-height: calc(3em * var(--sidebar-fade));
-  overflow: hidden;
+  position: relative;
+  z-index: 1;
 }
 
 /* Section heading: large bright display text (e.g. "Habilidades") */
