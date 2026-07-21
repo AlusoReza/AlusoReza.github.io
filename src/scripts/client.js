@@ -718,41 +718,6 @@ if (mobileProfileInner) {
   profileObserver.observe(mobileProfileInner)
 }
 
-// --- Tech Grid fade on resize (only when column count changes) ---
-const techShowcase = document.querySelector('.tech-showcase')
-let techFadeTimer = null
-let lastSignature = ''
-if (techShowcase) {
-  const grids = techShowcase.querySelectorAll('.tech-grid')
-  function getColCount(grid) {
-    const items = grid.children
-    if (items.length < 2) return items.length
-    const firstTop = items[0].offsetTop
-    let count = 1
-    for (let i = 1; i < items.length; i++) {
-      if (items[i].offsetTop === firstTop) count++
-      else break
-    }
-    return count
-  }
-  function getSignature() {
-    return Array.from(grids).map(g => getColCount(g)).join(',')
-  }
-  lastSignature = getSignature()
-  const techObserver = new ResizeObserver(() => {
-    const sig = getSignature()
-    if (sig !== lastSignature) {
-      lastSignature = sig
-      techShowcase.classList.add('is-resizing')
-      clearTimeout(techFadeTimer)
-      techFadeTimer = setTimeout(() => {
-        techShowcase.classList.remove('is-resizing')
-      }, 120)
-    }
-  })
-  techObserver.observe(techShowcase)
-}
-
 // --- Back to top ---
 const backToTop = document.getElementById('back-to-top')
 const contentEl = document.getElementById('content')
@@ -879,7 +844,14 @@ function snapSidebarFade() {
         html.classList.remove('sidebar-no-transition')
       })
     })
-    setTimeout(() => { html.classList.remove('lang-switcher-delayed') }, 340)
+    setTimeout(() => {
+      html.classList.remove('lang-switcher-delayed')
+      html.classList.add('lang-switcher-reveal')
+      const ls = document.querySelector('.lang-switcher-floating')
+      ls?.addEventListener('animationend', () => {
+        html.classList.remove('lang-switcher-reveal')
+      }, { once: true })
+    }, 340)
     snapProfileTimer = setTimeout(() => { animateMobileProfile(true) }, 350)
   } else {
     html.classList.remove('sidebar-midpoint-mode')

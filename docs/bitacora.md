@@ -454,3 +454,8 @@ Global workflow summary. Each entry links to the detailed day log.
 **Prompt:** Sidebar rendered for PC layout but hidden between 1236-1240px. Root cause: `clearTimeout(resizeTimer)` in `handleMobileProfile()` kills the timer that calls `snapSidebarFade()`.
 **Plan:** Replace 17-line manual sidebar transition block with single `snapSidebarFade()` call. Eliminates `clearTimeout(resizeTimer)`, removes manual flex/width transition, ensures `sidebar-midpoint-mode` always added in midpoint range.
 **Build:** `npm run build` — 708ms, 0 errors. Tests: 0 FAILs.
+
+### Session 115: Archive tech grid transitions
+**Prompt:** Document the complete history of FLIP and transition attempts on the tech grid (Sessions 102-111). Create archived document with all 5 approaches, code, reasons for rejection, and lessons learned.
+**Plan:** Remove transition CSS/JS from `global.css` and `client.js`. Create `docs/archived/tech-grid-transitions.md` with timeline, code snippets, and decision rationale.
+**Build:** `npm run build` — 581ms, 0 errors.

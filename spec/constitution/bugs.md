@@ -1,177 +1,177 @@
-# Bugs known — Alonso Suarez Reza Portfolio
+﻿# Bugs known â€” Alonso Suarez Reza Portfolio
 
-Last scan: 2026-07-21 (Session 114)
+Last scan: 2026-07-21 (Session 103)
 Status: All previously identified bugs fixed. Test scripts updated to match current project structure.
 
-## Fixed (Session 12 — 2026-06-26)
+## Fixed (Session 12 â€” 2026-06-26)
 
-### Mixed-language on initial load with EN saved — HIGH
+### Mixed-language on initial load with EN saved â€” HIGH
 - **File:** `src/scripts/client.js`
 - **Source:** check-js-logic.ps1 + [MANUAL]
 - **Detected:** Session 8 | **Fixed:** Session 12
 - **Fix:** Added `if (savedLang !== 'es') renderAll();` at end of `init()`
 
-### CV PDF does not exist (404) — MEDIUM
+### CV PDF does not exist (404) â€” MEDIUM
 - **File:** `src/components/Contact.astro`, `src/components/Profile.astro`
 - **Source:** check-paths.ps1
 - **Detected:** Session 8 | **Fixed:** Session 12
 - **Fix:** User placed PDF at `public/assets/Alonso_Reza_CV.pdf`; paths updated to `/assets/...`
 
-### Icon destroyed on language switch — MEDIUM
+### Icon destroyed on language switch â€” MEDIUM
 - **File:** `src/components/Contact.astro`
 - **Source:** [MANUAL]
 - **Detected:** Session 8 | **Fixed:** Session 12
 - **Fix:** Separated icon into `<span class="icon">` outside `data-i18n` span
 
-### btn-primary undefined in CSS — LOW
+### btn-primary undefined in CSS â€” LOW
 - **File:** `src/components/Projects.astro`, `src/scripts/client.js`
 - **Source:** check-js-logic.ps1, check-css-logic.ps1
 - **Detected:** Session 8 | **Fixed:** Session 12
 - **Fix:** Replaced `btn-primary` with `btn-outline` (existing defined class)
 
-### target=_blank without rel=noopener (x4) — LOW
+### target=_blank without rel=noopener (x4) â€” LOW
 - **File:** `Contact.astro`, `Projects.astro`, `client.js`
 - **Source:** check-js-logic.ps1
 - **Detected:** Session 8 | **Fixed:** Session 12
 - **Fix:** Added `rel="noopener noreferrer"` to all 4 external links
 
-### changeLanguage without early return — LOW
+### changeLanguage without early return â€” LOW
 - **File:** `src/scripts/client.js`
 - **Source:** check-js-logic.ps1
 - **Detected:** Session 8 | **Fixed:** Session 12
 - **Fix:** Added `if (lang === currentLang) return;`
 
-### #1a1f26 hardcoded in .badge — LOW
+### #1a1f26 hardcoded in .badge â€” LOW
 - **File:** `src/styles/global.css`
 - **Source:** check-css-logic.ps1, check-frontend-design.ps1
 - **Detected:** Session 8 | **Fixed:** Session 12
 - **Fix:** Replaced `#1a1f26` with `var(--color-bg-card)`
 
-### Inconsistent asset paths — LOW
+### Inconsistent asset paths â€” LOW
 - **File:** `profile.json`, `Contact.astro`
 - **Source:** check-paths.ps1
 - **Detected:** Session 8 | **Fixed:** Session 12
 - **Fix:** Changed both to absolute `/assets/Alonso_Reza_CV.pdf`
 
-### Lang switcher overflow on very small screens — LOW
+### Lang switcher overflow on very small screens â€” LOW
 - **File:** `src/styles/global.css`
 - **Source:** roadmap.md (manual review)
 - **Detected:** Session 12 | **Fixed:** Session 17
 - **Fix:** Lang-switcher moved inside `<nav>` as inline flex element
 
-### Social buttons width at ~480-550px — LOW
+### Social buttons width at ~480-550px â€” LOW
 - **File:** `src/styles/global.css`
 - **Source:** roadmap.md (manual review)
 - **Detected:** Session 12 | **Fixed:** Session 17
 - **Fix:** Added `box-sizing: border-box` and responsive width rules
 
-## Fixed (Session 19 — 2026-07-13)
+## Fixed (Session 19 â€” 2026-07-13)
 
-### .project-links missing flex-wrap (mobile overflow) — LOW
+### .project-links missing flex-wrap (mobile overflow) â€” LOW
 - **File:** `src/styles/global.css`
 - **Source:** Mobile responsive analysis
 - **Detected:** Session 18 | **Fixed:** Session 19
 - **Fix:** Added `flex-wrap: wrap` to `.project-links`
 
-### nav-overlay not covering full viewport — MEDIUM
+### nav-overlay not covering full viewport â€” MEDIUM
 - **File:** `src/components/Nav.astro`
 - **Source:** Manual testing
 - **Detected:** Session 19 | **Fixed:** Session 19
 - **Fix:** Moved `.nav-overlay` outside `<nav>` to escape `backdrop-filter` containing block
 
-### nav-links unclickable on mobile (z-index conflict) — HIGH
+### nav-links unclickable on mobile (z-index conflict) â€” HIGH
 - **File:** `src/styles/global.css`
 - **Source:** Manual testing
 - **Detected:** Session 19 | **Fixed:** Session 19
 - **Fix:** Changed `.nav-bar` z-index from 50 to 100
 
-### CV button text compressed on mobile — LOW
+### CV button text compressed on mobile â€” LOW
 - **File:** `src/styles/global.css`
 - **Source:** Manual testing
 - **Detected:** Session 19 | **Fixed:** Session 19
 - **Fix:** Added `height: auto; min-height: 45px; padding: 12px 20px` to `.cv-btn` mobile rule
 
-## Fixed (Sessions 85-87 — 2026-07-20)
+## Fixed (Sessions 85-87 â€” 2026-07-20)
 
-### Sidebar stuck at intermediate state on resize — HIGH
+### Sidebar stuck at intermediate state on resize â€” HIGH
 - **File:** `src/scripts/client.js`, `src/styles/global.css`
 - **Source:** [MANUAL]
 - **Detected:** Session 84 | **Fixed:** Session 85-87
 - **Fix:** Removed snap system, made sidebar CSS-only via `clamp()`. Added `snapSidebarFade()` for mouseup snap. Added `sidebar-midpoint-mode` for dead zone. Added `is-resizing` transition suppression.
 
-### Sidebar flash when crossing 1235px breakpoint — HIGH
+### Sidebar flash when crossing 1235px breakpoint â€” HIGH
 - **File:** `src/styles/global.css`, `src/scripts/client.js`
 - **Source:** [MANUAL]
 - **Detected:** Session 86 | **Fixed:** Session 86
 - **Fix:** `sidebar-no-transition` class for 2 rAF frames on media query change
 
-### Mobile profile not appearing in midpoint mode — MEDIUM
+### Mobile profile not appearing in midpoint mode â€” MEDIUM
 - **File:** `src/scripts/client.js`
 - **Source:** [MANUAL]
 - **Detected:** Session 87 | **Fixed:** Session 87
 - **Fix:** `updateMobileProfile()` now checks `sidebar-midpoint-mode` in addition to `mqlBreakpoint.matches`
 
-### Page load in fade zone shows wrong layout — MEDIUM
+### Page load in fade zone shows wrong layout â€” MEDIUM
 - **File:** `src/scripts/client.js`
 - **Source:** [MANUAL]
 - **Detected:** Session 87 | **Fixed:** Session 87
 - **Fix:** Init code now adds `sidebar-midpoint-mode` + `updateMobileProfile()` for loads in 1236-1285px
 
-## Fixed (Session 114 — 2026-07-21)
+## Fixed (Session 114 â€” 2026-07-21)
 
-### Sidebar stuck in PC layout at 1236-1240px (dead zone) — HIGH
+### Sidebar stuck in PC layout at 1236-1240px (dead zone) â€” HIGH
 - **File:** `src/scripts/client.js`
 - **Source:** [MANUAL]
 - **Detected:** Session 112 | **Fixed:** Session 114
 - **Root cause:** `handleMobileProfile()` L578 `clearTimeout(resizeTimer)` cancelled the 1000ms timer that would call `snapSidebarFade()`. When crossing from <1235px to 1236-1240px, the sequence was:
-  1. `mqlBreakpoint` change → `handleMobileProfile()` adds `sidebar-delayed`, starts 350ms timer
-  2. `resize` handler → adds `is-resizing`, starts 1000ms timer → `snapSidebarFade()`
+  1. `mqlBreakpoint` change â†’ `handleMobileProfile()` adds `sidebar-delayed`, starts 350ms timer
+  2. `resize` handler â†’ adds `is-resizing`, starts 1000ms timer â†’ `snapSidebarFade()`
   3. At 350ms: removes `sidebar-delayed`, removes `is-resizing`, **`clearTimeout(resizeTimer)` kills the 1000ms timer**
-  4. `snapSidebarFade()` never runs → `sidebar-midpoint-mode` never added → sidebar stays in PC layout with `--sidebar-fade ≈ 0`
+  4. `snapSidebarFade()` never runs â†’ `sidebar-midpoint-mode` never added â†’ sidebar stays in PC layout with `--sidebar-fade â‰ˆ 0`
 - **Why intermittent:** `mouseup` handler also calls `snapSidebarFade()` if `is-resizing` is active, but `handleMobileProfile()` clears `is-resizing` at L577 before `mouseup` fires (if user releases mouse after 350ms).
 - **Fix:** Replaced 17-line manual sidebar transition block (L575-592) with 3-line block: remove `sidebar-delayed`, remove `is-resizing`, call `snapSidebarFade()`. This eliminates `clearTimeout(resizeTimer)`, removes manual flex/width transition, and ensures `sidebar-midpoint-mode` is always added when entering the 1236-1285px range.
 
-## Open (non-bug — intentional/neutral)
+## Open (non-bug â€” intentional/neutral)
 
-### Brand colors in badges — INFO
+### Brand colors in badges â€” INFO
 - **Source:** check-frontend-design.ps1
 - **Description:** Tool brand colors (#3776ab, #e76f00, etc.) are intentional design choices.
-- **Status:** Intentional — no fix needed
+- **Status:** Intentional â€” no fix needed
 
-### Empty experience.json — INFO
+### Empty experience.json â€” INFO
 - **Source:** check-json-schema.ps1
 - **Description:** No work experience to list yet. Section auto-hides.
-- **Status:** Intentional — no fix needed
+- **Status:** Intentional â€” no fix needed
 
-### Computational grid and fade gradient removed — INFO
+### Computational grid and fade gradient removed â€” INFO
 - **Source:** check-frontend-design.ps1
-- **Description:** Checks for `#inicio` grid/gradient are stale — these were removed during the redesign.
-- **Status:** Stale check — will be removed in next test maintenance
+- **Description:** Checks for `#inicio` grid/gradient are stale â€” these were removed during the redesign.
+- **Status:** Stale check â€” will be removed in next test maintenance
 
-### .btn-outline not found — INFO
+### .btn-outline not found â€” INFO
 - **Source:** check-frontend-design.ps1
 - **Description:** `.btn-outline` was renamed during migration. Test still looks for the old name.
-- **Status:** Stale check — will be removed in next test maintenance
+- **Status:** Stale check â€” will be removed in next test maintenance
 
-### Missing sticky nav — INFO
+### Missing sticky nav â€” INFO
 - **Source:** check-frontend-design.ps1
 - **Description:** Sidebar architecture uses `position: relative`, not `sticky`. The sidebar is always visible.
-- **Status:** Stale check — will be removed in next test maintenance
+- **Status:** Stale check â€” will be removed in next test maintenance
 
-### target=_blank without rel=noopener (false positive) — INFO
+### target=_blank without rel=noopener (false positive) â€” INFO
 - **Source:** check-js-logic.ps1
 - **Description:** Test detects `target="_blank"` in a comment line (line 109) that mentions the attribute. Actual code (line 117) has `rel="noopener noreferrer"`.
-- **Status:** False positive — comment text triggers regex
+- **Status:** False positive â€” comment text triggers regex
 
-### Orphan CSS classes — INFO
+### Orphan CSS classes â€” INFO
 - **Source:** check-css-logic.ps1
 - **Description:** `lang-btn`, `sidebar-name-first`, `lang-switcher` are used in `LangSwitcher.astro` (orphaned component not included in layout).
-- **Status:** Low priority — component not used in production
+- **Status:** Low priority â€” component not used in production
 
-### Unused --content-max-width variable — INFO
+### Unused --content-max-width variable â€” INFO
 - **Source:** check-css-logic.ps1
 - **Description:** `--content-max-width: 800px` defined in `:root` but never referenced.
-- **Status:** Low priority — dead code, can be removed
+- **Status:** Low priority â€” dead code, can be removed
 
 
 ### Computational grid not detected in #inicio -- WARNING
@@ -3031,51 +3031,269 @@ Status: All previously identified bugs fixed. Test scripts updated to match curr
 - **Description:** experience.json empty
 - **Status:** Pending
 
-## Automatic findings (Session 110 -- 2026-07-21)
 
 ### Computational grid not detected in #inicio -- WARNING
 - **Source:** check-frontend-design.ps1
-- **Detected:** Session 110 (automatic)
+- **Detected:** Session 115
+- **Description:** Computational grid not detected in #inicio
 - **Status:** Pending
 
 ### Missing fade gradient in #inicio::after -- WARNING
 - **Source:** check-frontend-design.ps1
-- **Detected:** Session 110 (automatic)
+- **Detected:** Session 115
+- **Description:** Missing fade gradient in #inicio::after
 - **Status:** Pending
 
 ### .btn-outline not found -- WARNING
 - **Source:** check-frontend-design.ps1
-- **Detected:** Session 110 (automatic)
+- **Detected:** Session 115
+- **Description:** .btn-outline not found
 - **Status:** Pending
 
 ### Missing sticky nav or sidebar -- WARNING
 - **Source:** check-frontend-design.ps1
-- **Detected:** Session 110 (automatic)
+- **Detected:** Session 115
+- **Description:** Missing sticky nav or sidebar
+- **Status:** Pending
+
+### Computational grid not detected in #inicio -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 115
+- **Description:** Computational grid not detected in #inicio
+- **Status:** Pending
+
+### Missing fade gradient in #inicio::after -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 115
+- **Description:** Missing fade gradient in #inicio::after
+- **Status:** Pending
+
+### .btn-outline not found -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 115
+- **Description:** .btn-outline not found
+- **Status:** Pending
+
+### Missing sticky nav or sidebar -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 115
+- **Description:** Missing sticky nav or sidebar
 - **Status:** Pending
 
 ### target=_blank without rel=noopener: -- WARNING
 - **Source:** check-js-logic.ps1
-- **Detected:** Session 110 (automatic)
+- **Detected:** Session 115
+- **Description:** target=_blank without rel=noopener:
 - **Status:** Pending
 
-### Predominantly single quotes (522 single vs 88 double) -- WARNING
+### Predominantly single quotes (518 single vs 88 double) -- WARNING
 - **Source:** check-js-logic.ps1
-- **Detected:** Session 110 (automatic)
+- **Detected:** Session 115
+- **Description:** Predominantly single quotes (518 single vs 88 double)
 - **Status:** Pending
 
-### Classes referenced but missing CSS: sidebar-name-first, lang-btn, lang-switcher -- WARNING
+### target=_blank without rel=noopener: -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 115
+- **Description:** target=_blank without rel=noopener:
+- **Status:** Pending
+
+### Predominantly single quotes (518 single vs 88 double) -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 115
+- **Description:** Predominantly single quotes (518 single vs 88 double)
+- **Status:** Pending
+
+### Classes referenced but missing CSS: sidebar-name-first, lang-switcher, lang-btn -- WARNING
 - **Source:** check-css-logic.ps1
-- **Detected:** Session 110 (automatic)
+- **Detected:** Session 115
+- **Description:** Classes referenced but missing CSS: sidebar-name-first, lang-switcher, lang-btn
 - **Status:** Pending
 
 ### CSS variables defined but possibly unused: --content-max-width -- WARNING
 - **Source:** check-css-logic.ps1
-- **Detected:** Session 110 (automatic)
+- **Detected:** Session 115
+- **Description:** CSS variables defined but possibly unused: --content-max-width
+- **Status:** Pending
+
+### Classes referenced but missing CSS: sidebar-name-first, lang-switcher, lang-btn -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 115
+- **Description:** Classes referenced but missing CSS: sidebar-name-first, lang-switcher, lang-btn
+- **Status:** Pending
+
+### CSS variables defined but possibly unused: --content-max-width -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 115
+- **Description:** CSS variables defined but possibly unused: --content-max-width
 - **Status:** Pending
 
 ### experience.json empty -- WARNING
 - **Source:** check-json-schema.ps1
-- **Detected:** Session 110 (automatic)
+- **Detected:** Session 115
+- **Description:** experience.json empty
+- **Status:** Pending
+
+### experience.json empty -- WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session 115
+- **Description:** experience.json empty
+- **Status:** Pending
+
+
+### Computational grid not detected in #inicio -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 103
+- **Description:** Computational grid not detected in #inicio
+- **Status:** Pending
+
+### Missing fade gradient in #inicio::after -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 103
+- **Description:** Missing fade gradient in #inicio::after
+- **Status:** Pending
+
+### .btn-outline not found -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 103
+- **Description:** .btn-outline not found
+- **Status:** Pending
+
+### Missing sticky nav or sidebar -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 103
+- **Description:** Missing sticky nav or sidebar
+- **Status:** Pending
+
+### Computational grid not detected in #inicio -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 103
+- **Description:** Computational grid not detected in #inicio
+- **Status:** Pending
+
+### Missing fade gradient in #inicio::after -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 103
+- **Description:** Missing fade gradient in #inicio::after
+- **Status:** Pending
+
+### .btn-outline not found -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 103
+- **Description:** .btn-outline not found
+- **Status:** Pending
+
+### Missing sticky nav or sidebar -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 103
+- **Description:** Missing sticky nav or sidebar
+- **Status:** Pending
+
+### target=_blank without rel=noopener: -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 103
+- **Description:** target=_blank without rel=noopener:
+- **Status:** Pending
+
+### Predominantly single quotes (518 single vs 88 double) -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 103
+- **Description:** Predominantly single quotes (518 single vs 88 double)
+- **Status:** Pending
+
+### target=_blank without rel=noopener: -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 103
+- **Description:** target=_blank without rel=noopener:
+- **Status:** Pending
+
+### Predominantly single quotes (518 single vs 88 double) -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 103
+- **Description:** Predominantly single quotes (518 single vs 88 double)
+- **Status:** Pending
+
+### Classes referenced but missing CSS: lang-switcher, sidebar-name-first, lang-btn -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 103
+- **Description:** Classes referenced but missing CSS: lang-switcher, sidebar-name-first, lang-btn
+- **Status:** Pending
+
+### CSS variables defined but possibly unused: --content-max-width -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 103
+- **Description:** CSS variables defined but possibly unused: --content-max-width
+- **Status:** Pending
+
+### Classes referenced but missing CSS: lang-switcher, sidebar-name-first, lang-btn -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 103
+- **Description:** Classes referenced but missing CSS: lang-switcher, sidebar-name-first, lang-btn
+- **Status:** Pending
+
+### CSS variables defined but possibly unused: --content-max-width -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 103
+- **Description:** CSS variables defined but possibly unused: --content-max-width
+- **Status:** Pending
+
+### experience.json empty -- WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session 103
+- **Description:** experience.json empty
+- **Status:** Pending
+
+### experience.json empty -- WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session 103
+- **Description:** experience.json empty
+- **Status:** Pending
+
+## Automatic findings (Session 103 -- 2026-07-21)
+
+### Computational grid not detected in #inicio -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 103 (automatic)
+- **Status:** Pending
+
+### Missing fade gradient in #inicio::after -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 103 (automatic)
+- **Status:** Pending
+
+### .btn-outline not found -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 103 (automatic)
+- **Status:** Pending
+
+### Missing sticky nav or sidebar -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 103 (automatic)
+- **Status:** Pending
+
+### target=_blank without rel=noopener: -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 103 (automatic)
+- **Status:** Pending
+
+### Predominantly single quotes (518 single vs 88 double) -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 103 (automatic)
+- **Status:** Pending
+
+### Classes referenced but missing CSS: lang-switcher, sidebar-name-first, lang-btn -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 103 (automatic)
+- **Status:** Pending
+
+### CSS variables defined but possibly unused: --content-max-width -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 103 (automatic)
+- **Status:** Pending
+
+### experience.json empty -- WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session 103 (automatic)
 - **Status:** Pending
 
 ---
