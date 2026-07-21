@@ -429,3 +429,8 @@ Global workflow summary. Each entry links to the detailed day log.
 **Prompt:** Fix mobile-profile section not animating when resizing between PC and mobile. Root cause: `height: auto → 0` not transitionable; grid-template-rows overriden by flex min-height.
 **Plan:** Add `height:0` to CSS base, JS-driven `animateMobileProfile()` with scrollHeight measurement. Update handleMobileProfile() and updateMobileProfile() callers.
 **Build:** `npm run build` — 699ms, 0 errors. Tests: 0 FAILs.
+
+### Session 110: Fix snapSidebarFade midpoint entry animation
+**Prompt:** Mobile profile animation missing when stopping resize at midpoint (~1250px). `snapSidebarFade()` called `updateMobileProfile()` (instant) instead of `animateMobileProfile(true)`.
+**Plan:** Single-line change in `snapSidebarFade()` L874.
+**Build:** `npm run build` — 591ms, 0 errors. Tests: 0 FAILs.
