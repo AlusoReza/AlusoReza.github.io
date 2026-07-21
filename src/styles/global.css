@@ -244,18 +244,15 @@ html:not(.js-loading) .content {
   grid-template-rows: 0fr;
   overflow: clip;
   opacity: 0;
-  transition:
-    grid-template-rows 0.35s ease,
-    opacity 0.35s ease;
+  height: 0;
+  transition: opacity 0.35s ease;
 }
 
 .mobile-profile--visible {
   grid-template-rows: 1fr;
   height: auto;
   opacity: 1;
-  transition:
-    grid-template-rows 0.35s ease,
-    opacity 0.35s ease;
+  transition: opacity 0.35s ease;
 }
 
 /* ========================

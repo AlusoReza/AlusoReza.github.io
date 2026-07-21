@@ -499,12 +499,48 @@ function updateMobileProfile() {
   const html = document.documentElement
   const shouldShow = (mqlBreakpoint.matches || html.classList.contains('sidebar-midpoint-mode')) && currentPage === 'sobre'
   if (shouldShow) {
+    mobileProfile.style.height = ''
     mobileProfile.classList.add('mobile-profile--visible')
   } else {
     mobileProfile.style.transition = 'none'
     mobileProfile.classList.remove('mobile-profile--visible')
     mobileProfile.offsetHeight
     mobileProfile.style.transition = ''
+    mobileProfile.style.height = '0'
+  }
+}
+
+let mobileProfileTimer = null
+
+function animateMobileProfile(show, duration = 350) {
+  if (!mobileProfile) return
+  if (mobileProfileTimer) { clearTimeout(mobileProfileTimer); mobileProfileTimer = null }
+
+  if (show) {
+    mobileProfile.style.height = ''
+    mobileProfile.classList.add('mobile-profile--visible')
+    const h = mobileProfile.scrollHeight
+    mobileProfile.style.height = '0'
+    mobileProfile.offsetHeight
+    mobileProfile.style.transition = `height ${duration}ms ease, opacity ${duration}ms ease`
+    requestAnimationFrame(() => { mobileProfile.style.height = h + 'px' })
+    mobileProfileTimer = setTimeout(() => {
+      mobileProfile.style.height = ''
+      mobileProfile.style.transition = ''
+      mobileProfileTimer = null
+    }, duration)
+  } else {
+    const h = mobileProfile.scrollHeight
+    mobileProfile.style.height = h + 'px'
+    mobileProfile.offsetHeight
+    mobileProfile.classList.remove('mobile-profile--visible')
+    mobileProfile.style.transition = `height ${duration}ms ease, opacity ${duration}ms ease`
+    requestAnimationFrame(() => { mobileProfile.style.height = '0' })
+    mobileProfileTimer = setTimeout(() => {
+      mobileProfile.style.height = '0'
+      mobileProfile.style.transition = ''
+      mobileProfileTimer = null
+    }, duration)
   }
 }
 
@@ -516,7 +552,7 @@ function handleMobileProfile() {
     document.documentElement.classList.add('sidebar-delayed')
     document.querySelector('.sidebar')?.offsetHeight
     if (mobileProfile?.classList.contains('mobile-profile--visible')) {
-      mobileProfile.classList.remove('mobile-profile--visible')
+      animateMobileProfile(false)
     }
     setTimeout(() => {
       document.documentElement.classList.remove('sidebar-delayed')
@@ -540,7 +576,7 @@ function handleMobileProfile() {
     // Shrinking past 1234px: lock sidebar during mobile-profile slide-in
     if (sidebarLockTimer) { clearTimeout(sidebarLockTimer); sidebarLockTimer = null }
     document.documentElement.classList.add('sidebar-locked')
-    updateMobileProfile()
+    animateMobileProfile(true)
     sidebarLockTimer = setTimeout(() => {
       document.documentElement.classList.remove('sidebar-locked')
       sidebarLockTimer = null
@@ -856,6 +892,7 @@ window.addEventListener('resize', () => {
       mobileProfile.classList.remove('mobile-profile--visible')
       mobileProfile.offsetHeight
       mobileProfile.style.transition = ''
+      mobileProfile.style.height = '0'
     }
   }
 
