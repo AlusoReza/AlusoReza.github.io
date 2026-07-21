@@ -920,7 +920,12 @@ html:not(.js-loading) .content {
   border: 1px solid var(--color-border);
   border-radius: 4px;
   background-color: var(--color-bg-card);
-  transition: border-color 0.25s ease, background-color 0.25s ease;
+  transition: opacity 0.3s ease, border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.tech-showcase.is-resizing .tech-item {
+  opacity: 0.2;
+  transition: opacity 0.1s ease;
 }
 
 .tech-item:hover {

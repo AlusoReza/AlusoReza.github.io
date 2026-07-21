@@ -396,7 +396,6 @@ function initScrollReveal() {
     })
   }, { threshold: 0.15 })
   document.querySelectorAll('.reveal').forEach(el => scrollObserver.observe(el))
-  document.querySelectorAll('[data-flip]').forEach(el => el.classList.add('visible'))
 }
 
 // --- Language switching ---
@@ -676,52 +675,37 @@ if (mobileProfileInner) {
   profileObserver.observe(mobileProfileInner)
 }
 
-// --- Tech Grid FLIP animation on resize ---
-const storedRects = new Map()
-
-function flipAnimate(container) {
-  if (!motionOK) return
-  const targets = container.querySelectorAll('[data-flip]')
-  if (!targets.length) return
-
-  if (storedRects.size === 0) {
-    targets.forEach(el => storedRects.set(el, el.getBoundingClientRect()))
-    return
-  }
-
-  const newRects = new Map()
-  targets.forEach(el => newRects.set(el, el.getBoundingClientRect()))
-
-  targets.forEach(el => {
-    const oldRect = storedRects.get(el)
-    const newRect = newRects.get(el)
-    if (!oldRect || !newRect) return
-    const dx = oldRect.left - newRect.left
-    const dy = oldRect.top - newRect.top
-    if (dx === 0 && dy === 0) return
-
-    el.style.transform = `translate(${dx}px, ${dy}px)`
-    el.style.transition = 'none'
-  })
-
-  container.getBoundingClientRect()
-
-  targets.forEach(el => {
-    if (el.style.transform) {
-      el.style.transition = 'transform 0.3s ease'
-      el.style.transform = ''
-    }
-  })
-
-  targets.forEach(el => storedRects.set(el, newRects.get(el)))
-}
-
+// --- Tech Grid fade on resize (only when column count changes) ---
 const techShowcase = document.querySelector('.tech-showcase')
-let techFlipTimer = null
+let techFadeTimer = null
+let lastSignature = ''
 if (techShowcase) {
+  const grids = techShowcase.querySelectorAll('.tech-grid')
+  function getColCount(grid) {
+    const items = grid.children
+    if (items.length < 2) return items.length
+    const firstTop = items[0].offsetTop
+    let count = 1
+    for (let i = 1; i < items.length; i++) {
+      if (items[i].offsetTop === firstTop) count++
+      else break
+    }
+    return count
+  }
+  function getSignature() {
+    return Array.from(grids).map(g => getColCount(g)).join(',')
+  }
+  lastSignature = getSignature()
   const techObserver = new ResizeObserver(() => {
-    clearTimeout(techFlipTimer)
-    techFlipTimer = setTimeout(() => flipAnimate(techShowcase), 60)
+    const sig = getSignature()
+    if (sig !== lastSignature) {
+      lastSignature = sig
+      techShowcase.classList.add('is-resizing')
+      clearTimeout(techFadeTimer)
+      techFadeTimer = setTimeout(() => {
+        techShowcase.classList.remove('is-resizing')
+      }, 200)
+    }
   })
   techObserver.observe(techShowcase)
 }
