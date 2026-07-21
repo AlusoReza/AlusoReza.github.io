@@ -871,7 +871,7 @@ function snapSidebarFade() {
         html.classList.remove('sidebar-no-transition')
       })
     })
-    setTimeout(() => { updateMobileProfile() }, 350)
+    setTimeout(() => { animateMobileProfile(true) }, 350)
   } else {
     html.classList.remove('sidebar-midpoint-mode')
     html.style.removeProperty('--sidebar-fade')
