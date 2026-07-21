@@ -413,3 +413,14 @@ Global workflow summary. Each entry links to the detailed day log.
 **Prompt:** User wants scrollbar at viewport's right edge. Previous uncommitted attempt broke sidebar centering, CV button overlap, and large-screen collapse.
 **Plan:** Move `<MobileProfile />` inside `.content-body` (inherits padding-right). Remove max-width from `.app-layout` (full viewport width). Center sidebar via `margin-left: calc((100vw - var(--app-max-width)) / 2)`. Center content via `.content-body { max-width; margin: auto }`. Update `--app-max-width` variable at large-screen breakpoints. Reset `margin-left:0` on fixed sidebar in mobile.
 **Build:** `npm run build` — 694ms, 0 errors. Tests: 0 FAILs.
+
+---
+
+## 2026-07-21
+
+[Detailed log →](logs/2026-07-21.md)
+
+### Session 108: Revert FLIP, restore centering, clean CSS baseline
+**Prompt:** Revert commit `5025473` (FLIP removal refactor), re-apply H↔F category swap, restore grid centering from stash — excluding all FLIP effects.
+**Plan:** Stash WIP → revert → re-apply swap → restore 3-state responsive grid + centering CSS (text-align:center on labels, auto-fill 76px grid with justify-content:center on tech-grid, margin-top:28px). Remove all FLIP CSS (data-flip transitions, will-change, transform on items).
+**Build:** `npm run build` — 1.20s, 0 errors. Tests: not run.

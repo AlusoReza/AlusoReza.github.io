@@ -8,8 +8,8 @@ const tools = skills.tools || []
 
 const categories = [
   { key: 'about-lang-label', label: 'Lenguajes', items: languages },
-  { key: 'about-frameworks-label', label: 'Frameworks', items: frameworks },
   { key: 'about-tools-label', label: 'Herramientas', items: tools },
+  { key: 'about-frameworks-label', label: 'Frameworks', items: frameworks },
 ]
 ---
 <div data-page="sobre" class="page">
@@ -20,13 +20,13 @@ const categories = [
     ))}
   </div>
 
-  <div class="tech-showcase reveal">
+  <div class="tech-showcase">
     {categories.map(cat => (
-      <div class="tech-category" data-flip>
+      <div class="tech-category">
         <span class="tech-category-label" data-i18n={cat.key}>{cat.label}</span>
         <div class="tech-grid">
           {cat.items.map(s => (
-            <div class={`tech-item${s.logo ? '' : ' tech-item--text-only'}`} data-flip>
+            <div class={`tech-item${s.logo ? '' : ' tech-item--text-only'}`}>
               {s.logo
                 ? <img src={s.logo} alt={s.name} loading="lazy" />
                 : <span class="tech-item-fallback">{s.name.slice(0,2).toUpperCase()}</span>
