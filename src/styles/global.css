@@ -217,7 +217,7 @@ body {
   display: flex;
   flex-direction: column;
   padding: var(--content-pad-top) var(--content-pad-right) var(--content-pad-bottom) var(--content-pad-left);
-  opacity: 0;Vale 
+  opacity: 0;
   transition: opacity 0.4s ease, padding 0.15s ease-out;
 }
 
@@ -854,14 +854,14 @@ html:not(.js-loading) .content {
 /* ≥960px: 3 categories side-by-side, equal width */
 @media (min-width: 960px) {
   .tech-showcase {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 0.86fr 1fr;
   }
 }
 
 /* 640–959px: L+F fill space, Herramientas full-width below */
 @media (min-width: 640px) and (max-width: 959px) {
   .tech-showcase {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 0.9fr;
   }
   .tech-category:last-child {
     grid-column: 1 / -1;
