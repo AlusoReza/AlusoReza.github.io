@@ -444,3 +444,13 @@ Global workflow summary. Each entry links to the detailed day log.
 **Prompt:** Multiple dead zone issues: mobile profile missing at 1235px, flash on resize 1236→1235, midpoint mode missing 7 sidebar rules, timing gaps. Root cause: CSS/JS 1px breakpoint misalignment.
 **Plan:** Align `mqlBreakpoint` to 1235px, remove dead zone handler, add 7 missing midpoint-mode sidebar rules, adjust sidebar-delayed timer 400→350ms. Phase 3 (sidebar-init-desktop flash) deferred.
 **Build:** `npm run build` — 1.97s, 0 errors. Tests: 0 FAILs.
+
+### Session 113: Mobile profile animation fix on large→small resize + timer safety
+**Prompt:** When maximizing window then rapidly resizing to small, mobile profile animation breaks — partially slides down then pops to full height. Also found untacked setTimeout in `snapSidebarFade` causing potential flicker.
+**Plan:** Add micro-transition adjustment (re-measure height after 350ms, smooth 150ms adjust if >2px diff). Track previously fire-and-forget `snapSidebarFade` timeout in `snapProfileTimer`. Clear all timers in `updateMobileProfile()`, `animateMobileProfile()`, and resize handler.
+**Build:** `npm run build` — 671ms, 0 errors. Tests: 0 FAILs.
+
+### Session 114: Fix dead zone sidebar stuck in PC layout (1236-1240px)
+**Prompt:** Sidebar rendered for PC layout but hidden between 1236-1240px. Root cause: `clearTimeout(resizeTimer)` in `handleMobileProfile()` kills the timer that calls `snapSidebarFade()`.
+**Plan:** Replace 17-line manual sidebar transition block with single `snapSidebarFade()` call. Eliminates `clearTimeout(resizeTimer)`, removes manual flex/width transition, ensures `sidebar-midpoint-mode` always added in midpoint range.
+**Build:** `npm run build` — 708ms, 0 errors. Tests: 0 FAILs.

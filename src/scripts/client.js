@@ -490,12 +490,18 @@ const mobileProfile = document.querySelector('.mobile-profile')
 const mqlBreakpoint = window.matchMedia('(max-width: 1235px)')
 let wasBelow = mqlBreakpoint.matches
 let sidebarLockTimer = null
+let mobileProfileTimer = null
+let snapProfileTimer = null
+let adjustTimer = null
 
 /*
 updateMobileProfile(): Controla la visibilidad del mobile-profile solo en la página "Sobre mí". En otras páginas se oculta instantáneamente (sin transición) para evitar que la animación de colapso interfiera con el contenido.
 */
 function updateMobileProfile() {
   if (!mobileProfile) return
+  if (mobileProfileTimer) { clearTimeout(mobileProfileTimer); mobileProfileTimer = null }
+  if (snapProfileTimer) { clearTimeout(snapProfileTimer); snapProfileTimer = null }
+  if (adjustTimer) { clearTimeout(adjustTimer); adjustTimer = null }
   const html = document.documentElement
   const shouldShow = (mqlBreakpoint.matches || html.classList.contains('sidebar-midpoint-mode')) && currentPage === 'sobre'
   if (shouldShow) {
@@ -510,11 +516,11 @@ function updateMobileProfile() {
   }
 }
 
-let mobileProfileTimer = null
-
 function animateMobileProfile(show, duration = 350) {
   if (!mobileProfile) return
   if (mobileProfileTimer) { clearTimeout(mobileProfileTimer); mobileProfileTimer = null }
+  if (snapProfileTimer) { clearTimeout(snapProfileTimer); snapProfileTimer = null }
+  if (adjustTimer) { clearTimeout(adjustTimer); adjustTimer = null }
 
   if (show) {
     mobileProfile.style.height = ''
@@ -525,8 +531,20 @@ function animateMobileProfile(show, duration = 350) {
     mobileProfile.style.transition = `height ${duration}ms ease, opacity ${duration}ms ease`
     requestAnimationFrame(() => { mobileProfile.style.height = h + 'px' })
     mobileProfileTimer = setTimeout(() => {
-      mobileProfile.style.height = ''
-      mobileProfile.style.transition = ''
+      const finalH = mobileProfile.scrollHeight
+      const currentH = Math.round(parseFloat(getComputedStyle(mobileProfile).height))
+      if (Math.abs(finalH - currentH) > 2) {
+        mobileProfile.style.transition = 'height 0.15s ease'
+        mobileProfile.style.height = finalH + 'px'
+        adjustTimer = setTimeout(() => {
+          mobileProfile.style.height = ''
+          mobileProfile.style.transition = ''
+          adjustTimer = null
+        }, 150)
+      } else {
+        mobileProfile.style.height = ''
+        mobileProfile.style.transition = ''
+      }
       mobileProfileTimer = null
     }, duration)
   } else {
@@ -557,20 +575,7 @@ function handleMobileProfile() {
     setTimeout(() => {
       document.documentElement.classList.remove('sidebar-delayed')
       document.documentElement.classList.remove('is-resizing')
-      clearTimeout(resizeTimer)
-      const sidebar = document.querySelector('.sidebar')
-      if (sidebar && motionOK) {
-        sidebar.style.flex = '0 0 0'
-        sidebar.style.width = '0'
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            sidebar.style.flex = ''
-            sidebar.style.width = ''
-            sidebar.style.transition = 'opacity 0.3s ease, flex 0.3s ease, width 0.3s ease'
-            setTimeout(() => { sidebar.style.transition = '' }, 350)
-          })
-        })
-      }
+      snapSidebarFade()
     }, 350)
   } else if (isBelow && !wasBelow) {
     // Shrinking past 1235px: lock sidebar during mobile-profile slide-in
@@ -875,7 +880,7 @@ function snapSidebarFade() {
       })
     })
     setTimeout(() => { html.classList.remove('lang-switcher-delayed') }, 340)
-    setTimeout(() => { animateMobileProfile(true) }, 350)
+    snapProfileTimer = setTimeout(() => { animateMobileProfile(true) }, 350)
   } else {
     html.classList.remove('sidebar-midpoint-mode')
     html.style.removeProperty('--sidebar-fade')
@@ -892,6 +897,9 @@ window.addEventListener('resize', () => {
   if (wasInMidpoint) {
     html.classList.remove('sidebar-midpoint-mode')
     if (window.innerWidth > 1235 && mobileProfile?.classList.contains('mobile-profile--visible')) {
+      if (mobileProfileTimer) { clearTimeout(mobileProfileTimer); mobileProfileTimer = null }
+      if (snapProfileTimer) { clearTimeout(snapProfileTimer); snapProfileTimer = null }
+      if (adjustTimer) { clearTimeout(adjustTimer); adjustTimer = null }
       mobileProfile.style.transition = 'none'
       mobileProfile.classList.remove('mobile-profile--visible')
       mobileProfile.offsetHeight
