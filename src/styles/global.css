@@ -846,7 +846,6 @@ html:not(.js-loading) .content {
 /* Category wrapper: responsive 3-state layout */
 .tech-showcase {
   display: grid;
-  gap: 24px;
   margin-top: 28px;
   margin-bottom: 28px;
 }
@@ -856,12 +855,22 @@ html:not(.js-loading) .content {
   .tech-showcase {
     grid-template-columns: 1fr 0.86fr 1fr;
   }
+  .tech-category:first-child {
+    margin-right: clamp(2px, 0.4vw, 3px);
+  }
+  .tech-category:nth-child(2) {
+    margin: 0 clamp(2px, 0.8vw, 4px);
+  }
+  .tech-category:last-child {
+    margin-left: clamp(2px, 0.4vw, 3px);
+  }
 }
 
 /* 640–959px: L+F fill space, Herramientas full-width below */
 @media (min-width: 640px) and (max-width: 959px) {
   .tech-showcase {
     grid-template-columns: 1fr 0.9fr;
+    gap: clamp(4px, 1vw, 12px);
   }
   .tech-category:last-child {
     grid-column: 1 / -1;
