@@ -434,8 +434,3 @@ Global workflow summary. Each entry links to the detailed day log.
 **Prompt:** Mobile profile animation missing when stopping resize at midpoint (~1250px). `snapSidebarFade()` called `updateMobileProfile()` (instant) instead of `animateMobileProfile(true)`.
 **Plan:** Single-line change in `snapSidebarFade()` L874.
 **Build:** `npm run build` — 591ms, 0 errors. Tests: 0 FAILs.
-
-### Session 111: Fix LangSwitcher flicker on slow PC→mobile resize
-**Prompt:** LangSwitcher flickers during slow PC→mobile resize. Root cause: media query fires at 1235px, mqlBreakpoint at 1234px — 1px gap.
-**Plan:** Move LangSwitcher rule to `@media (max-width: 1234px)`. Add `lang-switcher-delayed` class in `snapSidebarFade()` for midpoint entry.
-**Build:** `npm run build` — 732ms, 0 errors. Tests: 0 FAILs.
