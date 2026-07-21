@@ -852,7 +852,11 @@ function snapSidebarFade() {
         html.classList.remove('lang-switcher-reveal')
       }, { once: true })
     }, 340)
-    snapProfileTimer = setTimeout(() => { animateMobileProfile(true) }, 350)
+    snapProfileTimer = setTimeout(() => {
+      if (html.classList.contains('sidebar-midpoint-mode')) {
+        animateMobileProfile(true)
+      }
+    }, 350)
   } else {
     html.classList.remove('sidebar-midpoint-mode')
     html.style.removeProperty('--sidebar-fade')
