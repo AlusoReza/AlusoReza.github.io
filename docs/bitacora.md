@@ -434,3 +434,13 @@ Global workflow summary. Each entry links to the detailed day log.
 **Prompt:** Mobile profile animation missing when stopping resize at midpoint (~1250px). `snapSidebarFade()` called `updateMobileProfile()` (instant) instead of `animateMobileProfile(true)`.
 **Plan:** Single-line change in `snapSidebarFade()` L874.
 **Build:** `npm run build` — 591ms, 0 errors. Tests: 0 FAILs.
+
+### Session 111: LangSwitcher flicker fix
+**Prompt:** Lang-switcher flickers on slow PC→mobile resize. CSS mobile breakpoint (1234px) misaligned with sidebar/hamburger (1235px).
+**Plan:** Move lang-switcher CSS to `@media (max-width: 1235px)`. Add `lang-switcher-delayed` class in midpoint entry.
+**Build:** `npm run build` — 0 errors. Tests: 0 FAILs.
+
+### Session 112: Comprehensive breakpoint alignment + midpoint mode completion
+**Prompt:** Multiple dead zone issues: mobile profile missing at 1235px, flash on resize 1236→1235, midpoint mode missing 7 sidebar rules, timing gaps. Root cause: CSS/JS 1px breakpoint misalignment.
+**Plan:** Align `mqlBreakpoint` to 1235px, remove dead zone handler, add 7 missing midpoint-mode sidebar rules, adjust sidebar-delayed timer 400→350ms. Phase 3 (sidebar-init-desktop flash) deferred.
+**Build:** `npm run build` — 1.97s, 0 errors. Tests: 0 FAILs.

@@ -487,7 +487,7 @@ mql.addEventListener('change', (e) => {
 
 // --- MobileProfile transition (sidebar-delayed/locked for sequential animations) ---
 const mobileProfile = document.querySelector('.mobile-profile')
-const mqlBreakpoint = window.matchMedia('(max-width: 1234px)')
+const mqlBreakpoint = window.matchMedia('(max-width: 1235px)')
 let wasBelow = mqlBreakpoint.matches
 let sidebarLockTimer = null
 
@@ -548,7 +548,7 @@ function handleMobileProfile() {
   const isBelow = mqlBreakpoint.matches
 
   if (!isBelow && wasBelow) {
-    // Growing past 1234px: delay sidebar transitions 350ms (mobile-profile collapse time)
+    // Growing past 1235px: delay sidebar transitions 350ms (mobile-profile collapse time)
     document.documentElement.classList.add('sidebar-delayed')
     document.querySelector('.sidebar')?.offsetHeight
     if (mobileProfile?.classList.contains('mobile-profile--visible')) {
@@ -571,12 +571,14 @@ function handleMobileProfile() {
           })
         })
       }
-    }, 400)
+    }, 350)
   } else if (isBelow && !wasBelow) {
-    // Shrinking past 1234px: lock sidebar during mobile-profile slide-in
+    // Shrinking past 1235px: lock sidebar during mobile-profile slide-in
     if (sidebarLockTimer) { clearTimeout(sidebarLockTimer); sidebarLockTimer = null }
     document.documentElement.classList.add('sidebar-locked')
-    animateMobileProfile(true)
+    if (!mobileProfile?.classList.contains('mobile-profile--visible')) {
+      animateMobileProfile(true)
+    }
     sidebarLockTimer = setTimeout(() => {
       document.documentElement.classList.remove('sidebar-locked')
       sidebarLockTimer = null
@@ -734,7 +736,7 @@ if (techShowcase) {
   lastSignature = getSignature()
   const techObserver = new ResizeObserver(() => {
     const sig = getSignature()
-    if (sig !== lastSignature && motionOK) {
+    if (sig !== lastSignature) {
       lastSignature = sig
       techShowcase.classList.add('is-resizing')
       clearTimeout(techFadeTimer)
@@ -889,7 +891,7 @@ window.addEventListener('resize', () => {
 
   if (wasInMidpoint) {
     html.classList.remove('sidebar-midpoint-mode')
-    if (mobileProfile?.classList.contains('mobile-profile--visible')) {
+    if (window.innerWidth > 1235 && mobileProfile?.classList.contains('mobile-profile--visible')) {
       mobileProfile.style.transition = 'none'
       mobileProfile.classList.remove('mobile-profile--visible')
       mobileProfile.offsetHeight

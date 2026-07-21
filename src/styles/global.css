@@ -845,6 +845,7 @@ html:not(.js-loading) .content {
   display: grid;
   margin-top: 28px;
   margin-bottom: 28px;
+  transition: transform 0.06s ease-out;
 }
 
 /* ≥960px: 3 categories side-by-side, equal width */
@@ -917,17 +918,16 @@ html:not(.js-loading) .content {
   border: 1px solid var(--color-border);
   border-radius: 4px;
   background-color: var(--color-bg-card);
-  transition: opacity 0.2s ease-in, border-color 0.25s ease, background-color 0.25s ease;
+  transition: border-color 0.25s ease, background-color 0.25s ease;
 }
 
-.tech-showcase.is-resizing .tech-item {
-  opacity: 0.5;
-  transition: opacity 0.12s ease-out;
+.tech-showcase.is-resizing {
+  transform: scale(0.98);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .tech-showcase.is-resizing .tech-item {
-    opacity: 1;
+  .tech-showcase.is-resizing {
+    transform: none;
     transition: none;
   }
 }
@@ -1396,6 +1396,37 @@ html.sidebar-midpoint-mode .sidebar-top > .sidebar-cv-btn {
   display: none;
 }
 
+/* Sidebar profile image: slightly smaller on midpoint */
+html.sidebar-midpoint-mode .sidebar-profile-img {
+  width: 120px;
+  height: 150px;
+}
+
+/* Sidebar typography: slightly smaller on midpoint */
+html.sidebar-midpoint-mode .sidebar-name {
+  font-size: 1.6rem;
+}
+
+html.sidebar-midpoint-mode .sidebar-desc {
+  font-size: 0.85rem;
+}
+
+html.sidebar-midpoint-mode .sidebar-nav-link {
+  font-size: 0.85rem;
+}
+
+html.sidebar-midpoint-mode .sidebar-social a {
+  font-size: 0.85rem;
+}
+
+html.sidebar-midpoint-mode .sidebar-cv-btn {
+  font-size: 0.8rem;
+}
+
+html.sidebar-midpoint-mode .sidebar-lang-btn {
+  font-size: 0.75rem;
+}
+
 /* Sidebar on About page: hide name + title (mobile profile has them) */
 html.sidebar-midpoint-mode .sidebar--about .sidebar-name,
 html.sidebar-midpoint-mode .sidebar--about .sidebar-desc {
@@ -1661,8 +1692,8 @@ html.sidebar-midpoint-mode .skills-personality-grid {
   }
 }
 
-/* LangSwitcher: fixed at 1234px (aligned with mqlBreakpoint) */
-@media (max-width: 1234px) {
+/* LangSwitcher: fixed at 1235px (aligned with sidebar/hamburger breakpoints) */
+@media (max-width: 1235px) {
   .lang-switcher-floating {
     display: flex;
     position: fixed;
