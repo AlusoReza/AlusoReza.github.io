@@ -20,13 +20,13 @@ const categories = [
     ))}
   </div>
 
-  <div class="tech-showcase">
+  <div class="tech-showcase reveal">
     {categories.map(cat => (
-      <div class="tech-category">
+      <div class="tech-category" data-flip>
         <span class="tech-category-label" data-i18n={cat.key}>{cat.label}</span>
         <div class="tech-grid">
           {cat.items.map(s => (
-            <div class={`tech-item${s.logo ? '' : ' tech-item--text-only'}`}>
+            <div class={`tech-item${s.logo ? '' : ' tech-item--text-only'}`} data-flip>
               {s.logo
                 ? <img src={s.logo} alt={s.name} loading="lazy" />
                 : <span class="tech-item-fallback">{s.name.slice(0,2).toUpperCase()}</span>

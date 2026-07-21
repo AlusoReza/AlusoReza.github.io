@@ -413,13 +413,3 @@ Global workflow summary. Each entry links to the detailed day log.
 **Prompt:** User wants scrollbar at viewport's right edge. Previous uncommitted attempt broke sidebar centering, CV button overlap, and large-screen collapse.
 **Plan:** Move `<MobileProfile />` inside `.content-body` (inherits padding-right). Remove max-width from `.app-layout` (full viewport width). Center sidebar via `margin-left: calc((100vw - var(--app-max-width)) / 2)`. Center content via `.content-body { max-width; margin: auto }`. Update `--app-max-width` variable at large-screen breakpoints. Reset `margin-left:0` on fixed sidebar in mobile.
 **Build:** `npm run build` — 694ms, 0 errors. Tests: 0 FAILs.
-
-### Session 105: Tech grid responsive layout + FLIP category-only animation
-**Prompt:** Redesign tech grid: 3 categories positioned left/center/right with centered labels. Responsive3-state layout. Auto-fill inner grid. FLIP animates only categories.
-**Plan:** Replace `.tech-showcase` auto-fit with responsive grid (≥960px: 3 cols, 640-959px: 2 + H full-width, <640px: stacked). `.tech-grid` → CSS grid auto-fill. Center labels. Remove `data-flip` from items.
-**Build:** `npm run build` — 1.28s, 0 errors. Tests: 0 FAILs.
-
-### Session 106: Clean FLIP transitions + add grid spacing
-**Prompt:** Grid layout perfect, but transitions cause vertigo. Clean ALL FLIP-related transitions. Add 28px margin-top.
-**Plan:** Remove FLIP system entirely: CSS transform transitions, JS storedRects/flipAnimate/ResizeObserver, HTML data-flip + reveal on showcase. Add margin-top: 28px to .tech-showcase.
-**Build:** `npm run build` — 675ms, 0 errors. Tests: 0 FAILs.
