@@ -424,3 +424,8 @@ Global workflow summary. Each entry links to the detailed day log.
 **Prompt:** Revert commit `5025473` (FLIP removal refactor), re-apply H↔F category swap, restore grid centering from stash — excluding all FLIP effects.
 **Plan:** Stash WIP → revert → re-apply swap → restore 3-state responsive grid + centering CSS (text-align:center on labels, auto-fill 76px grid with justify-content:center on tech-grid, margin-top:28px). Remove all FLIP CSS (data-flip transitions, will-change, transform on items).
 **Build:** `npm run build` — 1.20s, 0 errors. Tests: not run.
+
+### Session 109: Fix mobile-profile animation on resize (Bug #2)
+**Prompt:** Fix mobile-profile section not animating when resizing between PC and mobile. Root cause: `height: auto → 0` not transitionable; grid-template-rows overriden by flex min-height.
+**Plan:** Add `height:0` to CSS base, JS-driven `animateMobileProfile()` with scrollHeight measurement. Update handleMobileProfile() and updateMobileProfile() callers.
+**Build:** `npm run build` — 699ms, 0 errors. Tests: 0 FAILs.
