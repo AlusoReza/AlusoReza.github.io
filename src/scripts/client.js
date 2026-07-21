@@ -734,13 +734,13 @@ if (techShowcase) {
   lastSignature = getSignature()
   const techObserver = new ResizeObserver(() => {
     const sig = getSignature()
-    if (sig !== lastSignature) {
+    if (sig !== lastSignature && motionOK) {
       lastSignature = sig
       techShowcase.classList.add('is-resizing')
       clearTimeout(techFadeTimer)
       techFadeTimer = setTimeout(() => {
         techShowcase.classList.remove('is-resizing')
-      }, 200)
+      }, 120)
     }
   })
   techObserver.observe(techShowcase)
@@ -866,11 +866,13 @@ function snapSidebarFade() {
     html.classList.add('sidebar-no-transition')
     html.style.setProperty('--sidebar-fade', '0')
     html.classList.add('sidebar-midpoint-mode')
+    html.classList.add('lang-switcher-delayed')
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         html.classList.remove('sidebar-no-transition')
       })
     })
+    setTimeout(() => { html.classList.remove('lang-switcher-delayed') }, 340)
     setTimeout(() => { animateMobileProfile(true) }, 350)
   } else {
     html.classList.remove('sidebar-midpoint-mode')
