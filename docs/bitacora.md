@@ -523,3 +523,8 @@ Global workflow summary. Each entry links to the detailed day log.
 **Prompt:** Mobile profile should only appear on "Sobre mí" page. Navigation works correctly, but PC→mobile resize shows profile on all pages. Sidebar transitions should work on every page.
 **Plan:** Add `currentPage === 'sobre'` guard to `animateMobileProfile(true)` calls in `handleMobileProfile()` and `snapSidebarFade()`.
 **Build:** `npm run build` — 703ms, 0 errors. Tests: 0 FAILs, 18 WARNs. No regressions.
+
+### Session 134: Add missing footer i18n translation
+**Prompt:** Footer text doesn't change when switching language. `data-i18n="footer"` attribute exists but key missing from JSON.
+**Plan:** Add `"footer"` key to `sections.json` for both `es` and `en`.
+**Build:** `npm run build` — 667ms, 0 errors. Tests: 0 FAILs, 18 WARNs. No regressions.

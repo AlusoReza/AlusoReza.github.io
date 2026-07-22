@@ -406,3 +406,7 @@
 - Added `currentPage === 'sobre'` guard to `animateMobileProfile(true)` in `handleMobileProfile()` and `snapSidebarFade()`
 - Mobile profile now only appears on "Sobre mí" page during resize (was: appeared on all pages)
 - Sidebar transitions and sidebar behavior unchanged — still work on all pages
+
+### Session 134 — Add missing footer i18n translation
+- Added `"footer"` key to `sections.json` (es: "Diseñado y construido por...", en: "Designed and built by...")
+- Element already had `data-i18n="footer"` — only the JSON key was missing
