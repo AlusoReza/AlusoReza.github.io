@@ -121,3 +121,10 @@ Critical code decisions in `client.js` and `global.css`. Each entry documents wh
 - **Decision:** Use `@keyframes sidebar-entrance` animation instead of CSS transitions for the initial sidebar appearance when `sidebar-delayed` is removed. CSS animations are NOT suppressed by `transition: none !important` from `is-resizing` — they're a separate mechanism. Captures `--sidebar-fade` value at animation start as `--entrance-target` (static CSS custom property on sidebar element). On `animationend`, cleans up and re-calls `snapSidebarFade()` to set correct inline value.
 - **Bug fixed:** Sidebar appeared suddenly (no animation) during any resize from mobile to desktop. `is-resizing` suppressed all CSS transitions, so the sidebar couldn't animate from 0→visible during the brief window between timer firing and next resize event.
 - **Revert consequence:** Sidebar returns to jumping from invisible to visible without animation during resize.
+
+## 18. Standalone `lang-switcher-delayed` for direct PC-to-mobile crossing
+- **File:** `src/styles/global.css` L68-70, `src/scripts/client.js` L593, L603-611
+- **Session:** 129
+- **Decision:** Apply `lang-switcher-delayed` class in `handleMobileProfile()` alongside `sidebar-locked` when crossing from desktop to mobile. Remove `lang-switcher-delayed` at T=340ms (10ms before `sidebar-locked` removal at T=350ms) so lang-switcher starts its base `transition: opacity 0.3s ease` fade-in during the last 100ms of the mobile profile animation. Add standalone CSS rule `html.lang-switcher-delayed .lang-switcher-floating { opacity: 0; }` (specificity 0,2,1) that works without `sidebar-midpoint-mode`.
+- **Bug fixed:** Lang-switcher appeared at the exact moment mobile profile animation finished (T=350ms), creating an abrupt pop-in. `sidebar-locked` was the only mechanism hiding it, and it was removed at the same time the animation ended.
+- **Revert consequence:** Lang-switcher returns to popping in abruptly at animation end. The CSS specificity chain (`sidebar-locked` → `lang-switcher-delayed` → base rule) is broken — only `sidebar-locked` provides timing control.

@@ -80,6 +80,7 @@
 66. **122 · Intermediate-speed resize fix** — Remove inline `--sidebar-fade` after timer's snap in fade zone
 67. **124 · Sidebar entrance animation** — `@keyframes sidebar-entrance` replaces CSS transitions (not blocked by `is-resizing`)
 68. **128 · Midpoint padding fix** — Aligned midpoint `--content-pad-right` with mobile values
+69. **129 · Lang-switcher late appearance** — `lang-switcher-delayed` removed at T=340ms, fade-in during last 100ms of animation
 
 ## Next 🔜
 

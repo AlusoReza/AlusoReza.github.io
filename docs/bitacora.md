@@ -503,3 +503,13 @@ Global workflow summary. Each entry links to the detailed day log.
 **Prompt:** Midpoint zone has excessive right padding that compresses content. Commit `17cfc45` fixed mobile `--content-pad-right` to `clamp(8px, 3vw, 12px)` but midpoint was never updated.
 **Plan:** Update midpoint `--content-pad-right` from `clamp(16px, 3vw, 24px)` to `clamp(8px, 3vw, 12px)`.
 **Build:** `npm run build` — 1.86s, 0 errors. Tests: 0 FAILs, 18 WARNs. No regressions.
+
+### Session 129: Fix lang-switcher late appearance — fade-in during last 100ms
+**Prompt:** Lang-switcher appears at the exact moment animation finishes (T=350ms), creating abrupt pop-in. Three previous attempts (Sessions 125-127) all failed.
+**Plan:** Apply `lang-switcher-delayed` at T=0 alongside `sidebar-locked`. Remove delayed at T=340ms so lang-switcher starts fade-in during last 100ms of profile animation.
+**Build:** `npm run build` — 817ms, 0 errors. Tests: 0 FAILs, 18 WARNs. No regressions.
+
+### Session 131: Fix sidebar navigation broken by orphaned storedRects.clear()
+**Prompt:** Sidebar navigation completely stopped working — clicking any nav link does nothing. Started after recent bug fix commits.
+**Plan:** Remove orphaned `storedRects.clear()` line left behind when `storedRects` Map was deleted in commit `3c7e94c`. Single line deletion, zero regression risk.
+**Build:** `npm run build` — 789ms, 0 errors. Tests: 0 FAILs, 18 WARNs. No regressions.

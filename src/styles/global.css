@@ -65,6 +65,10 @@ html.sidebar-locked .lang-switcher-floating {
   transition: none;
 }
 
+html.lang-switcher-delayed .lang-switcher-floating {
+  opacity: 0;
+}
+
 html.sidebar-init-mobile { --sidebar-fade: 0; }
 html.sidebar-init-desktop { --sidebar-fade: 1; }
 

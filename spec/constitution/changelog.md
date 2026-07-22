@@ -394,3 +394,9 @@
 ### Session 128 — Fix midpoint right padding
 - Updated `--content-pad-right` in `sidebar-midpoint-mode` from `clamp(16px, 3vw, 24px)` to `clamp(8px, 3vw, 12px)` to match mobile values
 - Commit `17cfc45` fixed mobile padding but midpoint was never updated
+
+### Session 129 — Fix lang-switcher late appearance
+- Applied `lang-switcher-delayed` class in `handleMobileProfile()` PC→mobile branch
+- `lang-switcher-delayed` removed at T=340ms (10ms before `sidebar-locked` at T=350ms)
+- Lang-switcher starts fade-in during last 100ms of mobile profile animation
+- Added standalone CSS rule `html.lang-switcher-delayed .lang-switcher-floating { opacity: 0; }` (specificity 0,2,1)

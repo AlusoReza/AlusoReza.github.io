@@ -195,8 +195,6 @@ function navigateTo(pageId) {
   const newPage = document.querySelector(`[data-page="${pageId}"]`)
   if (!newPage) { isTransitioning = false; return }
 
-  if (oldPage?.querySelector('.tech-showcase')) storedRects.clear()
-
   const contentEl = document.getElementById('content')
   if (contentEl) contentEl.scrollTop = 0
 
@@ -490,6 +488,7 @@ const mobileProfile = document.querySelector('.mobile-profile')
 const mqlBreakpoint = window.matchMedia('(max-width: 1235px)')
 let wasBelow = mqlBreakpoint.matches
 let sidebarLockTimer = null
+let langSwitcherTimer = null
 let mobileProfileTimer = null
 let snapProfileTimer = null
 let adjustTimer = null
@@ -572,6 +571,8 @@ function handleMobileProfile() {
 
   if (!isBelow && wasBelow) {
     // Growing past 1235px: delay sidebar transitions 350ms (mobile-profile collapse time)
+    if (langSwitcherTimer) { clearTimeout(langSwitcherTimer); langSwitcherTimer = null }
+    document.documentElement.classList.remove('lang-switcher-delayed')
     document.documentElement.classList.add('sidebar-delayed')
     document.querySelector('.sidebar')?.offsetHeight
     if (mobileProfile?.classList.contains('mobile-profile--visible')) {
@@ -596,10 +597,16 @@ function handleMobileProfile() {
   } else if (isBelow && !wasBelow) {
     // Shrinking past 1235px: lock sidebar during mobile-profile slide-in
     if (sidebarLockTimer) { clearTimeout(sidebarLockTimer); sidebarLockTimer = null }
+    if (langSwitcherTimer) { clearTimeout(langSwitcherTimer); langSwitcherTimer = null }
     document.documentElement.classList.add('sidebar-locked')
+    document.documentElement.classList.add('lang-switcher-delayed')
     if (!mobileProfile?.classList.contains('mobile-profile--visible')) {
       animateMobileProfile(true)
     }
+    langSwitcherTimer = setTimeout(() => {
+      document.documentElement.classList.remove('lang-switcher-delayed')
+      langSwitcherTimer = null
+    }, 340)
     sidebarLockTimer = setTimeout(() => {
       document.documentElement.classList.remove('sidebar-locked')
       sidebarLockTimer = null
