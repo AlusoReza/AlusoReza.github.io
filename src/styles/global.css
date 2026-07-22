@@ -81,6 +81,20 @@ html.sidebar-delayed .sidebar {
   transition: none !important;
 }
 
+/* Entrance animation: runs independently of is-resizing (transition:none).
+   @keyframes are not suppressed by transition:none — they're a separate mechanism. */
+@keyframes sidebar-entrance {
+  from { opacity: 0; flex: 0 0 0; width: 0; }
+  to {
+    opacity: var(--entrance-target);
+    flex: 0 0 calc(var(--sidebar-width) * var(--entrance-target));
+    width: calc(var(--sidebar-width) * var(--entrance-target));
+  }
+}
+.sidebar.sidebar-entrance {
+  animation: sidebar-entrance 0.3s ease forwards;
+}
+
 /* ========================
    1. Base / Reset
    ======================== */
@@ -1341,11 +1355,6 @@ html.sidebar-midpoint-mode .lang-switcher-floating {
 
 html.sidebar-midpoint-mode.lang-switcher-delayed .lang-switcher-floating {
   opacity: 0;
-}
-
-html.sidebar-midpoint-mode.lang-switcher-reveal .lang-switcher-floating {
-  opacity: 1;
-  transition: opacity 0.3s ease;
 }
 
 /* Dark overlay behind sidebar */

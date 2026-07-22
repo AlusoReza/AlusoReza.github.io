@@ -581,6 +581,17 @@ function handleMobileProfile() {
       document.documentElement.classList.remove('sidebar-delayed')
       document.documentElement.classList.remove('is-resizing')
       snapSidebarFade()
+      const s = document.querySelector('.sidebar')
+      if (s) {
+        const t = getComputedStyle(document.documentElement).getPropertyValue('--sidebar-fade').trim()
+        s.style.setProperty('--entrance-target', t || '0')
+        s.classList.add('sidebar-entrance')
+        s.addEventListener('animationend', () => {
+          s.classList.remove('sidebar-entrance')
+          s.style.removeProperty('--entrance-target')
+          snapSidebarFade()
+        }, { once: true })
+      }
     }, 350)
   } else if (isBelow && !wasBelow) {
     // Shrinking past 1235px: lock sidebar during mobile-profile slide-in
@@ -850,7 +861,6 @@ function snapSidebarFade() {
     })
     setTimeout(() => {
       html.classList.remove('lang-switcher-delayed')
-      html.classList.add('lang-switcher-reveal')
     }, 340)
     snapProfileTimer = setTimeout(() => {
       if (html.classList.contains('sidebar-midpoint-mode')) {

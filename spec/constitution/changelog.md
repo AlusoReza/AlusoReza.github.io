@@ -372,3 +372,21 @@
 - Moved midpoint setup (`initW` + class additions) before `updateMobileProfile()` in `init()`
 - Removed `setTimeout(() => { updateMobileProfile() }, 350)` — unnecessary with `sidebar-no-transition`
 - Mobile profile now appears immediately on F5 in midpoint zone (1236-1285px)
+
+### Session 121 — Fix lang-switcher fade-in — eliminate lang-switcher-reveal
+- Moved `transition: none` from `sidebar-midpoint-mode` to `lang-switcher-delayed` rule
+- Deleted `lang-switcher-reveal` CSS rule entirely (net -5 lines)
+- Removed `lang-switcher-reveal` class addition in JS timeout
+- Added `lang-switcher-reveal` cleanup in all exit paths (safety net)
+- Fixes both re-entry bug (stale reveal class) and atomic transition+opacity change
+
+### Session 122 — Fix sidebar sudden appearance on intermediate-speed resize
+- Added `removeProperty('--sidebar-fade')` after `snapSidebarFade()` in `handleMobileProfile()`'s 350ms timer
+- Only applies when viewport is in fade zone (1236-1336px), letting CSS clamp drive fade
+- Fixes race condition where stale inline value caused sidebar to appear suddenly or be invisible
+
+### Session 124 — Fix sidebar animation during resize — @keyframes entrance
+- Replaced inline-removal fix (Session 122) with `@keyframes sidebar-entrance` CSS animation
+- Animation captures `--sidebar-fade` as `--entrance-target` at start, runs independently of `is-resizing`
+- On `animationend`: cleanup + `snapSidebarFade()` to re-set correct inline value
+- Fixes root cause: `is-resizing` suppressed all CSS transitions, preventing sidebar from animating during resize

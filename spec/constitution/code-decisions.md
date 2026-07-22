@@ -101,12 +101,12 @@ Critical code decisions in `client.js` and `global.css`. Each entry documents wh
 - **Bug fixed:** Mobile profile half-height flash on large→small resize. `overflow: clip` doesn't establish a scroll container, making `scrollHeight` return unreliable values (0 or partial). This triggered the fallback path in `animateMobileProfile(show=true)` which sets `height: auto` before the transition is configured, causing instant content expansion. `overflow: hidden` establishes a scroll container for reliable `scrollHeight`.
 - **Revert consequence:** `scrollHeight` may return incorrect values again, causing the half-height flash to reappear.
 
-## 15. CSS `transition: opacity 0.3s ease` replaces `@keyframes lang-fade-in`
-- **File:** `src/styles/global.css` L1346-1349, `src/scripts/client.js` L852-855
-- **Session:** 119
-- **Decision:** Use CSS `transition: opacity 0.3s ease` on `.lang-switcher-reveal` instead of `@keyframes lang-fade-in` animation. Removed `animationend` event listener from JS.
-- **Bug fixed:** Lang-switcher popped in without a smooth fade-in when resizing to the midpoint zone. The `@keyframes` animation started after the opacity 0→1 jump, making the fade imperceptible. With CSS `transition`, the opacity change itself triggers the 0.3s fade — no flash, smooth transition.
-- **Revert consequence:** Lang-switcher fade-in becomes imperceptible again (pops in instantly).
+## 15. `transition: none` on `sidebar-midpoint-mode` (not on `lang-switcher-delayed`)
+- **File:** `src/styles/global.css` L1332-1344, `src/scripts/client.js` L852-854
+- **Session:** 119, 121, 122
+- **Decision:** `transition: none` lives on `sidebar-midpoint-mode` rule (specificity 0,2,1), not on `lang-switcher-delayed` rule. `lang-switcher-delayed` only carries `opacity: 0`. After 340ms, `lang-switcher-delayed` is removed — `sidebar-midpoint-mode`'s `transition: none` applies, making the opacity change 0→1 atomic (no transition). This matches the automatic path behavior (crossing 1235px via `handleMobileProfile`), where the lang-switcher appears instantly as part of the mobile layout.
+- **Bug fixed:** Lang-switcher popped in without fade on midpoint entry. Three root causes: (1) `lang-switcher-reveal` was never cleaned up on exit, so on re-entry both `delayed` and `reveal` were present with same specificity — reveal won (later source order), making delayed dead. (2) `transition` and `opacity` changed atomically when swapping delayed→reveal, causing browsers to swallow the transition. (3) With `transition: none` on `lang-switcher-delayed`, the atomic class removal caused `transition: opacity 0.3s ease` + `opacity: 1` to apply in the same recalc — browser swallowed the transition.
+- **Revert consequence:** Lang-switcher appearance breaks — opacity jumps from 0 to 1 with base `transition: opacity 0.3s ease`, but both change atomically so browser swallows it. Lang-switcher stays invisible or appears inconsistently.
 
 ## 16. Midpoint setup before `updateMobileProfile()` in `init()`
 - **File:** `src/scripts/client.js` L782-790
@@ -114,3 +114,10 @@ Critical code decisions in `client.js` and `global.css`. Each entry documents wh
 - **Decision:** Move `const initW = window.innerWidth` and midpoint class setup (`sidebar-init-mobile`, `sidebar-no-transition`, `sidebar-midpoint-mode`) to BEFORE the first `updateMobileProfile()` call in `init()`. Remove the 350ms `setTimeout` that re-called `updateMobileProfile()`.
 - **Bug fixed:** Mobile profile delayed 350ms on F5 reload in midpoint zone (1236-1285px). Previously, `updateMobileProfile()` ran before `sidebar-midpoint-mode` was added, so `shouldShow` evaluated to `false`. The 350ms `setTimeout` repaired this but created a visible delay.
 - **Revert consequence:** Mobile profile returns to appearing with a 350ms delay on F5 reload in the midpoint zone.
+
+## 17. `@keyframes sidebar-entrance` animation (not CSS transitions)
+- **File:** `src/styles/global.css` L84-96, `src/scripts/client.js` L584-594
+- **Session:** 124
+- **Decision:** Use `@keyframes sidebar-entrance` animation instead of CSS transitions for the initial sidebar appearance when `sidebar-delayed` is removed. CSS animations are NOT suppressed by `transition: none !important` from `is-resizing` — they're a separate mechanism. Captures `--sidebar-fade` value at animation start as `--entrance-target` (static CSS custom property on sidebar element). On `animationend`, cleans up and re-calls `snapSidebarFade()` to set correct inline value.
+- **Bug fixed:** Sidebar appeared suddenly (no animation) during any resize from mobile to desktop. `is-resizing` suppressed all CSS transitions, so the sidebar couldn't animate from 0→visible during the brief window between timer firing and next resize event.
+- **Revert consequence:** Sidebar returns to jumping from invisible to visible without animation during resize.

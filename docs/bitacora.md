@@ -483,3 +483,18 @@ Global workflow summary. Each entry links to the detailed day log.
 **Prompt:** When pressing F5 with viewport 1236-1285px, mobile profile doesn't appear for ~350ms because `updateMobileProfile()` runs before `sidebar-midpoint-mode` is added in `init()`.
 **Plan:** Move midpoint setup before `updateMobileProfile()` call. Remove 350ms `setTimeout` (unnecessary with `sidebar-no-transition`).
 **Build:** `npm run build` — 671ms, 0 errors. Tests: 0 FAILs.
+
+### Session 121: Fix lang-switcher fade-in — eliminate lang-switcher-reveal, move transition:none to delayed
+**Prompt:** Lang-switcher fade-in still broken. `lang-switcher-reveal` never cleaned up on exit (re-entry broken). `transition` and `opacity` change atomically (browser swallows transition).
+**Plan:** Move `transition: none` from `sidebar-midpoint-mode` to `lang-switcher-delayed`. Delete `lang-switcher-reveal` rule. Remove reveal addition in JS. Add cleanup in all exit paths.
+**Build:** `npm run build` — 613ms, 0 errors. Tests: 0 FAILs.
+
+### Session 122: Fix sidebar sudden appearance on intermediate-speed resize
+**Prompt:** At intermediate resize speeds from mobile (<1235px) to desktop (>1336px), the sidebar appears suddenly instead of transitioning smoothly. Root cause: 350ms timer removes `is-resizing` while user still dragging; if mouseup fires shortly after, stale inline `--sidebar-fade` persists.
+**Plan:** After `snapSidebarFade()` in the 350ms timer, remove inline `--sidebar-fade` if viewport is in fade zone (1236-1336px), letting CSS clamp drive the fade.
+**Build:** `npm run build` — 653ms, 0 errors. Tests: 0 FAILs, 18 WARNs. No regressions.
+
+### Session 124: Fix sidebar animation during resize — @keyframes entrance
+**Prompt:** The sidebar doesn't animate during resize — it only animates when you stop. Root cause: `is-resizing` suppresses all CSS transitions on the sidebar. The 350ms timer removes `is-resizing` but the next resize event re-adds it within ~16ms, cutting off any transition.
+**Plan:** Replace CSS transition approach with `@keyframes sidebar-entrance` animation. CSS animations are NOT suppressed by `transition: none`. Capture `--sidebar-fade` value at animation start, animate to that target over 300ms.
+**Build:** `npm run build` — 571ms, 0 errors. Tests: 0 FAILs, 18 WARNs. No regressions.
