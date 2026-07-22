@@ -1,8 +1,8 @@
 [
   {
     "title": {
-      "es": "Curso de Programación en Python",
-      "en": "Python Programming Course"
+      "es": "\ud83d\udc0d Programaci\u00f3n en Python",
+      "en": "\ud83d\udc0d Python Programming"
     },
     "institution": {
       "es": "Universidad Internacional de La Rioja (UNIR)",
@@ -12,15 +12,20 @@
       "es": "18 jun. 2026",
       "en": "June 18, 2026"
     },
+    "tags": [
+      { "es": "Python", "en": "Python" },
+      { "es": "Pandas", "en": "Pandas" },
+      { "es": "NumPy", "en": "NumPy" }
+    ],
     "description": {
-      "es": "Curso de 75 horas (3 ECTS) sobre fundamentos de programación en Python: sintaxis, estructuras de datos, control de flujo y resolución de problemas computacionales.",
+      "es": "Curso de 75 horas (3 ECTS) sobre fundamentos de programaci\u00f3n en Python: sintaxis, estructuras de datos, control de flujo y resoluci\u00f3n de problemas computacionales.",
       "en": "75-hour course (3 ECTS) on Python programming fundamentals: syntax, data structures, control flow, and computational problem-solving."
     }
   },
   {
     "title": {
-      "es": "Certificado de Iniciación al Desarrollo con IA: Programa con Agentes",
-      "en": "Introduction to AI Development: Programming with Agents"
+      "es": "\ud83e\udd16 Iniciaci\u00f3n al Desarrollo con IA: Programa con Agentes",
+      "en": "\ud83e\udd16 Introduction to AI Development: Programming with Agents"
     },
     "institution": {
       "es": "BIG SCHOOL",
@@ -30,15 +35,20 @@
       "es": "26 jun. 2026",
       "en": "June 26, 2026"
     },
+    "tags": [
+      { "es": "IA", "en": "AI" },
+      { "es": "Agentes", "en": "Agents" },
+      { "es": "OpenCode", "en": "OpenCode" }
+    ],
     "description": {
-      "es": "Curso de 6 horas sobre desarrollo en el nuevo paradigma de programación con agentes de IA. Cubre conceptos básicos e intermedios/avanzados, uso de herramientas como OpenCode y Claude Code, elaboración de perfiles de proyecto con buenas prácticas y estándares modernos (skills, MCP, logs, SDD, uso de múltiples agentes).",
+      "es": "Curso de 6 horas sobre desarrollo en el nuevo paradigma de programaci\u00f3n con agentes de IA. Cubre conceptos b\u00e1sicos e intermedios/avanzados, uso de herramientas como OpenCode y Claude Code, elaboraci\u00f3n de perfiles de proyecto con buenas pr\u00e1cticas y est\u00e1ndares modernos (skills, MCP, logs, SDD, uso de m\u00faltiples agentes).",
       "en": "6-hour course on development in the new paradigm of programming with AI agents. Covers basic to intermediate/advanced concepts, use of tools like OpenCode and Claude Code, project profiling with best practices and modern standards (skills, MCP, logs, SDD, multi-agent usage)."
     }
   },
   {
     "title": {
-      "es": "Bootcamp en Habilidades Digitales y Gestión Ágil",
-      "en": "Bootcamp in Digital Skills and Agile Management"
+      "es": "\ud83d\udcbc Bootcamp en Habilidades Digitales y Gesti\u00f3n \u00c1gil",
+      "en": "\ud83d\udcbc Bootcamp in Digital Skills and Agile Management"
     },
     "institution": {
       "es": "Universidad Internacional de La Rioja (UNIR)",
@@ -48,15 +58,20 @@
       "es": "2025",
       "en": "2025"
     },
+    "tags": [
+      { "es": "Excel", "en": "Excel" },
+      { "es": "Canva", "en": "Canva" },
+      { "es": "\u00c1giles", "en": "Agile" }
+    ],
     "description": {
-      "es": "Bootcamp sobre elaboración de currículum vitae, uso avanzado de herramientas como Excel y Canva, métodos de estudio y networking, y metodologías ágiles en el desarrollo de software.",
+      "es": "Bootcamp sobre elaboraci\u00f3n de curr\u00edculum vitae, uso avanzado de herramientas como Excel y Canva, m\u00e9todos de estudio y networking, y metodolog\u00edas \u00e1giles en el desarrollo de software.",
       "en": "Bootcamp on resume building, advanced use of tools such as Excel and Canva, study methods and networking, and agile methodologies in software development."
     }
   },
   {
     "title": {
-      "es": "Curso de Preparación para la Certificación AWS Cloud Practitioner",
-      "en": "AWS Cloud Practitioner Certification Prep Course"
+      "es": "\u2601\ufe0f Certificaci\u00f3n AWS Cloud Practitioner",
+      "en": "\u2601\ufe0f AWS Cloud Practitioner Certification"
     },
     "institution": {
       "es": "Universidad Internacional de La Rioja (UNIR)",
@@ -66,15 +81,20 @@
       "es": "1 jun. 2026",
       "en": "June 1, 2026"
     },
+    "tags": [
+      { "es": "AWS", "en": "AWS" },
+      { "es": "Cloud", "en": "Cloud" },
+      { "es": "CLF-C01", "en": "CLF-C01" }
+    ],
     "description": {
-      "es": "Curso de 50 horas sobre fundamentos de AWS Cloud: servicios principales, arquitectura en la nube, seguridad, facturación y preparación para el examen CLF-C01.",
+      "es": "Curso de 50 horas sobre fundamentos de AWS Cloud: servicios principales, arquitectura en la nube, seguridad, facturaci\u00f3n y preparaci\u00f3n para el examen CLF-C01.",
       "en": "50-hour course on AWS Cloud fundamentals: core services, cloud architecture, security, billing, and preparation for the CLF-C01 exam."
     }
   },
   {
     "title": {
-      "es": "Curso de Preparación para la Certificación AZ-900: Microsoft Azure Fundamentals",
-      "en": "AZ-900: Microsoft Azure Fundamentals Prep Course"
+      "es": "\ud83d\udd37 AZ-900: Microsoft Azure Fundamentals",
+      "en": "\ud83d\udd37 AZ-900: Microsoft Azure Fundamentals"
     },
     "institution": {
       "es": "Universidad Internacional de La Rioja (UNIR)",
@@ -84,152 +104,189 @@
       "es": "26 may. 2026",
       "en": "May 26, 2026"
     },
+    "tags": [
+      { "es": "Azure", "en": "Azure" },
+      { "es": "Microsoft", "en": "Microsoft" },
+      { "es": "Cloud", "en": "Cloud" }
+    ],
     "description": {
-      "es": "Curso de 50 horas sobre fundamentos de Microsoft Azure: servicios en la nube, arquitectura, gestión de recursos, seguridad, privacidad y cumplimiento.",
+      "es": "Curso de 50 horas sobre fundamentos de Microsoft Azure: servicios en la nube, arquitectura, gesti\u00f3n de recursos, seguridad, privacidad y cumplimiento.",
       "en": "50-hour course on Microsoft Azure fundamentals: cloud services, architecture, resource management, security, privacy, and compliance."
     }
   },
   {
     "title": {
-      "es": "Curso de Spring Framework y Spring Boot",
-      "en": "Spring Framework and Spring Boot Course"
+      "es": "\ud83c\udf3f Spring Framework y Spring Boot",
+      "en": "\ud83c\udf3f Spring Framework and Spring Boot"
     },
     "institution": {
-      "es": "Código Facilito",
-      "en": "Código Facilito"
+      "es": "C\u00f3digo Facilito",
+      "en": "C\u00f3digo Facilito"
     },
     "date": {
       "es": "3 jul. 2026",
       "en": "July 3, 2026"
     },
+    "tags": [
+      { "es": "Java", "en": "Java" },
+      { "es": "Spring", "en": "Spring" },
+      { "es": "Spring Boot", "en": "Spring Boot" }
+    ],
     "description": {
-      "es": "Curso de 4h 15m sobre desarrollo de aplicaciones con Spring Framework y Spring Boot, incluyendo configuración, dependencias, desarrollo web y buenas prácticas.",
+      "es": "Curso de 4h 15m sobre desarrollo de aplicaciones con Spring Framework y Spring Boot, incluyendo configuraci\u00f3n, dependencias, desarrollo web y buenas pr\u00e1cticas.",
       "en": "4h 15m course on application development with Spring Framework and Spring Boot, covering configuration, dependencies, web development, and best practices."
     }
   },
   {
     "title": {
-      "es": "Curso Profesional de Docker",
-      "en": "Professional Docker Course"
+      "es": "\ud83d\udc33 Curso Profesional de Docker",
+      "en": "\ud83d\udc33 Professional Docker Course"
     },
     "institution": {
-      "es": "Código Facilito",
-      "en": "Código Facilito"
+      "es": "C\u00f3digo Facilito",
+      "en": "C\u00f3digo Facilito"
     },
     "date": {
       "es": "4 jul. 2026",
       "en": "July 4, 2026"
     },
+    "tags": [
+      { "es": "Docker", "en": "Docker" },
+      { "es": "Contenedores", "en": "Containers" }
+    ],
     "description": {
-      "es": "Curso de 3h 31m sobre contenedores Docker: instalación, imágenes, volúmenes, redes, Docker Compose y despliegue de aplicaciones containerizadas.",
+      "es": "Curso de 3h 31m sobre contenedores Docker: instalaci\u00f3n, im\u00e1genes, vol\u00famenes, redes, Docker Compose y despliegue de aplicaciones containerizadas.",
       "en": "3h 31m course on Docker containers: installation, images, volumes, networks, Docker Compose, and deploying containerized applications."
     }
   },
   {
     "title": {
-      "es": "Curso de Introducción a DevOps: Bases y Conceptos",
-      "en": "Introduction to DevOps: Fundamentals and Concepts"
+      "es": "\u2699\ufe0f Introducci\u00f3n a DevOps: Bases y Conceptos",
+      "en": "\u2699\ufe0f Introduction to DevOps: Fundamentals and Concepts"
     },
     "institution": {
-      "es": "Código Facilito",
-      "en": "Código Facilito"
+      "es": "C\u00f3digo Facilito",
+      "en": "C\u00f3digo Facilito"
     },
     "date": {
       "es": "4 jul. 2026",
       "en": "July 4, 2026"
     },
+    "tags": [
+      { "es": "DevOps", "en": "DevOps" },
+      { "es": "CI/CD", "en": "CI/CD" }
+    ],
     "description": {
-      "es": "Curso de 1h 32m sobre los fundamentos del desarrollo DevOps: integración continua, despliegue continuo, automatización y cultura de colaboración.",
+      "es": "Curso de 1h 32m sobre los fundamentos del desarrollo DevOps: integraci\u00f3n continua, despliegue continuo, automatizaci\u00f3n y cultura de colaboraci\u00f3n.",
       "en": "1h 32m course on DevOps fundamentals: continuous integration, continuous deployment, automation, and collaboration culture."
     }
   },
   {
     "title": {
-      "es": "Curso de Introducción a Rust",
-      "en": "Introduction to Rust Course"
+      "es": "\ud83e\udd80 Introducci\u00f3n a Rust",
+      "en": "\ud83e\udd80 Introduction to Rust"
     },
     "institution": {
-      "es": "Código Facilito",
-      "en": "Código Facilito"
+      "es": "C\u00f3digo Facilito",
+      "en": "C\u00f3digo Facilito"
     },
     "date": {
       "es": "4 jul. 2026",
       "en": "July 4, 2026"
     },
+    "tags": [
+      { "es": "Rust", "en": "Rust" }
+    ],
     "description": {
-      "es": "Curso de 4h 47m sobre fundamentos del lenguaje Rust: tipos de datos, ownership, borrowing, patrones, estructuras de datos y programación concurrente.",
+      "es": "Curso de 4h 47m sobre fundamentos del lenguaje Rust: tipos de datos, ownership, borrowing, patrones, estructuras de datos y programaci\u00f3n concurrente.",
       "en": "4h 47m course on Rust fundamentals: data types, ownership, borrowing, patterns, data structures, and concurrent programming."
     }
   },
   {
     "title": {
-      "es": "Curso profesional de Git",
-      "en": "Professional Git Course"
+      "es": "\ud83d\udd00 Git Profesional",
+      "en": "\ud83d\udd00 Professional Git"
     },
     "institution": {
-      "es": "Código Facilito",
-      "en": "Código Facilito"
+      "es": "C\u00f3digo Facilito",
+      "en": "C\u00f3digo Facilito"
     },
     "date": {
       "es": "4 jul. 2026",
       "en": "July 4, 2026"
     },
+    "tags": [
+      { "es": "Git", "en": "Git" }
+    ],
     "description": {
-      "es": "Curso de 3h 14m sobre control de versiones con Git: ramas, merges, rebase, cherry-pick, flujos de trabajo y gestión de repositorios.",
+      "es": "Curso de 3h 14m sobre control de versiones con Git: ramas, merges, rebase, cherry-pick, flujos de trabajo y gesti\u00f3n de repositorios.",
       "en": "3h 14m course on version control with Git: branches, merges, rebase, cherry-pick, workflows, and repository management."
     }
   },
   {
     "title": {
-      "es": "Curso a fondo de GitHub",
-      "en": "In-depth GitHub Course"
+      "es": "\ud83d\udc19 GitHub a fondo",
+      "en": "\ud83d\udc19 In-depth GitHub"
     },
     "institution": {
-      "es": "Código Facilito",
-      "en": "Código Facilito"
+      "es": "C\u00f3digo Facilito",
+      "en": "C\u00f3digo Facilito"
     },
     "date": {
       "es": "5 jul. 2026",
       "en": "July 5, 2026"
     },
+    "tags": [
+      { "es": "GitHub", "en": "GitHub" },
+      { "es": "Actions", "en": "Actions" }
+    ],
     "description": {
-      "es": "Curso de 3h 3m sobre uso avanzado de GitHub: pull requests, issues, GitHub Actions, Pages, seguridad y colaboración en equipos de desarrollo.",
+      "es": "Curso de 3h 3m sobre uso avanzado de GitHub: pull requests, issues, GitHub Actions, Pages, seguridad y colaboraci\u00f3n en equipos de desarrollo.",
       "en": "3h 3m course on advanced GitHub usage: pull requests, issues, GitHub Actions, Pages, security, and team development collaboration."
     }
   },
   {
     "title": {
-      "es": "Curso de Desarrollo de software con Claude Code",
-      "en": "Software Development with Claude Code Course"
+      "es": "\u2728 Desarrollo de software con Claude Code",
+      "en": "\u2728 Software Development with Claude Code"
     },
     "institution": {
-      "es": "Código Facilito",
-      "en": "Código Facilito"
+      "es": "C\u00f3digo Facilito",
+      "en": "C\u00f3digo Facilito"
     },
     "date": {
       "es": "6 jul. 2026",
       "en": "July 6, 2026"
     },
+    "tags": [
+      { "es": "IA", "en": "AI" },
+      { "es": "Claude Code", "en": "Claude Code" },
+      { "es": "MCP", "en": "MCP" }
+    ],
     "description": {
-      "es": "Curso de 4h 19m sobre desarrollo asistido por IA con Claude Code: agentes, herramientas MCP, skills, flujos de trabajo modernos y buenas prácticas.",
+      "es": "Curso de 4h 19m sobre desarrollo asistido por IA con Claude Code: agentes, herramientas MCP, skills, flujos de trabajo modernos y buenas pr\u00e1cticas.",
       "en": "4h 19m course on AI-assisted development with Claude Code: agents, MCP tools, skills, modern workflows, and best practices."
     }
   },
   {
     "title": {
-      "es": "Curso de Java Profesional",
-      "en": "Professional Java Course"
+      "es": "\u2615 Java Profesional",
+      "en": "\u2615 Professional Java"
     },
     "institution": {
-      "es": "Código Facilito",
-      "en": "Código Facilito"
+      "es": "C\u00f3digo Facilito",
+      "en": "C\u00f3digo Facilito"
     },
     "date": {
       "es": "6 jul. 2026",
       "en": "July 6, 2026"
     },
+    "tags": [
+      { "es": "Java", "en": "Java" },
+      { "es": "POO", "en": "OOP" }
+    ],
     "description": {
-      "es": "Curso de 4h 35m sobre programación profesional en Java: POO, colecciones, lambdas, streams, concurrencia y desarrollo de aplicaciones robustas.",
+      "es": "Curso de 4h 35m sobre programaci\u00f3n profesional en Java: POO, colecciones, lambdas, streams, concurrencia y desarrollo de aplicaciones robustas.",
       "en": "4h 35m course on professional Java programming: OOP, collections, lambdas, streams, concurrency, and building robust applications."
     }
   }

@@ -5,8 +5,8 @@
     "sec-est": "Formación Académica",
     "sec-exp": "Experiencia",
     "sec-cert": "Certificados",
-    "hab-note": "Mi enfoque de trabajo combina el rigor técnico con una visión estratégica, priorizando siempre la eficiencia y la escalabilidad de los sistemas que desarrollo.",
-    "hab-ai": "También integro de manera profesional <strong>modelos de lenguaje (LLMs)</strong> y <strong>agentes de IA</strong> en flujos de desarrollo, automatización y análisis. Mi objetivo es dominar estas tecnologías emergentes aplicándolas a problemas reales con el mismo rigor técnico.",
+    "hab-note": "Experiencia destacable en <strong>Java</strong>, bases de datos cómo <strong>SQL</strong> y tecnologías frontend (<strong>HTML y CSS</strong>).",
+    "hab-ai": "Enfoque en la <strong>solución rigurosa de problemas </strong> y <strong> desarrollo de software de calidad</strong>, así cómo integrar flujos de trabajo basados en la <strong>cultura DevOps</strong> y <strong>tecnologías emergentes</strong>, como modelos de lenguaje (<strong>LLMs</strong>) y <strong>agentes de IA</strong>.",
     "footer": "Diseñado y construido por Alonso José Suárez Reza"
   },
   "en": {
@@ -15,8 +15,8 @@
     "sec-est": "Academic Background",
     "sec-exp": "Experience",
     "sec-cert": "Certificates",
-    "hab-note": "My work approach combines technical rigor with strategic vision, prioritizing efficiency and scalability in the systems I develop.",
-    "hab-ai": "I also professionally integrate <strong>Large Language Models (LLMs)</strong> and <strong>AI agents</strong> into development workflows, automation, and data analysis. My goal is to master these emerging technologies by applying them to real problems with the same technical rigor.",
+    "hab-note": "Notable experience in <strong>Java</strong>, databases such as <strong>SQL</strong>, and frontend technologies (<strong>HTML and CSS</strong>).",
+    "hab-ai": "Focus on <strong>rigorous problem-solving </strong> and <strong> quality software development</strong>, as well as integrating workflows based on <strong>DevOps culture</strong> and <strong>emerging technologies</strong>, such as language models (<strong>LLMs</strong>) and <strong>AI agents</strong>.",
     "footer": "Designed and built by Alonso José Suárez Reza"
   }
 }

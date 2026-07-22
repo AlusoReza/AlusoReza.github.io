@@ -150,6 +150,11 @@ function renderCertificateItem(item) {
       <strong class="card-title">${t(item.title)}</strong>`
   if (item.date) html += `<span class="card-date">${t(item.date)}</span>`
   html += '</div>'
+  if (item.tags && item.tags.length) {
+    html += '<div class="card-tags">'
+    for (const tag of item.tags) html += `<span class="card-tag">${t(tag)}</span>`
+    html += '</div>'
+  }
   if (item.institution) html += `<p class="card-sub">${t(item.institution)}</p>`
   if (item.description) html += `<p class="card-desc">${t(item.description)}</p>`
   html += '</div>'

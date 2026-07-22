@@ -985,6 +985,8 @@ html:not(.js-loading) .content {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
+  /*This introduce a space between /hab-note and skill cards*/
+  margin-top: 27px;
 }
 
 /* Individual personality skill card */
