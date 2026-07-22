@@ -410,3 +410,8 @@
 ### Session 134 — Add missing footer i18n translation
 - Added `"footer"` key to `sections.json` (es: "Diseñado y construido por...", en: "Designed and built by...")
 - Element already had `data-i18n="footer"` — only the JSON key was missing
+
+### Session 135 — Fix mobile FLIP animation floating letters
+- Added `if (w > 1235) return` guard in ResizeObserver callback
+- Skips FLIP animation when viewport wider than mobile breakpoint
+- Prevents floating letters when toggling "desktop view" on mobile browsers

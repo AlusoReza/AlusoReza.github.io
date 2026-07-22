@@ -83,6 +83,7 @@
 69. **129 · Lang-switcher sync** — Replicated midpoint timing: both classes removed T=340ms, animation deferred T=350ms
 70. **133 · Mobile profile page guard** — `currentPage === 'sobre'` guard on resize-triggered `animateMobileProfile(true)`
 71. **134 · Footer i18n** — Added missing `"footer"` key to `sections.json`
+72. **135 · FLIP mobile guard** — `if (w > 1235) return` skips FLIP on wider viewports
 
 ## Next 🔜
 

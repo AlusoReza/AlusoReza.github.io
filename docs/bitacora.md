@@ -529,6 +529,11 @@ Global workflow summary. Each entry links to the detailed day log.
 **Plan:** Add `"footer"` key to `sections.json` for both `es` and `en`.
 **Build:** `npm run build` — 667ms, 0 errors. Tests: 0 FAILs, 18 WARNs. No regressions.
 
+### Session 135: Fix mobile FLIP animation floating letters on desktop view toggle
+**Prompt:** On mobile, toggling "desktop view" in the browser causes FLIP animation to fire, making name letters float. FLIP runs unconditionally with no viewport guard.
+**Plan:** Add `if (w > 1235) return` guard in ResizeObserver callback to skip FLIP on wider viewports.
+**Build:** `npm run build` — 595ms, 0 errors. Tests: 0 FAILs, 14 WARNs (improved). No regressions.
+
 ### Session 135: Full orphaned code audit and cleanup
 **Prompt:** After storedRects bug, audit entire codebase for orphaned references and dead code from previous refactors.
 **Plan:** Fix H1 (broken toggleSection auto-hide), remove M2-M6 (orphaned component, hidden div, redundant MediaQueryList, dead CSS), clean L1-L7 (dead attributes, stale comments, unused variables/keys). 13 changes across 6 files.

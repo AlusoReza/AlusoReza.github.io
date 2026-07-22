@@ -637,6 +637,7 @@ if (mobileProfileInner) {
 
   const profileObserver = new ResizeObserver(entries => {
     const w = entries[0].contentRect.width
+    if (w > 1235) return
     const spans = name.querySelectorAll('span')
 
     // Capture name position BEFORE measurement — measurement temporarily
