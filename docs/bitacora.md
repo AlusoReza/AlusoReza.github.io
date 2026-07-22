@@ -498,3 +498,8 @@ Global workflow summary. Each entry links to the detailed day log.
 **Prompt:** The sidebar doesn't animate during resize — it only animates when you stop. Root cause: `is-resizing` suppresses all CSS transitions on the sidebar. The 350ms timer removes `is-resizing` but the next resize event re-adds it within ~16ms, cutting off any transition.
 **Plan:** Replace CSS transition approach with `@keyframes sidebar-entrance` animation. CSS animations are NOT suppressed by `transition: none`. Capture `--sidebar-fade` value at animation start, animate to that target over 300ms.
 **Build:** `npm run build` — 571ms, 0 errors. Tests: 0 FAILs, 18 WARNs. No regressions.
+
+### Session 128: Fix midpoint right padding — align with mobile values
+**Prompt:** Midpoint zone has excessive right padding that compresses content. Commit `17cfc45` fixed mobile `--content-pad-right` to `clamp(8px, 3vw, 12px)` but midpoint was never updated.
+**Plan:** Update midpoint `--content-pad-right` from `clamp(16px, 3vw, 24px)` to `clamp(8px, 3vw, 12px)`.
+**Build:** `npm run build` — 1.86s, 0 errors. Tests: 0 FAILs, 18 WARNs. No regressions.

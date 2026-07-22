@@ -390,3 +390,7 @@
 - Animation captures `--sidebar-fade` as `--entrance-target` at start, runs independently of `is-resizing`
 - On `animationend`: cleanup + `snapSidebarFade()` to re-set correct inline value
 - Fixes root cause: `is-resizing` suppressed all CSS transitions, preventing sidebar from animating during resize
+
+### Session 128 — Fix midpoint right padding
+- Updated `--content-pad-right` in `sidebar-midpoint-mode` from `clamp(16px, 3vw, 24px)` to `clamp(8px, 3vw, 12px)` to match mobile values
+- Commit `17cfc45` fixed mobile padding but midpoint was never updated

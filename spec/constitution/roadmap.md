@@ -79,6 +79,7 @@
 65. **121 · Lang-switcher fade-in (final)** — Eliminated `lang-switcher-reveal`, moved `transition:none` to `delayed`
 66. **122 · Intermediate-speed resize fix** — Remove inline `--sidebar-fade` after timer's snap in fade zone
 67. **124 · Sidebar entrance animation** — `@keyframes sidebar-entrance` replaces CSS transitions (not blocked by `is-resizing`)
+68. **128 · Midpoint padding fix** — Aligned midpoint `--content-pad-right` with mobile values
 
 ## Next 🔜
 
