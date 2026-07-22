@@ -415,3 +415,8 @@
 - Added `if (w > 1235) return` guard in ResizeObserver callback
 - Skips FLIP animation when viewport wider than mobile breakpoint
 - Prevents floating letters when toggling "desktop view" on mobile browsers
+
+### Session 136 — Fix FLIP viewport jump detection
+- Added `lastProfileW` tracker and `jump > 200` guard in ResizeObserver
+- Detects sudden viewport changes (>200px) typical of browser "desktop view" toggle
+- Complements Session 135's `w > 1235` guard for jumps within mobile range

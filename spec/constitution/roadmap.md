@@ -84,6 +84,7 @@
 70. **133 · Mobile profile page guard** — `currentPage === 'sobre'` guard on resize-triggered `animateMobileProfile(true)`
 71. **134 · Footer i18n** — Added missing `"footer"` key to `sections.json`
 72. **135 · FLIP mobile guard** — `if (w > 1235) return` skips FLIP on wider viewports
+73. **136 · FLIP jump guard** — Skip FLIP when viewport changes >200px (browser toggle detection)
 
 ## Next 🔜
 

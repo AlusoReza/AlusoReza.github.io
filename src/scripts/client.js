@@ -634,10 +634,14 @@ if (mobileProfileInner) {
   const actions = mobileProfileInner.querySelector('.mobile-profile-actions')
   const img = mobileProfileInner.querySelector('.mobile-profile-img')
   let flipAnimated = false
+  let lastProfileW = 0
 
   const profileObserver = new ResizeObserver(entries => {
     const w = entries[0].contentRect.width
-    if (w > 1235) return
+    if (w > 1235) { lastProfileW = w; return }
+    const jump = Math.abs(w - lastProfileW)
+    lastProfileW = w
+    if (jump > 200) return
     const spans = name.querySelectorAll('span')
 
     // Capture name position BEFORE measurement — measurement temporarily
