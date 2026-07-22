@@ -420,3 +420,8 @@
 - Added `lastProfileW` tracker and `jump > 200` guard in ResizeObserver
 - Detects sudden viewport changes (>200px) typical of browser "desktop view" toggle
 - Complements Session 135's `w > 1235` guard for jumps within mobile range
+
+### Session 137 — Fix FLIP jump guard — layout always updates
+- Removed early `return` from `jump > 200` guard (was skipping layout calculation)
+- Moved `jump <= 200` check into FLIP decision and shift compensation
+- Layout (`classList.toggle`) now always executes; only FLIP animation is skipped on large jumps

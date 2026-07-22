@@ -539,6 +539,11 @@ Global workflow summary. Each entry links to the detailed day log.
 **Plan:** Track previous width with `lastProfileW`, skip FLIP when jump > 200px (browser toggle signature).
 **Build:** `npm run build` — 594ms, 0 errors. Tests: 0 FAILs, 14 WARNs. No regressions.
 
+### Session 137: Fix FLIP jump guard — layout must always update
+**Prompt:** Session 136's `jump > 200` return skipped layout calculation — mobile profile stuck in vertical. Layout must always update; only FLIP animation should be skipped.
+**Plan:** Remove early `return`, move `jump <= 200` check into FLIP decision and shift compensation.
+**Build:** `npm run build` — 633ms, 0 errors. Tests: 0 FAILs, 14 WARNs. No regressions.
+
 ### Session 135: Full orphaned code audit and cleanup
 **Prompt:** After storedRects bug, audit entire codebase for orphaned references and dead code from previous refactors.
 **Plan:** Fix H1 (broken toggleSection auto-hide), remove M2-M6 (orphaned component, hidden div, redundant MediaQueryList, dead CSS), clean L1-L7 (dead attributes, stale comments, unused variables/keys). 13 changes across 6 files.

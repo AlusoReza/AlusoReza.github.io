@@ -641,7 +641,6 @@ if (mobileProfileInner) {
     if (w > 1235) { lastProfileW = w; return }
     const jump = Math.abs(w - lastProfileW)
     lastProfileW = w
-    if (jump > 200) return
     const spans = name.querySelectorAll('span')
 
     // Capture name position BEFORE measurement — measurement temporarily
@@ -673,7 +672,7 @@ if (mobileProfileInner) {
 
     if (shouldRow === wasRow) {
       // Grid NOT changing — compensate vertical shift for name layout change
-      if (flipAnimated) {
+      if (flipAnimated && jump <= 200) {
         const newNameRect = name.getBoundingClientRect()
         const dy = oldNameRect.top - newNameRect.top
         if (dy !== 0) {
@@ -687,7 +686,7 @@ if (mobileProfileInner) {
       return
     }
 
-    if (flipAnimated) {
+    if (flipAnimated && jump <= 200) {
       // Suppress parent transitions during FLIP
       mobileProfileInner.style.transition = 'none'
 
