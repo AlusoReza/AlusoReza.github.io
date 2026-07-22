@@ -588,8 +588,10 @@ function handleMobileProfile() {
     if (sidebarLockTimer) { clearTimeout(sidebarLockTimer); sidebarLockTimer = null }
     if (langSwitcherTimer) { clearTimeout(langSwitcherTimer); langSwitcherTimer = null }
     if (snapProfileTimer) { clearTimeout(snapProfileTimer); snapProfileTimer = null }
-    document.documentElement.classList.add('sidebar-locked')
-    document.documentElement.classList.add('lang-switcher-delayed')
+    if (currentPage === 'sobre') {
+      document.documentElement.classList.add('sidebar-locked')
+      document.documentElement.classList.add('lang-switcher-delayed')
+    }
     langSwitcherTimer = setTimeout(() => {
       document.documentElement.classList.remove('sidebar-locked')
       document.documentElement.classList.remove('lang-switcher-delayed')
@@ -863,7 +865,9 @@ function snapSidebarFade() {
     html.classList.add('sidebar-no-transition')
     html.style.setProperty('--sidebar-fade', '0')
     html.classList.add('sidebar-midpoint-mode')
-    html.classList.add('lang-switcher-delayed')
+    if (currentPage === 'sobre') {
+      html.classList.add('lang-switcher-delayed')
+    }
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         html.classList.remove('sidebar-no-transition')

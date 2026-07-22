@@ -86,6 +86,7 @@
 72. **135 · FLIP mobile guard** — `if (w > 1235) return` skips FLIP on wider viewports
 73. **136 · FLIP jump guard** — Skip FLIP when viewport changes >200px (browser toggle detection)
 74. **137 · FLIP jump fix** — Layout always updates; only FLIP animation skipped on large jumps
+75. **138 · Lang-switcher page guard** — `sidebar-locked` + `lang-switcher-delayed` only on about page
 
 ## Next 🔜
 

@@ -544,6 +544,11 @@ Global workflow summary. Each entry links to the detailed day log.
 **Plan:** Remove early `return`, move `jump <= 200` check into FLIP decision and shift compensation.
 **Build:** `npm run build` — 633ms, 0 errors. Tests: 0 FAILs, 14 WARNs. No regressions.
 
+### Session 138: Lang-switcher delay page guard — only apply on about page
+**Prompt:** `sidebar-locked` + `lang-switcher-delayed` applied on ALL pages, causing 340ms delay on non-about pages. Should be instant on other pages.
+**Plan:** Wrap both classes in `currentPage === 'sobre'` guard in `handleMobileProfile()` and `snapSidebarFade()`.
+**Build:** `npm run build` — 746ms, 0 errors. Tests: 0 FAILs, 14 WARNs. No regressions.
+
 ### Session 135: Full orphaned code audit and cleanup
 **Prompt:** After storedRects bug, audit entire codebase for orphaned references and dead code from previous refactors.
 **Plan:** Fix H1 (broken toggleSection auto-hide), remove M2-M6 (orphaned component, hidden div, redundant MediaQueryList, dead CSS), clean L1-L7 (dead attributes, stale comments, unused variables/keys). 13 changes across 6 files.

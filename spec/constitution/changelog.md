@@ -425,3 +425,8 @@
 - Removed early `return` from `jump > 200` guard (was skipping layout calculation)
 - Moved `jump <= 200` check into FLIP decision and shift compensation
 - Layout (`classList.toggle`) now always executes; only FLIP animation is skipped on large jumps
+
+### Session 138 — Lang-switcher delay only on about page
+- Added `currentPage === 'sobre'` guard to `sidebar-locked` + `lang-switcher-delayed` in `handleMobileProfile()`
+- Added `currentPage === 'sobre'` guard to `lang-switcher-delayed` in `snapSidebarFade()`
+- Lang-switcher now appears instantly on non-about pages when crossing breakpoints
