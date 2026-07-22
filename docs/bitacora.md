@@ -528,3 +528,8 @@ Global workflow summary. Each entry links to the detailed day log.
 **Prompt:** Footer text doesn't change when switching language. `data-i18n="footer"` attribute exists but key missing from JSON.
 **Plan:** Add `"footer"` key to `sections.json` for both `es` and `en`.
 **Build:** `npm run build` — 667ms, 0 errors. Tests: 0 FAILs, 18 WARNs. No regressions.
+
+### Session 135: Full orphaned code audit and cleanup
+**Prompt:** After storedRects bug, audit entire codebase for orphaned references and dead code from previous refactors.
+**Plan:** Fix H1 (broken toggleSection auto-hide), remove M2-M6 (orphaned component, hidden div, redundant MediaQueryList, dead CSS), clean L1-L7 (dead attributes, stale comments, unused variables/keys). 13 changes across 6 files.
+**Build:** `npm run build` — 654ms, 0 errors. Tests: 0 FAILs, 14 WARNs (reduced from 18). No regressions.

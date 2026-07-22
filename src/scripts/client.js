@@ -2,7 +2,7 @@
 Global state: manages the core application state — parsed data, active language, current page, and transition lock.
     - DATA: Objeto JSON completo parseado del atributo data-data del <body>. Es la fuente única de toda la data del sitio (perfil, skills, proyectos, etc.). Se serializa en Astro y se lee en cliente sin fetch.
     - currentLang: Idioma activo ('es' o 'en'). Se persiste en localStorage bajo la clave 'preferredLang'. Controla qué traducciones se muestran en toda la UI.
-    - currentPage: ID de la página activa actualmente ('sobre', 'hab', etc.). Se usa para renderizar la sección correcta, marcar el nav activo y controlar qué páginas están visibles.
+    - currentPage: ID de la página activa actualmente ('sobre', 'proy', etc.). Se usa para renderizar la sección correcta, marcar el nav activo y controlar qué páginas están visibles.
     - isTransitioning: Flag booleano de bloqueo. Impide clics múltiples durante la animación de transición entre páginas. Se pone true al iniciar y false al terminar la transición (350ms).
 */
 const DATA = JSON.parse(document.body.dataset.data)
@@ -25,7 +25,7 @@ function t(field) {
 /*
 translateUI(): Traduce todos los elementos estáticos del DOM que tienen un atributo data-i18n. Busca las traducciones en DATA.lang[currentLang] y las inyecta como innerHTML. Se llama en init() y en renderAll() tras cambiar idioma.
     - data: Referencia a DATA.lang — el objeto que contiene todas las traducciones de la UI estática (nav, about, contact, etc.).
-    - key: La clave i18n del elemento actual (ej: 'nav-sobre', 'contact-email'). Se extrae de el.dataset.i18n.
+    - key: La clave i18n del elemento actual (ej: 'nav-sobre', 'sec-perfil'). Se extrae de el.dataset.i18n.
 Otros: Manejo especial para 'sobre-text' — separa el texto por doble salto de línea (\n\n) y lo envuelve en párrafos <p> con clase 'about-paragraph reveal' para que cada párrafo tenga su propia animación de scroll reveal.
 */
 function translateUI() {
@@ -54,8 +54,8 @@ function renderAll() {
   renderSection('education', DATA.education, renderEducationItem)
   renderSection('experience', DATA.experience, renderExperienceItem)
   renderSection('certificates', DATA.certificates, renderCertificateItem)
-  toggleSection('experiencia', DATA.experience)
-  toggleSection('certificados', DATA.certificates)
+  toggleSection('exp', DATA.experience)
+  toggleSection('cert', DATA.certificates)
   initScrollReveal()
 }
 
@@ -162,7 +162,7 @@ toggleSection(id, arr): Oculta o muestra una sección del DOM depending on si ti
 Otros: Al asignar display:'' (string vacío), se elimina el estilo inline y la sección vuelve a su display por defecto definido en CSS.
 */
 function toggleSection(id, arr) {
-  const el = document.getElementById(id)
+  const el = document.querySelector(`[data-page="${id}"]`)
   if (el) el.style.display = (!arr || arr.length === 0) ? 'none' : ''
 }
 
@@ -184,7 +184,7 @@ navigateTo(pageId): Sistema de navegación entre páginas con transiciones anima
     - newPage: Página DOM destino (data-page="${pageId}"). Si no existe, la función aborta.
     - contentEl: Contenedor scrollable #content. Se hace scroll al top antes de mostrar la nueva página.
     - motionOK: Booleano. Verdadero si el usuario NO tiene prefer-reduced-motion activado. Determina si se usa animación CSS o transición instantánea.
-    - footer: Elemento .site-footer. Se oculta en páginas que no son 'sobre' o 'hab' (las que tienen sidebar).
+    - footer: Elemento .site-footer. Se oculta en páginas que no son 'sobre'.
 Otros: La transición tiene 3 caminos: (1) con animación — añade clase 'exiting' y espera 350ms, (2) sin motion — cambio instantáneo, (3) sin oldPage — primera carga, solo muestra. El flag isTransitioning se gestiona internamente.
 */
 function navigateTo(pageId) {
@@ -472,17 +472,6 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') closeSidebar()
 })
 
-const mql = window.matchMedia('(max-width: 1235px)')
-mql.addEventListener('change', (e) => {
-  if (!e.matches) closeSidebar()
-  document.documentElement.classList.add('sidebar-no-transition')
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      document.documentElement.classList.remove('sidebar-no-transition')
-    })
-  })
-})
-
 // --- MobileProfile transition (sidebar-delayed/locked for sequential animations) ---
 const mobileProfile = document.querySelector('.mobile-profile')
 const mqlBreakpoint = window.matchMedia('(max-width: 1235px)')
@@ -617,7 +606,16 @@ function handleMobileProfile() {
   wasBelow = isBelow
 }
 
-mqlBreakpoint.addEventListener('change', handleMobileProfile)
+mqlBreakpoint.addEventListener('change', (e) => {
+  if (!e.matches) closeSidebar()
+  document.documentElement.classList.add('sidebar-no-transition')
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      document.documentElement.classList.remove('sidebar-no-transition')
+    })
+  })
+  handleMobileProfile()
+})
 
 if (mqlBreakpoint.matches) {
   updateMobileProfile()
@@ -768,7 +766,7 @@ init(): Inicialización maestra de toda la aplicación. Se ejecuta al final del 
     - validPage: Página validada — comprueba que el data-page existe en el DOM. Si no existe (página eliminada), cae a 'sobre'. Evita mostrar una página que ya no está en el HTML.
     - activePage: Elemento DOM de la página guardada. Se le añade la clase 'active' para mostrarla.
     - activeNav: Elemento DOM del enlace de nav correspondiente a la página guardada. Se marca como activo.
-    - footer: Elemento .site-footer. Se oculta si la página guardada no es 'sobre' o 'hab'.
+    - footer: Elemento .site-footer. Se oculta si la página guardada no es 'sobre'.
     - spinner: Elemento #loading-spinner. Se le añade la clase 'done' para iniciar la animación de ocultación, pero solo si el <html> tiene la clase 'show-spinner' (indicando que JS cargó correctamente).
 
 Otros: clearTimeout(window.__spinnerTimer) cancela el timer de fallback del spinner (por si JS carga lento). Al final, se elimina 'js-loading' del <html> para activar las transiciones CSS que estaban pausadas.

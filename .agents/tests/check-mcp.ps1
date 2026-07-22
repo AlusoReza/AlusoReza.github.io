@@ -91,10 +91,10 @@ else { Fail "client.js does NOT use addEventListener with [data-lang]" "Migrate 
 if ($clientJs -match 'document\.body\.dataset\.data') { Pass "client.js reads data from data-data" }
 else { Fail "client.js does NOT use document.body.dataset.data" "Read data from document.body.dataset.data" }
 
-# --- CHECK 10: LangSwitcher (in LangSwitcher.astro) ---
-$langSwitcher = Get-Content "$src\components\LangSwitcher.astro" -Raw
-if ($langSwitcher -match 'data-lang=' -and $langSwitcher -notmatch 'onclick=') { Pass "LangSwitcher.astro includes data-lang buttons (no onclick)" }
-else { Fail "LangSwitcher.astro missing data-lang or has onclick" "Include ES/EN buttons with data-lang in LangSwitcher.astro" }
+# --- CHECK 10: Lang buttons in BaseLayout (inline, no separate component) ---
+$baseLayout = Get-Content "$src\layouts\BaseLayout.astro" -Raw
+if ($baseLayout -match 'data-lang=' -and $baseLayout -notmatch 'onclick=') { Pass "BaseLayout.astro includes data-lang buttons (no onclick)" }
+else { Fail "BaseLayout.astro missing data-lang or has onclick" "Include ES/EN buttons with data-lang in BaseLayout.astro" }
 
 # --- CHECK 11: set:html on HTML elements ---
 Title "Astro Directives"

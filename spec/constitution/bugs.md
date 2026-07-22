@@ -1,6 +1,6 @@
 ﻿# Bugs known — Alonso Suarez Reza Portfolio
 
-Last scan: 2026-07-22 (Session 134)
+Last scan: 2026-07-22 (Session 135)
 Status: All previously identified bugs fixed. 1 partially fixed (Session 118). Test scripts updated to match current project structure. Code decisions documented in `code-decisions.md`.
 
 ## Fixed (Session 12 — 2026-06-26)
@@ -242,6 +242,14 @@ Status: All previously identified bugs fixed. 1 partially fixed (Session 118). T
 - **Fix:** Single line deletion — removed `if (oldPage?.querySelector('.tech-showcase')) storedRects.clear()`. Zero regression risk since `storedRects` no longer exists.
 - **Revert consequence:** Navigation from Sobre mí page to any other page silently fails, blocking all further navigation.
 
+### toggleSection() uses wrong element IDs — auto-hide for empty sections broken — HIGH
+- **File:** `src/scripts/client.js`, lines 57-58, 164-167
+- **Source:** [MANUAL]
+- **Detected:** Session 135 | **Fixed:** Session 135
+- **Root cause:** `toggleSection('experiencia', ...)` and `toggleSection('certificados', ...)` use `document.getElementById(id)`, but the DOM uses `data-page="exp"` and `data-page="cert"` — no `id` attributes exist. `getElementById` returns `null`, the `if (el)` guard prevents a crash, so the auto-hide silently does nothing. Experience and certificates pages render as empty visible sections when their data arrays are empty.
+- **Fix:** Changed `toggleSection` to use `document.querySelector('[data-page="${id}"]')` and updated call sites with correct page IDs (`exp`, `cert`).
+- **Revert consequence:** Auto-hide for empty experience/certificates sections stops working again.
+
 ## Open (non-bug — intentional/neutral)
 
 ### Brand colors in badges — INFO
@@ -274,15 +282,15 @@ Status: All previously identified bugs fixed. 1 partially fixed (Session 118). T
 - **Description:** Test detects `target="_blank"` in a comment line (line 109) that mentions the attribute. Actual code (line 117) has `rel="noopener noreferrer"`.
 - **Status:** False positive — comment text triggers regex
 
-### Orphan CSS classes — INFO
+### Orphan CSS classes — FIXED
 - **Source:** check-css-logic.ps1
-- **Description:** `lang-btn`, `sidebar-name-first`, `lang-switcher` are used in `LangSwitcher.astro` (orphaned component not included in layout).
-- **Status:** Low priority — component not used in production
+- **Description:** `lang-btn`, `sidebar-name-first`, `lang-switcher` were used in `LangSwitcher.astro` (orphaned component). All removed in Session 135.
+- **Status:** ✅ Fixed (Session 135) — deleted LangSwitcher.astro, removed sidebar-name-first class
 
-### Unused --content-max-width variable — INFO
+### Unused --content-max-width variable — FIXED
 - **Source:** check-css-logic.ps1
 - **Description:** `--content-max-width: 800px` defined in `:root` but never referenced.
-- **Status:** Low priority — dead code, can be removed
+- **Status:** ✅ Fixed (Session 135) — removed from `:root`
 
 ---
 
@@ -2094,51 +2102,223 @@ All findings below are from `run-all.ps1` test runs across sessions 90–103. Ea
 - **Description:** experience.json empty
 - **Status:** Pending
 
-## Automatic findings (Session 134 -- 2026-07-22)
+
+### LangSwitcher.astro missing data-lang or has onclick -- ERROR
+- **Source:** check-mcp.ps1
+- **Detected:** Session 135
+- **Description:** LangSwitcher.astro missing data-lang or has onclick
+- **Status:** Pending
+
+### LangSwitcher.astro missing data-lang or has onclick -- ERROR
+- **Source:** check-mcp.ps1
+- **Detected:** Session 135
+- **Description:** LangSwitcher.astro missing data-lang or has onclick
+- **Status:** Pending
 
 ### Computational grid not detected in #inicio -- WARNING
 - **Source:** check-frontend-design.ps1
-- **Detected:** Session 134 (automatic)
+- **Detected:** Session 135
+- **Description:** Computational grid not detected in #inicio
 - **Status:** Pending
 
 ### Missing fade gradient in #inicio::after -- WARNING
 - **Source:** check-frontend-design.ps1
-- **Detected:** Session 134 (automatic)
+- **Detected:** Session 135
+- **Description:** Missing fade gradient in #inicio::after
 - **Status:** Pending
 
 ### .btn-outline not found -- WARNING
 - **Source:** check-frontend-design.ps1
-- **Detected:** Session 134 (automatic)
+- **Detected:** Session 135
+- **Description:** .btn-outline not found
 - **Status:** Pending
 
 ### Missing sticky nav or sidebar -- WARNING
 - **Source:** check-frontend-design.ps1
-- **Detected:** Session 134 (automatic)
+- **Detected:** Session 135
+- **Description:** Missing sticky nav or sidebar
+- **Status:** Pending
+
+### Computational grid not detected in #inicio -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 135
+- **Description:** Computational grid not detected in #inicio
+- **Status:** Pending
+
+### Missing fade gradient in #inicio::after -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 135
+- **Description:** Missing fade gradient in #inicio::after
+- **Status:** Pending
+
+### .btn-outline not found -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 135
+- **Description:** .btn-outline not found
+- **Status:** Pending
+
+### Missing sticky nav or sidebar -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 135
+- **Description:** Missing sticky nav or sidebar
 - **Status:** Pending
 
 ### target=_blank without rel=noopener: -- WARNING
 - **Source:** check-js-logic.ps1
-- **Detected:** Session 134 (automatic)
+- **Detected:** Session 135
+- **Description:** target=_blank without rel=noopener:
 - **Status:** Pending
 
-### Predominantly single quotes (536 single vs 88 double) -- WARNING
+### Predominantly single quotes (528 single vs 90 double) -- WARNING
 - **Source:** check-js-logic.ps1
-- **Detected:** Session 134 (automatic)
+- **Detected:** Session 135
+- **Description:** Predominantly single quotes (528 single vs 90 double)
 - **Status:** Pending
 
-### Classes referenced but missing CSS: sidebar-name-first, lang-btn, lang-switcher -- WARNING
-- **Source:** check-css-logic.ps1
-- **Detected:** Session 134 (automatic)
+### target=_blank without rel=noopener: -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 135
+- **Description:** target=_blank without rel=noopener:
 - **Status:** Pending
 
-### CSS variables defined but possibly unused: --content-max-width -- WARNING
-- **Source:** check-css-logic.ps1
-- **Detected:** Session 134 (automatic)
+### Predominantly single quotes (528 single vs 90 double) -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 135
+- **Description:** Predominantly single quotes (528 single vs 90 double)
 - **Status:** Pending
 
 ### experience.json empty -- WARNING
 - **Source:** check-json-schema.ps1
-- **Detected:** Session 134 (automatic)
+- **Detected:** Session 135
+- **Description:** experience.json empty
+- **Status:** Pending
+
+### experience.json empty -- WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session 135
+- **Description:** experience.json empty
+- **Status:** Pending
+
+
+### Computational grid not detected in #inicio -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 135
+- **Description:** Computational grid not detected in #inicio
+- **Status:** Pending
+
+### Missing fade gradient in #inicio::after -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 135
+- **Description:** Missing fade gradient in #inicio::after
+- **Status:** Pending
+
+### .btn-outline not found -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 135
+- **Description:** .btn-outline not found
+- **Status:** Pending
+
+### Missing sticky nav or sidebar -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 135
+- **Description:** Missing sticky nav or sidebar
+- **Status:** Pending
+
+### Computational grid not detected in #inicio -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 135
+- **Description:** Computational grid not detected in #inicio
+- **Status:** Pending
+
+### Missing fade gradient in #inicio::after -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 135
+- **Description:** Missing fade gradient in #inicio::after
+- **Status:** Pending
+
+### .btn-outline not found -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 135
+- **Description:** .btn-outline not found
+- **Status:** Pending
+
+### Missing sticky nav or sidebar -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 135
+- **Description:** Missing sticky nav or sidebar
+- **Status:** Pending
+
+### target=_blank without rel=noopener: -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 135
+- **Description:** target=_blank without rel=noopener:
+- **Status:** Pending
+
+### Predominantly single quotes (528 single vs 90 double) -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 135
+- **Description:** Predominantly single quotes (528 single vs 90 double)
+- **Status:** Pending
+
+### target=_blank without rel=noopener: -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 135
+- **Description:** target=_blank without rel=noopener:
+- **Status:** Pending
+
+### Predominantly single quotes (528 single vs 90 double) -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 135
+- **Description:** Predominantly single quotes (528 single vs 90 double)
+- **Status:** Pending
+
+### experience.json empty -- WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session 135
+- **Description:** experience.json empty
+- **Status:** Pending
+
+### experience.json empty -- WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session 135
+- **Description:** experience.json empty
+- **Status:** Pending
+
+## Automatic findings (Session 135 -- 2026-07-22)
+
+### Computational grid not detected in #inicio -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 135 (automatic)
+- **Status:** Pending
+
+### Missing fade gradient in #inicio::after -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 135 (automatic)
+- **Status:** Pending
+
+### .btn-outline not found -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 135 (automatic)
+- **Status:** Pending
+
+### Missing sticky nav or sidebar -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 135 (automatic)
+- **Status:** Pending
+
+### target=_blank without rel=noopener: -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 135 (automatic)
+- **Status:** Pending
+
+### Predominantly single quotes (528 single vs 90 double) -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 135 (automatic)
+- **Status:** Pending
+
+### experience.json empty -- WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session 135 (automatic)
 - **Status:** Pending
 
 ---

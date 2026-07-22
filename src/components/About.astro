@@ -14,7 +14,7 @@ const categories = [
 ---
 <div data-page="sobre" class="page">
   <h2 class="section-title perfil-title" data-i18n="sec-perfil">Perfil Profesional</h2>
-  <div data-i18n="sobre-text" data-section="about-text">
+  <div data-i18n="sobre-text">
     {t('sobre-text').split('\n\n').map(p => (
       <p class="about-paragraph reveal" set:html={p}></p>
     ))}

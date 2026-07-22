@@ -38,7 +38,6 @@ PORTFOLIO — Global Stylesheet
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   --sidebar-width: clamp(240px, 23vw, 320px);
   --sidebar-fade: clamp(0, (100vw - 1236px) / 100px, 1);
-  --content-max-width: 800px;
   --transition-speed: 0.35s;
 
   /* Content padding — adjust to expand/contract content area */
@@ -354,10 +353,6 @@ html:not(.js-loading) .content {
   color: var(--color-text);
 }
 
-.mobile-profile-desc--standalone {
-  display: none;
-}
-
 .mobile-profile-social {
   display: flex;
   gap: 12px;
@@ -666,11 +661,6 @@ html:not(.js-loading) .content {
 
 /* 6f. Language Switcher — ES/EN toggle buttons */
 
-/* Sidebar lang buttons: hidden — language lives in floating switcher only */
-.sidebar-lang {
-  display: none;
-}
-
 /* Individual lang button: bordered pill with glass-morphism */
 .sidebar-lang-btn {
   background: none;
@@ -818,17 +808,6 @@ html:not(.js-loading) .content {
   max-height: calc(3em * var(--sidebar-fade));
   position: relative;
   z-index: 1;
-}
-
-/* Section heading: large bright display text (e.g. "Habilidades") */
-.section-heading {
-  font-family: var(--font-display);
-  color: var(--color-text-bright);
-  font-size: 1.85rem;
-  font-weight: 700;
-  margin: 4px 0 24px 0;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
 }
 
 /* ========================
@@ -1260,7 +1239,7 @@ html:not(.js-loading) .content {
   max-width: 115%;
 }
 
-/* Hidden footer: only shown on About and Skills pages */
+/* Hidden footer: only shown on About page */
 .site-footer.hidden {
   display: none;
 }
@@ -1728,10 +1707,6 @@ html.sidebar-midpoint-mode .skills-personality-grid {
     --content-pad-right: 4px;
     --content-pad-bottom: 24px;
     --content-pad-left: 16px;
-  }
-
-  .section-heading {
-    font-size: 1.45rem;
   }
 
   .section-title {
