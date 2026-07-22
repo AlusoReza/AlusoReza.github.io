@@ -1397,7 +1397,7 @@ html.sidebar-midpoint-mode .content {
 
 /* Push non-home pages below fixed hamburger button + lang switcher */
 html.sidebar-midpoint-mode .page:not([data-page="sobre"]) {
-  padding-top: calc(max(16px, env(safe-area-inset-top)) + 44px);
+  padding-top: calc(max(16px, env(safe-area-inset-top)) + 30px);
 }
 
 /* Hide desktop-only sidebar elements */
@@ -1665,7 +1665,7 @@ html.sidebar-midpoint-mode .skills-personality-grid {
 
   /* Push non-home pages below fixed hamburger button + lang switcher */
   .page:not([data-page="sobre"]) {
-    padding-top: calc(max(16px, env(safe-area-inset-top)) + 44px);
+    padding-top: calc(max(16px, env(safe-area-inset-top)) + 30px);
   }
 
   /* Sidebar: hide photo, social and CV — keep name + title + nav + lang */
