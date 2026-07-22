@@ -55,7 +55,7 @@
 43. **86 · Breakpoint flash fix** — `sidebar-no-transition` for 2 rAF frames on media query change
 44. **87 · Snap on resize end** — `snapSidebarFade()` + midpoint mode (1236-1285px) + `is-resizing` + mouseup snap
 
-### Sidebar refinement (Sessions 88-115)
+### Sidebar refinement (Sessions 88-119)
 45. **88 · Bugs.md cleanup** — Deduplication and triage of bug tracker
 46. **89 · Test suite fix** — ASCII encoding + stale file references, 0 FAILs
 47. **90 · About + Skills merge** — Unified page, eliminated Skills.astro (10 → 8 components)
@@ -72,6 +72,9 @@
 58. **113 · Timer safety** — 3 named timers, micro-adjustment, race condition fixes
 59. **114 · Dead zone fix** — `snapSidebarFade()` call replaces manual sidebar transition
 60. **115 · Tech grid archive** — Documented 5 animation approaches, removed transition code
+61. **116 · Documentation overhaul** — bugs.md rewrite, code-decisions.md, spec updates
+62. **117-118 · Mobile profile animation fix** — Inverted operation order + `overflow: hidden`
+63. **119 · Lang-switcher fade-in** — CSS transition replaces `@keyframes lang-fade-in`, removed `animationend` listener
 
 ## Next 🔜
 

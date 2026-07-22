@@ -100,3 +100,17 @@ Critical code decisions in `client.js` and `global.css`. Each entry documents wh
 - **Decision:** Use `overflow: hidden` instead of `overflow: clip` on `.mobile-profile`.
 - **Bug fixed:** Mobile profile half-height flash on large→small resize. `overflow: clip` doesn't establish a scroll container, making `scrollHeight` return unreliable values (0 or partial). This triggered the fallback path in `animateMobileProfile(show=true)` which sets `height: auto` before the transition is configured, causing instant content expansion. `overflow: hidden` establishes a scroll container for reliable `scrollHeight`.
 - **Revert consequence:** `scrollHeight` may return incorrect values again, causing the half-height flash to reappear.
+
+## 15. CSS `transition: opacity 0.3s ease` replaces `@keyframes lang-fade-in`
+- **File:** `src/styles/global.css` L1346-1349, `src/scripts/client.js` L852-855
+- **Session:** 119
+- **Decision:** Use CSS `transition: opacity 0.3s ease` on `.lang-switcher-reveal` instead of `@keyframes lang-fade-in` animation. Removed `animationend` event listener from JS.
+- **Bug fixed:** Lang-switcher popped in without a smooth fade-in when resizing to the midpoint zone. The `@keyframes` animation started after the opacity 0→1 jump, making the fade imperceptible. With CSS `transition`, the opacity change itself triggers the 0.3s fade — no flash, smooth transition.
+- **Revert consequence:** Lang-switcher fade-in becomes imperceptible again (pops in instantly).
+
+## 16. Midpoint setup before `updateMobileProfile()` in `init()`
+- **File:** `src/scripts/client.js` L782-790
+- **Session:** 120
+- **Decision:** Move `const initW = window.innerWidth` and midpoint class setup (`sidebar-init-mobile`, `sidebar-no-transition`, `sidebar-midpoint-mode`) to BEFORE the first `updateMobileProfile()` call in `init()`. Remove the 350ms `setTimeout` that re-called `updateMobileProfile()`.
+- **Bug fixed:** Mobile profile delayed 350ms on F5 reload in midpoint zone (1236-1285px). Previously, `updateMobileProfile()` ran before `sidebar-midpoint-mode` was added, so `shouldShow` evaluated to `false`. The 350ms `setTimeout` repaired this but created a visible delay.
+- **Revert consequence:** Mobile profile returns to appearing with a 350ms delay on F5 reload in the midpoint zone.

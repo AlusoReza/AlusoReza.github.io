@@ -473,3 +473,13 @@ Global workflow summary. Each entry links to the detailed day log.
 **Prompt:** Session 117's inverted operation order fix didn't resolve the bug. User also tried `minmax(0, 0fr)` and `min-height: 0` — neither worked. Root cause: `overflow: clip` makes `scrollHeight` unreliable.
 **Plan:** Revert user's CSS experiments. Change `overflow: clip` → `overflow: hidden` on `.mobile-profile` to establish scroll container for reliable `scrollHeight` measurement.
 **Build:** `npm run build` — 600ms, 0 errors. Tests: 0 FAILs.
+
+### Session 119: Fix lang-switcher fade-in — replace keyframe animation with CSS transition
+**Prompt:** Lang-switcher pops in without a smooth fade-in when resizing to the midpoint zone. Previous fix added a 340ms delay but the keyframe animation is imperceptible.
+**Plan:** Remove `@keyframes lang-fade-in` and add `transition: opacity 0.3s ease` to `.lang-switcher-reveal`. Remove `animationend` listener in JS. Net change: ~8 lines removed, ~2 added.
+**Build:** `npm run build` — 521ms, 0 errors. Tests: 0 FAILs.
+
+### Session 120: Fix mobile profile delayed 350ms on F5 reload in midpoint zone
+**Prompt:** When pressing F5 with viewport 1236-1285px, mobile profile doesn't appear for ~350ms because `updateMobileProfile()` runs before `sidebar-midpoint-mode` is added in `init()`.
+**Plan:** Move midpoint setup before `updateMobileProfile()` call. Remove 350ms `setTimeout` (unnecessary with `sidebar-no-transition`).
+**Build:** `npm run build` — 671ms, 0 errors. Tests: 0 FAILs.

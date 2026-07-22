@@ -347,3 +347,28 @@
 ### Session 115 — Archive tech grid transitions
 - Removed transition CSS/JS from `global.css` and `client.js`
 - Created `docs/archived/tech-grid-transitions.md` with full timeline and rationale
+
+### Session 116 — Documentation overhaul
+- Rewrote `bugs.md` (consolidated ~520 duplicated warnings into 10 entries)
+- Created `code-decisions.md` (13 critical decisions)
+- Updated sidebar-architecture spec/plan/tasks
+- Updated changelog, roadmap, AGENTS.md, tech-stack.md, glossary.md
+
+### Session 117 — Fix mobile profile animation order
+- Inverted operation order in `animateMobileProfile(show=true)` — set `style.height='0'` before adding `--visible`
+- Added scrollHeight fallback for grid `1fr` at 0 height
+
+### Session 118 — Fix mobile profile animation — overflow:clip → overflow:hidden
+- Changed `overflow: clip` → `overflow: hidden` on `.mobile-profile` for reliable `scrollHeight`
+- Reverted user's CSS experiments (`minmax(0, 0fr)`, `min-height: 0`)
+
+### Session 119 — Fix lang-switcher fade-in — replace keyframe animation with CSS transition
+- Removed `@keyframes lang-fade-in` and `.lang-switcher-reveal` animation rule
+- Added CSS `transition: opacity 0.3s ease` to `.lang-switcher-reveal`
+- Removed `animationend` event listener from JS
+- Net change: ~8 lines removed, ~2 added across 2 files
+
+### Session 120 — Fix mobile profile delayed 350ms on F5 reload in midpoint zone
+- Moved midpoint setup (`initW` + class additions) before `updateMobileProfile()` in `init()`
+- Removed `setTimeout(() => { updateMobileProfile() }, 350)` — unnecessary with `sidebar-no-transition`
+- Mobile profile now appears immediately on F5 in midpoint zone (1236-1285px)

@@ -779,6 +779,16 @@ function init() {
 
   renderAll()
 
+  const initW = window.innerWidth
+  if (initW > 1235 && initW < 1337) {
+    const initClass = initW < 1286 ? 'sidebar-init-mobile' : 'sidebar-init-desktop'
+    document.documentElement.classList.add(initClass)
+    if (initW < 1286) {
+      document.documentElement.classList.add('sidebar-no-transition')
+      document.documentElement.classList.add('sidebar-midpoint-mode')
+    }
+  }
+
   updateMobileProfile()
   sidebar?.classList.toggle('sidebar--about', validPage === 'sobre')
 
@@ -792,22 +802,11 @@ function init() {
   initScrollReveal()
   updateScrollbar()
 
-  const initW = window.innerWidth
-  if (initW > 1235 && initW < 1337) {
-    const initClass = initW < 1286 ? 'sidebar-init-mobile' : 'sidebar-init-desktop'
-    document.documentElement.classList.add(initClass)
-    if (initW < 1286) {
-      document.documentElement.classList.add('sidebar-no-transition')
-      document.documentElement.classList.add('sidebar-midpoint-mode')
-    }
-  }
-
   document.documentElement.classList.remove('js-loading')
 
   window.addEventListener('resize', updateScrollbar)
 
   if (initW > 1235 && initW < 1286) {
-    setTimeout(() => { updateMobileProfile() }, 350)
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         document.documentElement.classList.remove('sidebar-no-transition')
@@ -852,10 +851,6 @@ function snapSidebarFade() {
     setTimeout(() => {
       html.classList.remove('lang-switcher-delayed')
       html.classList.add('lang-switcher-reveal')
-      const ls = document.querySelector('.lang-switcher-floating')
-      ls?.addEventListener('animationend', () => {
-        html.classList.remove('lang-switcher-reveal')
-      }, { once: true })
     }, 340)
     snapProfileTimer = setTimeout(() => {
       if (html.classList.contains('sidebar-midpoint-mode')) {

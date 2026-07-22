@@ -1343,13 +1343,9 @@ html.sidebar-midpoint-mode.lang-switcher-delayed .lang-switcher-floating {
   opacity: 0;
 }
 
-@keyframes lang-fade-in {
-  from { opacity: 0 }
-  to   { opacity: 1 }
-}
-
 html.sidebar-midpoint-mode.lang-switcher-reveal .lang-switcher-floating {
-  animation: lang-fade-in 0.3s ease;
+  opacity: 1;
+  transition: opacity 0.3s ease;
 }
 
 /* Dark overlay behind sidebar */

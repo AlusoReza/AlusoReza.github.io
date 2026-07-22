@@ -1,6 +1,6 @@
 ﻿# Bugs known — Alonso Suarez Reza Portfolio
 
-Last scan: 2026-07-22 (Session 118)
+Last scan: 2026-07-22 (Session 120)
 Status: All previously identified bugs fixed. 1 partially fixed (Session 118). Test scripts updated to match current project structure. Code decisions documented in `code-decisions.md`.
 
 ## Fixed (Session 12 — 2026-06-26)
@@ -204,6 +204,15 @@ Status: All previously identified bugs fixed. 1 partially fixed (Session 118). T
   4. Session 118: Changed `overflow: clip` → `overflow: hidden` — establishes scroll container, making `scrollHeight` reliably return full content height. **Result:** Visual behavior improved — no more instant appearance, animation is smoother. Not perfect but sufficient.
 - **Fix:** Changed `overflow: clip` to `overflow: hidden` on `.mobile-profile` (global.css:245). Both clip at the content-box boundary identically, but `hidden` creates a scroll container needed for reliable `scrollHeight`. Reverted user's `minmax(0, 0fr)` and `min-height: 0` experiments.
 - **Status:** Partially fixed — visual behavior significantly improved, animation covers more of the mobile profile. Remaining minor imperfection accepted as sufficient.
+
+## Fixed (Session 120 — 2026-07-22)
+
+### Mobile profile delayed 350ms on F5 reload in midpoint zone — MEDIUM
+- **File:** `src/scripts/client.js`
+- **Source:** [MANUAL]
+- **Detected:** Session 120 | **Fixed:** Session 120
+- **Root cause:** In `init()`, `updateMobileProfile()` at L782 ran BEFORE `sidebar-midpoint-mode` was added at L801. The condition `shouldShow = (mqlBreakpoint.matches || html.classList.contains('sidebar-midpoint-mode')) && currentPage === 'sobre'` evaluated to `false` because viewport was >1235px (mqlBreakpoint false) and sidebar-midpoint-mode not yet added. Mobile profile was hidden. A 350ms `setTimeout` at L810 re-called `updateMobileProfile()` after midpoint setup, but this delay was visible to the user.
+- **Fix:** Moved midpoint setup block (`const initW` + class additions) from L795-803 to BEFORE `updateMobileProfile()` at L782. Removed the `setTimeout(() => { updateMobileProfile() }, 350)` at L810 — unnecessary because `sidebar-no-transition` suppresses sidebar transitions on fresh load. Kept the double-rAF `sidebar-no-transition` removal for subsequent resizes.
 
 ## Open (non-bug — intentional/neutral)
 
@@ -640,6 +649,115 @@ All findings below are from `run-all.ps1` test runs across sessions 90–103. Ea
 - **Description:** experience.json empty
 - **Status:** Pending
 
+
+### Computational grid not detected in #inicio -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 118
+- **Description:** Computational grid not detected in #inicio
+- **Status:** Pending
+
+### Missing fade gradient in #inicio::after -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 118
+- **Description:** Missing fade gradient in #inicio::after
+- **Status:** Pending
+
+### .btn-outline not found -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 118
+- **Description:** .btn-outline not found
+- **Status:** Pending
+
+### Missing sticky nav or sidebar -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 118
+- **Description:** Missing sticky nav or sidebar
+- **Status:** Pending
+
+### Computational grid not detected in #inicio -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 118
+- **Description:** Computational grid not detected in #inicio
+- **Status:** Pending
+
+### Missing fade gradient in #inicio::after -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 118
+- **Description:** Missing fade gradient in #inicio::after
+- **Status:** Pending
+
+### .btn-outline not found -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 118
+- **Description:** .btn-outline not found
+- **Status:** Pending
+
+### Missing sticky nav or sidebar -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 118
+- **Description:** Missing sticky nav or sidebar
+- **Status:** Pending
+
+### target=_blank without rel=noopener: -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 118
+- **Description:** target=_blank without rel=noopener:
+- **Status:** Pending
+
+### Predominantly single quotes (514 single vs 88 double) -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 118
+- **Description:** Predominantly single quotes (514 single vs 88 double)
+- **Status:** Pending
+
+### target=_blank without rel=noopener: -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 118
+- **Description:** target=_blank without rel=noopener:
+- **Status:** Pending
+
+### Predominantly single quotes (514 single vs 88 double) -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 118
+- **Description:** Predominantly single quotes (514 single vs 88 double)
+- **Status:** Pending
+
+### Classes referenced but missing CSS: sidebar-name-first, lang-btn, lang-switcher -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 118
+- **Description:** Classes referenced but missing CSS: sidebar-name-first, lang-btn, lang-switcher
+- **Status:** Pending
+
+### CSS variables defined but possibly unused: --content-max-width -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 118
+- **Description:** CSS variables defined but possibly unused: --content-max-width
+- **Status:** Pending
+
+### Classes referenced but missing CSS: sidebar-name-first, lang-btn, lang-switcher -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 118
+- **Description:** Classes referenced but missing CSS: sidebar-name-first, lang-btn, lang-switcher
+- **Status:** Pending
+
+### CSS variables defined but possibly unused: --content-max-width -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 118
+- **Description:** CSS variables defined but possibly unused: --content-max-width
+- **Status:** Pending
+
+### experience.json empty -- WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session 118
+- **Description:** experience.json empty
+- **Status:** Pending
+
+### experience.json empty -- WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session 118
+- **Description:** experience.json empty
+- **Status:** Pending
+
 ## Automatic findings (Session 118 -- 2026-07-22)
 
 ### Computational grid not detected in #inicio -- WARNING
@@ -667,12 +785,12 @@ All findings below are from `run-all.ps1` test runs across sessions 90–103. Ea
 - **Detected:** Session 118 (automatic)
 - **Status:** Pending
 
-### Predominantly single quotes (520 single vs 88 double) -- WARNING
+### Predominantly single quotes (514 single vs 88 double) -- WARNING
 - **Source:** check-js-logic.ps1
 - **Detected:** Session 118 (automatic)
 - **Status:** Pending
 
-### Classes referenced but missing CSS: lang-switcher, sidebar-name-first, lang-btn -- WARNING
+### Classes referenced but missing CSS: sidebar-name-first, lang-btn, lang-switcher -- WARNING
 - **Source:** check-css-logic.ps1
 - **Detected:** Session 118 (automatic)
 - **Status:** Pending
