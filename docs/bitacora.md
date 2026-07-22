@@ -513,3 +513,8 @@ Global workflow summary. Each entry links to the detailed day log.
 **Prompt:** Sidebar navigation completely stopped working — clicking any nav link does nothing. Started after recent bug fix commits.
 **Plan:** Remove orphaned `storedRects.clear()` line left behind when `storedRects` Map was deleted in commit `3c7e94c`. Single line deletion, zero regression risk.
 **Build:** `npm run build` — 789ms, 0 errors. Tests: 0 FAILs, 18 WARNs. No regressions.
+
+### Session 132: Fix mobile page title overlap with fixed hamburger button
+**Prompt:** On non-home pages, the fixed hamburger button overlaps section titles on mobile. `--content-pad-top: 18px` is insufficient to clear the button (16px–52px zone).
+**Plan:** Add `padding-top` to `.page:not([data-page="sobre"])` in mobile and midpoint modes. Only affects non-home pages. Accounts for safe-area-inset on notched devices.
+**Build:** `npm run build` — 635ms, 0 errors. Tests: 0 FAILs, 18 WARNs. No regressions.

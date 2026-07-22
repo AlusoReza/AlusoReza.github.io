@@ -1395,6 +1395,11 @@ html.sidebar-midpoint-mode .content {
   --content-pad-left: clamp(16px, 3vw, 24px);
 }
 
+/* Push non-home pages below fixed hamburger button + lang switcher */
+html.sidebar-midpoint-mode .page:not([data-page="sobre"]) {
+  padding-top: calc(max(16px, env(safe-area-inset-top)) + 44px);
+}
+
 /* Hide desktop-only sidebar elements */
 html.sidebar-midpoint-mode .sidebar-top > .sidebar-profile-img,
 html.sidebar-midpoint-mode .sidebar-top > .sidebar-social,
@@ -1656,6 +1661,11 @@ html.sidebar-midpoint-mode .skills-personality-grid {
     --content-pad-right: clamp(8px, 3vw, 12px);
     --content-pad-bottom: clamp(24px, 4vh, 60px);
     --content-pad-left: clamp(16px, 3vw, 24px);
+  }
+
+  /* Push non-home pages below fixed hamburger button + lang switcher */
+  .page:not([data-page="sobre"]) {
+    padding-top: calc(max(16px, env(safe-area-inset-top)) + 44px);
   }
 
   /* Sidebar: hide photo, social and CV — keep name + title + nav + lang */
