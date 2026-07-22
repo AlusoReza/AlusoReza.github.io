@@ -401,3 +401,8 @@
 - `animateMobileProfile(true)` deferred to T=350ms via `sidebarLockTimer` (was: called immediately)
 - Cleared `snapProfileTimer` to prevent conflicts with midpoint path
 - Standalone CSS rule `html.lang-switcher-delayed .lang-switcher-floating { opacity: 0; }` (specificity 0,2,1)
+
+### Session 133 — Fix mobile profile appearing on non-about pages during resize
+- Added `currentPage === 'sobre'` guard to `animateMobileProfile(true)` in `handleMobileProfile()` and `snapSidebarFade()`
+- Mobile profile now only appears on "Sobre mí" page during resize (was: appeared on all pages)
+- Sidebar transitions and sidebar behavior unchanged — still work on all pages

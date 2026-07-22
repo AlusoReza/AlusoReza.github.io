@@ -81,6 +81,7 @@
 67. **124 · Sidebar entrance animation** — `@keyframes sidebar-entrance` replaces CSS transitions (not blocked by `is-resizing`)
 68. **128 · Midpoint padding fix** — Aligned midpoint `--content-pad-right` with mobile values
 69. **129 · Lang-switcher sync** — Replicated midpoint timing: both classes removed T=340ms, animation deferred T=350ms
+70. **133 · Mobile profile page guard** — `currentPage === 'sobre'` guard on resize-triggered `animateMobileProfile(true)`
 
 ## Next 🔜
 

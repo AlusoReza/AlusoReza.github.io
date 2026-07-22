@@ -518,3 +518,8 @@ Global workflow summary. Each entry links to the detailed day log.
 **Prompt:** On non-home pages, the fixed hamburger button overlaps section titles on mobile. `--content-pad-top: 18px` is insufficient to clear the button (16px–52px zone).
 **Plan:** Add `padding-top` to `.page:not([data-page="sobre"])` in mobile and midpoint modes. Only affects non-home pages. Accounts for safe-area-inset on notched devices.
 **Build:** `npm run build` — 635ms, 0 errors. Tests: 0 FAILs, 18 WARNs. No regressions.
+
+### Session 133: Fix mobile profile appearing on non-about pages during resize
+**Prompt:** Mobile profile should only appear on "Sobre mí" page. Navigation works correctly, but PC→mobile resize shows profile on all pages. Sidebar transitions should work on every page.
+**Plan:** Add `currentPage === 'sobre'` guard to `animateMobileProfile(true)` calls in `handleMobileProfile()` and `snapSidebarFade()`.
+**Build:** `npm run build` — 703ms, 0 errors. Tests: 0 FAILs, 18 WARNs. No regressions.

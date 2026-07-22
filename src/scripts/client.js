@@ -607,7 +607,7 @@ function handleMobileProfile() {
       langSwitcherTimer = null
     }, 340)
     sidebarLockTimer = setTimeout(() => {
-      if (!mobileProfile?.classList.contains('mobile-profile--visible')) {
+      if (currentPage === 'sobre' && !mobileProfile?.classList.contains('mobile-profile--visible')) {
         animateMobileProfile(true)
       }
       sidebarLockTimer = null
@@ -871,7 +871,7 @@ function snapSidebarFade() {
       html.classList.remove('lang-switcher-delayed')
     }, 340)
     snapProfileTimer = setTimeout(() => {
-      if (html.classList.contains('sidebar-midpoint-mode')) {
+      if (currentPage === 'sobre' && html.classList.contains('sidebar-midpoint-mode')) {
         animateMobileProfile(true)
       }
     }, 350)
