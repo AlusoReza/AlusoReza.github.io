@@ -1,7 +1,7 @@
 ﻿# Bugs known — Alonso Suarez Reza Portfolio
 
-Last scan: 2026-07-22 (Session ?)
-Status: All previously identified bugs fixed. Test scripts updated to match current project structure. Code decisions documented in `code-decisions.md`.
+Last scan: 2026-07-22 (Session 118)
+Status: All previously identified bugs fixed. 1 partially fixed (Session 118). Test scripts updated to match current project structure. Code decisions documented in `code-decisions.md`.
 
 ## Fixed (Session 12 — 2026-06-26)
 
@@ -188,6 +188,22 @@ Status: All previously identified bugs fixed. Test scripts updated to match curr
 - **Detected:** Session 102-111 | **Fixed:** Session 115
 - **Root cause:** 5 different animation approaches tried on tech grid (FLIP ×3, opacity fade, scale pulse). All rejected due to conflicts with `.reveal` transforms, discrete `flex-direction`, or stale measurements.
 - **Fix:** Removed all transition CSS/JS from `global.css` and `client.js`. Created `docs/archived/tech-grid-transitions.md` with full timeline, code snippets, and decision rationale.
+
+## Partially fixed (Sessions 117-118 — 2026-07-22)
+
+### Mobile profile half-height flash on large→small resize — MEDIUM
+- **File:** `src/styles/global.css`, `src/scripts/client.js`
+- **Source:** [MANUAL]
+- **Detected:** Session 117 | **Improved:** Session 118
+- **Symptom:** When resizing from >1235px to <1235px, the top half of the mobile profile appears instantly (no animation), then the animation transitions the bottom half smoothly. The user described it as "an instant spacing corresponding to half the mobile profile."
+- **Root cause:** `overflow: clip` on `.mobile-profile` does NOT establish a scroll container, causing `scrollHeight` to return an unreliable value (possibly `clientHeight` = 0 or a partial value). This triggered the fallback path in `animateMobileProfile(show=true)` which sets `height: auto` before the CSS transition is configured, causing instant content expansion.
+- **Investigation process:**
+  1. Session 117: Inverted operation order in `animateMobileProfile(show=true)` — set `style.height='0'` before `classList.add('--visible')`. Added `scrollHeight` fallback. **Result:** Did not fix the bug.
+  2. User tried `grid-template-rows: minmax(0, 0fr)` — explicitly set row minimum to 0 instead of `auto`. **Result:** Did not fix the bug.
+  3. User tried `min-height: 0` on `.mobile-profile` — prevented flex item expansion. **Result:** Did not fix the bug.
+  4. Session 118: Changed `overflow: clip` → `overflow: hidden` — establishes scroll container, making `scrollHeight` reliably return full content height. **Result:** Visual behavior improved — no more instant appearance, animation is smoother. Not perfect but sufficient.
+- **Fix:** Changed `overflow: clip` to `overflow: hidden` on `.mobile-profile` (global.css:245). Both clip at the content-box boundary identically, but `hidden` creates a scroll container needed for reliable `scrollHeight`. Reverted user's `minmax(0, 0fr)` and `min-height: 0` experiments.
+- **Status:** Partially fixed — visual behavior significantly improved, animation covers more of the mobile profile. Remaining minor imperfection accepted as sufficient.
 
 ## Open (non-bug — intentional/neutral)
 
@@ -406,51 +422,269 @@ All findings below are from `run-all.ps1` test runs across sessions 90–103. Ea
 - **Description:** experience.json empty
 - **Status:** Pending
 
-## Automatic findings (Session ? -- 2026-07-22)
 
 ### Computational grid not detected in #inicio -- WARNING
 - **Source:** check-frontend-design.ps1
-- **Detected:** Session ? (automatic)
+- **Detected:** Session 118
+- **Description:** Computational grid not detected in #inicio
 - **Status:** Pending
 
 ### Missing fade gradient in #inicio::after -- WARNING
 - **Source:** check-frontend-design.ps1
-- **Detected:** Session ? (automatic)
+- **Detected:** Session 118
+- **Description:** Missing fade gradient in #inicio::after
 - **Status:** Pending
 
 ### .btn-outline not found -- WARNING
 - **Source:** check-frontend-design.ps1
-- **Detected:** Session ? (automatic)
+- **Detected:** Session 118
+- **Description:** .btn-outline not found
 - **Status:** Pending
 
 ### Missing sticky nav or sidebar -- WARNING
 - **Source:** check-frontend-design.ps1
-- **Detected:** Session ? (automatic)
+- **Detected:** Session 118
+- **Description:** Missing sticky nav or sidebar
+- **Status:** Pending
+
+### Computational grid not detected in #inicio -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 118
+- **Description:** Computational grid not detected in #inicio
+- **Status:** Pending
+
+### Missing fade gradient in #inicio::after -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 118
+- **Description:** Missing fade gradient in #inicio::after
+- **Status:** Pending
+
+### .btn-outline not found -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 118
+- **Description:** .btn-outline not found
+- **Status:** Pending
+
+### Missing sticky nav or sidebar -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 118
+- **Description:** Missing sticky nav or sidebar
 - **Status:** Pending
 
 ### target=_blank without rel=noopener: -- WARNING
 - **Source:** check-js-logic.ps1
-- **Detected:** Session ? (automatic)
+- **Detected:** Session 118
+- **Description:** target=_blank without rel=noopener:
 - **Status:** Pending
 
 ### Predominantly single quotes (520 single vs 88 double) -- WARNING
 - **Source:** check-js-logic.ps1
-- **Detected:** Session ? (automatic)
+- **Detected:** Session 118
+- **Description:** Predominantly single quotes (520 single vs 88 double)
 - **Status:** Pending
 
-### Classes referenced but missing CSS: sidebar-name-first, lang-switcher, lang-btn -- WARNING
+### target=_blank without rel=noopener: -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 118
+- **Description:** target=_blank without rel=noopener:
+- **Status:** Pending
+
+### Predominantly single quotes (520 single vs 88 double) -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 118
+- **Description:** Predominantly single quotes (520 single vs 88 double)
+- **Status:** Pending
+
+### Classes referenced but missing CSS: lang-switcher, lang-btn, sidebar-name-first -- WARNING
 - **Source:** check-css-logic.ps1
-- **Detected:** Session ? (automatic)
+- **Detected:** Session 118
+- **Description:** Classes referenced but missing CSS: lang-switcher, lang-btn, sidebar-name-first
 - **Status:** Pending
 
 ### CSS variables defined but possibly unused: --content-max-width -- WARNING
 - **Source:** check-css-logic.ps1
-- **Detected:** Session ? (automatic)
+- **Detected:** Session 118
+- **Description:** CSS variables defined but possibly unused: --content-max-width
+- **Status:** Pending
+
+### Classes referenced but missing CSS: lang-switcher, lang-btn, sidebar-name-first -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 118
+- **Description:** Classes referenced but missing CSS: lang-switcher, lang-btn, sidebar-name-first
+- **Status:** Pending
+
+### CSS variables defined but possibly unused: --content-max-width -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 118
+- **Description:** CSS variables defined but possibly unused: --content-max-width
 - **Status:** Pending
 
 ### experience.json empty -- WARNING
 - **Source:** check-json-schema.ps1
-- **Detected:** Session ? (automatic)
+- **Detected:** Session 118
+- **Description:** experience.json empty
+- **Status:** Pending
+
+### experience.json empty -- WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session 118
+- **Description:** experience.json empty
+- **Status:** Pending
+
+
+### Computational grid not detected in #inicio -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 118
+- **Description:** Computational grid not detected in #inicio
+- **Status:** Pending
+
+### Missing fade gradient in #inicio::after -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 118
+- **Description:** Missing fade gradient in #inicio::after
+- **Status:** Pending
+
+### .btn-outline not found -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 118
+- **Description:** .btn-outline not found
+- **Status:** Pending
+
+### Missing sticky nav or sidebar -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 118
+- **Description:** Missing sticky nav or sidebar
+- **Status:** Pending
+
+### Computational grid not detected in #inicio -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 118
+- **Description:** Computational grid not detected in #inicio
+- **Status:** Pending
+
+### Missing fade gradient in #inicio::after -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 118
+- **Description:** Missing fade gradient in #inicio::after
+- **Status:** Pending
+
+### .btn-outline not found -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 118
+- **Description:** .btn-outline not found
+- **Status:** Pending
+
+### Missing sticky nav or sidebar -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 118
+- **Description:** Missing sticky nav or sidebar
+- **Status:** Pending
+
+### target=_blank without rel=noopener: -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 118
+- **Description:** target=_blank without rel=noopener:
+- **Status:** Pending
+
+### Predominantly single quotes (520 single vs 88 double) -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 118
+- **Description:** Predominantly single quotes (520 single vs 88 double)
+- **Status:** Pending
+
+### target=_blank without rel=noopener: -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 118
+- **Description:** target=_blank without rel=noopener:
+- **Status:** Pending
+
+### Predominantly single quotes (520 single vs 88 double) -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 118
+- **Description:** Predominantly single quotes (520 single vs 88 double)
+- **Status:** Pending
+
+### Classes referenced but missing CSS: lang-switcher, sidebar-name-first, lang-btn -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 118
+- **Description:** Classes referenced but missing CSS: lang-switcher, sidebar-name-first, lang-btn
+- **Status:** Pending
+
+### CSS variables defined but possibly unused: --content-max-width -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 118
+- **Description:** CSS variables defined but possibly unused: --content-max-width
+- **Status:** Pending
+
+### Classes referenced but missing CSS: lang-switcher, sidebar-name-first, lang-btn -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 118
+- **Description:** Classes referenced but missing CSS: lang-switcher, sidebar-name-first, lang-btn
+- **Status:** Pending
+
+### CSS variables defined but possibly unused: --content-max-width -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 118
+- **Description:** CSS variables defined but possibly unused: --content-max-width
+- **Status:** Pending
+
+### experience.json empty -- WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session 118
+- **Description:** experience.json empty
+- **Status:** Pending
+
+### experience.json empty -- WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session 118
+- **Description:** experience.json empty
+- **Status:** Pending
+
+## Automatic findings (Session 118 -- 2026-07-22)
+
+### Computational grid not detected in #inicio -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 118 (automatic)
+- **Status:** Pending
+
+### Missing fade gradient in #inicio::after -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 118 (automatic)
+- **Status:** Pending
+
+### .btn-outline not found -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 118 (automatic)
+- **Status:** Pending
+
+### Missing sticky nav or sidebar -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 118 (automatic)
+- **Status:** Pending
+
+### target=_blank without rel=noopener: -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 118 (automatic)
+- **Status:** Pending
+
+### Predominantly single quotes (520 single vs 88 double) -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 118 (automatic)
+- **Status:** Pending
+
+### Classes referenced but missing CSS: lang-switcher, sidebar-name-first, lang-btn -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 118 (automatic)
+- **Status:** Pending
+
+### CSS variables defined but possibly unused: --content-max-width -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 118 (automatic)
+- **Status:** Pending
+
+### experience.json empty -- WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session 118 (automatic)
 - **Status:** Pending
 
 ---

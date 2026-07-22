@@ -242,7 +242,7 @@ html:not(.js-loading) .content {
 .mobile-profile {
   display: grid;
   grid-template-rows: 0fr;
-  overflow: clip;
+  overflow: hidden;
   opacity: 0;
   height: 0;
   transition: opacity 0.35s ease;

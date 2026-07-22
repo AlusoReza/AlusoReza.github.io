@@ -93,3 +93,10 @@ Critical code decisions in `client.js` and `global.css`. Each entry documents wh
 - **Decision:** `snapProfileTimer` callback checks `html.classList.contains('sidebar-midpoint-mode')` before calling `animateMobileProfile(true)`.
 - **Bug fixed:** Mobile profile overlap on slow resize. `snapProfileTimer` (350ms) fires unconditionally after `snapSidebarFade()`, re-expanding mobile profile that `handleMobileProfile()` just collapsed. Chain: `a3559e7` removed `updateMobileProfile()` midpoint check → `d42e222` added `window.innerWidth > 1235` guard preventing collapse in midpoint zone → `8650255` introduced `snapProfileTimer` via `snapSidebarFade()`.
 - **Revert consequence:** Mobile profile re-expands after being collapsed on slow resize through midpoint zone.
+
+## 14. `overflow: hidden` on `.mobile-profile` (not `clip`)
+- **File:** `src/styles/global.css` L245
+- **Session:** 118
+- **Decision:** Use `overflow: hidden` instead of `overflow: clip` on `.mobile-profile`.
+- **Bug fixed:** Mobile profile half-height flash on large→small resize. `overflow: clip` doesn't establish a scroll container, making `scrollHeight` return unreliable values (0 or partial). This triggered the fallback path in `animateMobileProfile(show=true)` which sets `height: auto` before the transition is configured, causing instant content expansion. `overflow: hidden` establishes a scroll container for reliable `scrollHeight`.
+- **Revert consequence:** `scrollHeight` may return incorrect values again, causing the half-height flash to reappear.

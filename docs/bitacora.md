@@ -468,3 +468,8 @@ Global workflow summary. Each entry links to the detailed day log.
 **Prompt:** When rapidly resizing from >1235px to <1235px, top half of mobile profile appears suddenly without animation, then bottom half animates in.
 **Plan:** Invert operation order in `animateMobileProfile(show=true)`: set `style.height='0'` before adding `--visible` class. Add scrollHeight fallback if grid `1fr` at 0 height returns 0. No changes to hide path, updateMobileProfile, or other code paths.
 **Build:** `npm run build` — 547ms, 0 errors. Tests: 0 FAILs.
+
+### Session 118: Fix mobile profile animation — overflow:clip → overflow:hidden
+**Prompt:** Session 117's inverted operation order fix didn't resolve the bug. User also tried `minmax(0, 0fr)` and `min-height: 0` — neither worked. Root cause: `overflow: clip` makes `scrollHeight` unreliable.
+**Plan:** Revert user's CSS experiments. Change `overflow: clip` → `overflow: hidden` on `.mobile-profile` to establish scroll container for reliable `scrollHeight` measurement.
+**Build:** `npm run build` — 600ms, 0 errors. Tests: 0 FAILs.
