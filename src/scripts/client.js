@@ -598,17 +598,18 @@ function handleMobileProfile() {
     // Shrinking past 1235px: lock sidebar during mobile-profile slide-in
     if (sidebarLockTimer) { clearTimeout(sidebarLockTimer); sidebarLockTimer = null }
     if (langSwitcherTimer) { clearTimeout(langSwitcherTimer); langSwitcherTimer = null }
+    if (snapProfileTimer) { clearTimeout(snapProfileTimer); snapProfileTimer = null }
     document.documentElement.classList.add('sidebar-locked')
     document.documentElement.classList.add('lang-switcher-delayed')
-    if (!mobileProfile?.classList.contains('mobile-profile--visible')) {
-      animateMobileProfile(true)
-    }
     langSwitcherTimer = setTimeout(() => {
+      document.documentElement.classList.remove('sidebar-locked')
       document.documentElement.classList.remove('lang-switcher-delayed')
       langSwitcherTimer = null
     }, 340)
     sidebarLockTimer = setTimeout(() => {
-      document.documentElement.classList.remove('sidebar-locked')
+      if (!mobileProfile?.classList.contains('mobile-profile--visible')) {
+        animateMobileProfile(true)
+      }
       sidebarLockTimer = null
     }, 350)
   }

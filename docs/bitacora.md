@@ -504,10 +504,10 @@ Global workflow summary. Each entry links to the detailed day log.
 **Plan:** Update midpoint `--content-pad-right` from `clamp(16px, 3vw, 24px)` to `clamp(8px, 3vw, 12px)`.
 **Build:** `npm run build` — 1.86s, 0 errors. Tests: 0 FAILs, 18 WARNs. No regressions.
 
-### Session 129: Fix lang-switcher late appearance — fade-in during last 100ms
-**Prompt:** Lang-switcher appears at the exact moment animation finishes (T=350ms), creating abrupt pop-in. Three previous attempts (Sessions 125-127) all failed.
-**Plan:** Apply `lang-switcher-delayed` at T=0 alongside `sidebar-locked`. Remove delayed at T=340ms so lang-switcher starts fade-in during last 100ms of profile animation.
-**Build:** `npm run build` — 817ms, 0 errors. Tests: 0 FAILs, 18 WARNs. No regressions.
+### Session 129: Fix lang-switcher — sync with mobile profile animation
+**Prompt:** Lang-switcher appears at T=350ms (animation end), user wants it to appear "justo con el contenido" like midpoint. Root cause: `animateMobileProfile(true)` called immediately at T=0 in mobile but delayed to T=350ms in midpoint. Also `sidebar-locked` blocks lang-switcher even after `lang-switcher-delayed` removed.
+**Plan:** Replicate midpoint: remove both `sidebar-locked` + `lang-switcher-delayed` at T=340ms, defer animation to T=350ms.
+**Build:** `npm run build` — 920ms, 0 errors. Tests: 0 FAILs, 18 WARNs. No regressions.
 
 ### Session 131: Fix sidebar navigation broken by orphaned storedRects.clear()
 **Prompt:** Sidebar navigation completely stopped working — clicking any nav link does nothing. Started after recent bug fix commits.
