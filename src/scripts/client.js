@@ -523,10 +523,15 @@ function animateMobileProfile(show, duration = 350) {
   if (adjustTimer) { clearTimeout(adjustTimer); adjustTimer = null }
 
   if (show) {
-    mobileProfile.style.height = ''
-    mobileProfile.classList.add('mobile-profile--visible')
-    const h = mobileProfile.scrollHeight
     mobileProfile.style.height = '0'
+    mobileProfile.offsetHeight
+    mobileProfile.classList.add('mobile-profile--visible')
+    let h = mobileProfile.scrollHeight
+    if (h <= 0) {
+      mobileProfile.style.height = 'auto'
+      mobileProfile.offsetHeight
+      h = mobileProfile.scrollHeight
+    }
     mobileProfile.offsetHeight
     mobileProfile.style.transition = `height ${duration}ms ease, opacity ${duration}ms ease`
     requestAnimationFrame(() => { mobileProfile.style.height = h + 'px' })

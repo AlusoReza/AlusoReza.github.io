@@ -1,6 +1,7 @@
 # Glossary — Alonso Suárez Reza Portfolio
 
 ## A
+- **animateMobileProfile()**: JS function in `client.js` that animates MobileProfile height with explicit `scrollHeight` measurement. Replaced CSS `grid-template-rows` animation (Session 109).
 - **Astro 5**: Static web framework (SSG) used to build the portfolio. Compiles HTML at build-time and sends minimal JS to the client.
 - **addEventListener**: Standard JS method for assigning events. Replaces inline `onclick`.
 
@@ -25,6 +26,9 @@
 ## G
 - **git diff**: Command used in the initial snapshot and post-build to detect changes.
 
+## H
+- **handleMobileProfile()**: JS function that orchestrates sequential animations when crossing the 1235px breakpoint. Manages `sidebar-locked`/`sidebar-delayed` classes and calls `animateMobileProfile()`.
+
 ## I
 - **i18n**: Internationalization. Translation system based on `data-i18n` + `lang.json`.
 
@@ -36,6 +40,7 @@
 
 ## M
 - **MCP**: Model Context Protocol / Astro MCP. Set of Astro 5 best practices (no inline events, data via attributes, no globals).
+- **mqlBreakpoint**: `window.matchMedia('(max-width: 1235px)')` — JS media query listener aligned with CSS `@media (max-width: 1235px)`. Drives MobileProfile show/hide logic.
 - **motionOK**: Boolean variable in `client.js` that detects `prefers-reduced-motion`. If `false`, it skips the scroll reveal.
 
 ## P
@@ -48,6 +53,11 @@
 - **SDD**: Specification-Driven Development. Approach where specifications (`spec/`) are the project's source of truth.
 - **set:html**: Astro directive for rendering HTML in elements. Correctly used in Astro components (not in `<script>`).
 - **Skill**: opencode plugin that provides specialized instructions for specific tasks (e.g., `frontend-design`).
+- **snapProfileTimer**: Named timer in `client.js` that schedules `animateMobileProfile(true)` 350ms after `snapSidebarFade()` midpoint entry. Gated on `sidebar-midpoint-mode` to prevent re-expanding collapsed profile.
+- **snapSidebarFade()**: JS function called on mouseup or 1000ms fallback timer. Snaps `--sidebar-fade` to 0 or 1 based on viewport position in fade zone (1236-1336px).
+- **sidebar-delayed**: CSS class that delays sidebar transitions 350ms while MobileProfile collapses. Applied when growing past 1235px.
+- **sidebar-locked**: CSS class that freezes `--sidebar-fade` at 0 during MobileProfile slide-in animation. Applied when shrinking past 1235px.
+- **sidebar-midpoint-mode**: CSS class that duplicates `@media (max-width:1235px)` rules, allowing JS to activate mobile layout in the 1236-1285px range.
 
 ## T
 - **t()**: Helper function that resolves bilingual fields: `t({ es: "...", en: "..." })` → returns the current language value.

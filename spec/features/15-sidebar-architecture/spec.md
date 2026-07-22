@@ -45,15 +45,15 @@ All classes are applied to `<html>`.
 
 ### `sidebar-locked`
 - **Purpose:** Freezes `--sidebar-fade` at 0 during MobileProfile slide-in animation
-- **CSS:** `--sidebar-fade: 0; transition: none` on sidebar + sidebar-inner
+- **CSS:** `--sidebar-fade: 0; transition: none !important` on sidebar + sidebar-inner
 - **Duration:** 350ms (set by `handleMobileProfile()`)
-- **Trigger:** Shrinking past 1234px (`mqlBreakpoint`)
+- **Trigger:** Shrinking past 1235px (`mqlBreakpoint`)
 
 ### `sidebar-delayed`
-- **Purpose:** Delays sidebar transitions 400ms while MobileProfile collapses
+- **Purpose:** Delays sidebar transitions 350ms while MobileProfile collapses
 - **CSS:** `flex: 0 0 0 !important; width: 0 !important; opacity: 0 !important`
-- **Duration:** 400ms
-- **Trigger:** Growing past 1234px (`mqlBreakpoint`)
+- **Duration:** 350ms
+- **Trigger:** Growing past 1235px (`mqlBreakpoint`)
 
 ### `sidebar-no-transition`
 - **Purpose:** Suppresses CSS transitions for 2 rAF frames (~33ms)
@@ -83,43 +83,59 @@ All classes are applied to `<html>`.
 ### `snapSidebarFade()`
 Called on mouseup or 1000ms fallback timer. Three branches:
 1. **1286–1336px:** Remove midpoint mode, set `--sidebar-fade: 1` (snap to desktop)
-2. **1236–1285px:** Add `sidebar-no-transition` for 2 frames, set `--sidebar-fade: 0`, add `sidebar-midpoint-mode`, call `updateMobileProfile()` after 350ms
+2. **1236–1285px:** Add `sidebar-no-transition` for 2 frames, set `--sidebar-fade: 0`, add `sidebar-midpoint-mode`, add `lang-switcher-delayed` (340ms → `lang-switcher-reveal`), schedule `snapProfileTimer` (350ms) to call `animateMobileProfile(true)` if midpoint mode still active
 3. **Outside fade zone:** Remove midpoint mode, remove inline `--sidebar-fade`
 
 ### `handleMobileProfile()`
-Orchestrates sequential animations when crossing the 1234px breakpoint:
-- **Growing past 1234px:** Add `sidebar-delayed` (400ms), hide MobileProfile
-- **Shrinking past 1234px:** Add `sidebar-locked` (350ms), show MobileProfile
+Orchestrates sequential animations when crossing the 1235px breakpoint:
+- **Growing past 1235px:** Add `sidebar-delayed` (350ms), hide MobileProfile via `animateMobileProfile(false)`, then remove `sidebar-delayed` + `is-resizing` + call `snapSidebarFade()`
+- **Shrinking past 1235px:** Add `sidebar-locked` (350ms), show MobileProfile via `animateMobileProfile(true)`
 
 ### `updateMobileProfile()`
 Shows/hides MobileProfile based on:
-- `mqlBreakpoint.matches` (≤1234px) OR `sidebar-midpoint-mode` active
+- `mqlBreakpoint.matches` (≤1235px) OR `sidebar-midpoint-mode` active
 - `currentPage === 'sobre'`
+- Clears all 3 timers (`mobileProfileTimer`, `snapProfileTimer`, `adjustTimer`) on call
+
+### `animateMobileProfile(show, duration = 350)`
+JS-driven height animation for MobileProfile:
+- **Show:** Measure `scrollHeight`, set explicit px height, transition to target, micro-adjust if >2px diff after main animation
+- **Hide:** Capture current height, transition to 0, cleanup
+- Clears all 3 timers on call. Uses `mobileProfileTimer` for main animation, `adjustTimer` for micro-adjustment.
 
 ## Event flow
 
 ### Resize (during drag)
 1. Remove inline `--sidebar-fade` → CSS clamp takes over
 2. Add `is-resizing` → suppress all transitions
-3. If was in midpoint mode → remove it, hide MobileProfile instantly
+3. If was in midpoint mode → remove it, hide MobileProfile instantly (only if `window.innerWidth > 1235`)
 
 ### Mouseup (snap)
 1. Clear fallback timer
 2. Remove `is-resizing` → transitions re-enable
 3. Call `snapSidebarFade()` → snap to nearest extreme
 
+### `snapSidebarFade()` midpoint entry
+1. Add `sidebar-no-transition` for 2 frames
+2. Set `--sidebar-fade: 0` inline
+3. Add `sidebar-midpoint-mode`
+4. Add `lang-switcher-delayed` (340ms fade-in)
+5. Schedule `snapProfileTimer` (350ms) → `animateMobileProfile(true)` if midpoint mode still active
+
 ### Page load in fade zone
 1. Add `sidebar-init-mobile` or `sidebar-init-desktop` → prevent flash
-2. If below midpoint: also add `sidebar-midpoint-mode` + delayed `updateMobileProfile()`
-3. First resize event removes all init classes
+2. If below midpoint: also add `sidebar-no-transition` + `sidebar-midpoint-mode`
+3. Delayed `updateMobileProfile()` at 350ms
+4. First resize event removes all init classes
 
 ## CSS location
 
-- **State classes** (`sidebar-locked`, `sidebar-delayed`, `sidebar-no-transition`, `is-resizing`): `global.css` lines 54–81, 1200–1208
+- **State classes** (`sidebar-locked`, `sidebar-delayed`, `sidebar-no-transition`, `is-resizing`): `global.css` lines 54–82
 - **Init classes** (`sidebar-init-mobile/desktop`): `global.css` line 68–69
-- **Midpoint mode** (`sidebar-midpoint-mode`): `global.css` lines 1210–1355
-- **Base sidebar**: `global.css` lines 452–467
-- **Mobile media query**: `global.css` lines 1427–1600
+- **Midpoint mode** (`sidebar-midpoint-mode`): `global.css` lines 1282–1460
+- **Base sidebar**: `global.css` lines 453–468
+- **Mobile media query**: `global.css` lines 1530–1575
+- **MobileProfile base**: `global.css` lines 242–256 (`height: 0`, opacity transition)
 
 ## Why
 

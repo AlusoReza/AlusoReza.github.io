@@ -459,3 +459,12 @@ Global workflow summary. Each entry links to the detailed day log.
 **Prompt:** Document the complete history of FLIP and transition attempts on the tech grid (Sessions 102-111). Create archived document with all 5 approaches, code, reasons for rejection, and lessons learned.
 **Plan:** Remove transition CSS/JS from `global.css` and `client.js`. Create `docs/archived/tech-grid-transitions.md` with timeline, code snippets, and decision rationale.
 **Build:** `npm run build` — 581ms, 0 errors.
+
+### Session 116: Documentation overhaul — bugs.md, code-decisions.md, spec updates
+**Prompt:** Comprehensive documentation update. Rewrite bugs.md (consolidate duplicates), create code-decisions.md (13 critical decisions), update sidebar-architecture spec/plan/tasks, update changelog/roadmap/tech-stack/glossary/AGENTS.
+**Plan:** 12 files modified/created. bugs.md: 3300→250 lines (consolidated ~520 duplicated warnings into 10 entries, added 6 missing Fixed entries for Sessions 109-115). New code-decisions.md with 13 decisions. Updated spec.md (timings, functions, CSS lines), plan.md (8 new architecture decisions), tasks.md (13 new completed tasks). Updated changelog (Sessions 88-115), roadmap (Sessions 88-115), AGENTS.md (8 components, code-decisions.md ref), tech-stack.md (files, breakpoints), glossary.md (8 new entries).
+
+### Session 117: Fix mobile profile animation order — prevent flash on rapid resize
+**Prompt:** When rapidly resizing from >1235px to <1235px, top half of mobile profile appears suddenly without animation, then bottom half animates in.
+**Plan:** Invert operation order in `animateMobileProfile(show=true)`: set `style.height='0'` before adding `--visible` class. Add scrollHeight fallback if grid `1fr` at 0 height returns 0. No changes to hide path, updateMobileProfile, or other code paths.
+**Build:** `npm run build` — 547ms, 0 errors. Tests: 0 FAILs.

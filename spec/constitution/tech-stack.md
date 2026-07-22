@@ -11,11 +11,12 @@
 ## Key files / modules
 
 - `src/layouts/BaseLayout.astro` — HTML shell, Nav, LangSwitcher, `data-data` attribute on `<body>`, client.js bundle
-- `src/scripts/client.js` — Client-side JS (i18n, rendering, scroll-reveal, back-to-top)
+- `src/scripts/client.js` — Client-side JS (i18n, rendering, scroll-reveal, back-to-top, mobile profile animation, sidebar orchestration)
 - `src/styles/global.css` — Dark GitHub theme (imported by layout, bundled by Astro)
 - `src/data/*.json` — 7 JSON files (bilingual data contracts)
-- `src/components/*.astro` — 10 Astro components (rendering only, no business logic)
+- `src/components/*.astro` — 8 Astro components (rendering only, no business logic)
 - `.agents/tests/` — Test scripts (`run-all.ps1` + 6 check modules)
+- `spec/constitution/code-decisions.md` — Critical code decisions with file:line refs and revert consequences
 - `docs/logs/` — Session logs by day (`YYYY-MM-DD.md`)
 - `docs/bitacora.md` — Global scannable workflow summary
 
@@ -75,7 +76,7 @@
 - **Signature motif:** Computational grid on hero (28px spacing, 2% white opacity, linear-gradient fade).
 - **Badges:** Language badges (border-left accent) + tool badges (solid background, glow hover). AI Agents badge in `#10a37f`.
 - **Reveal animations:** Scroll-triggered `.reveal` / `.reveal.active` with 0.8s ease-out, 30px Y offset.
-- **Responsive:** Primary breakpoint at 1235px (sidebar/mobile switch). Secondary at 650px/800px (MobileProfile internal layout states). Additional at 480px (smallest screens).
+- **Responsive:** Primary breakpoint at 1235px (sidebar/mobile switch, aligned between CSS `@media` and JS `mqlBreakpoint`). Secondary at 650px/800px (MobileProfile internal layout states). Additional at 480px (smallest screens). See `code-decisions.md` #2 for breakpoint alignment rationale.
 - **Accessibility:** `prefers-reduced-motion` respected in CSS (universal `!important` override) and JS (no scroll listener).
 
 ## Hard limits

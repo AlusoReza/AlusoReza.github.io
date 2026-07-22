@@ -55,6 +55,24 @@
 43. **86 · Breakpoint flash fix** — `sidebar-no-transition` for 2 rAF frames on media query change
 44. **87 · Snap on resize end** — `snapSidebarFade()` + midpoint mode (1236-1285px) + `is-resizing` + mouseup snap
 
+### Sidebar refinement (Sessions 88-115)
+45. **88 · Bugs.md cleanup** — Deduplication and triage of bug tracker
+46. **89 · Test suite fix** — ASCII encoding + stale file references, 0 FAILs
+47. **90 · About + Skills merge** — Unified page, eliminated Skills.astro (10 → 8 components)
+48. **91-92 · Grid + title fixes** — Adaptive grid, personality render, title repositioning
+49. **94-96 · FLIP animation** — Tech grid animation attempts, `.reveal` conflict resolution
+50. **98-100 · Sidebar maximize animation** — JS-driven width transition, `sidebar-delayed` timing
+51. **102 · Flex-basis fix** — Sidebar flex override + `is-resizing` coordination
+52. **104 · Viewport-edge scrollbar** — MobileProfile inside `.content-body`, centered layout
+53. **108 · FLIP revert** — Restored CSS grid centering, removed all FLIP effects
+54. **109 · MobileProfile animation** — JS-driven `animateMobileProfile()` with `height: 0` base
+55. **110 · Midpoint entry animation** — `snapSidebarFade()` calls `animateMobileProfile(true)`
+56. **111 · LangSwitcher flicker** — Aligned CSS breakpoint, `lang-switcher-delayed` class
+57. **112 · Breakpoint alignment** — `mqlBreakpoint` → 1235px, midpoint mode completion, timer adjustment
+58. **113 · Timer safety** — 3 named timers, micro-adjustment, race condition fixes
+59. **114 · Dead zone fix** — `snapSidebarFade()` call replaces manual sidebar transition
+60. **115 · Tech grid archive** — Documented 5 animation approaches, removed transition code
+
 ## Next 🔜
 
 - Add more integration tests (build output, HTML snapshot)

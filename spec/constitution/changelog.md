@@ -251,3 +251,99 @@
 - `is-resizing` transition suppression
 - `mouseup` snap trigger + 1000ms fallback timer
 - Init code: `sidebar-init-mobile` + `sidebar-midpoint-mode` for fade zone page loads
+
+### Session 88 — Bugs.md cleanup — deduplication and triage
+- Complete rewrite of `bugs.md` from 865→120 lines
+- Deduplicated automatic findings, organized by status
+
+### Session 89 — Fix test suite — encoding + stale file references
+- Rewrote all 7 .ps1 scripts with ASCII-only characters
+- Updated file references, fixed `!important` filter
+- Results: 0 FAILs, 57 PASS, 18 WARN (all known/intentional)
+
+### Session 90 — Merge About + Skills into single unified page
+- Rewrote About.astro with tech grid + personality
+- Eliminated Skills.astro (component count: 10 → 8)
+- Updated client.js footer condition, nav.json
+
+### Session 91 — Fix 4 bugs — adaptive grid, nav gap, personality render
+- CSS Grid adaptive (`auto-fit, minmax(250px,1fr)`)
+- Remove stale `nav-hab` from Profile.astro
+- Always call `renderAll()` in init()
+
+### Session 92 — Revert grid CSS + fix title position
+- Reverted `.tech-grid` to flexbox, restored `width: 76px`
+- Moved "Perfil Profesional" title above bio paragraphs
+
+### Session 94 — Fix card order + FLIP animation bugs
+- Removed `partition()` in About.astro
+- Declared global `motionOK`, rewrote `flipAnimate()`
+- Added `[data-flip]` CSS override
+
+### Session 95 — Cleanup orphaned CSS + rebuild verification
+- Removed `.about-intro` rule from global.css
+
+### Session 96 — Fix FLIP animation — remove .reveal from FLIP elements
+- Removed `reveal`/`stagger-item` from FLIP elements
+- Added `.visible` to `[data-flip]` in `initScrollReveal()`
+- Reduced `sidebar-delayed` timeout to 50ms
+
+### Session 98 — Fix sidebar snap — transition during sidebar-delayed
+- Added transition to `html.sidebar-delayed .sidebar` CSS rule
+- Force reflow after adding class in JS
+- Reverted timeout to 400ms
+
+### Session 99 — Sidebar animation speed tuning
+- Changed `sidebar-delayed` CSS transition from 0.15s to 0.3s
+- Reapply original 0.15s transition via inline style + rAF
+
+### Session 100 — Sidebar maximize animation — JS-driven width transition
+- Suppress transitions with `none !important` during delay
+- After removing class: set width=0, double rAF, clear width → CSS variable drives 0.3s transition
+
+### Session 102 — Sidebar maximize — fix flex-basis override + is-resizing block
+- Control flex alongside width
+- Remove `is-resizing` + clearTimeout when removing sidebar-delayed at 400ms
+
+### Session 104 — Scrollbar at viewport edge — move MobileProfile inside .content-body
+- Moved `<MobileProfile />` inside `.content-body`
+- Centered sidebar via `margin-left: calc((100vw - var(--app-max-width)) / 2)`
+- Centered content via `.content-body { max-width; margin: auto }`
+
+## 2026-07-21 — Sessions 108-115
+
+### Session 108 — Revert FLIP, restore centering, clean CSS baseline
+- Reverted commit `5025473` (FLIP removal refactor)
+- Restored 3-state responsive grid + centering CSS
+- Removed all FLIP CSS
+
+### Session 109 — Fix mobile-profile animation on resize (Bug #2)
+- Added `height: 0` to `.mobile-profile` CSS base state
+- New `animateMobileProfile(show, duration)` function with scrollHeight measurement
+- Updated `handleMobileProfile()` and `updateMobileProfile()` callers
+
+### Session 110 — Fix snapSidebarFade midpoint entry animation
+- Changed `updateMobileProfile()` → `animateMobileProfile(true)` in `snapSidebarFade()` midpoint branch
+
+### Session 111 — LangSwitcher flicker fix
+- Changed lang-switcher CSS media query to `@media (max-width: 1235px)`
+- Added `lang-switcher-delayed` class in `snapSidebarFade()` midpoint entry
+
+### Session 112 — Comprehensive breakpoint alignment + midpoint mode completion
+- Aligned `mqlBreakpoint` to 1235px (from 1234px)
+- Removed dead zone handler
+- Added 7 missing midpoint-mode sidebar rules
+- Adjusted sidebar-delayed timer 400→350ms
+
+### Session 113 — Mobile profile animation fix on large→small resize + timer safety
+- Micro-transition adjustment (re-measure after 350ms, smooth 150ms adjust)
+- 3 named timer architecture (`mobileProfileTimer`, `snapProfileTimer`, `adjustTimer`)
+- Clear all timers in all code paths
+
+### Session 114 — Fix dead zone sidebar stuck in PC layout (1236-1240px)
+- Replaced 17-line manual sidebar transition block with `snapSidebarFade()` call
+- Eliminates `clearTimeout(resizeTimer)`, ensures midpoint mode always added
+
+### Session 115 — Archive tech grid transitions
+- Removed transition CSS/JS from `global.css` and `client.js`
+- Created `docs/archived/tech-grid-transitions.md` with full timeline and rationale

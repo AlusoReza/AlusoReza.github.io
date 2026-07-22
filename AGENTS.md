@@ -25,7 +25,8 @@ spec/
 │   ├── tech-stack.md        — Stack, conventions, design, limits
 │   ├── roadmap.md           — Done / Next / Backlog
 │   ├── changelog.md         — Session history
-│   └── bugs.md              — Known bugs and lifecycle
+│   ├── bugs.md              — Known bugs and lifecycle
+│   └── code-decisions.md    — Critical code decisions and revert consequences
 ├── features/                — One folder per feature (NNN-name/)
 │   └── NNN-name/
 │       ├── spec.md          — What it does + acceptance criteria
@@ -37,8 +38,8 @@ spec/
     └── spec_template/       — Canonical SDD template
 
 src/
-├── components/       — 10 Astro components (Nav, LangSwitcher, Profile, About,
-│                       Skills, Education, Projects, Experience, Certificates, Contact)
+├── components/       — 8 Astro components (Nav, LangSwitcher, Profile, About,
+│                       Skills, Education, Projects, Experience)
 ├── layouts/
 │   └── BaseLayout.astro  — HTML shell, Nav, LangSwitcher, data-data attribute on body,
 │                           client.js bundle
