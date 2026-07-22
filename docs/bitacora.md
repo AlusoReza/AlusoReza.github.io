@@ -548,3 +548,8 @@ Global workflow summary. Each entry links to the detailed day log.
 **Prompt:** After storedRects bug, audit entire codebase for orphaned references and dead code from previous refactors.
 **Plan:** Fix H1 (broken toggleSection auto-hide), remove M2-M6 (orphaned component, hidden div, redundant MediaQueryList, dead CSS), clean L1-L7 (dead attributes, stale comments, unused variables/keys). 13 changes across 6 files.
 **Build:** `npm run build` — 654ms, 0 errors. Tests: 0 FAILs, 14 WARNs (reduced from 18). No regressions.
+
+### Session 138: Add 8 Código Facilito certificates from PDFs
+**Prompt:** Analizar proyecto y actualizar certificados. Leer PDFs con pypdf, detectar faltantes, añadir al JSON.
+**Plan:** Leer 12 PDFs → 8 faltantes (Código Facilito), 1 ilegible. Añadir entradas bilingües. Build exitoso.
+**Build:** `npm run build` — 613ms, 0 errors. Tests: 0 FAILs, 14 WARNs. No regressions.

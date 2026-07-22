@@ -88,5 +88,149 @@
       "es": "Curso de 50 horas sobre fundamentos de Microsoft Azure: servicios en la nube, arquitectura, gestión de recursos, seguridad, privacidad y cumplimiento.",
       "en": "50-hour course on Microsoft Azure fundamentals: cloud services, architecture, resource management, security, privacy, and compliance."
     }
+  },
+  {
+    "title": {
+      "es": "Curso de Spring Framework y Spring Boot",
+      "en": "Spring Framework and Spring Boot Course"
+    },
+    "institution": {
+      "es": "Código Facilito",
+      "en": "Código Facilito"
+    },
+    "date": {
+      "es": "3 jul. 2026",
+      "en": "July 3, 2026"
+    },
+    "description": {
+      "es": "Curso de 4h 15m sobre desarrollo de aplicaciones con Spring Framework y Spring Boot, incluyendo configuración, dependencias, desarrollo web y buenas prácticas.",
+      "en": "4h 15m course on application development with Spring Framework and Spring Boot, covering configuration, dependencies, web development, and best practices."
+    }
+  },
+  {
+    "title": {
+      "es": "Curso Profesional de Docker",
+      "en": "Professional Docker Course"
+    },
+    "institution": {
+      "es": "Código Facilito",
+      "en": "Código Facilito"
+    },
+    "date": {
+      "es": "4 jul. 2026",
+      "en": "July 4, 2026"
+    },
+    "description": {
+      "es": "Curso de 3h 31m sobre contenedores Docker: instalación, imágenes, volúmenes, redes, Docker Compose y despliegue de aplicaciones containerizadas.",
+      "en": "3h 31m course on Docker containers: installation, images, volumes, networks, Docker Compose, and deploying containerized applications."
+    }
+  },
+  {
+    "title": {
+      "es": "Curso de Introducción a DevOps: Bases y Conceptos",
+      "en": "Introduction to DevOps: Fundamentals and Concepts"
+    },
+    "institution": {
+      "es": "Código Facilito",
+      "en": "Código Facilito"
+    },
+    "date": {
+      "es": "4 jul. 2026",
+      "en": "July 4, 2026"
+    },
+    "description": {
+      "es": "Curso de 1h 32m sobre los fundamentos del desarrollo DevOps: integración continua, despliegue continuo, automatización y cultura de colaboración.",
+      "en": "1h 32m course on DevOps fundamentals: continuous integration, continuous deployment, automation, and collaboration culture."
+    }
+  },
+  {
+    "title": {
+      "es": "Curso de Introducción a Rust",
+      "en": "Introduction to Rust Course"
+    },
+    "institution": {
+      "es": "Código Facilito",
+      "en": "Código Facilito"
+    },
+    "date": {
+      "es": "4 jul. 2026",
+      "en": "July 4, 2026"
+    },
+    "description": {
+      "es": "Curso de 4h 47m sobre fundamentos del lenguaje Rust: tipos de datos, ownership, borrowing, patrones, estructuras de datos y programación concurrente.",
+      "en": "4h 47m course on Rust fundamentals: data types, ownership, borrowing, patterns, data structures, and concurrent programming."
+    }
+  },
+  {
+    "title": {
+      "es": "Curso profesional de Git",
+      "en": "Professional Git Course"
+    },
+    "institution": {
+      "es": "Código Facilito",
+      "en": "Código Facilito"
+    },
+    "date": {
+      "es": "4 jul. 2026",
+      "en": "July 4, 2026"
+    },
+    "description": {
+      "es": "Curso de 3h 14m sobre control de versiones con Git: ramas, merges, rebase, cherry-pick, flujos de trabajo y gestión de repositorios.",
+      "en": "3h 14m course on version control with Git: branches, merges, rebase, cherry-pick, workflows, and repository management."
+    }
+  },
+  {
+    "title": {
+      "es": "Curso a fondo de GitHub",
+      "en": "In-depth GitHub Course"
+    },
+    "institution": {
+      "es": "Código Facilito",
+      "en": "Código Facilito"
+    },
+    "date": {
+      "es": "5 jul. 2026",
+      "en": "July 5, 2026"
+    },
+    "description": {
+      "es": "Curso de 3h 3m sobre uso avanzado de GitHub: pull requests, issues, GitHub Actions, Pages, seguridad y colaboración en equipos de desarrollo.",
+      "en": "3h 3m course on advanced GitHub usage: pull requests, issues, GitHub Actions, Pages, security, and team development collaboration."
+    }
+  },
+  {
+    "title": {
+      "es": "Curso de Desarrollo de software con Claude Code",
+      "en": "Software Development with Claude Code Course"
+    },
+    "institution": {
+      "es": "Código Facilito",
+      "en": "Código Facilito"
+    },
+    "date": {
+      "es": "6 jul. 2026",
+      "en": "July 6, 2026"
+    },
+    "description": {
+      "es": "Curso de 4h 19m sobre desarrollo asistido por IA con Claude Code: agentes, herramientas MCP, skills, flujos de trabajo modernos y buenas prácticas.",
+      "en": "4h 19m course on AI-assisted development with Claude Code: agents, MCP tools, skills, modern workflows, and best practices."
+    }
+  },
+  {
+    "title": {
+      "es": "Curso de Java Profesional",
+      "en": "Professional Java Course"
+    },
+    "institution": {
+      "es": "Código Facilito",
+      "en": "Código Facilito"
+    },
+    "date": {
+      "es": "6 jul. 2026",
+      "en": "July 6, 2026"
+    },
+    "description": {
+      "es": "Curso de 4h 35m sobre programación profesional en Java: POO, colecciones, lambdas, streams, concurrencia y desarrollo de aplicaciones robustas.",
+      "en": "4h 35m course on professional Java programming: OOP, collections, lambdas, streams, concurrency, and building robust applications."
+    }
   }
 ]
