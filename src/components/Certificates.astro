@@ -14,6 +14,11 @@ const tl = (obj) => obj?.[l] || ''
         <strong class="card-title">{tl(item.title)}</strong>
         {item.date && <span class="card-date">{tl(item.date)}</span>}
       </div>
+      {item.tags && item.tags.length > 0 && (
+        <div class="card-tags">
+          {item.tags.map(tag => <span class="card-tag">{tl(tag)}</span>)}
+        </div>
+      )}
       {item.institution && <p class="card-sub">{tl(item.institution)}</p>}
       {item.description && <p class="card-desc">{tl(item.description)}</p>}
     </div>

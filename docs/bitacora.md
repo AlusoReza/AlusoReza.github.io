@@ -558,3 +558,18 @@ Global workflow summary. Each entry links to the detailed day log.
 **Prompt:** Analizar proyecto y actualizar certificados. Leer PDFs con pypdf, detectar faltantes, añadir al JSON.
 **Plan:** Leer 12 PDFs → 8 faltantes (Código Facilito), 1 ilegible. Añadir entradas bilingües. Build exitoso.
 **Build:** `npm run build` — 613ms, 0 errors. Tests: 0 FAILs, 14 WARNs. No regressions.
+
+### Session 139: Certificate cards — emojis + technology tags
+**Prompt:** Mejorar tarjetas de certificados: emoji al inicio del titulo + etiquetas de tecnologias entre titulo y fecha.
+**Plan:** Actualizar JSON (emojis + tags), render JS + Astro, CSS pills. Build exitoso.
+**Build:** `npm run build` — 1.29s, 0 errors. Tests: 0 FAILs, 14 WARNs. No regressions.
+
+### Session 140: Certificate cards — accent border + glow + tag refinement
+**Prompt:** Mejorar tarjetas de certificados para que no queden sosas. Borde accent, hover glow, tags accent-colored, institucion como divider.
+**Plan:** Solo CSS (4 reglas). Build exitoso.
+**Build:** `npm run build` — 961ms, 0 errors. Tests: 0 FAILs, 14 WARNs. No regressions.
+
+### Session 141: Reduce card accent intensity
+**Prompt:** Reducir intensidad del verde accent en borde y tags. Titulo e institucion son lo mas importante.
+**Plan:** Solo CSS (2 reglas). Border-left 30% opacity, tags muted. Build exitoso.
+**Build:** `npm run build` — 611ms, 0 errors. Tests: 0 FAILs, 14 WARNs. No regressions.
