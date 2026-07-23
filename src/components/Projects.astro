@@ -19,7 +19,9 @@ const tl = (obj) => obj?.[l] || ''
       {proj.stack && proj.stack.length > 0 && (
         <div class="stack-tags">
           {proj.stack.map(tag => (
-            <span class="stack-tag">{tag}</span>
+            tag.logo
+              ? <span class="stack-tag"><img src={tag.logo} alt={tl(tag)} loading="lazy" />{tl(tag)}</span>
+              : <span class="stack-tag"><span class="stack-tag-fallback">{tl(tag).slice(0, 2).toUpperCase()}</span>{tl(tag)}</span>
           ))}
         </div>
       )}

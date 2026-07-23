@@ -5,7 +5,11 @@
       "es": "Herramienta diseñada para automatizar y simplificar la creación de entornos Docker, permitiendo despliegues rápidos y estandarizados.",
       "en": "Tool designed to automate and simplify the creation of Docker environments, allowing fast and standardized deployments."
     },
-    "stack": ["Docker", "Shell", "Win/Linux"],
+    "stack": [
+      { "es": "Docker", "en": "Docker", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" },
+      { "es": "Shell", "en": "Shell", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg" },
+      { "es": "Win/Linux", "en": "Win/Linux", "logo": "" }
+    ],
     "links": [
       {
         "text": {

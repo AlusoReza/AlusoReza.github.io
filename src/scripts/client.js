@@ -119,7 +119,13 @@ function renderProjectItem(proj) {
     <p class="project-desc">${t(proj.description)}</p>`
   if (proj.stack && proj.stack.length) {
     html += '<div class="stack-tags">'
-    proj.stack.forEach(tag => html += `<span class="stack-tag">${tag}</span>`)
+    proj.stack.forEach(tag => {
+      if (tag.logo) {
+        html += `<span class="stack-tag"><img src="${tag.logo}" alt="${t(tag)}" loading="lazy" />${t(tag)}</span>`
+      } else {
+        html += `<span class="stack-tag"><span class="stack-tag-fallback">${t(tag).slice(0, 2).toUpperCase()}</span>${t(tag)}</span>`
+      }
+    })
     html += '</div>'
   }
   if (proj.links && proj.links.length) {
