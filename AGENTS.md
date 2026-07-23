@@ -26,7 +26,8 @@ spec/
 │   ├── roadmap.md           — Done / Next / Backlog
 │   ├── changelog.md         — Session history
 │   ├── bugs.md              — Known bugs and lifecycle
-│   └── code-decisions.md    — Critical code decisions and revert consequences
+│   ├── code-decisions.md    — Critical code decisions and revert consequences
+│   └── frontend-decisions.md — Visual and design decisions and revert consequences
 ├── features/                — One folder per feature (NNN-name/)
 │   └── NNN-name/
 │       ├── spec.md          — What it does + acceptance criteria
@@ -90,6 +91,8 @@ public/
 - **Design:** Dark theme (`#0d1117` bg, `#c9d1d9` text), accent blue `#58a6ff`, scroll-triggered reveal (`.reveal`), responsive at 650px.
 - **Badges:** Language badges (border-left accent) + tool badges (solid background, glow hover). AI Agents badge in tool badges (green `#10a37f`). Rendered at build time by Astro Profile component.
 - **data-data:** All JSONs serialized into a `data-data` attribute on `<body>` via `JSON.stringify()`. Client JS reads from `document.body.dataset.data` (browser auto-decodes HTML entities), no fetch calls or globals.
+- **Decisions:** Code decisions (`code-decisions.md`) and frontend decisions (`frontend-decisions.md`) cross-reference each other when a technical and visual decision are related.
+- **Frontend decisions:** One entry per major page section/component (not per change). Each entry is updated in-place as decisions evolve. New alternatives and rationale are added to the existing entry, not as new entries.
 
 ## Architecture
 1. **Build time (Astro):** Renders all sections statically in Spanish. `data-i18n` attributes preserved in HTML for client-side translation. Profile badges rendered by Astro. Empty experience/certificates arrays render section with `style="display:none"`. All JSON data serialized into `data-data` attribute on `<body>`.
@@ -119,6 +122,7 @@ public/
        - `logo`: DevIcon CDN URL if available (`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/{tech}/{tech}-original.svg`), empty string `""` if no icon exists
   5. Section auto-appears on page reload (hidden if array is empty)
 - **Adding content:** Edit the corresponding JSON file in `src/data/` — no component changes required.
+- **Frontend decisions (when user requests):** When the user says "save this to frontend decisions" (or similar), document the decision in `spec/constitution/frontend-decisions.md` using the established format: location, technical, related code decision, session, current appearance, key decisions, rejected alternatives, revert consequence.
 - **Bug tracking (IMPORTANT — document before fixing):**
   1. **Detect:** When running "Comprueba MCP", `run-all.ps1` runs the 6 scripts and identifies mechanical bugs. The agent reviews the `[MANUAL]` section for deep logic bugs.
   2. **Document before fixing:** All findings are automatically saved to `spec/constitution/bugs.md` under `🔴 Sin arreglar`. Each entry: file, line, severity, description, detection session, proposed fix, status. `[MANUAL]` bugs are added manually by the agent in the same format.

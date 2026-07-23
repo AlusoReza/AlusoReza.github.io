@@ -1,6 +1,6 @@
 # Code decisions — Alonso Suarez Reza Portfolio
 
-Critical code decisions in `client.js` and `global.css`. Each entry documents what was decided, why, what bug it fixes, and what happens if reverted.
+Critical code decisions in `client.js` and `global.css`. Each entry documents what was decided, why, what bug it fixes, what happens if reverted, and any related frontend decision (if any).
 
 ## 1. `sidebar-no-transition` double rAF technique
 - **File:** `src/scripts/client.js` L806-810, `src/styles/global.css` L76-82
