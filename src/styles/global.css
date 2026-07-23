@@ -1376,30 +1376,40 @@ html:not(.js-loading) .content {
   align-items: center;
   gap: 6px;
   padding: 14px 20px 0;
-  background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* Inline mode: tags on title line, no extra padding */
 .project-card--inline .stack-tags {
   padding: 0 20px 0 0;
   justify-content: flex-end;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .stack-tag {
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  padding: 2px 8px;
-  border: 1px solid var(--color-border);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding: 3px 10px;
   border-radius: 3px;
-  color: var(--color-text-muted);
-  background-color: var(--color-bg-card);
+  background: rgba(100, 255, 218, 0.06);
+  color: rgba(100, 255, 218, 0.6);
+  border: 1px solid rgba(100, 255, 218, 0.12);
   flex-shrink: 0;
   white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.stack-tag:hover {
+  background: rgba(100, 255, 218, 0.12);
+  border-color: rgba(100, 255, 218, 0.25);
+  box-shadow: 0 0 8px rgba(100, 255, 218, 0.15);
 }
 
 /* Inline tags: match header bg */
 .project-card--inline .stack-tag {
-  background-color: rgba(0, 0, 0, 0.2);
+  background: rgba(100, 255, 218, 0.08);
+  border-color: rgba(100, 255, 218, 0.15);
 }
 
 /* Project links: text links with arrow */

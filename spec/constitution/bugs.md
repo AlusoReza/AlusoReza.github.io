@@ -1,164 +1,164 @@
-# Bugs known — Alonso Suarez Reza Portfolio
+﻿# Bugs known â€” Alonso Suarez Reza Portfolio
 
-Last scan: 2026-07-23 (Session 160)
+Last scan: 2026-07-23 (Session 168)
 Status: All previously identified bugs fixed. 1 partially fixed (Session 118). Test scripts updated to match current project structure. Code decisions documented in `code-decisions.md`.
 
-## Fixed (Session 12 — 2026-06-26)
+## Fixed (Session 12 â€” 2026-06-26)
 
-### Mixed-language on initial load with EN saved — HIGH
+### Mixed-language on initial load with EN saved â€” HIGH
 - **File:** `src/scripts/client.js`
 - **Source:** check-js-logic.ps1 + [MANUAL]
 - **Detected:** Session 8 | **Fixed:** Session 12
 - **Fix:** Added `if (savedLang !== 'es') renderAll();` at end of `init()`
 
-### CV PDF does not exist (404) — MEDIUM
+### CV PDF does not exist (404) â€” MEDIUM
 - **File:** `src/components/Contact.astro`, `src/components/Profile.astro`
 - **Source:** check-paths.ps1
 - **Detected:** Session 8 | **Fixed:** Session 12
 - **Fix:** User placed PDF at `public/assets/Alonso_Reza_CV.pdf`; paths updated to `/assets/...`
 
-### Icon destroyed on language switch — MEDIUM
+### Icon destroyed on language switch â€” MEDIUM
 - **File:** `src/components/Contact.astro`
 - **Source:** [MANUAL]
 - **Detected:** Session 8 | **Fixed:** Session 12
 - **Fix:** Separated icon into `<span class="icon">` outside `data-i18n` span
 
-### btn-primary undefined in CSS — LOW
+### btn-primary undefined in CSS â€” LOW
 - **File:** `src/components/Projects.astro`, `src/scripts/client.js`
 - **Source:** check-js-logic.ps1, check-css-logic.ps1
 - **Detected:** Session 8 | **Fixed:** Session 12
 - **Fix:** Replaced `btn-primary` with `btn-outline` (existing defined class)
 
-### target=_blank without rel=noopener (x4) — LOW
+### target=_blank without rel=noopener (x4) â€” LOW
 - **File:** `Contact.astro`, `Projects.astro`, `client.js`
 - **Source:** check-js-logic.ps1
 - **Detected:** Session 8 | **Fixed:** Session 12
 - **Fix:** Added `rel="noopener noreferrer"` to all 4 external links
 
-### changeLanguage without early return — LOW
+### changeLanguage without early return â€” LOW
 - **File:** `src/scripts/client.js`
 - **Source:** check-js-logic.ps1
 - **Detected:** Session 8 | **Fixed:** Session 12
 - **Fix:** Added `if (lang === currentLang) return;`
 
-### #1a1f26 hardcoded in .badge — LOW
+### #1a1f26 hardcoded in .badge â€” LOW
 - **File:** `src/styles/global.css`
 - **Source:** check-css-logic.ps1, check-frontend-design.ps1
 - **Detected:** Session 8 | **Fixed:** Session 12
 - **Fix:** Replaced `#1a1f26` with `var(--color-bg-card)`
 
-### Inconsistent asset paths — LOW
+### Inconsistent asset paths â€” LOW
 - **File:** `profile.json`, `Contact.astro`
 - **Source:** check-paths.ps1
 - **Detected:** Session 8 | **Fixed:** Session 12
 - **Fix:** Changed both to absolute `/assets/Alonso_Reza_CV.pdf`
 
-### Lang switcher overflow on very small screens — LOW
+### Lang switcher overflow on very small screens â€” LOW
 - **File:** `src/styles/global.css`
 - **Source:** roadmap.md (manual review)
 - **Detected:** Session 12 | **Fixed:** Session 17
 - **Fix:** Lang-switcher moved inside `<nav>` as inline flex element
 
-### Social buttons width at ~480-550px — LOW
+### Social buttons width at ~480-550px â€” LOW
 - **File:** `src/styles/global.css`
 - **Source:** roadmap.md (manual review)
 - **Detected:** Session 12 | **Fixed:** Session 17
 - **Fix:** Added `box-sizing: border-box` and responsive width rules
 
-## Fixed (Session 19 — 2026-07-13)
+## Fixed (Session 19 â€” 2026-07-13)
 
-### .project-links missing flex-wrap (mobile overflow) — LOW
+### .project-links missing flex-wrap (mobile overflow) â€” LOW
 - **File:** `src/styles/global.css`
 - **Source:** Mobile responsive analysis
 - **Detected:** Session 18 | **Fixed:** Session 19
 - **Fix:** Added `flex-wrap: wrap` to `.project-links`
 
-### nav-overlay not covering full viewport — MEDIUM
+### nav-overlay not covering full viewport â€” MEDIUM
 - **File:** `src/components/Nav.astro`
 - **Source:** Manual testing
 - **Detected:** Session 19 | **Fixed:** Session 19
 - **Fix:** Moved `.nav-overlay` outside `<nav>` to escape `backdrop-filter` containing block
 
-### nav-links unclickable on mobile (z-index conflict) — HIGH
+### nav-links unclickable on mobile (z-index conflict) â€” HIGH
 - **File:** `src/styles/global.css`
 - **Source:** Manual testing
 - **Detected:** Session 19 | **Fixed:** Session 19
 - **Fix:** Changed `.nav-bar` z-index from 50 to 100
 
-### CV button text compressed on mobile — LOW
+### CV button text compressed on mobile â€” LOW
 - **File:** `src/styles/global.css`
 - **Source:** Manual testing
 - **Detected:** Session 19 | **Fixed:** Session 19
 - **Fix:** Added `height: auto; min-height: 45px; padding: 12px 20px` to `.cv-btn` mobile rule
 
-## Fixed (Sessions 85-87 — 2026-07-20)
+## Fixed (Sessions 85-87 â€” 2026-07-20)
 
-### Sidebar stuck at intermediate state on resize — HIGH
+### Sidebar stuck at intermediate state on resize â€” HIGH
 - **File:** `src/scripts/client.js`, `src/styles/global.css`
 - **Source:** [MANUAL]
 - **Detected:** Session 84 | **Fixed:** Session 85-87
 - **Fix:** Removed snap system, made sidebar CSS-only via `clamp()`. Added `snapSidebarFade()` for mouseup snap. Added `sidebar-midpoint-mode` for dead zone. Added `is-resizing` transition suppression.
 
-### Sidebar flash when crossing 1235px breakpoint — HIGH
+### Sidebar flash when crossing 1235px breakpoint â€” HIGH
 - **File:** `src/styles/global.css`, `src/scripts/client.js`
 - **Source:** [MANUAL]
 - **Detected:** Session 86 | **Fixed:** Session 86
 - **Fix:** `sidebar-no-transition` class for 2 rAF frames on media query change
 
-### Mobile profile not appearing in midpoint mode — MEDIUM
+### Mobile profile not appearing in midpoint mode â€” MEDIUM
 - **File:** `src/scripts/client.js`
 - **Source:** [MANUAL]
 - **Detected:** Session 87 | **Fixed:** Session 87
 - **Fix:** `updateMobileProfile()` now checks `sidebar-midpoint-mode` in addition to `mqlBreakpoint.matches`
 
-### Page load in fade zone shows wrong layout — MEDIUM
+### Page load in fade zone shows wrong layout â€” MEDIUM
 - **File:** `src/scripts/client.js`
 - **Source:** [MANUAL]
 - **Detected:** Session 87 | **Fixed:** Session 87
 - **Fix:** Init code now adds `sidebar-midpoint-mode` + `updateMobileProfile()` for loads in 1236-1285px
 
-## Fixed (Session 109 — 2026-07-21)
+## Fixed (Session 109 â€” 2026-07-21)
 
-### Mobile-profile animation broken on resize — HIGH
+### Mobile-profile animation broken on resize â€” HIGH
 - **File:** `src/scripts/client.js`, `src/styles/global.css`
 - **Source:** [MANUAL]
 - **Detected:** Session 109 | **Fixed:** Session 109
-- **Root cause:** `height: auto → 0` is not transitionable in CSS. `grid-template-rows: 0fr/1fr` was overridden by flex `min-height: auto` on PC.
+- **Root cause:** `height: auto â†’ 0` is not transitionable in CSS. `grid-template-rows: 0fr/1fr` was overridden by flex `min-height: auto` on PC.
 - **Fix:** Added `height: 0` to `.mobile-profile` CSS base state. New `animateMobileProfile(show, duration)` function with `scrollHeight` measurement and explicit px height animation. Updated `handleMobileProfile()` and `updateMobileProfile()` callers.
 - **Code decision:** See `code-decisions.md` #5 (JS-driven height animation) and #6 (`height: 0` base state).
 
-## Fixed (Session 110 — 2026-07-21)
+## Fixed (Session 110 â€” 2026-07-21)
 
-### SnapSidebarFade midpoint entry animation missing — MEDIUM
+### SnapSidebarFade midpoint entry animation missing â€” MEDIUM
 - **File:** `src/scripts/client.js`
 - **Source:** [MANUAL]
 - **Detected:** Session 110 | **Fixed:** Session 110
 - **Root cause:** `snapSidebarFade()` called `updateMobileProfile()` (instant show) instead of `animateMobileProfile(true)`.
-- **Fix:** Single-line change in `snapSidebarFade()` midpoint branch: `updateMobileProfile()` → `animateMobileProfile(true)`.
+- **Fix:** Single-line change in `snapSidebarFade()` midpoint branch: `updateMobileProfile()` â†’ `animateMobileProfile(true)`.
 - **Code decision:** See `code-decisions.md` #3 (`animateMobileProfile()` in `snapSidebarFade()`).
 
-## Fixed (Session 111 — 2026-07-21)
+## Fixed (Session 111 â€” 2026-07-21)
 
-### LangSwitcher flicker on slow PC→mobile resize — MEDIUM
+### LangSwitcher flicker on slow PCâ†’mobile resize â€” MEDIUM
 - **File:** `src/styles/global.css`, `src/scripts/client.js`
 - **Source:** [MANUAL]
 - **Detected:** Session 111 | **Fixed:** Session 111
 - **Root cause:** Lang-switcher CSS mobile breakpoint was at 1234px (aligned with old `mqlBreakpoint`) while sidebar/hamburger were at 1235px. During slow resize, lang-switcher flickered between states.
 - **Fix:** Changed lang-switcher CSS media query to `@media (max-width: 1235px)`. Added `lang-switcher-delayed` class in `snapSidebarFade()` midpoint entry.
 
-## Fixed (Session 112 — 2026-07-21)
+## Fixed (Session 112 â€” 2026-07-21)
 
-### Breakpoint misalignment (1px gap) — HIGH
+### Breakpoint misalignment (1px gap) â€” HIGH
 - **File:** `src/scripts/client.js`, `src/styles/global.css`
 - **Source:** [MANUAL]
 - **Detected:** Session 112 | **Fixed:** Session 112
-- **Root cause:** CSS `@media (max-width: 1235px)` and JS `mqlBreakpoint (max-width: 1234px)` were misaligned by 1px. Mobile profile missing at 1235px on initial load, flash on resize 1236→1235px, midpoint mode missing 7 sidebar rules, sidebar-delayed timing gap.
-- **Fix:** Aligned `mqlBreakpoint` to 1235px. Removed dead zone handler. Added 7 missing midpoint-mode sidebar rules. Adjusted sidebar-delayed timer 400→350ms.
+- **Root cause:** CSS `@media (max-width: 1235px)` and JS `mqlBreakpoint (max-width: 1234px)` were misaligned by 1px. Mobile profile missing at 1235px on initial load, flash on resize 1236â†’1235px, midpoint mode missing 7 sidebar rules, sidebar-delayed timing gap.
+- **Fix:** Aligned `mqlBreakpoint` to 1235px. Removed dead zone handler. Added 7 missing midpoint-mode sidebar rules. Adjusted sidebar-delayed timer 400â†’350ms.
 - **Code decision:** See `code-decisions.md` #2 (`mqlBreakpoint` at 1235px) and #11 (timer architecture).
 
-## Fixed (Session 113 — 2026-07-21)
+## Fixed (Session 113 â€” 2026-07-21)
 
-### Mobile profile pop-to-height on large→small resize — MEDIUM
+### Mobile profile pop-to-height on largeâ†’small resize â€” MEDIUM
 - **File:** `src/scripts/client.js`
 - **Source:** [MANUAL]
 - **Detected:** Session 113 | **Fixed:** Session 113
@@ -166,197 +166,197 @@ Status: All previously identified bugs fixed. 1 partially fixed (Session 118). T
 - **Fix:** Micro-transition adjustment (re-measure after 350ms, smooth 150ms adjust if >2px diff). Track `snapProfileTimer`. Clear all 3 timers in `updateMobileProfile()`, `animateMobileProfile()`, and resize handler.
 - **Code decision:** See `code-decisions.md` #11 (timer architecture).
 
-## Fixed (Session 114 — 2026-07-21)
+## Fixed (Session 114 â€” 2026-07-21)
 
-### Sidebar stuck in PC layout at 1236-1240px (dead zone) — HIGH
+### Sidebar stuck in PC layout at 1236-1240px (dead zone) â€” HIGH
 - **File:** `src/scripts/client.js`
 - **Source:** [MANUAL]
 - **Detected:** Session 112 | **Fixed:** Session 114
 - **Root cause:** `handleMobileProfile()` L578 `clearTimeout(resizeTimer)` cancelled the 1000ms timer that would call `snapSidebarFade()`. When crossing from <1235px to 1236-1240px, the sequence was:
-  1. `mqlBreakpoint` change → `handleMobileProfile()` adds `sidebar-delayed`, starts 350ms timer
-  2. `resize` handler → adds `is-resizing`, starts 1000ms timer → `snapSidebarFade()`
+  1. `mqlBreakpoint` change â†’ `handleMobileProfile()` adds `sidebar-delayed`, starts 350ms timer
+  2. `resize` handler â†’ adds `is-resizing`, starts 1000ms timer â†’ `snapSidebarFade()`
   3. At 350ms: removes `sidebar-delayed`, removes `is-resizing`, **`clearTimeout(resizeTimer)` kills the 1000ms timer**
-  4. `snapSidebarFade()` never runs → `sidebar-midpoint-mode` never added → sidebar stays in PC layout with `--sidebar-fade ≈ 0`
+  4. `snapSidebarFade()` never runs â†’ `sidebar-midpoint-mode` never added â†’ sidebar stays in PC layout with `--sidebar-fade â‰ˆ 0`
 - **Why intermittent:** `mouseup` handler also calls `snapSidebarFade()` if `is-resizing` is active, but `handleMobileProfile()` clears `is-resizing` at L577 before `mouseup` fires (if user releases mouse after 350ms).
 - **Fix:** Replaced 17-line manual sidebar transition block (L575-592) with 3-line block: remove `sidebar-delayed`, remove `is-resizing`, call `snapSidebarFade()`. This eliminates `clearTimeout(resizeTimer)`, removes manual flex/width transition, and ensures `sidebar-midpoint-mode` is always added when entering the 1236-1285px range.
 
-## Fixed (Session 115 — 2026-07-21)
+## Fixed (Session 115 â€” 2026-07-21)
 
-### Tech grid FLIP/transition attempts archived — LOW
+### Tech grid FLIP/transition attempts archived â€” LOW
 - **File:** `src/styles/global.css`, `src/scripts/client.js`, `docs/archived/tech-grid-transitions.md`
 - **Source:** [MANUAL]
 - **Detected:** Session 102-111 | **Fixed:** Session 115
-- **Root cause:** 5 different animation approaches tried on tech grid (FLIP ×3, opacity fade, scale pulse). All rejected due to conflicts with `.reveal` transforms, discrete `flex-direction`, or stale measurements.
+- **Root cause:** 5 different animation approaches tried on tech grid (FLIP Ã—3, opacity fade, scale pulse). All rejected due to conflicts with `.reveal` transforms, discrete `flex-direction`, or stale measurements.
 - **Fix:** Removed all transition CSS/JS from `global.css` and `client.js`. Created `docs/archived/tech-grid-transitions.md` with full timeline, code snippets, and decision rationale.
 
-## Partially fixed (Sessions 117-118 — 2026-07-22)
+## Partially fixed (Sessions 117-118 â€” 2026-07-22)
 
-### Mobile profile half-height flash on large→small resize — MEDIUM
+### Mobile profile half-height flash on largeâ†’small resize â€” MEDIUM
 - **File:** `src/styles/global.css`, `src/scripts/client.js`
 - **Source:** [MANUAL]
 - **Detected:** Session 117 | **Improved:** Session 118
 - **Symptom:** When resizing from >1235px to <1235px, the top half of the mobile profile appears instantly (no animation), then the animation transitions the bottom half smoothly. The user described it as "an instant spacing corresponding to half the mobile profile."
 - **Root cause:** `overflow: clip` on `.mobile-profile` does NOT establish a scroll container, causing `scrollHeight` to return an unreliable value (possibly `clientHeight` = 0 or a partial value). This triggered the fallback path in `animateMobileProfile(show=true)` which sets `height: auto` before the CSS transition is configured, causing instant content expansion.
 - **Investigation process:**
-  1. Session 117: Inverted operation order in `animateMobileProfile(show=true)` — set `style.height='0'` before `classList.add('--visible')`. Added `scrollHeight` fallback. **Result:** Did not fix the bug.
-  2. User tried `grid-template-rows: minmax(0, 0fr)` — explicitly set row minimum to 0 instead of `auto`. **Result:** Did not fix the bug.
-  3. User tried `min-height: 0` on `.mobile-profile` — prevented flex item expansion. **Result:** Did not fix the bug.
-  4. Session 118: Changed `overflow: clip` → `overflow: hidden` — establishes scroll container, making `scrollHeight` reliably return full content height. **Result:** Visual behavior improved — no more instant appearance, animation is smoother. Not perfect but sufficient.
+  1. Session 117: Inverted operation order in `animateMobileProfile(show=true)` â€” set `style.height='0'` before `classList.add('--visible')`. Added `scrollHeight` fallback. **Result:** Did not fix the bug.
+  2. User tried `grid-template-rows: minmax(0, 0fr)` â€” explicitly set row minimum to 0 instead of `auto`. **Result:** Did not fix the bug.
+  3. User tried `min-height: 0` on `.mobile-profile` â€” prevented flex item expansion. **Result:** Did not fix the bug.
+  4. Session 118: Changed `overflow: clip` â†’ `overflow: hidden` â€” establishes scroll container, making `scrollHeight` reliably return full content height. **Result:** Visual behavior improved â€” no more instant appearance, animation is smoother. Not perfect but sufficient.
 - **Fix:** Changed `overflow: clip` to `overflow: hidden` on `.mobile-profile` (global.css:245). Both clip at the content-box boundary identically, but `hidden` creates a scroll container needed for reliable `scrollHeight`. Reverted user's `minmax(0, 0fr)` and `min-height: 0` experiments.
-- **Status:** Partially fixed — visual behavior significantly improved, animation covers more of the mobile profile. Remaining minor imperfection accepted as sufficient.
+- **Status:** Partially fixed â€” visual behavior significantly improved, animation covers more of the mobile profile. Remaining minor imperfection accepted as sufficient.
 
-## Fixed (Session 120 — 2026-07-22)
+## Fixed (Session 120 â€” 2026-07-22)
 
-### Mobile profile delayed 350ms on F5 reload in midpoint zone — MEDIUM
+### Mobile profile delayed 350ms on F5 reload in midpoint zone â€” MEDIUM
 - **File:** `src/scripts/client.js`
 - **Source:** [MANUAL]
 - **Detected:** Session 120 | **Fixed:** Session 120
 - **Root cause:** In `init()`, `updateMobileProfile()` at L782 ran BEFORE `sidebar-midpoint-mode` was added at L801. The condition `shouldShow = (mqlBreakpoint.matches || html.classList.contains('sidebar-midpoint-mode')) && currentPage === 'sobre'` evaluated to `false` because viewport was >1235px (mqlBreakpoint false) and sidebar-midpoint-mode not yet added. Mobile profile was hidden. A 350ms `setTimeout` at L810 re-called `updateMobileProfile()` after midpoint setup, but this delay was visible to the user.
-- **Fix:** Moved midpoint setup block (`const initW` + class additions) from L795-803 to BEFORE `updateMobileProfile()` at L782. Removed the `setTimeout(() => { updateMobileProfile() }, 350)` at L810 — unnecessary because `sidebar-no-transition` suppresses sidebar transitions on fresh load. Kept the double-rAF `sidebar-no-transition` removal for subsequent resizes.
+- **Fix:** Moved midpoint setup block (`const initW` + class additions) from L795-803 to BEFORE `updateMobileProfile()` at L782. Removed the `setTimeout(() => { updateMobileProfile() }, 350)` at L810 â€” unnecessary because `sidebar-no-transition` suppresses sidebar transitions on fresh load. Kept the double-rAF `sidebar-no-transition` removal for subsequent resizes.
 
-## Fixed (Session 121 — 2026-07-22)
+## Fixed (Session 121 â€” 2026-07-22)
 
-### Lang-switcher fade-in broken on re-entry — MEDIUM
+### Lang-switcher fade-in broken on re-entry â€” MEDIUM
 - **File:** `src/styles/global.css`, `src/scripts/client.js`
 - **Source:** [MANUAL]
 - **Detected:** Session 119 | **Fixed:** Session 121
-- **Root cause:** Two issues: (1) `lang-switcher-reveal` never cleaned up on exit, so on re-entry both `delayed` and `reveal` were present with same specificity — `reveal` won (later source order), making `delayed` dead. (2) `transition` and `opacity` changed atomically when swapping delayed→reveal, causing browsers to swallow the transition.
+- **Root cause:** Two issues: (1) `lang-switcher-reveal` never cleaned up on exit, so on re-entry both `delayed` and `reveal` were present with same specificity â€” `reveal` won (later source order), making `delayed` dead. (2) `transition` and `opacity` changed atomically when swapping delayedâ†’reveal, causing browsers to swallow the transition.
 - **Fix:** Moved `transition: none` from `sidebar-midpoint-mode` to `lang-switcher-delayed` rule. Deleted `lang-switcher-reveal` CSS rule entirely. Removed reveal addition in JS. Added cleanup in all exit paths.
 
-## Fixed (Session 122 — 2026-07-22)
+## Fixed (Session 122 â€” 2026-07-22)
 
-### Sidebar sudden appearance on intermediate-speed resize — MEDIUM
+### Sidebar sudden appearance on intermediate-speed resize â€” MEDIUM
 - **File:** `src/scripts/client.js`
 - **Source:** [MANUAL]
 - **Detected:** Session 122 | **Fixed:** Session 124
-- **Root cause:** `is-resizing` adds `transition: none !important` on `.sidebar` during resize. When `sidebar-delayed` is removed by the 350ms timer, the sidebar should transition from 0 to visible — but `is-resizing` is re-added by the next resize event (~16ms later), cutting off the transition. The sidebar stays nearly invisible (~3%) during the entire resize, then jumps to visible when the user stops.
-- **Fix:** Replaced CSS transition approach with `@keyframes sidebar-entrance` animation. CSS animations are NOT suppressed by `transition: none` — they're a separate mechanism. The animation captures `--sidebar-fade` value at start as `--entrance-target`, animates opacity/flex/width from 0 to target over 300ms. On `animationend`, cleans up and re-snapss via `snapSidebarFade()`.
+- **Root cause:** `is-resizing` adds `transition: none !important` on `.sidebar` during resize. When `sidebar-delayed` is removed by the 350ms timer, the sidebar should transition from 0 to visible â€” but `is-resizing` is re-added by the next resize event (~16ms later), cutting off the transition. The sidebar stays nearly invisible (~3%) during the entire resize, then jumps to visible when the user stops.
+- **Fix:** Replaced CSS transition approach with `@keyframes sidebar-entrance` animation. CSS animations are NOT suppressed by `transition: none` â€” they're a separate mechanism. The animation captures `--sidebar-fade` value at start as `--entrance-target`, animates opacity/flex/width from 0 to target over 300ms. On `animationend`, cleans up and re-snapss via `snapSidebarFade()`.
 
-## Fixed (Session 131 — 2026-07-22)
+## Fixed (Session 131 â€” 2026-07-22)
 
-### Orphaned storedRects.clear() crashes navigateTo() and permanently breaks sidebar navigation — HIGH
+### Orphaned storedRects.clear() crashes navigateTo() and permanently breaks sidebar navigation â€” HIGH
 - **File:** `src/scripts/client.js`, line 198 (removed)
 - **Source:** [MANUAL]
 - **Detected:** Session 131 | **Fixed:** Session 131
-- **Root cause:** Commit `3c7e94c` removed the `const storedRects = new Map()` declaration (FLIP animation code) but left an orphaned `storedRects.clear()` call inside `navigateTo()`. When navigating FROM a page that has a `.tech-showcase` element (Sobre mí), `oldPage?.querySelector('.tech-showcase')` is truthy, triggering `storedRects.clear()` → `ReferenceError: storedRects is not defined` → `isTransitioning` is set to `true` but never reset (error thrown before the `setTimeout` that resets it) → all subsequent `navigateTo()` calls blocked by `if (...isTransitioning) return` guard → sidebar navigation completely stops working.
-- **Fix:** Single line deletion — removed `if (oldPage?.querySelector('.tech-showcase')) storedRects.clear()`. Zero regression risk since `storedRects` no longer exists.
-- **Revert consequence:** Navigation from Sobre mí page to any other page silently fails, blocking all further navigation.
+- **Root cause:** Commit `3c7e94c` removed the `const storedRects = new Map()` declaration (FLIP animation code) but left an orphaned `storedRects.clear()` call inside `navigateTo()`. When navigating FROM a page that has a `.tech-showcase` element (Sobre mÃ­), `oldPage?.querySelector('.tech-showcase')` is truthy, triggering `storedRects.clear()` â†’ `ReferenceError: storedRects is not defined` â†’ `isTransitioning` is set to `true` but never reset (error thrown before the `setTimeout` that resets it) â†’ all subsequent `navigateTo()` calls blocked by `if (...isTransitioning) return` guard â†’ sidebar navigation completely stops working.
+- **Fix:** Single line deletion â€” removed `if (oldPage?.querySelector('.tech-showcase')) storedRects.clear()`. Zero regression risk since `storedRects` no longer exists.
+- **Revert consequence:** Navigation from Sobre mÃ­ page to any other page silently fails, blocking all further navigation.
 
-### toggleSection() uses wrong element IDs — auto-hide for empty sections broken — HIGH
+### toggleSection() uses wrong element IDs â€” auto-hide for empty sections broken â€” HIGH
 - **File:** `src/scripts/client.js`, lines 57-58, 164-167
 - **Source:** [MANUAL]
 - **Detected:** Session 135 | **Fixed:** Session 135
-- **Root cause:** `toggleSection('experiencia', ...)` and `toggleSection('certificados', ...)` use `document.getElementById(id)`, but the DOM uses `data-page="exp"` and `data-page="cert"` — no `id` attributes exist. `getElementById` returns `null`, the `if (el)` guard prevents a crash, so the auto-hide silently does nothing. Experience and certificates pages render as empty visible sections when their data arrays are empty.
+- **Root cause:** `toggleSection('experiencia', ...)` and `toggleSection('certificados', ...)` use `document.getElementById(id)`, but the DOM uses `data-page="exp"` and `data-page="cert"` â€” no `id` attributes exist. `getElementById` returns `null`, the `if (el)` guard prevents a crash, so the auto-hide silently does nothing. Experience and certificates pages render as empty visible sections when their data arrays are empty.
 - **Fix:** Changed `toggleSection` to use `document.querySelector('[data-page="${id}"]')` and updated call sites with correct page IDs (`exp`, `cert`).
 - **Revert consequence:** Auto-hide for empty experience/certificates sections stops working again.
 
-## Open (non-bug — intentional/neutral)
+## Open (non-bug â€” intentional/neutral)
 
-### Brand colors in badges — INFO
+### Brand colors in badges â€” INFO
 - **Source:** check-frontend-design.ps1
 - **Description:** Tool brand colors (#3776ab, #e76f00, etc.) are intentional design choices.
-- **Status:** Intentional — no fix needed
+- **Status:** Intentional â€” no fix needed
 
-### Empty experience.json — INFO
+### Empty experience.json â€” INFO
 - **Source:** check-json-schema.ps1
 - **Description:** No work experience to list yet. Section auto-hides.
-- **Status:** Intentional — no fix needed
+- **Status:** Intentional â€” no fix needed
 
-### Computational grid and fade gradient removed — INFO
+### Computational grid and fade gradient removed â€” INFO
 - **Source:** check-frontend-design.ps1
-- **Description:** Checks for `#inicio` grid/gradient are stale — these were removed during the redesign.
-- **Status:** Stale check — will be removed in next test maintenance
+- **Description:** Checks for `#inicio` grid/gradient are stale â€” these were removed during the redesign.
+- **Status:** Stale check â€” will be removed in next test maintenance
 
-### .btn-outline not found — INFO
+### .btn-outline not found â€” INFO
 - **Source:** check-frontend-design.ps1
 - **Description:** `.btn-outline` was renamed during migration. Test still looks for the old name.
-- **Status:** Stale check — will be removed in next test maintenance
+- **Status:** Stale check â€” will be removed in next test maintenance
 
-### Missing sticky nav — INFO
+### Missing sticky nav â€” INFO
 - **Source:** check-frontend-design.ps1
 - **Description:** Sidebar architecture uses `position: relative`, not `sticky`. The sidebar is always visible.
-- **Status:** Stale check — will be removed in next test maintenance
+- **Status:** Stale check â€” will be removed in next test maintenance
 
-### target=_blank without rel=noopener (false positive) — INFO
+### target=_blank without rel=noopener (false positive) â€” INFO
 - **Source:** check-js-logic.ps1
 - **Description:** Test detects `target="_blank"` in a comment line (line 109) that mentions the attribute. Actual code (line 117) has `rel="noopener noreferrer"`.
-- **Status:** False positive — comment text triggers regex
+- **Status:** False positive â€” comment text triggers regex
 
-### Orphan CSS classes — FIXED
+### Orphan CSS classes â€” FIXED
 - **Source:** check-css-logic.ps1
 - **Description:** `lang-btn`, `sidebar-name-first`, `lang-switcher` were used in `LangSwitcher.astro` (orphaned component). All removed in Session 135.
-- **Status:** ✅ Fixed (Session 135) — deleted LangSwitcher.astro, removed sidebar-name-first class
+- **Status:** âœ… Fixed (Session 135) â€” deleted LangSwitcher.astro, removed sidebar-name-first class
 
-### Unused --content-max-width variable — FIXED
+### Unused --content-max-width variable â€” FIXED
 - **Source:** check-css-logic.ps1
 - **Description:** `--content-max-width: 800px` defined in `:root` but never referenced.
-- **Status:** ✅ Fixed (Session 135) — removed from `:root`
+- **Status:** âœ… Fixed (Session 135) â€” removed from `:root`
 
 ---
 
 ## Automatic test findings (consolidated)
 
-All findings below are from `run-all.ps1` test runs across sessions 90–103. Each entry represents a unique finding. Session list shows where it was detected.
+All findings below are from `run-all.ps1` test runs across sessions 90â€“103. Each entry represents a unique finding. Session list shows where it was detected.
 
-### Computational grid not detected in #inicio — WARNING
+### Computational grid not detected in #inicio â€” WARNING
 - **Source:** check-frontend-design.ps1
 - **Detected:** Sessions 90, 91, 93, 95, 97, 99, 103
-- **Description:** Stale check — computational grid was removed during redesign. Should be removed from test suite.
+- **Description:** Stale check â€” computational grid was removed during redesign. Should be removed from test suite.
 - **Status:** Pending (stale check)
 
-### Missing fade gradient in #inicio::after — WARNING
+### Missing fade gradient in #inicio::after â€” WARNING
 - **Source:** check-frontend-design.ps1
 - **Detected:** Sessions 90, 91, 93, 95, 97, 99, 103
-- **Description:** Stale check — fade gradient was removed during redesign. Should be removed from test suite.
+- **Description:** Stale check â€” fade gradient was removed during redesign. Should be removed from test suite.
 - **Status:** Pending (stale check)
 
-### .btn-outline not found — WARNING
+### .btn-outline not found â€” WARNING
 - **Source:** check-frontend-design.ps1
 - **Detected:** Sessions 90, 91, 93, 95, 97, 99, 103
-- **Description:** Stale check — `.btn-outline` was renamed. Test still looks for old name.
+- **Description:** Stale check â€” `.btn-outline` was renamed. Test still looks for old name.
 - **Status:** Pending (stale check)
 
-### Missing sticky nav or sidebar — WARNING
+### Missing sticky nav or sidebar â€” WARNING
 - **Source:** check-frontend-design.ps1
 - **Detected:** Sessions 90, 91, 93, 95, 97, 99, 103
-- **Description:** Stale check — sidebar architecture uses `position: relative`, not `sticky`.
+- **Description:** Stale check â€” sidebar architecture uses `position: relative`, not `sticky`.
 - **Status:** Pending (stale check)
 
-### target=_blank without rel=noopener — WARNING
+### target=_blank without rel=noopener â€” WARNING
 - **Source:** check-js-logic.ps1
 - **Detected:** Sessions 90, 91, 93, 95, 97, 99, 103
-- **Description:** False positive — test detects attribute in a comment line (L109). Actual code has `rel="noopener noreferrer"`.
+- **Description:** False positive â€” test detects attribute in a comment line (L109). Actual code has `rel="noopener noreferrer"`.
 - **Status:** Pending (false positive)
 
-### Predominantly single quotes — WARNING
+### Predominantly single quotes â€” WARNING
 - **Source:** check-js-logic.ps1
 - **Detected:** Sessions 90, 91, 93, 95, 97, 99, 103
-- **Description:** JS file uses predominantly single quotes (464–536 single vs 88 double across sessions). Code style convention — not a bug.
+- **Description:** JS file uses predominantly single quotes (464â€“536 single vs 88 double across sessions). Code style convention â€” not a bug.
 - **Status:** Pending (code style, not a bug)
 
-### Classes referenced but missing CSS — WARNING
+### Classes referenced but missing CSS â€” WARNING
 - **Source:** check-css-logic.ps1
 - **Detected:** Sessions 90, 91, 93, 95, 97, 99, 103
 - **Description:** `lang-btn`, `lang-switcher`, `sidebar-name-first` (and `tech-showcase` in some sessions) are referenced in HTML but have no CSS definitions. These are used in `LangSwitcher.astro` which is not included in the current layout.
 - **Status:** Pending (orphaned component)
 
-### CSS variables defined but possibly unused: --content-max-width — WARNING
+### CSS variables defined but possibly unused: --content-max-width â€” WARNING
 - **Source:** check-css-logic.ps1
 - **Detected:** Sessions 90, 91, 93, 95, 97, 99, 103
 - **Description:** `--content-max-width: 800px` defined in `:root` but never referenced.
 - **Status:** Pending (dead code)
 
-### experience.json empty — WARNING
+### experience.json empty â€” WARNING
 - **Source:** check-json-schema.ps1
 - **Detected:** Sessions 90, 91, 93, 95, 97, 99, 103
 - **Description:** No work experience to list yet. Section auto-hides via `toggleSection()`.
 - **Status:** Pending (intentional)
 
-### !important outside prefers-reduced-motion block — ERROR
+### !important outside prefers-reduced-motion block â€” ERROR
 - **Source:** check-css-logic.ps1
 - **Detected:** Sessions 90, 91, 93, 95, 97, 99, 103
-- **Description:** `!important` used in sidebar state classes (`sidebar-locked`, `sidebar-delayed`, `sidebar-no-transition`, `is-resizing`). These are intentional — the state classes must override any inline transition. Excluded from the `prefers-reduced-motion` check by test filter.
-- **Status:** Pending (intentional, test false positive — filtered in Session 89)
+- **Description:** `!important` used in sidebar state classes (`sidebar-locked`, `sidebar-delayed`, `sidebar-no-transition`, `is-resizing`). These are intentional â€” the state classes must override any inline transition. Excluded from the `prefers-reduced-motion` check by test filter.
+- **Status:** Pending (intentional, test false positive â€” filtered in Session 89)
 
 
 ### Computational grid not detected in #inicio -- WARNING
@@ -5244,46 +5244,381 @@ All findings below are from `run-all.ps1` test runs across sessions 90–103. Ea
 - **Description:** experience.json empty
 - **Status:** Pending
 
-## Automatic findings (Session 160 -- 2026-07-23)
 
 ### Computational grid not detected in #inicio -- WARNING
 - **Source:** check-frontend-design.ps1
-- **Detected:** Session 160 (automatic)
+- **Detected:** Session 161
+- **Description:** Computational grid not detected in #inicio
 - **Status:** Pending
 
 ### Missing fade gradient in #inicio::after -- WARNING
 - **Source:** check-frontend-design.ps1
-- **Detected:** Session 160 (automatic)
+- **Detected:** Session 161
+- **Description:** Missing fade gradient in #inicio::after
 - **Status:** Pending
 
 ### .btn-outline not found -- WARNING
 - **Source:** check-frontend-design.ps1
-- **Detected:** Session 160 (automatic)
+- **Detected:** Session 161
+- **Description:** .btn-outline not found
 - **Status:** Pending
 
 ### Missing sticky nav or sidebar -- WARNING
 - **Source:** check-frontend-design.ps1
-- **Detected:** Session 160 (automatic)
+- **Detected:** Session 161
+- **Description:** Missing sticky nav or sidebar
 - **Status:** Pending
 
-### target=_blank without rel=noopener: -- WARNING
-- **Source:** check-js-logic.ps1
-- **Detected:** Session 160 (automatic)
+### Computational grid not detected in #inicio -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 161
+- **Description:** Computational grid not detected in #inicio
 - **Status:** Pending
 
-### Predominantly single quotes (564 single vs 108 double) -- WARNING
+### Missing fade gradient in #inicio::after -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 161
+- **Description:** Missing fade gradient in #inicio::after
+- **Status:** Pending
+
+### .btn-outline not found -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 161
+- **Description:** .btn-outline not found
+- **Status:** Pending
+
+### Missing sticky nav or sidebar -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 161
+- **Description:** Missing sticky nav or sidebar
+- **Status:** Pending
+
+### Predominantly single quotes (566 single vs 120 double) -- WARNING
 - **Source:** check-js-logic.ps1
-- **Detected:** Session 160 (automatic)
+- **Detected:** Session 161
+- **Description:** Predominantly single quotes (566 single vs 120 double)
+- **Status:** Pending
+
+### Predominantly single quotes (566 single vs 120 double) -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 161
+- **Description:** Predominantly single quotes (566 single vs 120 double)
 - **Status:** Pending
 
 ### CSS variables defined but possibly unused: --with-image -- WARNING
 - **Source:** check-css-logic.ps1
-- **Detected:** Session 160 (automatic)
+- **Detected:** Session 161
+- **Description:** CSS variables defined but possibly unused: --with-image
+- **Status:** Pending
+
+### CSS variables defined but possibly unused: --with-image -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 161
+- **Description:** CSS variables defined but possibly unused: --with-image
 - **Status:** Pending
 
 ### experience.json empty -- WARNING
 - **Source:** check-json-schema.ps1
-- **Detected:** Session 160 (automatic)
+- **Detected:** Session 161
+- **Description:** experience.json empty
+- **Status:** Pending
+
+### experience.json empty -- WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session 161
+- **Description:** experience.json empty
+- **Status:** Pending
+
+
+### Computational grid not detected in #inicio -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 162
+- **Description:** Computational grid not detected in #inicio
+- **Status:** Pending
+
+### Missing fade gradient in #inicio::after -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 162
+- **Description:** Missing fade gradient in #inicio::after
+- **Status:** Pending
+
+### .btn-outline not found -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 162
+- **Description:** .btn-outline not found
+- **Status:** Pending
+
+### Missing sticky nav or sidebar -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 162
+- **Description:** Missing sticky nav or sidebar
+- **Status:** Pending
+
+### Computational grid not detected in #inicio -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 162
+- **Description:** Computational grid not detected in #inicio
+- **Status:** Pending
+
+### Missing fade gradient in #inicio::after -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 162
+- **Description:** Missing fade gradient in #inicio::after
+- **Status:** Pending
+
+### .btn-outline not found -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 162
+- **Description:** .btn-outline not found
+- **Status:** Pending
+
+### Missing sticky nav or sidebar -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 162
+- **Description:** Missing sticky nav or sidebar
+- **Status:** Pending
+
+### Predominantly single quotes (577 single vs 120 double) -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 162
+- **Description:** Predominantly single quotes (577 single vs 120 double)
+- **Status:** Pending
+
+### Predominantly single quotes (577 single vs 120 double) -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 162
+- **Description:** Predominantly single quotes (577 single vs 120 double)
+- **Status:** Pending
+
+### CSS variables defined but possibly unused: --with-image -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 162
+- **Description:** CSS variables defined but possibly unused: --with-image
+- **Status:** Pending
+
+### CSS variables defined but possibly unused: --with-image -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 162
+- **Description:** CSS variables defined but possibly unused: --with-image
+- **Status:** Pending
+
+### experience.json empty -- WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session 162
+- **Description:** experience.json empty
+- **Status:** Pending
+
+### experience.json empty -- WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session 162
+- **Description:** experience.json empty
+- **Status:** Pending
+
+
+### Computational grid not detected in #inicio -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 163
+- **Description:** Computational grid not detected in #inicio
+- **Status:** Pending
+
+### Missing fade gradient in #inicio::after -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 163
+- **Description:** Missing fade gradient in #inicio::after
+- **Status:** Pending
+
+### .btn-outline not found -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 163
+- **Description:** .btn-outline not found
+- **Status:** Pending
+
+### Missing sticky nav or sidebar -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 163
+- **Description:** Missing sticky nav or sidebar
+- **Status:** Pending
+
+### Computational grid not detected in #inicio -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 163
+- **Description:** Computational grid not detected in #inicio
+- **Status:** Pending
+
+### Missing fade gradient in #inicio::after -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 163
+- **Description:** Missing fade gradient in #inicio::after
+- **Status:** Pending
+
+### .btn-outline not found -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 163
+- **Description:** .btn-outline not found
+- **Status:** Pending
+
+### Missing sticky nav or sidebar -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 163
+- **Description:** Missing sticky nav or sidebar
+- **Status:** Pending
+
+### Predominantly single quotes (583 single vs 120 double) -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 163
+- **Description:** Predominantly single quotes (583 single vs 120 double)
+- **Status:** Pending
+
+### Predominantly single quotes (583 single vs 120 double) -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 163
+- **Description:** Predominantly single quotes (583 single vs 120 double)
+- **Status:** Pending
+
+### CSS variables defined but possibly unused: --with-image -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 163
+- **Description:** CSS variables defined but possibly unused: --with-image
+- **Status:** Pending
+
+### CSS variables defined but possibly unused: --with-image -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 163
+- **Description:** CSS variables defined but possibly unused: --with-image
+- **Status:** Pending
+
+### experience.json empty -- WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session 163
+- **Description:** experience.json empty
+- **Status:** Pending
+
+### experience.json empty -- WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session 163
+- **Description:** experience.json empty
+- **Status:** Pending
+
+
+### Computational grid not detected in #inicio -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 168
+- **Description:** Computational grid not detected in #inicio
+- **Status:** Pending
+
+### Missing fade gradient in #inicio::after -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 168
+- **Description:** Missing fade gradient in #inicio::after
+- **Status:** Pending
+
+### .btn-outline not found -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 168
+- **Description:** .btn-outline not found
+- **Status:** Pending
+
+### Missing sticky nav or sidebar -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 168
+- **Description:** Missing sticky nav or sidebar
+- **Status:** Pending
+
+### Computational grid not detected in #inicio -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 168
+- **Description:** Computational grid not detected in #inicio
+- **Status:** Pending
+
+### Missing fade gradient in #inicio::after -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 168
+- **Description:** Missing fade gradient in #inicio::after
+- **Status:** Pending
+
+### .btn-outline not found -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 168
+- **Description:** .btn-outline not found
+- **Status:** Pending
+
+### Missing sticky nav or sidebar -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 168
+- **Description:** Missing sticky nav or sidebar
+- **Status:** Pending
+
+### Predominantly single quotes (583 single vs 120 double) -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 168
+- **Description:** Predominantly single quotes (583 single vs 120 double)
+- **Status:** Pending
+
+### Predominantly single quotes (583 single vs 120 double) -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 168
+- **Description:** Predominantly single quotes (583 single vs 120 double)
+- **Status:** Pending
+
+### CSS variables defined but possibly unused: --with-image -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 168
+- **Description:** CSS variables defined but possibly unused: --with-image
+- **Status:** Pending
+
+### CSS variables defined but possibly unused: --with-image -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 168
+- **Description:** CSS variables defined but possibly unused: --with-image
+- **Status:** Pending
+
+### experience.json empty -- WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session 168
+- **Description:** experience.json empty
+- **Status:** Pending
+
+### experience.json empty -- WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session 168
+- **Description:** experience.json empty
+- **Status:** Pending
+
+## Automatic findings (Session 168 -- 2026-07-23)
+
+### Computational grid not detected in #inicio -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 168 (automatic)
+- **Status:** Pending
+
+### Missing fade gradient in #inicio::after -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 168 (automatic)
+- **Status:** Pending
+
+### .btn-outline not found -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 168 (automatic)
+- **Status:** Pending
+
+### Missing sticky nav or sidebar -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 168 (automatic)
+- **Status:** Pending
+
+### Predominantly single quotes (583 single vs 120 double) -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 168 (automatic)
+- **Status:** Pending
+
+### CSS variables defined but possibly unused: --with-image -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 168 (automatic)
+- **Status:** Pending
+
+### experience.json empty -- WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session 168 (automatic)
 - **Status:** Pending
 
 ---
