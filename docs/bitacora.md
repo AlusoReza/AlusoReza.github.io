@@ -659,3 +659,28 @@ Global workflow summary. Each entry links to the detailed day log.
 **Prompt:** Eliminar stages CSS tambien elimino configuraciones de seguridad. Tags/fecha no deben comprimirse ni solaparse. En vertical todo a la izquierda.
 **Plan:** Anadir `flex-shrink: 0` a `.card-date`. Cambiar `align-self: flex-end` → `flex-start` en s2 date.
 **Build:** `npm run build` — 927ms, 0 errors. Tests: 0 FAILs, 16 WARNs. No regressions.
+
+### Session 153: 3-stage card layout — tags right-aligned near date
+**Prompt:** Tags centradas crean efecto escalera. Quiere alineación fija ~70px de fecha. 3 stages.
+**Plan:** s1: tags flex:0 0 auto + margin-left:auto + margin-right:60px. s2: tags flex:1 1 auto centered. s3: vertical. Detección 3 stages en JS.
+**Build:** `npm run build` — 731ms, 0 errors. Tests: 0 FAILs, 16 WARNs. No regressions.
+
+### Session 154: Fix card layout measurement bug + s2 detection
+**Prompt:** Cards rotas: tags no alineadas, resize no va a vertical, fecha mal. Medicion no contaba 60px margin-right.
+**Plan:** s1 medicion suma 70px (60px margin-right + 10px gap). s2 verifica los 3 elementos caben en linea.
+**Build:** `npm run build` — 717ms, 0 errors. Tests: 0 FAILs, 16 WARNs. No regressions.
+
+### Session 155: card-header-right wrapper — fixed tag-to-date distance
+**Prompt:** Tags no a distancia fija de fecha (escalera). S2 se solapan. Quiere wrapper con distancia fija 70px.
+**Plan:** Envolver tags+date en `.card-header-right` (gap:70px, margin-left:auto, flex-shrink:0). s1 grupo fijo, s2 grupo suelto, s3 vertical.
+**Build:** `npm run build` — 681ms, 0 errors. Tests: 0 FAILs, 16 WARNs. No regressions.
+
+### Session 156: Fix null guard crash on education cards
+**Prompt:** Pagina negra tras cambios en layoutCardHeaders(). Education cards sin `.card-header-right` causan null reference.
+**Plan:** Mover query de `right` al inicio del forEach con `if (!right) return`. Education cards ignoradas.
+**Build:** `npm run build` — 688ms, 0 errors. Tests: 0 FAILs, 16 WARNs. No regressions.
+
+### Session 157: Fix dynamicGap formula + clear inline gap for s2/s3
+**Prompt:** (1) Distancia mide desde ultimo tag, no primer tag hasta right of date. (2) Gap constante persiste en s2/s3 por inline style override.
+**Plan:** Formula `TARGET - tagsW - dateW`. Limpiar `right.style.gap = ''` para s2/s3 (CSS controla gap).
+**Build:** `npm run build` — 646ms, 0 errors. Tests: 0 FAILs, 16 WARNs. No regressions.

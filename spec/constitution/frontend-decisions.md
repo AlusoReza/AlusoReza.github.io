@@ -117,31 +117,36 @@ Visual and design decisions in `global.css`, `*.astro` components, and related c
 - **Revert consequence:** Education cards lose image layout. Reverts to text-only cards identical to certificates.
 
 ## 8. Card system — shared CSS and JS-based adaptive layout
-- **Location:** visual: `global.css` L1050-1093 (card-item, card-header, card-title, card-tags, card-date, card-list, card-image) + `client.js` layoutCardHeaders()
-- **Technical:** JS-based per-card layout detection via `layoutCardHeaders()`. Flexbox + stage classes (s1/s2). WeakMap cache skips unchanged cards. `requestAnimationFrame` for instant response.
+- **Location:** visual: `global.css` L1050-1095 (card-item, card-header, card-title, card-tags, card-date, card-list, card-image) + `client.js` layoutCardHeaders()
+- **Technical:** JS-based per-card layout detection via `layoutCardHeaders()`. Flexbox + 3 stage classes (s1/s2/s3). WeakMap cache skips unchanged cards. `requestAnimationFrame` for instant response. Dynamic gap per card for constant first-tag-to-date distance.
 - **Related code decision:** #12 — `data-data` attribute
-- **Session:** 137-152
-- **Current appearance:** Cards with left border accent (0.3), title (`flex: 0 0 auto`), tags (`flex-shrink: 0`, `white-space: nowrap`), date (`flex-shrink: 0`). 2 stages: s1 = all inline (title | tags centered | date), s2 = all vertical (title / tags / date, all left-aligned). Each card transitions independently.
+- **Session:** 137-157
+- **Current appearance:** Cards with left border accent (0.3), title (`flex: 0 0 auto`), tags (`flex-shrink: 0`, `white-space: nowrap`), date (`flex-shrink: 0`). 3 stages: s1 = title left, tags+date grouped right with constant distance (dynamic gap, TARGET=350px from first tag's left to date's RIGHT edge), s2 = group released (inline gap cleared, CSS gap=0, tags compress toward date), s3 = all vertical (title / tags / date, all left-aligned, CSS gap=10px). Each card transitions independently.
 - **Key decisions:**
   - Shared `card-item` base for certificates and education — consistency across card types
   - JS-based per-card detection — each card measures its own container width, determines stage independently. No shared breakpoints.
   - WeakMap cache — skips cards whose `clientWidth` hasn't changed. Eliminates unnecessary DOM manipulation.
   - `requestAnimationFrame` replaces `setTimeout(100)` — updates at 60fps for instant response during resize
-  - 2 stages only: s1 (all inline) and s2 (all vertical). No intermediate stages. Title is LAST to change.
+  - 3 stages: s1 (inline with constant distance), s2 (released, gap=0), s3 (all vertical)
+  - Dynamic gap per card: `gap = TARGET - tagsW - dateW` ensures constant distance from first tag's left edge to date's RIGHT edge across all cards
+  - s2/s3 clear inline gap (`right.style.gap = ''`) so CSS controls the gap (s2: gap 0, s3: gap 10px) — inline styles override CSS by specificity
+  - s2 detection measures `tagsW + dateW` (without gap) — correctly detects when released group fits
   - Title `flex: 0 0 auto` — takes natural width, never compresses
   - Tags `flex-shrink: 0; white-space: nowrap` — individual pills never compress or wrap
   - Date `flex-shrink: 0; white-space: nowrap` — immutable pill in all modes
-  - s2 `align-items: flex-start` — everything left-aligned in vertical mode (title, tags, date all flush left)
+  - s3 `align-items: flex-start` — everything left-aligned in vertical mode (title, tags, date all flush left)
   - Emoji no longer extracted — rendered as part of title text (no special positioning)
-  - `margin-left: 16px` removed from tags/date — `gap: 10px` handles spacing
 - **Rejected alternatives:**
   - CSS Grid with shared breakpoints — caused title compression and tag/date overlap at shared widths
   - 4-stage CSS Grid system — overcomplex, shared breakpoints still caused conflicts
-  - 3-stage system (tags left/date right intermediate) — removed per user request
+  - Static `gap: 70px` — measured distance from last tag to date, not first tag's left edge. Caused staircase effect across cards with different tag counts.
+  - `dynamicGap = TARGET - tagsW` (without `- dateW`) — measured to left edge of date, not right edge. Date width varies per card (ES/EN), causing misalignment.
+  - Inline gap without clearing for s2/s3 — inline style overrides CSS by specificity. Gap persisted in vertical mode, defeating stage transitions.
+  - `flex: 1` on `.card-header-right` for s2 — expanded to fill remaining space, pushing tags/date apart instead of compressing them together
   - Emoji above title stage — removed per user request
   - Date `align-self: flex-end` in s2 — placed date right-aligned, inconsistent with left-aligned title
   - `flex-shrink: 1` on title — allowed compression before tags/date wrapped, wrong priority
   - `flex: 1` on title — grew to fill space but also compressed, defeating immutability
   - `min-width: 120px` threshold — triggered collapse at arbitrary width, not natural wrap
   - `margin-left` on tags/date — created ~25px left margin when wrapped, misaligned content
-- **Revert consequence:** Title compresses instead of tags/date wrapping. Date compresses in vertical mode. Date right-aligned in vertical mode (inconsistent with title). Shared breakpoints cause simultaneous transitions. Resize response becomes slow (100ms debounce). Emoji extraction adds unnecessary complexity.
+- **Revert consequence:** Title compresses instead of tags/date wrapping. Date compresses in vertical mode. Date right-aligned in vertical mode (inconsistent with title). Shared breakpoints cause simultaneous transitions. Resize response becomes slow (100ms debounce). Emoji extraction adds unnecessary complexity. Static gap causes staircase effect. s2 detection uses inflated width and never triggers. Missing `- dateW` causes date misalignment. Inline gap override prevents s2/s3 transitions.

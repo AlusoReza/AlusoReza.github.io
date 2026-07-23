@@ -154,7 +154,8 @@ Otros: No incluye URL — los certificados no tienen enlaces (regla definida en 
 function renderCertificateItem(item) {
   let html = `<div class="card-item stagger-item reveal">
     <div class="card-header">
-      <strong class="card-title">${t(item.title)}</strong>`
+      <strong class="card-title">${t(item.title)}</strong>
+      <div class="card-header-right">`
   if (item.tags && item.tags.length) {
     html += '<div class="card-tags">'
     for (const tag of item.tags) {
@@ -167,7 +168,7 @@ function renderCertificateItem(item) {
     html += '</div>'
   }
   if (item.date) html += `<span class="card-date">${t(item.date)}</span>`
-  html += '</div>'
+  html += '</div></div>'
   if (item.institution) html += `<p class="card-sub">${t(item.institution)}</p>`
   if (item.description) html += `<p class="card-desc">${t(item.description)}</p>`
   html += '</div>'
@@ -175,8 +176,8 @@ function renderCertificateItem(item) {
 }
 
 /*
-layoutCardHeaders(): Adaptive per-card layout. Measures each .card-header's title, tags, and date natural widths, then determines the best stage (s1-s2) for that specific card based on available space. Each card transitions independently — no shared breakpoints.
-    - Stages: s1=all inline, s2=everything vertical.
+layoutCardHeaders(): Adaptive per-card layout. Measures each .card-header's title, tags, and date natural widths, then determines the best stage (s1-s3) for that specific card based on available space. Each card transitions independently — no shared breakpoints.
+    - Stages: s1=tags right-aligned near date, s2=tags released/centered, s3=everything vertical.
     - Uses WeakMap cache: skips cards whose container width hasn't changed.
 Otros: Se llama en init(), tras renderAll(), en resize (rAF) y tras changeLanguage().
 */
@@ -186,21 +187,42 @@ function layoutCardHeaders() {
   const headers = document.querySelectorAll('.card-header')
   if (!headers.length) return
 
-  const gap = 10
+  const CARD_GAP = 10
+  const TARGET = 450
+
   headers.forEach(h => {
+    const right = h.querySelector('.card-header-right')
+    if (!right) return
+
     const w = h.clientWidth
     const prev = _cardLayoutCache.get(h)
     if (prev && prev.w === w) return
 
     h.className = 'card-header'
     const title = h.querySelector('.card-title')
-    const tags = h.querySelector('.card-tags')
+    const tagsEl = h.querySelector('.card-tags')
     const date = h.querySelector('.card-date')
     const titleW = title ? title.offsetWidth : 0
-    const tagsW = tags ? tags.offsetWidth : 0
+    const tagsW = tagsEl ? tagsEl.offsetWidth : 0
     const dateW = date ? date.offsetWidth : 0
 
-    const stage = (titleW + tagsW + dateW + gap * 2 <= w) ? 's1' : 's2'
+    const dynamicGap = Math.max(0, TARGET - tagsW - dateW)
+    right.style.gap = dynamicGap + 'px'
+    const groupW = right.offsetWidth
+
+    let stage
+    if (titleW + groupW + CARD_GAP <= w) {
+      stage = 's1'
+    } else {
+      right.style.gap = ''
+      const groupWNoGap = tagsW + dateW
+      if (titleW + groupWNoGap + CARD_GAP <= w) {
+        stage = 's2'
+      } else {
+        stage = 's3'
+      }
+    }
+
     h.className = 'card-header card-header--' + stage
     _cardLayoutCache.set(h, { w, stage })
   })
