@@ -699,3 +699,38 @@ Global workflow summary. Each entry links to the detailed day log.
 **Prompt:** (1) Emojis en education. (2) Fecha wrap a izquierda cuando no cabe. (3) 25% mas espacio filas horizontal.
 **Plan:** Emojis en JSON. `:has(> .card-date)` para justify-content:space-between. Gap 6px→8px.
 **Build:** `npm run build` — 642ms, 0 errors. Tests: 0 FAILs, 16 WARNs. No regressions.
+
+### Session 161: Project cards — terminal header, stack tags, left accent
+**Prompt:** Rediseñar tarjetas de proyectos siguiendo frontend-design skill. Propuesta "Terminal Spec Sheet" aprobada.
+**Plan:** JetBrains Mono + `--font-mono`. Terminal header (dots macOS + `$ ` + monospace title). Left accent stripe. Stack tags (nuevo campo `stack` en JSON). Links como texto accent con `→`.
+**Build:** `npm run build` — 1.61s, 0 errors. Tests: 0 FAILs, 14 WARNs (pre-existing). No regressions.
+
+### Session 162: Adaptive stack tags + link text update
+**Prompt:** Stack tags en línea del título cuando quepa, debajo de descripción cuando no. Stack: Docker, Shell, Win/Linux. Link: "Página Web →".
+**Plan:** JS `layoutProjectStack()` mide title+tags vs header. CSS Grid con `.project-card--inline` (2 columnas). Mobile fuerza columna única.
+**Build:** `npm run build` — 656ms, 0 errors. Tests: 0 FAILs, 14 WARNs (pre-existing). No regressions.
+
+### Session 163: Fix layoutProjectStack() measurement bug
+**Prompt:** Tags siempre debajo, nunca en línea con título. Medición incorrecta.
+**Plan:** Medir anchos intrínsecos (suma de tags individuales + suma de dots/prompt/title) en vez de contenedores grid.
+**Build:** `npm run build` — 666ms, 0 errors. Tests: 0 FAILs, 14 WARNs (pre-existing). No regressions.
+
+### Session 164: Fix header background + title compression
+**Prompt:** (1) Color de fondo del header rompe continuidad visual. (2) Título se comprime al reducir pantalla.
+**Plan:** Quitar bg del header, añadir flex-wrap + flex-shrink:0 al título (mismo comportamiento que certificados).
+**Build:** `npm run build` — 637ms, 0 errors. Tests: 0 FAILs, 14 WARNs (pre-existing). No regressions.
+
+### Session 165: Fix card background + title wrap bug
+**Prompt:** (1) Quitar bg del card, restaurar bg del header. (2) Título wrappa a vertical — debe mantenerse horizontal.
+**Plan:** Card body transparente. Header mantiene bg oscuro. Título: white-space:nowrap + flex-shrink:0, sin flex-wrap en header.
+**Build:** `npm run build` — 665ms, 0 errors. Tests: 0 FAILs, 14 WARNs (pre-existing). No regressions.
+
+### Session 166: Fix stack tags background + compression
+**Prompt:** (1) Tags pills necesitan bg según posición. (2) Tags se comprimen inline — deben mantener tamaño constante.
+**Plan:** Tags: bg-card default, bg header inline. flex-shrink:0 + white-space:nowrap. stack-tags: flex-wrap:nowrap.
+**Build:** `npm run build` — 692ms, 0 errors. Tests: 0 FAILs, 14 WARNs (pre-existing). No regressiones.
+
+### Session 167: Restore card background-color
+**Prompt:** Colores siguen sin verse bien. Quiere diseño original session 161.
+**Plan:** Restaurar `background-color: var(--color-bg-card)` en `.project-card`.
+**Build:** `npm run build` — 750ms, 0 errors. Tests: 0 FAILs, 14 WARNs (pre-existing). No regressiones.

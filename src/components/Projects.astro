@@ -10,12 +10,23 @@ const tl = (obj) => obj?.[l] || ''
   <div data-section="projects">
   {projects.map(proj => (
     <div class="project-card">
-      <h3>{proj.title}</h3>
-      <p>{tl(proj.description)}</p>
+      <div class="project-header">
+        <div class="project-dots"><span></span><span></span><span></span></div>
+        <span class="project-prompt">$</span>
+        <span class="project-title">{proj.title}</span>
+      </div>
+      <p class="project-desc">{tl(proj.description)}</p>
+      {proj.stack && proj.stack.length > 0 && (
+        <div class="stack-tags">
+          {proj.stack.map(tag => (
+            <span class="stack-tag">{tag}</span>
+          ))}
+        </div>
+      )}
       {proj.links && (
         <div class="project-links">
           {proj.links.map(link => (
-            <a href={link.url} target="_blank" rel="noopener noreferrer" class="link-outline">{tl(link.text)}</a>
+            <a href={link.url} target="_blank" rel="noopener noreferrer" class="project-link">{tl(link.text)}</a>
           ))}
         </div>
       )}

@@ -5,18 +5,19 @@
       "es": "Herramienta diseñada para automatizar y simplificar la creación de entornos Docker, permitiendo despliegues rápidos y estandarizados.",
       "en": "Tool designed to automate and simplify the creation of Docker environments, allowing fast and standardized deployments."
     },
+    "stack": ["Docker", "Shell", "Win/Linux"],
     "links": [
       {
         "text": {
-          "es": "🌐 Ver Web del Proyecto",
-          "en": "🌐 View Project Website"
+          "es": "Página Web →",
+          "en": "Site →"
         },
         "url": "https://alusoreza.github.io/Dockers-Image-Creator/"
       },
       {
         "text": {
-          "es": "💻 Código en GitHub",
-          "en": "💻 Code on GitHub"
+          "es": "GitHub →",
+          "en": "GitHub →"
         },
         "url": "https://github.com/AlusoReza/Dockers-Image-Creator"
       }

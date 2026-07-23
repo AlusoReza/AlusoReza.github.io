@@ -172,3 +172,27 @@ Visual and design decisions in `global.css`, `*.astro` components, and related c
   - `margin-left: auto` for date alignment — always pushes date right, even when wrapped (broken aesthetics)
   - CSS Grid for list items — flex-wrap is simpler and more flexible for variable-width items
 - **Revert consequence:** Images reappear (legal risk). Date stays right-aligned when wrapped (broken layout). List always vertical regardless of available space. No visual identity for education entries.
+
+## 10. Project cards — terminal header, adaptive stack tags, left accent
+- **Location:** `Projects.astro`, `client.js` renderProjectItem() + layoutProjectStack(), `global.css` (.project-card, .project-card--inline, .project-header, .project-dots, .project-prompt, .project-title, .project-desc, .stack-tags, .stack-tag, .project-links, .project-link), `projects.json`, `BaseLayout.astro` (JetBrains Mono)
+- **Technical:** Redesigned project cards with terminal-inspired header (macOS dots + `$ ` prompt + monospace title). Left accent stripe replaces full border. Adaptive stack tags: JS-based `layoutProjectStack()` measures title + tags width vs header width. If fits → `.project-card--inline` (CSS Grid moves tags to title line, right-aligned). If not → tags stay below description (default grid). Mobile (<650px) always forces single column via CSS override. New `stack` data field renders as monospace pills. Links restyled as accent-colored text links with `→` arrow. Added JetBrains Mono as `--font-mono` token.
+- **Related code decision:** #8 — Card system
+- **Session:** 161-162
+- **Current appearance:** Project card: 3px left accent border (`#64ffda`), dark terminal header with three muted dots (red/yellow/green at 0.5 opacity) + `$ ` prompt + monospace title (`JetBrains Mono`). **Wide (>title+tags fit):** stack tags on same line as title, right-aligned. **Narrow:** tags drop below description (same position as before). **Mobile:** always below description. Tags: `["Docker","Shell","Win/Linux"]` as monospace pills. Links: `"Página Web →"` / `"GitHub →"`. Hover: left-border glow + lift.
+- **Key decisions:**
+  - Terminal header — grounded in Docker/DevOps subject; the three dots + `$ ` prompt are universally recognized as "code environment"
+  - Left accent stripe (no full border) — cleaner than full border, draws eye to the card's left edge
+  - JetBrains Mono — distinctive monospace face for terminal header + stack tags + links
+  - Adaptive stack tags — JS-based layout (like certificate cards) with 2 states: inline (title line) vs below-description. CSS Grid handles the layout shift. Mobile always forces below-description
+  - Stack values: `["Docker","Shell","Win/Linux"]` — language-neutral plain strings
+  - Links as text with `→` arrow — "Página Web →" / "GitHub →" / "Site →" — no bordered pills, no emojis
+  - `.link-outline` class removed — replaced by `.project-link`
+  - Grid layout — `.project-card` uses CSS Grid with named areas. `.project-card--inline` changes to 2-column layout
+- **Rejected alternatives:**
+  - Full terminal window (with title bar, close/minimize/maximize buttons) — too heavy for a single card
+  - Numbered markers (01, 02) — projects aren't sequential
+  - Large emoji watermark (Docker whale) — would compete with the terminal header
+  - Bordered pill links (`.link-outline` style) — felt templated
+  - Viewport-based media query for tag placement — less precise than per-card JS measurement
+  - CSS `flex-wrap` on header (tags wrap inside dark zone) — user wanted tags below description when narrow, not inside header
+- **Revert consequence:** Cards revert to generic bordered boxes. No terminal identity. No adaptive tag placement. Stack tags always below description regardless of available width. Links go back to emoji-prefixed bordered pills. JetBrains Mono unused.

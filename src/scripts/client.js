@@ -105,17 +105,26 @@ function renderEducationItem(item) {
 }
 
 /*
-renderProjectItem(proj): Renderiza una tarjeta de proyecto como HTML. Incluye título, descripción y enlaces externos. Los enlaces se abren en nueva pestaña con rel="noopener noreferrer" por seguridad.
-    - html: Acumulador de string. Se construye el template del proyecto y se devuelve al final.
-Otros: Los links son opcionales — solo se renderiza el div 'project-links' si proj.links existe y tiene elementos. Cada link tiene target="_blank" para no navegar fuera del portfolio.
+renderProjectItem(proj): Renderiza una tarjeta de proyecto como HTML con terminal header (dots + prompt + título monospace), descripción, stack tags y enlaces externos.
+    - html: Acumulador de string. Construye terminal header, descripción, tags de stack y links.
+Otros: stack y links son opcionales. Los links se abren en nueva pestaña con rel="noopener noreferrer".
 */
 function renderProjectItem(proj) {
   let html = `<div class="project-card stagger-item reveal">
-    <h3>${proj.title}</h3>
-    <p>${t(proj.description)}</p>`
+    <div class="project-header">
+      <div class="project-dots"><span></span><span></span><span></span></div>
+      <span class="project-prompt">$</span>
+      <span class="project-title">${proj.title}</span>
+    </div>
+    <p class="project-desc">${t(proj.description)}</p>`
+  if (proj.stack && proj.stack.length) {
+    html += '<div class="stack-tags">'
+    proj.stack.forEach(tag => html += `<span class="stack-tag">${tag}</span>`)
+    html += '</div>'
+  }
   if (proj.links && proj.links.length) {
     html += '<div class="project-links">'
-    proj.links.forEach(link => html += `<a href="${link.url}" target="_blank" rel="noopener noreferrer" class="link-outline">${t(link.text)}</a>`)
+    proj.links.forEach(link => html += `<a href="${link.url}" target="_blank" rel="noopener noreferrer" class="project-link">${t(link.text)}</a>`)
     html += '</div>'
   }
   html += '</div>'
@@ -217,6 +226,43 @@ function layoutCardHeaders() {
 
     h.className = 'card-header card-header--' + stage
     _cardLayoutCache.set(h, { w, stage })
+  })
+}
+
+/*
+layoutProjectStack(): Adaptive stack tag placement for project cards. Measures each .project-card's intrinsic content widths (dots + prompt + title vs individual tags) and compares against card width. If they fit, toggles .project-card--inline (tags move to title line via CSS Grid). If not, tags stay below description (default grid).
+    - card: Elemento DOM .project-card.
+    - headerContentW: Suma de dots.offsetWidth + prompt.offsetWidth + title.offsetWidth + gaps.
+    - tagsIntrinsicW: Suma de cada .stack-tag.offsetWidth + gaps (no el contenedor).
+    - cardW: card.clientWidth — ancho total del card.
+    - fits: Booleano. Verdadero si headerContentW + tagsIntrinsicW + gap <= cardW - headerPadding.
+Otros: En mobile (<650px) CSS fuerza columna única ignorando la clase --inline.
+*/
+function layoutProjectStack() {
+  document.querySelectorAll('.project-card').forEach(card => {
+    const header = card.querySelector('.project-header')
+    const tags = card.querySelector('.stack-tags')
+    if (!header || !tags) return
+
+    const dots = header.querySelector('.project-dots')
+    const prompt = header.querySelector('.project-prompt')
+    const title = header.querySelector('.project-title')
+    if (!title) return
+
+    const headerContentW = (dots ? dots.offsetWidth : 0)
+      + (prompt ? prompt.offsetWidth : 0)
+      + title.offsetWidth
+      + 20
+
+    let tagsIntrinsicW = 0
+    tags.querySelectorAll('.stack-tag').forEach((tag, i) => {
+      tagsIntrinsicW += tag.offsetWidth
+      if (i > 0) tagsIntrinsicW += 6
+    })
+
+    const cardW = card.clientWidth
+    const fits = headerContentW + tagsIntrinsicW + 10 <= cardW - 40
+    card.classList.toggle('project-card--inline', fits)
   })
 }
 
@@ -470,6 +516,7 @@ function changeLanguage(lang) {
   currentLang = lang
   renderAll()
   layoutCardHeaders()
+  layoutProjectStack()
   document.querySelectorAll('.sidebar-lang-btn').forEach(btn => btn.classList.remove('active'))
   document.querySelectorAll(`[data-lang="${lang}"]`).forEach(btn => btn.classList.add('active'))
   localStorage.setItem('preferredLang', lang)
@@ -867,6 +914,7 @@ function init() {
 
   renderAll()
   layoutCardHeaders()
+  layoutProjectStack()
 
   const initW = window.innerWidth
   if (initW > 1235 && initW < 1337) {
@@ -985,6 +1033,7 @@ window.addEventListener('resize', () => {
     _cardLayoutRAF = true
     requestAnimationFrame(() => {
       layoutCardHeaders()
+      layoutProjectStack()
       _cardLayoutRAF = false
     })
   }
