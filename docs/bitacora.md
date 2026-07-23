@@ -684,3 +684,8 @@ Global workflow summary. Each entry links to the detailed day log.
 **Prompt:** (1) Distancia mide desde ultimo tag, no primer tag hasta right of date. (2) Gap constante persiste en s2/s3 por inline style override.
 **Plan:** Formula `TARGET - tagsW - dateW`. Limpiar `right.style.gap = ''` para s2/s3 (CSS controla gap).
 **Build:** `npm run build` — 646ms, 0 errors. Tests: 0 FAILs, 16 WARNs. No regressions.
+
+### Session 158: s2 behavior — tags stick to title, not compress toward date
+**Prompt:** En s2, tags no deben comprimirse hacia la fecha. Deben quedarse pegadas al titulo y moverse con él hacia la fecha.
+**Plan:** s2 CSS: `flex: 1; margin-left: 0` (right group fills space, tags left, date right). s2 check: `titleW + CARD_GAP + tagsW + dateW <= w`.
+**Build:** `npm run build` — 648ms, 0 errors. Tests: 0 FAILs, 16 WARNs. No regressions.

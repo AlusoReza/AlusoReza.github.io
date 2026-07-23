@@ -215,8 +215,7 @@ function layoutCardHeaders() {
       stage = 's1'
     } else {
       right.style.gap = ''
-      const groupWNoGap = tagsW + dateW
-      if (titleW + groupWNoGap + CARD_GAP <= w) {
+      if (titleW + CARD_GAP + tagsW + dateW <= w) {
         stage = 's2'
       } else {
         stage = 's3'

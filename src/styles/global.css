@@ -1099,11 +1099,12 @@ html:not(.js-loading) .content {
 /* Stage 1: group locked — title approaches from left */
 .card-header--s1 .card-title { flex: 0 0 auto; }
 
-/* Stage 2: group released — tags compress toward date */
+/* Stage 2: tags stick to title, right group fills remaining space */
 .card-header--s2 .card-header-right {
-  flex: 0 1 auto;
+  flex: 1;
   gap: 0;
   justify-content: space-between;
+  margin-left: 0;
 }
 
 /* Stage 3: everything vertical */
