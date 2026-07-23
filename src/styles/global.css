@@ -1047,100 +1047,58 @@ html:not(.js-loading) .content {
   box-shadow: 0 0 20px rgba(100, 255, 218, 0.04);
 }
 
-/* Card header: 3-column grid — title left, tags centered, date right */
+/* Card header: flex row, stages set by JS per-card */
 .card-header {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 10px;
 }
 
-/* Card title: bright display font, natural width — wraps text only as last resort */
+/* Card title: bright display font, natural width — never compresses */
 .card-title {
   font-family: var(--font-display);
   color: var(--color-text-bright);
   font-size: 1.15rem;
   font-weight: 600;
   letter-spacing: -0.01em;
-  grid-column: 1;
-  justify-self: start;
-  min-width: 0;
   overflow-wrap: break-word;
   word-break: break-word;
 }
 
-/* Card emoji: inline on desktop, block above title on very small screens (stage 4) */
-.card-emoji {
-  margin-right: 4px;
-}
-
-/* Card date badge: bordered pill, muted text, right-aligned */
+/* Card date badge: bordered pill, muted text */
 .card-date {
   font-size: 0.8rem;
   color: var(--color-text-muted);
   font-weight: 500;
   white-space: nowrap;
+  flex-shrink: 0;
   padding: 4px 10px;
   border: 1px solid var(--color-border);
   border-radius: 4px;
-  grid-column: 3;
-  justify-self: end;
 }
 
-/* Card tags: inline row of technology pills, centered in middle column */
+/* Card tags: inline row of technology pills, never compress */
 .card-tags {
   display: flex;
   flex-wrap: nowrap;
   gap: 6px;
-  grid-column: 2;
-  justify-self: center;
 }
 
-/* === Card header responsive collapse (4 stages) === */
+/* === Card header adaptive stages (set by JS per-card) === */
 
-/* Stage 2: tags+date wrap to row 2 — tags left, date right */
-@media (max-width: 700px) {
-  .card-header {
-    grid-template-columns: auto 1fr;
-  }
-  .card-title {
-    grid-column: 1 / -1;
-  }
-  .card-tags {
-    grid-column: 1;
-    justify-self: start;
-  }
-  .card-date {
-    grid-column: 2;
-    justify-self: end;
-  }
+/* Stage 1: all on one line — title left, tags centered, date right */
+.card-header--s1 .card-title { flex: 0 0 auto; }
+.card-header--s1 .card-tags  { flex: 1 1 auto; justify-content: center; }
+.card-header--s1 .card-date  { flex: 0 0 auto; }
+
+/* Stage 2: everything vertical — title, tags, date stacked */
+.card-header--s2 {
+  flex-direction: column;
+  align-items: flex-start;
 }
-
-/* Stage 3: everything vertical */
-@media (max-width: 480px) {
-  .card-header {
-    grid-template-columns: 1fr;
-  }
-  .card-title,
-  .card-tags,
-  .card-date {
-    grid-column: 1;
-    justify-self: start;
-  }
-}
-
-/* Stage 4: emoji above title, title wraps */
-@media (max-width: 350px) {
-  .card-title {
-    display: flex;
-    flex-direction: column;
-  }
-  .card-emoji {
-    display: block;
-    margin-right: 0;
-    margin-bottom: 4px;
-    font-size: 1.2rem;
-  }
+.card-header--s2 .card-date {
+  align-self: flex-start;
 }
 
 /* Card subtitle: institution or company name, accent-colored with divider */
@@ -1167,7 +1125,7 @@ html:not(.js-loading) .content {
   color: var(--color-text);
 }
 
-/* Card tag: single technology pill, muted with icon */
+/* Card tag: single technology pill, muted with icon — immutable, never compresses */
 .card-tag {
   font-size: 0.7rem;
   font-weight: 500;
@@ -1180,6 +1138,8 @@ html:not(.js-loading) .content {
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 /* Card tag icon: DevIcon SVG, 14x14 */
@@ -1898,10 +1858,6 @@ html.sidebar-midpoint-mode .skills-personality-grid {
 
   .personality-note {
     font-size: 0.95rem;
-  }
-
-  .card-title {
-    font-size: 1.1rem;
   }
 
   .card-date {

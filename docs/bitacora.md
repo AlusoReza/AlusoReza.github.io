@@ -639,3 +639,23 @@ Global workflow summary. Each entry links to the detailed day log.
 **Prompt:** Tags centradas en vez de izquierda, titulo debajo de tags, layout roto al resize.
 **Plan:** Mover `.card-tags` base de linea 1162 (despues de media queries) a linea 1090 (antes de media queries). Source order fix.
 **Build:** `npm run build` — 636ms, 0 errors. Tests: 0 FAILs, 16 WARNs. No regressions.
+
+### Session 149: Immutable tags + title compression fix
+**Prompt:** Tags y contenedor se comprimen. Titulo se comprime en ventanas chicas. Quiere ambos completamente invariables.
+**Plan:** `.card-tag` anadir white-space:nowrap + flex-shrink:0. `.card-title` eliminar min-width:0 (restaurar auto). Eliminar font-size:1.1rem en 480px.
+**Build:** `npm run build` — 594ms, 0 errors. Tests: 0 FAILs, 16 WARNs. No regressions.
+
+### Session 150: JS-based per-card adaptive layout — replaces CSS Grid breakpoints
+**Prompt:** Breakpoints fixed causan titulo compression y tags/fecha overlap. Quiere adaptativo per-card.
+**Plan:** CSS Grid → Flexbox + `layoutCardHeaders()` JS function. Mide anchos naturales por-card, determina stage (s1-s4). Wired a init/resize/changeLanguage.
+**Build:** `npm run build` — 662ms, 0 errors. Tests: 0 FAILs, 16 WARNs. No regressions.
+
+### Session 151: 2 stages + instant resize (rAF + WeakMap cache)
+**Prompt:** Cambios de layout muy lentos. Quiere instantaneo. Eliminar stages intermedios — solo s1 (inline) y s2 (vertical).
+**Plan:** Simplificar a 2 stages. WeakMap cache para skip cards sin cambio. setTimeout → requestAnimationFrame. Eliminar emoji extraction.
+**Build:** `npm run build` — 601ms, 0 errors. Tests: 0 FAILs, 16 WARNs. No regressions.
+
+### Session 152: Card layout safety fixes
+**Prompt:** Eliminar stages CSS tambien elimino configuraciones de seguridad. Tags/fecha no deben comprimirse ni solaparse. En vertical todo a la izquierda.
+**Plan:** Anadir `flex-shrink: 0` a `.card-date`. Cambiar `align-self: flex-end` → `flex-start` en s2 date.
+**Build:** `npm run build` — 927ms, 0 errors. Tests: 0 FAILs, 16 WARNs. No regressions.

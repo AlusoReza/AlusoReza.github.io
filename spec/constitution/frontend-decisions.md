@@ -116,28 +116,32 @@ Visual and design decisions in `global.css`, `*.astro` components, and related c
   - Timeline markers — only 2 entries, not a sequence
 - **Revert consequence:** Education cards lose image layout. Reverts to text-only cards identical to certificates.
 
-## 8. Card system — shared CSS and progressive collapse
-- **Location:** visual: `global.css` L1031-1227 (card-item, card-header, card-title, card-emoji, card-tags, card-date, card-list, card-image)
-- **Technical:** CSS flex-wrap with natural-width title as collapse trigger, emoji extraction via regex in `client.js`
+## 8. Card system — shared CSS and JS-based adaptive layout
+- **Location:** visual: `global.css` L1050-1093 (card-item, card-header, card-title, card-tags, card-date, card-list, card-image) + `client.js` layoutCardHeaders()
+- **Technical:** JS-based per-card layout detection via `layoutCardHeaders()`. Flexbox + stage classes (s1/s2). WeakMap cache skips unchanged cards. `requestAnimationFrame` for instant response.
 - **Related code decision:** #12 — `data-data` attribute
-- **Session:** 137-146
-- **Current appearance:** Cards with left border accent (0.3), emoji (inline desktop, block above title on mobile), title (`flex: 0 0 auto`, `max-width: 100%`, `overflow-wrap: break-word`), tags (`flex-shrink: 0`), date (`flex-shrink: 0`). Progressive collapse: tags wrap → date wraps → title text wraps (last resort).
+- **Session:** 137-152
+- **Current appearance:** Cards with left border accent (0.3), title (`flex: 0 0 auto`), tags (`flex-shrink: 0`, `white-space: nowrap`), date (`flex-shrink: 0`). 2 stages: s1 = all inline (title | tags centered | date), s2 = all vertical (title / tags / date, all left-aligned). Each card transitions independently.
 - **Key decisions:**
   - Shared `card-item` base for certificates and education — consistency across card types
-  - Title `flex: 0 0 auto` — takes natural width, never compresses. Tags and date wrap first.
-  - Title `max-width: 100%` + `overflow-wrap: break-word` — text wraps ONLY when container is narrower than title natural width. Absolute last resort.
-  - Tags `flex-shrink: 0` — never shrinks, wraps when space runs out (cleaner collapse)
-  - Date `flex-shrink: 0` — never shrinks, only wraps when absolutely necessary
-  - `flex-wrap: wrap` on header — natural wrap order: tags first, then date, then title text
-  - Emoji extracted into `<span class="card-emoji">` — repositioned above title on mobile via `flex-direction: column`
-  - `margin-left: 16px` removed from tags/date — `gap: 10px` handles spacing, no extra indentation on wrap
-  - Regex `^[\p{Emoji_Presentation}\p{Extended_Pictographic}]*\s*` extracts leading emoji — handles certificates with emojis, gracefully skips those without
+  - JS-based per-card detection — each card measures its own container width, determines stage independently. No shared breakpoints.
+  - WeakMap cache — skips cards whose `clientWidth` hasn't changed. Eliminates unnecessary DOM manipulation.
+  - `requestAnimationFrame` replaces `setTimeout(100)` — updates at 60fps for instant response during resize
+  - 2 stages only: s1 (all inline) and s2 (all vertical). No intermediate stages. Title is LAST to change.
+  - Title `flex: 0 0 auto` — takes natural width, never compresses
+  - Tags `flex-shrink: 0; white-space: nowrap` — individual pills never compress or wrap
+  - Date `flex-shrink: 0; white-space: nowrap` — immutable pill in all modes
+  - s2 `align-items: flex-start` — everything left-aligned in vertical mode (title, tags, date all flush left)
+  - Emoji no longer extracted — rendered as part of title text (no special positioning)
+  - `margin-left: 16px` removed from tags/date — `gap: 10px` handles spacing
 - **Rejected alternatives:**
-  - 2-column grid — doesn't scale with more entries
-  - Fixed breakpoints for collapse — doesn't adapt to title length
-  - JavaScript-based detection — overengineered for CSS-native behavior
+  - CSS Grid with shared breakpoints — caused title compression and tag/date overlap at shared widths
+  - 4-stage CSS Grid system — overcomplex, shared breakpoints still caused conflicts
+  - 3-stage system (tags left/date right intermediate) — removed per user request
+  - Emoji above title stage — removed per user request
+  - Date `align-self: flex-end` in s2 — placed date right-aligned, inconsistent with left-aligned title
   - `flex-shrink: 1` on title — allowed compression before tags/date wrapped, wrong priority
   - `flex: 1` on title — grew to fill space but also compressed, defeating immutability
   - `min-width: 120px` threshold — triggered collapse at arbitrary width, not natural wrap
   - `margin-left` on tags/date — created ~25px left margin when wrapped, misaligned content
-- **Revert consequence:** Title compresses instead of wrapping tags/date. Text wraps prematurely. Emoji stays inline on mobile. Wrapped content has left indentation.
+- **Revert consequence:** Title compresses instead of tags/date wrapping. Date compresses in vertical mode. Date right-aligned in vertical mode (inconsistent with title). Shared breakpoints cause simultaneous transitions. Resize response becomes slow (100ms debounce). Emoji extraction adds unnecessary complexity.

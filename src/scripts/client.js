@@ -152,13 +152,9 @@ renderCertificateItem(item): Renderiza una tarjeta de certificado como HTML. Est
 Otros: No incluye URL — los certificados no tienen enlaces (regla definida en hard limits de tech-stack.md).
 */
 function renderCertificateItem(item) {
-  const titleText = t(item.title)
-  const emojiMatch = titleText.match(/^[\p{Emoji_Presentation}\p{Extended_Pictographic}]\s*/u)
-  const emoji = emojiMatch ? emojiMatch[0].trim() : ''
-  const titleWithoutEmoji = emoji ? titleText.slice(emojiMatch[0].length) : titleText
   let html = `<div class="card-item stagger-item reveal">
     <div class="card-header">
-      <strong class="card-title">${emoji ? `<span class="card-emoji">${emoji}</span>` : ''}${titleWithoutEmoji}</strong>`
+      <strong class="card-title">${t(item.title)}</strong>`
   if (item.tags && item.tags.length) {
     html += '<div class="card-tags">'
     for (const tag of item.tags) {
@@ -176,6 +172,38 @@ function renderCertificateItem(item) {
   if (item.description) html += `<p class="card-desc">${t(item.description)}</p>`
   html += '</div>'
   return html
+}
+
+/*
+layoutCardHeaders(): Adaptive per-card layout. Measures each .card-header's title, tags, and date natural widths, then determines the best stage (s1-s2) for that specific card based on available space. Each card transitions independently — no shared breakpoints.
+    - Stages: s1=all inline, s2=everything vertical.
+    - Uses WeakMap cache: skips cards whose container width hasn't changed.
+Otros: Se llama en init(), tras renderAll(), en resize (rAF) y tras changeLanguage().
+*/
+const _cardLayoutCache = new WeakMap()
+
+function layoutCardHeaders() {
+  const headers = document.querySelectorAll('.card-header')
+  if (!headers.length) return
+
+  const gap = 10
+  headers.forEach(h => {
+    const w = h.clientWidth
+    const prev = _cardLayoutCache.get(h)
+    if (prev && prev.w === w) return
+
+    h.className = 'card-header'
+    const title = h.querySelector('.card-title')
+    const tags = h.querySelector('.card-tags')
+    const date = h.querySelector('.card-date')
+    const titleW = title ? title.offsetWidth : 0
+    const tagsW = tags ? tags.offsetWidth : 0
+    const dateW = date ? date.offsetWidth : 0
+
+    const stage = (titleW + tagsW + dateW + gap * 2 <= w) ? 's1' : 's2'
+    h.className = 'card-header card-header--' + stage
+    _cardLayoutCache.set(h, { w, stage })
+  })
 }
 
 /*
@@ -427,6 +455,7 @@ function changeLanguage(lang) {
   if (lang === currentLang) return
   currentLang = lang
   renderAll()
+  layoutCardHeaders()
   document.querySelectorAll('.sidebar-lang-btn').forEach(btn => btn.classList.remove('active'))
   document.querySelectorAll(`[data-lang="${lang}"]`).forEach(btn => btn.classList.add('active'))
   localStorage.setItem('preferredLang', lang)
@@ -823,6 +852,7 @@ function init() {
   translateUI()
 
   renderAll()
+  layoutCardHeaders()
 
   const initW = window.innerWidth
   if (initW > 1235 && initW < 1337) {
@@ -867,6 +897,7 @@ function init() {
 
 // --- Resize debounce + snap on mouseup ---
 let resizeTimer
+let _cardLayoutRAF = false
 
 document.addEventListener('mouseup', () => {
   const html = document.documentElement
@@ -935,6 +966,14 @@ window.addEventListener('resize', () => {
     html.classList.remove('is-resizing')
     snapSidebarFade()
   }, 1000)
+
+  if (!_cardLayoutRAF) {
+    _cardLayoutRAF = true
+    requestAnimationFrame(() => {
+      layoutCardHeaders()
+      _cardLayoutRAF = false
+    })
+  }
 })
 
 init()
