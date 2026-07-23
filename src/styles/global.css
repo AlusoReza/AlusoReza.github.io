@@ -1078,6 +1078,11 @@ html:not(.js-loading) .content {
   border-radius: 4px;
 }
 
+/* Education card header: date right-aligned when same line, left-aligned when wrapped */
+.card-header:has(> .card-date) {
+  justify-content: space-between;
+}
+
 /* Card tags: inline row of technology pills, never compress */
 .card-tags {
   display: flex;
@@ -1185,19 +1190,22 @@ html:not(.js-loading) .content {
   flex-shrink: 0;
 }
 
-/* Card list: custom bullet points with accent triangles */
+/* Card list: horizontal flex row, wraps to vertical when items don't fit */
 .card-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
   margin: 12px 0 0 0;
-  padding-left: 20px;
+  padding: 0;
   list-style-type: none;
   color: var(--color-text-muted);
   font-size: 0.9rem;
 }
 
 .card-list li {
-  margin-bottom: 4px;
   position: relative;
   padding-left: 16px;
+  white-space: nowrap;
 }
 
 /* Accent triangle bullet */
@@ -1259,6 +1267,9 @@ html:not(.js-loading) .content {
   .card-item--with-image {
     flex-direction: column;
     align-items: center;
+  }
+  .card-list {
+    flex-direction: column;
   }
 }
 

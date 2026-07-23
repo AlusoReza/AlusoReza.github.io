@@ -689,3 +689,13 @@ Global workflow summary. Each entry links to the detailed day log.
 **Prompt:** En s2, tags no deben comprimirse hacia la fecha. Deben quedarse pegadas al titulo y moverse con él hacia la fecha.
 **Plan:** s2 CSS: `flex: 1; margin-left: 0` (right group fills space, tags left, date right). s2 check: `titleW + CARD_GAP + tagsW + dateW <= w`.
 **Build:** `npm run build` — 648ms, 0 errors. Tests: 0 FAILs, 16 WARNs. No regressions.
+
+### Session 159: Education cards — image removal, date alignment, horizontal list
+**Prompt:** (1) Quitar imagenes de education (preocupaciones legales). (2) Fecha a la derecha. (3) Lista horizontal con wrap.
+**Plan:** Eliminar image/initials de JSON+JS+Astro. `.card-header > .card-date { margin-left: auto }`. `.card-list { display: flex; flex-wrap: wrap }`.
+**Build:** `npm run build` — 612ms, 0 errors. Tests: 0 FAILs, 16 WARNs. No regressions.
+
+### Session 160: Education emojis + date wrap fix + list spacing
+**Prompt:** (1) Emojis en education. (2) Fecha wrap a izquierda cuando no cabe. (3) 25% mas espacio filas horizontal.
+**Plan:** Emojis en JSON. `:has(> .card-date)` para justify-content:space-between. Gap 6px→8px.
+**Build:** `npm run build` — 642ms, 0 errors. Tests: 0 FAILs, 16 WARNs. No regressions.

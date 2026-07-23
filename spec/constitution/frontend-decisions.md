@@ -150,3 +150,25 @@ Visual and design decisions in `global.css`, `*.astro` components, and related c
   - `min-width: 120px` threshold — triggered collapse at arbitrary width, not natural wrap
   - `margin-left` on tags/date — created ~25px left margin when wrapped, misaligned content
 - **Revert consequence:** Title compresses instead of tags/date wrapping. Date compresses in vertical mode. Date right-aligned in vertical mode (inconsistent with title). Shared breakpoints cause simultaneous transitions. Resize response becomes slow (100ms debounce). Emoji extraction adds unnecessary complexity. Static gap causes staircase effect. s2 detection uses inflated width and never triggers. Missing `- dateW` causes date misalignment. Inline gap override prevents s2/s3 transitions. s2 tags compress toward date instead of sticking to title.
+
+## 9. Education cards — image removal, emojis, date wrap, horizontal list
+- **Location:** `Education.astro`, `client.js` renderEducationItem(), `global.css` (.card-list, .card-header:has(> .card-date)), `education.json`
+- **Technical:** Removed image/fallback rendering from education cards (legal concerns with institutional logos). Added emoji prefix to titles (💻 DAM, ⚛️ Physics). Date alignment via `.card-header:has(> .card-date) { justify-content: space-between }` — right-aligned when same line, left-aligned when wrapped to new line. List items use `display: flex; flex-wrap: wrap; gap: 8px 12px` for horizontal flow, vertical fallback at 650px.
+- **Related code decision:** #8 — Card system
+- **Session:** 159-160
+- **Current appearance:** Education cards: no images/initials, emoji + title left + date right (wraps left when narrow), institution/description below, list items horizontal with triangle bullets and 8px row gap (wrap to vertical on mobile). Certificates unaffected.
+- **Key decisions:**
+  - Image removal — legal concerns with institutional logos in education cards
+  - Emoji prefix — consistent with certificates, adds visual identity without logos
+  - `:has(> .card-date)` selector — targets only education card headers (direct .card-date child). Certificates have .card-date inside .card-header-right → unaffected
+  - Date wrap behavior — `justify-content: space-between` puts date right when same line, left when wrapped (space-between with one item places it at start)
+  - Horizontal list with `flex-wrap: wrap` — items flow left to right, wrap when they don't fit
+  - 8px row gap — 25% more than original 6px for better vertical breathing room
+  - Mobile fallback at 650px — `flex-direction: column` restores vertical list
+  - `.card-item--with-image`, `.card-image`, `.card-image-fallback` CSS rules kept — not harmful, reusable if images return
+- **Rejected alternatives:**
+  - Keeping images with placeholder/abstract art — still raises legal concerns
+  - Large faded initials as background watermark — interesting but might compete with card content
+  - `margin-left: auto` for date alignment — always pushes date right, even when wrapped (broken aesthetics)
+  - CSS Grid for list items — flex-wrap is simpler and more flexible for variable-width items
+- **Revert consequence:** Images reappear (legal risk). Date stays right-aligned when wrapped (broken layout). List always vertical regardless of available space. No visual identity for education entries.
