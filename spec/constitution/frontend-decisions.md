@@ -94,3 +94,50 @@ Visual and design decisions in `global.css`, `*.astro` components, and related c
   - Merged About + Skills into single page — eliminates navigation overhead
 - **Rejected alternatives:** CSS Grid auto-fit (items expanded), FLIP animation (3 attempts, all buggy), opacity fade (invisible transition), scale pulse (distracting)
 - **Revert consequence:** Tech grid reverts to old skills page layout. Loses centered alignment. Animation history lost.
+
+## 7. Education cards — image layout and content differentiation
+- **Location:** visual: `global.css` L1174-1221 (card-image rules) / component: `Education.astro`
+- **Technical:** `client.js` L90-112 (`renderEducationItem()`), onerror fallback
+- **Related code decision:** #12 — `data-data` attribute
+- **Session:** 144
+- **Current appearance:** Cards with institution image (120x120px) on left, content on right (desktop). Mobile: image on top, content below. Initials fallback if image fails. List items with accent triangle bullets for achievements.
+- **Key decisions:**
+  - Image+text layout differentiates education from certificates (text-only) — encodes "institution is significant"
+  - Same `card-item` base system as certificates — consistency across card types
+  - CSS-only placeholders (initials) — no image files needed until user adds real ones
+  - onerror fallback: image → initials automatically — graceful degradation
+  - List items with accent triangles — content-driven differentiation from certificate tags
+  - 120x120px normalized size — consistent across different institution logos
+  - Mobile vertical layout — image above content at <650px
+- **Rejected alternatives:**
+  - 2-column grid — doesn't scale with more entries, compresses content
+  - Emoji prefix — academic titles are formal, emojis feel decorative
+  - Different accent color — breaks design system consistency
+  - Timeline markers — only 2 entries, not a sequence
+- **Revert consequence:** Education cards lose image layout. Reverts to text-only cards identical to certificates.
+
+## 8. Card system — shared CSS and progressive collapse
+- **Location:** visual: `global.css` L1031-1227 (card-item, card-header, card-title, card-emoji, card-tags, card-date, card-list, card-image)
+- **Technical:** CSS flex-wrap with natural-width title as collapse trigger, emoji extraction via regex in `client.js`
+- **Related code decision:** #12 — `data-data` attribute
+- **Session:** 137-146
+- **Current appearance:** Cards with left border accent (0.3), emoji (inline desktop, block above title on mobile), title (`flex: 0 0 auto`, `max-width: 100%`, `overflow-wrap: break-word`), tags (`flex-shrink: 0`), date (`flex-shrink: 0`). Progressive collapse: tags wrap → date wraps → title text wraps (last resort).
+- **Key decisions:**
+  - Shared `card-item` base for certificates and education — consistency across card types
+  - Title `flex: 0 0 auto` — takes natural width, never compresses. Tags and date wrap first.
+  - Title `max-width: 100%` + `overflow-wrap: break-word` — text wraps ONLY when container is narrower than title natural width. Absolute last resort.
+  - Tags `flex-shrink: 0` — never shrinks, wraps when space runs out (cleaner collapse)
+  - Date `flex-shrink: 0` — never shrinks, only wraps when absolutely necessary
+  - `flex-wrap: wrap` on header — natural wrap order: tags first, then date, then title text
+  - Emoji extracted into `<span class="card-emoji">` — repositioned above title on mobile via `flex-direction: column`
+  - `margin-left: 16px` removed from tags/date — `gap: 10px` handles spacing, no extra indentation on wrap
+  - Regex `^[\p{Emoji_Presentation}\p{Extended_Pictographic}]*\s*` extracts leading emoji — handles certificates with emojis, gracefully skips those without
+- **Rejected alternatives:**
+  - 2-column grid — doesn't scale with more entries
+  - Fixed breakpoints for collapse — doesn't adapt to title length
+  - JavaScript-based detection — overengineered for CSS-native behavior
+  - `flex-shrink: 1` on title — allowed compression before tags/date wrapped, wrong priority
+  - `flex: 1` on title — grew to fill space but also compressed, defeating immutability
+  - `min-width: 120px` threshold — triggered collapse at arbitrary width, not natural wrap
+  - `margin-left` on tags/date — created ~25px left margin when wrapped, misaligned content
+- **Revert consequence:** Title compresses instead of wrapping tags/date. Text wraps prematurely. Emoji stays inline on mobile. Wrapped content has left indentation.

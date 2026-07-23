@@ -9,18 +9,27 @@ const tl = (obj) => obj?.[l] || ''
   <h2 class="section-title reveal" data-i18n="sec-est">Formación Académica</h2>
   <div data-section="education">
   {education.map(item => (
-    <div class="card-item">
-      <div class="card-header">
-        <strong class="card-title">{tl(item.title)}</strong>
-        {item.date && <span class="card-date">{tl(item.date)}</span>}
+    <div class={`card-item stagger-item reveal${item.image || item.initials ? ' card-item--with-image' : ''}`}>
+      {item.image || item.initials ? (
+        item.image
+          ? <img class="card-image" src={item.image} alt={tl(item.institution)} loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+          : null
+      ) : null}
+      {(!item.image && item.initials) ? <div class="card-image-fallback">{item.initials}</div> : null}
+      {item.image ? <div class="card-image-fallback" style="display:none">{item.initials}</div> : null}
+      <div class="card-content">
+        <div class="card-header">
+          <strong class="card-title">{tl(item.title)}</strong>
+          {item.date && <span class="card-date">{tl(item.date)}</span>}
+        </div>
+        {item.institution && <p class="card-sub">{tl(item.institution)}</p>}
+        {item.description && <p class="card-desc" set:html={tl(item.description)}></p>}
+        {item.list && item.list.length > 0 && (
+          <ul class="card-list">
+            {item.list.map(li => <li>{tl(li)}</li>)}
+          </ul>
+        )}
       </div>
-      {item.institution && <p class="card-sub">{tl(item.institution)}</p>}
-      {item.description && <p class="card-desc" set:html={tl(item.description)}></p>}
-      {item.list && (
-        <ul class="card-list">
-          {item.list.map(li => <li>{tl(li)}</li>)}
-        </ul>
-      )}
     </div>
   ))}
   </div>

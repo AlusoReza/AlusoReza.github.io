@@ -1055,15 +1055,35 @@ html:not(.js-loading) .content {
   gap: 10px;
 }
 
-/* Card title: bright display font, expands to fill available space */
+/* Card title: bright display font, natural width — never compresses, wraps only when container is narrower */
 .card-title {
   font-family: var(--font-display);
   color: var(--color-text-bright);
   font-size: 1.15rem;
   font-weight: 600;
   letter-spacing: -0.01em;
-  flex: 1;
-  min-width: 0;
+  flex: 0 0 auto;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Card emoji: inline on desktop, block above title on mobile */
+.card-emoji {
+  margin-right: 4px;
+}
+
+@media (max-width: 650px) {
+  .card-title {
+    display: flex;
+    flex-direction: column;
+  }
+  .card-emoji {
+    display: block;
+    margin-right: 0;
+    margin-bottom: 4px;
+    font-size: 1.2rem;
+  }
 }
 
 /* Card date badge: bordered pill, muted text, right-aligned */
@@ -1076,7 +1096,6 @@ html:not(.js-loading) .content {
   border: 1px solid var(--color-border);
   border-radius: 4px;
   flex-shrink: 0;
-  margin-left: 16px;
 }
 
 /* Card subtitle: institution or company name, accent-colored with divider */
@@ -1109,7 +1128,6 @@ html:not(.js-loading) .content {
   flex-wrap: wrap;
   gap: 6px;
   flex-shrink: 0;
-  margin-left: 16px;
 }
 
 /* Card tag: single technology pill, muted with icon */
@@ -1170,6 +1188,60 @@ html:not(.js-loading) .content {
   position: absolute;
   left: 0;
   color: var(--color-accent);
+}
+
+/* Card with image: flex layout, image on left */
+.card-item--with-image {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+/* Image container: fixed size, consistent normalization */
+.card-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 4px;
+  object-fit: cover;
+  border: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+/* Image fallback: initials when no image or load fails */
+.card-image-fallback {
+  width: 120px;
+  height: 120px;
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-hover);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  flex-shrink: 0;
+  letter-spacing: 0.05em;
+  transition: border-color 0.3s ease;
+}
+
+.card-item--with-image:hover .card-image-fallback {
+  border-color: var(--color-accent);
+}
+
+/* Card content: flex grow, min-width 0 for text overflow */
+.card-content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Mobile: stack vertically, center image */
+@media (max-width: 650px) {
+  .card-item--with-image {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 /* ========================

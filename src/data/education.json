@@ -15,7 +15,14 @@
     "description": {
       "es": "Enfoque en ingeniería de software, desarrollo de sistemas multiplataforma y capacidad de análisis avanzado.",
       "en": "Focus on software engineering, multiplatform systems development, and advanced analysis skills."
-    }
+    },
+    "image": "",
+    "initials": "UNIR",
+    "list": [
+      { "es": "Ingeniería de software", "en": "Software engineering" },
+      { "es": "Sistemas multiplataforma", "en": "Multiplatform systems" },
+      { "es": "Análisis avanzado", "en": "Advanced analysis" }
+    ]
   },
   {
     "title": {
@@ -33,6 +40,13 @@
     "description": {
       "es": "Fuerte base en matemáticas y lógica. Especial interés y desempeño destacado en <strong>Física Computacional</strong> y <strong>Métodos Numéricos</strong>.",
       "en": "Strong foundation in mathematics and logic. Special interest and outstanding performance in <strong>Computational Physics</strong> and <strong>Numerical Methods</strong>."
-    }
+    },
+    "image": "",
+    "initials": "UGR",
+    "list": [
+      { "es": "Física Computacional", "en": "Computational Physics" },
+      { "es": "Métodos Numéricos", "en": "Numerical Methods" },
+      { "es": "Matemáticas y lógica", "en": "Mathematics and logic" }
+    ]
   }
 ]

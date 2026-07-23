@@ -88,9 +88,16 @@ renderEducationItem(item): Renderiza una tarjeta de educación completa como HTM
 Otros: La lista (item.list) solo se renderiza si existe y tiene elementos. Cada ítem de la lista también pasa por t() para soporte bilingüe.
 */
 function renderEducationItem(item) {
-  let html = `<div class="card-item stagger-item reveal">
-    <div class="card-header">
-      <strong class="card-title">${t(item.title)}</strong>`
+  const hasImage = item.image || item.initials
+  let html = `<div class="card-item stagger-item reveal${hasImage ? ' card-item--with-image' : ''}">`
+  if (hasImage) {
+    if (item.image) {
+      html += `<img class="card-image" src="${item.image}" alt="${t(item.institution)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />`
+    }
+    html += `<div class="card-image-fallback"${item.image ? ' style="display:none"' : ''}>${item.initials || ''}</div>`
+  }
+  html += '<div class="card-content"><div class="card-header">'
+  html += `<strong class="card-title">${t(item.title)}</strong>`
   if (item.date) html += `<span class="card-date">${t(item.date)}</span>`
   html += '</div>'
   if (item.institution) html += `<p class="card-sub">${t(item.institution)}</p>`
@@ -100,7 +107,7 @@ function renderEducationItem(item) {
     item.list.forEach(li => html += `<li>${t(li)}</li>`)
     html += '</ul>'
   }
-  html += '</div>'
+  html += '</div></div>'
   return html
 }
 
@@ -145,9 +152,13 @@ renderCertificateItem(item): Renderiza una tarjeta de certificado como HTML. Est
 Otros: No incluye URL — los certificados no tienen enlaces (regla definida en hard limits de tech-stack.md).
 */
 function renderCertificateItem(item) {
+  const titleText = t(item.title)
+  const emojiMatch = titleText.match(/^[\p{Emoji_Presentation}\p{Extended_Pictographic}]\s*/u)
+  const emoji = emojiMatch ? emojiMatch[0].trim() : ''
+  const titleWithoutEmoji = emoji ? titleText.slice(emojiMatch[0].length) : titleText
   let html = `<div class="card-item stagger-item reveal">
     <div class="card-header">
-      <strong class="card-title">${t(item.title)}</strong>`
+      <strong class="card-title">${emoji ? `<span class="card-emoji">${emoji}</span>` : ''}${titleWithoutEmoji}</strong>`
   if (item.tags && item.tags.length) {
     html += '<div class="card-tags">'
     for (const tag of item.tags) {

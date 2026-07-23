@@ -583,3 +583,49 @@ Global workflow summary. Each entry links to the detailed day log.
 **Prompt:** Anadir iconos DevIcon a tags (como tech grid) o color verde suave. Opcion C: iconos + fallback + accent suave.
 **Plan:** JSON +logo por tag, JS/Astro render img/fallback, CSS 3 reglas nuevas. Build exitoso.
 **Build:** `npm run build` — 611ms, 0 errors. Tests: 0 FAILs, 14 WARNs. No regressions.
+
+---
+
+## 2026-07-23
+
+[Detailed log →](logs/2026-07-23.md)
+
+### Session 139: Certificate cards — emojis + technology tags
+**Prompt:** Mejorar tarjetas de Certificados con emoji al inicio del titulo y tags de tecnologias.
+**Plan:** JSON tags array, JS/Astro render pills, CSS card-tags. Build exitoso.
+**Build:** `npm run build` — 1.29s, 0 errors. Tests: 0 FAILs, 14 WARNs. No regressions.
+
+### Session 140: Certificate cards — accent border + glow + tag refinement
+**Prompt:** Mejorar tarjetas: borde izquierdo accent, hover glow, tags con color accent.
+**Plan:** Solo CSS (4 reglas). Border-left, hover glow, tag accent, sub divider. Build exitoso.
+**Build:** `npm run build` — 961ms, 0 errors. Tests: 0 FAILs, 14 WARNs. No regressions.
+
+### Session 141: Reduce card accent intensity
+**Prompt:** Reducir intensidad del verde accent en borde y tags. Titulo e institucion son lo mas importante.
+**Plan:** Solo CSS (2 reglas). Border-left 30% opacity, tags muted. Build exitoso.
+**Build:** `npm run build` — 611ms, 0 errors. Tests: 0 FAILs, 14 WARNs. No regressions.
+
+### Session 142: Inline tags — move to same line as title and date
+**Prompt:** Mover tags debajo del titulo a la misma linea: |Titulo|Tags|Fecha|.
+**Plan:** Mover tags dentro de card-header (JS + Astro). CSS: flex:1 en titulo, flex-shrink:0 en tags/fecha, margin-left:16px. Build exitoso.
+**Build:** `npm run build` — 574ms, 0 errors. Tests: 0 FAILs, 14 WARNs. No regressions.
+
+### Session 143: Tags with DevIcon logos + initials fallback + softer accent
+**Prompt:** Anadir iconos DevIcon a tags (como tech grid) o color verde suave. Opcion C: iconos + fallback + accent suave.
+**Plan:** JSON +logo por tag, JS/Astro render img/fallback, CSS 3 reglas nuevas. Build exitoso.
+**Build:** `npm run build` — 611ms, 0 errors. Tests: 0 FAILs, 14 WARNs. No regressions.
+
+### Session 144: Education cards — image layout + initials fallback + progressive collapse
+**Prompt:** Mejorar tarjetas de Formacion con layout imagen+texto. Iniciales si no hay imagen. Mobile: imagen arriba.
+**Plan:** JSON image/initials/list, Education.astro ternario, CSS 6 reglas, client.js onerror fallback. Build exitoso.
+**Build:** `npm run build` — 611ms, 0 errors. Tests: 0 FAILs, 14 WARNs. No regressions.
+
+### Session 145: Card mobile — emoji reposition + left-align + collapse fix
+**Prompt:** Tres bugs mobile: alineacion izquierda, ruido visual emojis, resize no activa collapse.
+**Plan:** Eliminar margin-left, flex-shrink:0 tags, extraer emoji con regex, repositionar above title mobile. Build exitoso.
+**Build:** `npm run build` — 600ms, 0 errors. Tests: 0 FAILs, 16 WARNs. No regressions.
+
+### Session 146: Card title immutability — flex: 0 0 auto + text wrap as last resort
+**Prompt:** El titulo sigue comprimiéndose. Quiere titulo inmutable (ancho natural) que SOLO envuelva palabras cuando el contenedor sea mas estrecho que el titulo.
+**Plan:** Cambiar .card-title de flex:1 a flex:0 0 auto + max-width:100% + overflow-wrap:break-word. Build exitoso.
+**Build:** `npm run build` — 703ms, 0 errors. Tests: 0 FAILs, 16 WARNs. No regressions.
