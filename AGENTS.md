@@ -113,7 +113,10 @@ public/
   1. Drop the PDF into `docs/certificates/`
   2. Ask: "Add the certificate from `docs/certificates/file-name.pdf`"
   3. Agent reads the PDF with `pypdf` (`PdfReader`), extracts `title`, `institution`, `date`, `description`
-  4. Agent writes the entry to `src/data/certificates.json` using the bilingual format
+  4. Agent writes the entry to `src/data/certificates.json` using the bilingual format:
+     - `title`: emoji prefix that represents the course topic (e.g. 🐍 Python, 🐳 Docker, ☁️ AWS)
+     - `tags`: array of `{ "es": "...", "en": "...", "logo": "..." }` — technologies covered in the course
+       - `logo`: DevIcon CDN URL if available (`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/{tech}/{tech}-original.svg`), empty string `""` if no icon exists
   5. Section auto-appears on page reload (hidden if array is empty)
 - **Adding content:** Edit the corresponding JSON file in `src/data/` — no component changes required.
 - **Bug tracking (IMPORTANT — document before fixing):**
