@@ -88,14 +88,7 @@ renderEducationItem(item): Renderiza una tarjeta de educación completa como HTM
 Otros: La lista (item.list) solo se renderiza si existe y tiene elementos. Cada ítem de la lista también pasa por t() para soporte bilingüe.
 */
 function renderEducationItem(item) {
-  const hasImage = item.image || item.initials
-  let html = `<div class="card-item stagger-item reveal${hasImage ? ' card-item--with-image' : ''}">`
-  if (hasImage) {
-    if (item.image) {
-      html += `<img class="card-image" src="${item.image}" alt="${t(item.institution)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />`
-    }
-    html += `<div class="card-image-fallback"${item.image ? ' style="display:none"' : ''}>${item.initials || ''}</div>`
-  }
+  let html = `<div class="card-item stagger-item reveal">`
   html += '<div class="card-content"><div class="card-header">'
   html += `<strong class="card-title">${t(item.title)}</strong>`
   if (item.date) html += `<span class="card-date">${t(item.date)}</span>`
