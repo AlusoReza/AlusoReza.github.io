@@ -1047,43 +1047,31 @@ html:not(.js-loading) .content {
   box-shadow: 0 0 20px rgba(100, 255, 218, 0.04);
 }
 
-/* Card header: flex row with title, tags, and date inline */
+/* Card header: 3-column grid — title left, tags centered, date right */
 .card-header {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 10px;
 }
 
-/* Card title: bright display font, natural width — never compresses, wraps only when container is narrower */
+/* Card title: bright display font, natural width — wraps text only as last resort */
 .card-title {
   font-family: var(--font-display);
   color: var(--color-text-bright);
   font-size: 1.15rem;
   font-weight: 600;
   letter-spacing: -0.01em;
-  flex: 0 0 auto;
-  max-width: 100%;
+  grid-column: 1;
+  justify-self: start;
+  min-width: 0;
   overflow-wrap: break-word;
   word-break: break-word;
 }
 
-/* Card emoji: inline on desktop, block above title on mobile */
+/* Card emoji: inline on desktop, block above title on very small screens (stage 4) */
 .card-emoji {
   margin-right: 4px;
-}
-
-@media (max-width: 650px) {
-  .card-title {
-    display: flex;
-    flex-direction: column;
-  }
-  .card-emoji {
-    display: block;
-    margin-right: 0;
-    margin-bottom: 4px;
-    font-size: 1.2rem;
-  }
 }
 
 /* Card date badge: bordered pill, muted text, right-aligned */
@@ -1095,7 +1083,64 @@ html:not(.js-loading) .content {
   padding: 4px 10px;
   border: 1px solid var(--color-border);
   border-radius: 4px;
-  flex-shrink: 0;
+  grid-column: 3;
+  justify-self: end;
+}
+
+/* Card tags: inline row of technology pills, centered in middle column */
+.card-tags {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 6px;
+  grid-column: 2;
+  justify-self: center;
+}
+
+/* === Card header responsive collapse (4 stages) === */
+
+/* Stage 2: tags+date wrap to row 2 — tags left, date right */
+@media (max-width: 700px) {
+  .card-header {
+    grid-template-columns: auto 1fr;
+  }
+  .card-title {
+    grid-column: 1 / -1;
+  }
+  .card-tags {
+    grid-column: 1;
+    justify-self: start;
+  }
+  .card-date {
+    grid-column: 2;
+    justify-self: end;
+  }
+}
+
+/* Stage 3: everything vertical */
+@media (max-width: 480px) {
+  .card-header {
+    grid-template-columns: 1fr;
+  }
+  .card-title,
+  .card-tags,
+  .card-date {
+    grid-column: 1;
+    justify-self: start;
+  }
+}
+
+/* Stage 4: emoji above title, title wraps */
+@media (max-width: 350px) {
+  .card-title {
+    display: flex;
+    flex-direction: column;
+  }
+  .card-emoji {
+    display: block;
+    margin-right: 0;
+    margin-bottom: 4px;
+    font-size: 1.2rem;
+  }
 }
 
 /* Card subtitle: institution or company name, accent-colored with divider */
@@ -1120,14 +1165,6 @@ html:not(.js-loading) .content {
 /* Bold text within card descriptions */
 .card-desc strong {
   color: var(--color-text);
-}
-
-/* Card tags: inline row of technology pills */
-.card-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  flex-shrink: 0;
 }
 
 /* Card tag: single technology pill, muted with icon */

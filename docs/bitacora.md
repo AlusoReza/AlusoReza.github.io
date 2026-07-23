@@ -629,3 +629,13 @@ Global workflow summary. Each entry links to the detailed day log.
 **Prompt:** El titulo sigue comprimiéndose. Quiere titulo inmutable (ancho natural) que SOLO envuelva palabras cuando el contenedor sea mas estrecho que el titulo.
 **Plan:** Cambiar .card-title de flex:1 a flex:0 0 auto + max-width:100% + overflow-wrap:break-word. Build exitoso.
 **Build:** `npm run build` — 703ms, 0 errors. Tests: 0 FAILs, 16 WARNs. No regressions.
+
+### Session 147: CSS Grid card header — 4-stage responsive collapse
+**Prompt:** Rediseñar `.card-header` para desktop: titulo izquierda, tags centro, fecha derecha. Colapso progresivo en 4 etapas.
+**Plan:** Cambio de flexbox a CSS Grid (`auto 1fr auto`). Media queries en 700px, 480px, 350px para stages 2-4. Emoji movido de 650px a stage 4. Build exitoso.
+**Build:** `npm run build` — 867ms, 0 errors. Tests: 0 FAILs, 16 WARNs. No regressions.
+
+### Session 148: CSS source order fix — .card-tags base rule misplaced after media queries
+**Prompt:** Tags centradas en vez de izquierda, titulo debajo de tags, layout roto al resize.
+**Plan:** Mover `.card-tags` base de linea 1162 (despues de media queries) a linea 1090 (antes de media queries). Source order fix.
+**Build:** `npm run build` — 636ms, 0 errors. Tests: 0 FAILs, 16 WARNs. No regressions.
