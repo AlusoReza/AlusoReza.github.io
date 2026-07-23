@@ -13,9 +13,9 @@
       "en": "June 18, 2026"
     },
     "tags": [
-      { "es": "Python", "en": "Python" },
-      { "es": "Pandas", "en": "Pandas" },
-      { "es": "NumPy", "en": "NumPy" }
+      { "es": "Python", "en": "Python", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" },
+      { "es": "Pandas", "en": "Pandas", "logo": "" },
+      { "es": "NumPy", "en": "NumPy", "logo": "" }
     ],
     "description": {
       "es": "Curso de 75 horas (3 ECTS) sobre fundamentos de programaci\u00f3n en Python: sintaxis, estructuras de datos, control de flujo y resoluci\u00f3n de problemas computacionales.",
@@ -36,9 +36,9 @@
       "en": "June 26, 2026"
     },
     "tags": [
-      { "es": "IA", "en": "AI" },
-      { "es": "Agentes", "en": "Agents" },
-      { "es": "OpenCode", "en": "OpenCode" }
+      { "es": "IA", "en": "AI", "logo": "" },
+      { "es": "Agentes", "en": "Agents", "logo": "" },
+      { "es": "OpenCode", "en": "OpenCode", "logo": "" }
     ],
     "description": {
       "es": "Curso de 6 horas sobre desarrollo en el nuevo paradigma de programaci\u00f3n con agentes de IA. Cubre conceptos b\u00e1sicos e intermedios/avanzados, uso de herramientas como OpenCode y Claude Code, elaboraci\u00f3n de perfiles de proyecto con buenas pr\u00e1cticas y est\u00e1ndares modernos (skills, MCP, logs, SDD, uso de m\u00faltiples agentes).",
@@ -59,9 +59,9 @@
       "en": "2025"
     },
     "tags": [
-      { "es": "Excel", "en": "Excel" },
-      { "es": "Canva", "en": "Canva" },
-      { "es": "\u00c1giles", "en": "Agile" }
+      { "es": "Excel", "en": "Excel", "logo": "" },
+      { "es": "Canva", "en": "Canva", "logo": "" },
+      { "es": "\u00c1giles", "en": "Agile", "logo": "" }
     ],
     "description": {
       "es": "Bootcamp sobre elaboraci\u00f3n de curr\u00edculum vitae, uso avanzado de herramientas como Excel y Canva, m\u00e9todos de estudio y networking, y metodolog\u00edas \u00e1giles en el desarrollo de software.",
@@ -82,9 +82,9 @@
       "en": "June 1, 2026"
     },
     "tags": [
-      { "es": "AWS", "en": "AWS" },
-      { "es": "Cloud", "en": "Cloud" },
-      { "es": "CLF-C01", "en": "CLF-C01" }
+      { "es": "AWS", "en": "AWS", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" },
+      { "es": "Cloud", "en": "Cloud", "logo": "" },
+      { "es": "CLF-C01", "en": "CLF-C01", "logo": "" }
     ],
     "description": {
       "es": "Curso de 50 horas sobre fundamentos de AWS Cloud: servicios principales, arquitectura en la nube, seguridad, facturaci\u00f3n y preparaci\u00f3n para el examen CLF-C01.",
@@ -105,9 +105,9 @@
       "en": "May 26, 2026"
     },
     "tags": [
-      { "es": "Azure", "en": "Azure" },
-      { "es": "Microsoft", "en": "Microsoft" },
-      { "es": "Cloud", "en": "Cloud" }
+      { "es": "Azure", "en": "Azure", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azure/azure-original.svg" },
+      { "es": "Microsoft", "en": "Microsoft", "logo": "" },
+      { "es": "Cloud", "en": "Cloud", "logo": "" }
     ],
     "description": {
       "es": "Curso de 50 horas sobre fundamentos de Microsoft Azure: servicios en la nube, arquitectura, gesti\u00f3n de recursos, seguridad, privacidad y cumplimiento.",
@@ -128,9 +128,9 @@
       "en": "July 3, 2026"
     },
     "tags": [
-      { "es": "Java", "en": "Java" },
-      { "es": "Spring", "en": "Spring" },
-      { "es": "Spring Boot", "en": "Spring Boot" }
+      { "es": "Java", "en": "Java", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" },
+      { "es": "Spring", "en": "Spring", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg" },
+      { "es": "Spring Boot", "en": "Spring Boot", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg" }
     ],
     "description": {
       "es": "Curso de 4h 15m sobre desarrollo de aplicaciones con Spring Framework y Spring Boot, incluyendo configuraci\u00f3n, dependencias, desarrollo web y buenas pr\u00e1cticas.",
@@ -151,8 +151,8 @@
       "en": "July 4, 2026"
     },
     "tags": [
-      { "es": "Docker", "en": "Docker" },
-      { "es": "Contenedores", "en": "Containers" }
+      { "es": "Docker", "en": "Docker", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" },
+      { "es": "Contenedores", "en": "Containers", "logo": "" }
     ],
     "description": {
       "es": "Curso de 3h 31m sobre contenedores Docker: instalaci\u00f3n, im\u00e1genes, vol\u00famenes, redes, Docker Compose y despliegue de aplicaciones containerizadas.",
@@ -173,8 +173,8 @@
       "en": "July 4, 2026"
     },
     "tags": [
-      { "es": "DevOps", "en": "DevOps" },
-      { "es": "CI/CD", "en": "CI/CD" }
+      { "es": "DevOps", "en": "DevOps", "logo": "" },
+      { "es": "CI/CD", "en": "CI/CD", "logo": "" }
     ],
     "description": {
       "es": "Curso de 1h 32m sobre los fundamentos del desarrollo DevOps: integraci\u00f3n continua, despliegue continuo, automatizaci\u00f3n y cultura de colaboraci\u00f3n.",
@@ -195,7 +195,7 @@
       "en": "July 4, 2026"
     },
     "tags": [
-      { "es": "Rust", "en": "Rust" }
+      { "es": "Rust", "en": "Rust", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rust/rust-original.svg" }
     ],
     "description": {
       "es": "Curso de 4h 47m sobre fundamentos del lenguaje Rust: tipos de datos, ownership, borrowing, patrones, estructuras de datos y programaci\u00f3n concurrente.",
@@ -216,7 +216,7 @@
       "en": "July 4, 2026"
     },
     "tags": [
-      { "es": "Git", "en": "Git" }
+      { "es": "Git", "en": "Git", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" }
     ],
     "description": {
       "es": "Curso de 3h 14m sobre control de versiones con Git: ramas, merges, rebase, cherry-pick, flujos de trabajo y gesti\u00f3n de repositorios.",
@@ -237,8 +237,8 @@
       "en": "July 5, 2026"
     },
     "tags": [
-      { "es": "GitHub", "en": "GitHub" },
-      { "es": "Actions", "en": "Actions" }
+      { "es": "GitHub", "en": "GitHub", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" },
+      { "es": "Actions", "en": "Actions", "logo": "" }
     ],
     "description": {
       "es": "Curso de 3h 3m sobre uso avanzado de GitHub: pull requests, issues, GitHub Actions, Pages, seguridad y colaboraci\u00f3n en equipos de desarrollo.",
@@ -259,9 +259,9 @@
       "en": "July 6, 2026"
     },
     "tags": [
-      { "es": "IA", "en": "AI" },
-      { "es": "Claude Code", "en": "Claude Code" },
-      { "es": "MCP", "en": "MCP" }
+      { "es": "IA", "en": "AI", "logo": "" },
+      { "es": "Claude Code", "en": "Claude Code", "logo": "" },
+      { "es": "MCP", "en": "MCP", "logo": "" }
     ],
     "description": {
       "es": "Curso de 4h 19m sobre desarrollo asistido por IA con Claude Code: agentes, herramientas MCP, skills, flujos de trabajo modernos y buenas pr\u00e1cticas.",
@@ -282,8 +282,8 @@
       "en": "July 6, 2026"
     },
     "tags": [
-      { "es": "Java", "en": "Java" },
-      { "es": "POO", "en": "OOP" }
+      { "es": "Java", "en": "Java", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" },
+      { "es": "POO", "en": "OOP", "logo": "" }
     ],
     "description": {
       "es": "Curso de 4h 35m sobre programaci\u00f3n profesional en Java: POO, colecciones, lambdas, streams, concurrencia y desarrollo de aplicaciones robustas.",

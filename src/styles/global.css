@@ -1047,25 +1047,26 @@ html:not(.js-loading) .content {
   box-shadow: 0 0 20px rgba(100, 255, 218, 0.04);
 }
 
-/* Card header: flex row with title on left, date on right */
+/* Card header: flex row with title, tags, and date inline */
 .card-header {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   align-items: center;
   gap: 10px;
 }
 
-/* Card title: bright display font */
+/* Card title: bright display font, expands to fill available space */
 .card-title {
   font-family: var(--font-display);
   color: var(--color-text-bright);
   font-size: 1.15rem;
   font-weight: 600;
   letter-spacing: -0.01em;
+  flex: 1;
+  min-width: 0;
 }
 
-/* Card date badge: bordered pill, muted text */
+/* Card date badge: bordered pill, muted text, right-aligned */
 .card-date {
   font-size: 0.8rem;
   color: var(--color-text-muted);
@@ -1074,6 +1075,8 @@ html:not(.js-loading) .content {
   padding: 4px 10px;
   border: 1px solid var(--color-border);
   border-radius: 4px;
+  flex-shrink: 0;
+  margin-left: 16px;
 }
 
 /* Card subtitle: institution or company name, accent-colored with divider */
@@ -1100,24 +1103,50 @@ html:not(.js-loading) .content {
   color: var(--color-text);
 }
 
-/* Card tags: row of technology pills below the title */
+/* Card tags: inline row of technology pills */
 .card-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin: 8px 0 0 0;
+  flex-shrink: 0;
+  margin-left: 16px;
 }
 
-/* Card tag: single technology pill, muted */
+/* Card tag: single technology pill, muted with icon */
 .card-tag {
   font-size: 0.7rem;
   font-weight: 500;
   letter-spacing: 0.02em;
   padding: 2px 8px;
   border-radius: 3px;
-  background: var(--color-bg-hover);
-  color: var(--color-text-muted);
-  border: 1px solid var(--color-border);
+  background: rgba(100, 255, 218, 0.08);
+  color: rgba(100, 255, 218, 0.55);
+  border: 1px solid rgba(100, 255, 218, 0.12);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Card tag icon: DevIcon SVG, 14x14 */
+.card-tag img {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+/* Card tag fallback: initials box for tags without logo */
+.card-tag-fallback {
+  display: inline-flex;
+  width: 14px;
+  height: 14px;
+  background: rgba(100, 255, 218, 0.15);
+  border-radius: 2px;
+  font-size: 0.5rem;
+  font-weight: 600;
+  color: rgba(100, 255, 218, 0.7);
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 /* Card list: custom bullet points with accent triangles */

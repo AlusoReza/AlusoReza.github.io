@@ -430,3 +430,35 @@
 - Added `currentPage === 'sobre'` guard to `sidebar-locked` + `lang-switcher-delayed` in `handleMobileProfile()`
 - Added `currentPage === 'sobre'` guard to `lang-switcher-delayed` in `snapSidebarFade()`
 - Lang-switcher now appears instantly on non-about pages when crossing breakpoints
+
+## 2026-07-23 — Sessions 139-143
+
+### Session 139 — Add 8 Código Facilito certificates from PDFs
+- Read 12 PDFs with pypdf, identified 8 missing (all Código Facilito)
+- Added bilingual entries: Spring Boot, Docker, DevOps, Rust, Git, GitHub, Claude Code, Java
+- certificates.json: 5 → 13 entries
+
+### Session 140 — Certificate cards: emojis + technology tags
+- Added emoji prefix to each certificate title (🐍, 🤖, 💼, ☁️, etc.)
+- Added `tags` field (array of bilingual `{es, en}` objects) to each certificate
+- Updated `renderCertificateItem()` and `Certificates.astro` to render tags as pills
+- Added `.card-tags` and `.card-tag` CSS (flex pills, muted colors)
+
+### Session 141 — Certificate cards: accent border + glow + visual hierarchy
+- Added `border-left: 3px solid rgba(100,255,218,0.3)` to `.card-item` (subtle accent identity)
+- Added hover glow: `box-shadow: 0 0 20px rgba(100,255,218,0.04)`
+- Added `border-top` divider on `.card-sub` (institution separator)
+- Tags: muted gray pills (not accent-colored) to reduce visual fatigue
+
+### Session 142 — Reduce card accent intensity
+- Border-left: `var(--color-accent)` → `rgba(100,255,218,0.3)` (70% less intense)
+- Hover glow: `0.08` → `0.04` opacity
+- Tags: reverted to muted gray (bg: `--color-bg-hover`, color: `--color-text-muted`)
+
+### Session 143 — Inline tags + DevIcon logos + initials fallback
+- Moved tags from separate line into `.card-header` (inline with title + date)
+- CSS: `.card-title` → `flex:1`, `.card-tags` → `flex-shrink:0; margin-left:16px`, `.card-date` → `flex-shrink:0; margin-left:16px`
+- Added `logo` field to each tag in JSON (CDN URL or empty string)
+- 10 tags with DevIcon logos (Python, AWS, Azure, Java, Spring, Docker, Rust, Git, GitHub, Spring Boot)
+- JS/Astro: renders `<img>` if `tag.logo` exists, `<span class="card-tag-fallback">` with 2-letter initials if not
+- CSS: `.card-tag` → `inline-flex; gap:4px; accent suave`, `.card-tag img` → 14x14, `.card-tag-fallback` → 14x14 initials box

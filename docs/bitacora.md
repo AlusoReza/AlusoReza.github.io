@@ -573,3 +573,13 @@ Global workflow summary. Each entry links to the detailed day log.
 **Prompt:** Reducir intensidad del verde accent en borde y tags. Titulo e institucion son lo mas importante.
 **Plan:** Solo CSS (2 reglas). Border-left 30% opacity, tags muted. Build exitoso.
 **Build:** `npm run build` — 611ms, 0 errors. Tests: 0 FAILs, 14 WARNs. No regressions.
+
+### Session 142: Inline tags — move to same line as title and date
+**Prompt:** Mover tags debajo del titulo a la misma linea: |Titulo|Tags|Fecha|.
+**Plan:** Mover tags dentro de card-header (JS + Astro). CSS: flex:1 en titulo, flex-shrink:0 en tags/fecha, margin-left:16px. Build exitoso.
+**Build:** `npm run build` — 574ms, 0 errors. Tests: 0 FAILs, 14 WARNs. No regressions.
+
+### Session 143: Tags with DevIcon logos + initials fallback + softer accent
+**Prompt:** Anadir iconos DevIcon a tags (como tech grid) o color verde suave. Opcion C: iconos + fallback + accent suave.
+**Plan:** JSON +logo por tag, JS/Astro render img/fallback, CSS 3 reglas nuevas. Build exitoso.
+**Build:** `npm run build` — 611ms, 0 errors. Tests: 0 FAILs, 14 WARNs. No regressions.

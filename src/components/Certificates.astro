@@ -12,13 +12,16 @@ const tl = (obj) => obj?.[l] || ''
     <div class="card-item">
       <div class="card-header">
         <strong class="card-title">{tl(item.title)}</strong>
+        {item.tags && item.tags.length > 0 && (
+          <div class="card-tags">
+            {item.tags.map(tag => tag.logo
+              ? <span class="card-tag"><img src={tag.logo} alt={tl(tag)} loading="lazy" />{tl(tag)}</span>
+              : <span class="card-tag"><span class="card-tag-fallback">{tl(tag).slice(0, 2).toUpperCase()}</span>{tl(tag)}</span>
+            )}
+          </div>
+        )}
         {item.date && <span class="card-date">{tl(item.date)}</span>}
       </div>
-      {item.tags && item.tags.length > 0 && (
-        <div class="card-tags">
-          {item.tags.map(tag => <span class="card-tag">{tl(tag)}</span>)}
-        </div>
-      )}
       {item.institution && <p class="card-sub">{tl(item.institution)}</p>}
       {item.description && <p class="card-desc">{tl(item.description)}</p>}
     </div>

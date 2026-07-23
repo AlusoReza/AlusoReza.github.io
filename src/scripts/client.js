@@ -148,13 +148,19 @@ function renderCertificateItem(item) {
   let html = `<div class="card-item stagger-item reveal">
     <div class="card-header">
       <strong class="card-title">${t(item.title)}</strong>`
-  if (item.date) html += `<span class="card-date">${t(item.date)}</span>`
-  html += '</div>'
   if (item.tags && item.tags.length) {
     html += '<div class="card-tags">'
-    for (const tag of item.tags) html += `<span class="card-tag">${t(tag)}</span>`
+    for (const tag of item.tags) {
+      if (tag.logo) {
+        html += `<span class="card-tag"><img src="${tag.logo}" alt="${t(tag)}" loading="lazy" />${t(tag)}</span>`
+      } else {
+        html += `<span class="card-tag"><span class="card-tag-fallback">${t(tag).slice(0, 2).toUpperCase()}</span>${t(tag)}</span>`
+      }
+    }
     html += '</div>'
   }
+  if (item.date) html += `<span class="card-date">${t(item.date)}</span>`
+  html += '</div>'
   if (item.institution) html += `<p class="card-sub">${t(item.institution)}</p>`
   if (item.description) html += `<p class="card-desc">${t(item.description)}</p>`
   html += '</div>'
