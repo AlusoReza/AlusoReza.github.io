@@ -1,6 +1,6 @@
 # Bugs known — Alonso Suarez Reza Portfolio
 
-Last scan: 2026-07-23 (Session 151)
+Last scan: 2026-07-23 (Session 160)
 Status: All previously identified bugs fixed. 1 partially fixed (Session 118). Test scripts updated to match current project structure. Code decisions documented in `code-decisions.md`.
 
 ## Fixed (Session 12 — 2026-06-26)
@@ -4953,46 +4953,337 @@ All findings below are from `run-all.ps1` test runs across sessions 90–103. Ea
 - **Description:** experience.json empty
 - **Status:** Pending
 
-## Automatic findings (Session 151 -- 2026-07-23)
 
 ### Computational grid not detected in #inicio -- WARNING
 - **Source:** check-frontend-design.ps1
-- **Detected:** Session 151 (automatic)
+- **Detected:** Session 158
+- **Description:** Computational grid not detected in #inicio
 - **Status:** Pending
 
 ### Missing fade gradient in #inicio::after -- WARNING
 - **Source:** check-frontend-design.ps1
-- **Detected:** Session 151 (automatic)
+- **Detected:** Session 158
+- **Description:** Missing fade gradient in #inicio::after
 - **Status:** Pending
 
 ### .btn-outline not found -- WARNING
 - **Source:** check-frontend-design.ps1
-- **Detected:** Session 151 (automatic)
+- **Detected:** Session 158
+- **Description:** .btn-outline not found
 - **Status:** Pending
 
 ### Missing sticky nav or sidebar -- WARNING
 - **Source:** check-frontend-design.ps1
-- **Detected:** Session 151 (automatic)
+- **Detected:** Session 158
+- **Description:** Missing sticky nav or sidebar
+- **Status:** Pending
+
+### Computational grid not detected in #inicio -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 158
+- **Description:** Computational grid not detected in #inicio
+- **Status:** Pending
+
+### Missing fade gradient in #inicio::after -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 158
+- **Description:** Missing fade gradient in #inicio::after
+- **Status:** Pending
+
+### .btn-outline not found -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 158
+- **Description:** .btn-outline not found
+- **Status:** Pending
+
+### Missing sticky nav or sidebar -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 158
+- **Description:** Missing sticky nav or sidebar
 - **Status:** Pending
 
 ### target=_blank without rel=noopener: -- WARNING
 - **Source:** check-js-logic.ps1
-- **Detected:** Session 151 (automatic)
+- **Detected:** Session 158
+- **Description:** target=_blank without rel=noopener:
 - **Status:** Pending
 
 ### Predominantly single quotes (578 single vs 122 double) -- WARNING
 - **Source:** check-js-logic.ps1
-- **Detected:** Session 151 (automatic)
+- **Detected:** Session 158
+- **Description:** Predominantly single quotes (578 single vs 122 double)
+- **Status:** Pending
+
+### target=_blank without rel=noopener: -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 158
+- **Description:** target=_blank without rel=noopener:
+- **Status:** Pending
+
+### Predominantly single quotes (578 single vs 122 double) -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 158
+- **Description:** Predominantly single quotes (578 single vs 122 double)
 - **Status:** Pending
 
 ### CSS variables defined but possibly unused: --with-image -- WARNING
 - **Source:** check-css-logic.ps1
-- **Detected:** Session 151 (automatic)
+- **Detected:** Session 158
+- **Description:** CSS variables defined but possibly unused: --with-image
+- **Status:** Pending
+
+### CSS variables defined but possibly unused: --with-image -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 158
+- **Description:** CSS variables defined but possibly unused: --with-image
 - **Status:** Pending
 
 ### experience.json empty -- WARNING
 - **Source:** check-json-schema.ps1
-- **Detected:** Session 151 (automatic)
+- **Detected:** Session 158
+- **Description:** experience.json empty
+- **Status:** Pending
+
+### experience.json empty -- WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session 158
+- **Description:** experience.json empty
+- **Status:** Pending
+
+
+### Computational grid not detected in #inicio -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 159
+- **Description:** Computational grid not detected in #inicio
+- **Status:** Pending
+
+### Missing fade gradient in #inicio::after -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 159
+- **Description:** Missing fade gradient in #inicio::after
+- **Status:** Pending
+
+### .btn-outline not found -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 159
+- **Description:** .btn-outline not found
+- **Status:** Pending
+
+### Missing sticky nav or sidebar -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 159
+- **Description:** Missing sticky nav or sidebar
+- **Status:** Pending
+
+### Computational grid not detected in #inicio -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 159
+- **Description:** Computational grid not detected in #inicio
+- **Status:** Pending
+
+### Missing fade gradient in #inicio::after -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 159
+- **Description:** Missing fade gradient in #inicio::after
+- **Status:** Pending
+
+### .btn-outline not found -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 159
+- **Description:** .btn-outline not found
+- **Status:** Pending
+
+### Missing sticky nav or sidebar -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 159
+- **Description:** Missing sticky nav or sidebar
+- **Status:** Pending
+
+### target=_blank without rel=noopener: -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 159
+- **Description:** target=_blank without rel=noopener:
+- **Status:** Pending
+
+### Predominantly single quotes (564 single vs 108 double) -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 159
+- **Description:** Predominantly single quotes (564 single vs 108 double)
+- **Status:** Pending
+
+### target=_blank without rel=noopener: -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 159
+- **Description:** target=_blank without rel=noopener:
+- **Status:** Pending
+
+### Predominantly single quotes (564 single vs 108 double) -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 159
+- **Description:** Predominantly single quotes (564 single vs 108 double)
+- **Status:** Pending
+
+### CSS variables defined but possibly unused: --with-image -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 159
+- **Description:** CSS variables defined but possibly unused: --with-image
+- **Status:** Pending
+
+### CSS variables defined but possibly unused: --with-image -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 159
+- **Description:** CSS variables defined but possibly unused: --with-image
+- **Status:** Pending
+
+### experience.json empty -- WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session 159
+- **Description:** experience.json empty
+- **Status:** Pending
+
+### experience.json empty -- WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session 159
+- **Description:** experience.json empty
+- **Status:** Pending
+
+
+### Computational grid not detected in #inicio -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 160
+- **Description:** Computational grid not detected in #inicio
+- **Status:** Pending
+
+### Missing fade gradient in #inicio::after -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 160
+- **Description:** Missing fade gradient in #inicio::after
+- **Status:** Pending
+
+### .btn-outline not found -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 160
+- **Description:** .btn-outline not found
+- **Status:** Pending
+
+### Missing sticky nav or sidebar -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 160
+- **Description:** Missing sticky nav or sidebar
+- **Status:** Pending
+
+### Computational grid not detected in #inicio -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 160
+- **Description:** Computational grid not detected in #inicio
+- **Status:** Pending
+
+### Missing fade gradient in #inicio::after -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 160
+- **Description:** Missing fade gradient in #inicio::after
+- **Status:** Pending
+
+### .btn-outline not found -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 160
+- **Description:** .btn-outline not found
+- **Status:** Pending
+
+### Missing sticky nav or sidebar -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 160
+- **Description:** Missing sticky nav or sidebar
+- **Status:** Pending
+
+### target=_blank without rel=noopener: -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 160
+- **Description:** target=_blank without rel=noopener:
+- **Status:** Pending
+
+### Predominantly single quotes (564 single vs 108 double) -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 160
+- **Description:** Predominantly single quotes (564 single vs 108 double)
+- **Status:** Pending
+
+### target=_blank without rel=noopener: -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 160
+- **Description:** target=_blank without rel=noopener:
+- **Status:** Pending
+
+### Predominantly single quotes (564 single vs 108 double) -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 160
+- **Description:** Predominantly single quotes (564 single vs 108 double)
+- **Status:** Pending
+
+### CSS variables defined but possibly unused: --with-image -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 160
+- **Description:** CSS variables defined but possibly unused: --with-image
+- **Status:** Pending
+
+### CSS variables defined but possibly unused: --with-image -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 160
+- **Description:** CSS variables defined but possibly unused: --with-image
+- **Status:** Pending
+
+### experience.json empty -- WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session 160
+- **Description:** experience.json empty
+- **Status:** Pending
+
+### experience.json empty -- WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session 160
+- **Description:** experience.json empty
+- **Status:** Pending
+
+## Automatic findings (Session 160 -- 2026-07-23)
+
+### Computational grid not detected in #inicio -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 160 (automatic)
+- **Status:** Pending
+
+### Missing fade gradient in #inicio::after -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 160 (automatic)
+- **Status:** Pending
+
+### .btn-outline not found -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 160 (automatic)
+- **Status:** Pending
+
+### Missing sticky nav or sidebar -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session 160 (automatic)
+- **Status:** Pending
+
+### target=_blank without rel=noopener: -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 160 (automatic)
+- **Status:** Pending
+
+### Predominantly single quotes (564 single vs 108 double) -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session 160 (automatic)
+- **Status:** Pending
+
+### CSS variables defined but possibly unused: --with-image -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session 160 (automatic)
+- **Status:** Pending
+
+### experience.json empty -- WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session 160 (automatic)
 - **Status:** Pending
 
 ---
