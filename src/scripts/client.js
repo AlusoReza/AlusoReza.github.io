@@ -113,15 +113,18 @@ function renderProjectItem(proj) {
   let html = `<div class="project-card stagger-item reveal">
     <div class="project-header">
       <div class="project-dots"><span></span><span></span><span></span></div>
-      <span class="project-prompt">$</span>
-      <span class="project-title">${proj.title}</span>
+      <span class="project-prompt">$</span>${proj.titleIcon ? `<img src="${proj.titleIcon}" alt="" class="project-title-icon" />` : ''}<span class="project-title">${proj.title}</span>
     </div>
     <p class="project-desc">${t(proj.description)}</p>`
   if (proj.stack && proj.stack.length) {
     html += '<div class="stack-tags">'
     proj.stack.forEach(tag => {
       if (tag.logo) {
-        html += `<span class="stack-tag"><img src="${tag.logo}" alt="${t(tag)}" loading="lazy" />${t(tag)}</span>`
+        if (tag.logo.startsWith('http')) {
+          html += `<span class="stack-tag"><img src="${tag.logo}" alt="${t(tag)}" loading="lazy" />${t(tag)}</span>`
+        } else {
+          html += `<span class="stack-tag"><span class="stack-tag-emoji">${tag.logo}</span>${t(tag)}</span>`
+        }
       } else {
         html += `<span class="stack-tag"><span class="stack-tag-fallback">${t(tag).slice(0, 2).toUpperCase()}</span>${t(tag)}</span>`
       }
@@ -168,7 +171,11 @@ function renderCertificateItem(item) {
     html += '<div class="card-tags">'
     for (const tag of item.tags) {
       if (tag.logo) {
-        html += `<span class="card-tag"><img src="${tag.logo}" alt="${t(tag)}" loading="lazy" />${t(tag)}</span>`
+        if (tag.logo.startsWith('http')) {
+          html += `<span class="card-tag"><img src="${tag.logo}" alt="${t(tag)}" loading="lazy" />${t(tag)}</span>`
+        } else {
+          html += `<span class="card-tag"><span class="card-tag-emoji">${tag.logo}</span>${t(tag)}</span>`
+        }
       } else {
         html += `<span class="card-tag"><span class="card-tag-fallback">${t(tag).slice(0, 2).toUpperCase()}</span>${t(tag)}</span>`
       }

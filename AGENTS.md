@@ -119,7 +119,11 @@ public/
   4. Agent writes the entry to `src/data/certificates.json` using the bilingual format:
      - `title`: emoji prefix that represents the course topic (e.g. 🐍 Python, 🐳 Docker, ☁️ AWS)
      - `tags`: array of `{ "es": "...", "en": "...", "logo": "..." }` — technologies covered in the course
-       - `logo`: DevIcon CDN URL if available (`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/{tech}/{tech}-original.svg`), empty string `""` if no icon exists
+       - `logo`: Icon CDN URL — search priority: DevIcon → Simple Icons → SVG Logos
+       - DevIcon: `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/{tech}/{tech}-original.svg`
+       - Simple Icons: `https://cdn.simpleicons.org/{slug}`
+       - SVG Logos: `https://raw.githubusercontent.com/gilbarbara/logos/main/logos/{name}.svg`
+       - Empty string `""` if no icon exists in any source
   5. Section auto-appears on page reload (hidden if array is empty)
 - **Adding content:** Edit the corresponding JSON file in `src/data/` — no component changes required.
 - **Frontend decisions (when user requests):** When the user says "save this to frontend decisions" (or similar), document the decision in `spec/constitution/frontend-decisions.md` using the established format: location, technical, related code decision, session, current appearance, key decisions, rejected alternatives, revert consequence.

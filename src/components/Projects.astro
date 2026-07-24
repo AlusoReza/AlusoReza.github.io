@@ -13,6 +13,7 @@ const tl = (obj) => obj?.[l] || ''
       <div class="project-header">
         <div class="project-dots"><span></span><span></span><span></span></div>
         <span class="project-prompt">$</span>
+        {proj.titleIcon && <img src={proj.titleIcon} alt="" class="project-title-icon" />}
         <span class="project-title">{proj.title}</span>
       </div>
       <p class="project-desc">{tl(proj.description)}</p>
@@ -20,7 +21,9 @@ const tl = (obj) => obj?.[l] || ''
         <div class="stack-tags">
           {proj.stack.map(tag => (
             tag.logo
-              ? <span class="stack-tag"><img src={tag.logo} alt={tl(tag)} loading="lazy" />{tl(tag)}</span>
+              ? tag.logo.startsWith('http')
+                ? <span class="stack-tag"><img src={tag.logo} alt={tl(tag)} loading="lazy" />{tl(tag)}</span>
+                : <span class="stack-tag"><span class="stack-tag-emoji">{tag.logo}</span>{tl(tag)}</span>
               : <span class="stack-tag"><span class="stack-tag-fallback">{tl(tag).slice(0, 2).toUpperCase()}</span>{tl(tag)}</span>
           ))}
         </div>

@@ -15,7 +15,9 @@ const tl = (obj) => obj?.[l] || ''
         {item.tags && item.tags.length > 0 && (
           <div class="card-tags">
             {item.tags.map(tag => tag.logo
-              ? <span class="card-tag"><img src={tag.logo} alt={tl(tag)} loading="lazy" />{tl(tag)}</span>
+              ? tag.logo.startsWith('http')
+                ? <span class="card-tag"><img src={tag.logo} alt={tl(tag)} loading="lazy" />{tl(tag)}</span>
+                : <span class="card-tag"><span class="card-tag-emoji">{tag.logo}</span>{tl(tag)}</span>
               : <span class="card-tag"><span class="card-tag-fallback">{tl(tag).slice(0, 2).toUpperCase()}</span>{tl(tag)}</span>
             )}
           </div>

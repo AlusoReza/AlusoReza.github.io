@@ -1177,6 +1177,13 @@ html:not(.js-loading) .content {
   object-fit: contain;
 }
 
+/* Card tag emoji: inline emoji character, same size as icon */
+.card-tag-emoji {
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+  font-size: 14px;
+  line-height: 1;
+}
+
 /* Card tag fallback: initials box for tags without logo */
 .card-tag-fallback {
   display: inline-flex;
@@ -1358,6 +1365,15 @@ html:not(.js-loading) .content {
   white-space: nowrap;
 }
 
+/* Project title icon: DevIcon SVG next to title text */
+.project-title-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
 /* Project description */
 .project-desc {
   grid-area: desc;
@@ -1421,6 +1437,13 @@ html:not(.js-loading) .content {
   width: 14px;
   height: 14px;
   object-fit: contain;
+}
+
+/* Stack tag emoji: inline emoji character, same size as icon */
+.stack-tag-emoji {
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+  font-size: 14px;
+  line-height: 1;
 }
 
 /* Stack tag fallback: initials box for tags without logo */
