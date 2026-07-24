@@ -3,14 +3,32 @@
   <a href="README.es.md"><kbd><b>ES</b></kbd></a>
 </div>
 
-# 👨‍💻 Alonso José Suárez Reza 
+<style>
+  h1 { border-bottom: none !important; margin-bottom: 0 !important; padding-bottom: 0 !important; }
+  .hero-table { width: 100%; padding-top: 2px; border-collapse: collapse; }
+  .hero-name, .hero-badges { padding: 0 !important; white-space: nowrap; }
+  .hero-badges { text-align: right; }
+  @media (max-width: 800px) {
+    .hero-name, .hero-badges { display: block !important; text-align: left !important; }
+    .hero-badges { text-align: left !important; padding-top: 8px !important; }
+  }
+</style>
+
+<table class="hero-table">
+<tr>
+<td class="hero-name">
+<h1>👨‍💻 Alonso José Suárez Reza</h1>
+</td>
+<td class="hero-badges" valign="bottom">
+  <a href="https://alusoreza.github.io/"><img src="https://img.shields.io/badge/Portfolio-64ffda?style=flat&logo=googlechrome&logoColor=black" alt="Portfolio"></a>
+  <a href="https://www.linkedin.com/in/alonsoreza"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
+  <a href="https://github.com/AlusoReza"><img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white" alt="GitHub"></a>
+</td>
+</tr>
+</table>
+<div style="border-top: 1px solid #d0d7de; margin-top: -5px; padding-bottom: 12px;"></div>
 
 **Desarrollador de software** con formación en Física Computacional. Aplico rigor científico para construir software robusto, eficiente y escalable.
-<div align="left">
-  <a href="https://alusoreza.github.io/"><img src="https://img.shields.io/badge/Portfolio-64ffda?style=for-the-badge&logo=googlechrome&logoColor=black" alt="Portfolio"></a>
-  <a href="https://www.linkedin.com/in/alonsoreza"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
-  <a href="https://github.com/AlusoReza"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
-</div>
 
 ---
 
