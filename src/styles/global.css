@@ -931,6 +931,13 @@ html:not(.js-loading) .content {
   object-fit: contain;
 }
 
+/* Tech item emoji: inline emoji, same size as icon */
+.tech-item-emoji {
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+  font-size: 32px;
+  line-height: 1;
+}
+
 /* Name below icon */
 .tech-item-name {
   font-size: 0.7rem;

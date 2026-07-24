@@ -28,7 +28,9 @@ const categories = [
           {cat.items.map(s => (
             <div class={`tech-item${s.logo ? '' : ' tech-item--text-only'}`}>
               {s.logo
-                ? <img src={s.logo} alt={s.name} loading="lazy" />
+                ? s.logo.startsWith('http')
+                  ? <img src={s.logo} alt={s.name} loading="lazy" />
+                  : <span class="tech-item-emoji">{s.logo}</span>
                 : <span class="tech-item-fallback">{s.name.slice(0,2).toUpperCase()}</span>
               }
               <span class="tech-item-name">{s.name}</span>

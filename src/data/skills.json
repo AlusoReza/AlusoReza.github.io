@@ -72,9 +72,9 @@
     { "name": "GitHub", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" },
     { "name": "Eclipse", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/eclipse/eclipse-original.svg" },
     { "name": "Overleaf", "logo": "https://cdn.simpleicons.org/overleaf" },
-    { "name": "Excel", "logo": "" },
+    { "name": "Excel", "logo": "📋" },
     { "name": "UML", "logo": "https://cdn.simpleicons.org/uml" },
-    { "name": "CASE", "logo": "" },
+    { "name": "CASE", "logo": "🔧" },
     { "name": "OpenCode", "logo": "https://cdn.simpleicons.org/opencode" },
     { "name": "Claude", "logo": "https://cdn.simpleicons.org/claude" }
   ]
