@@ -1,6 +1,6 @@
 <div align="right">
-  <a href="README.md"><kbd><b>EN</b></kbd></a>
-  <a href="README.es.md"><kbd><b>ES</b></kbd></a>
+  <a href="README.md"><img src="https://img.shields.io/badge/EN-0a1527?style=flat&labelColor=0a1527&color=64ffda" alt="EN"></a>
+  <a href="README.es.md"><img src="https://img.shields.io/badge/ES-0a1527?style=flat&labelColor=0a1527&color=64ffda" alt="ES"></a>
 </div>
 
 <style>
@@ -32,9 +32,9 @@
 
 ## 🧑‍🔬 About
 
-I started solving differential equations and simulating N-body systems in Fortran. That training — breaking complex problems into precise, testable algorithms — is how I approach software development today.
+I started solving **differential equations** and simulating **N-body systems** in **Fortran**. That training — breaking **complex problems** into **precise, testable algorithms** — is how I approach software development today.
 
-I'm currently completing a degree in Multiplatform Application Development (DAM), where I combine my analytical foundation with modern engineering practices: backend systems, database design, containerization, and AI agent integration.
+I'm currently completing a degree in **Multiplatform Application Development (DAM)**, where I combine my **analytical foundation** with modern engineering practices: **backend systems**, **database design**, **containerization**, and **AI agent integration**.
 
 ## 🛠️ Tech Stack
 

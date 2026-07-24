@@ -1,6 +1,6 @@
 <div align="right">
-  <a href="README.md"><kbd><b>EN</b></kbd></a>
-  <a href="README.es.md"><kbd><b>ES</b></kbd></a>
+  <a href="README.md"><img src="https://img.shields.io/badge/EN-0a1527?style=flat&labelColor=0a1527&color=64ffda" alt="EN"></a>
+  <a href="README.es.md"><img src="https://img.shields.io/badge/ES-0a1527?style=flat&labelColor=0a1527&color=64ffda" alt="ES"></a>
 </div>
 
 <style>
@@ -34,9 +34,9 @@
 
 ## 🧑‍🔬 Sobre mí
 
-Empecé resolviendo ecuaciones diferenciales en Fortran y simulando sistemas de N-cuerpos en Python. Esa formación — descomponer problemas complejos en algoritmos precisos y verificables — es la forma en abordo el desarrollo de software hoy.
+Empecé resolviendo **ecuaciones diferenciales** en **Fortran** y simulando sistemas de **N-cuerpos** en **Python**. Esa formación — descomponer **problemas complejos** en **algoritmos precisos y verificables** — es la forma en abordo el desarrollo de software hoy.
 
-Actualmente estoy terminando el grado en Desarrollo de Aplicaciones Multiplataforma (DAM), donde combino mi base analítica con prácticas de ingeniería modernas: sistemas backend, diseño de bases de datos, contenedorización e integración de agentes de IA.
+Actualmente estoy terminando el grado en **Desarrollo de Aplicaciones Multiplataforma (DAM)**, donde combino mi **base analítica** con prácticas de ingeniería modernas: **sistemas backend**, **diseño de bases de datos**, **contenedorización** e **integración de agentes de IA**.
 
 ## 🛠️ Stack tecnológico
 
