@@ -8,9 +8,13 @@
   .hero-table { width: 100%; padding-top: 2px; border-collapse: collapse; }
   .hero-name, .hero-badges { padding: 0 !important; white-space: nowrap; }
   .hero-badges { text-align: right; }
+  .tech-stack { display: flex; gap: 16px; }
+  .tech-category { flex: 1; text-align: center; }
+  .tech-category h4 { margin: 0 0 8px; padding-bottom: 8px; border-bottom: 1px solid #30363d; }
   @media (max-width: 800px) {
     .hero-name, .hero-badges { display: block !important; text-align: left !important; }
     .hero-badges { text-align: left !important; padding-top: 8px !important; }
+    .tech-stack { flex-direction: column; }
   }
 </style>
 
@@ -40,14 +44,10 @@ Actualmente estoy terminando el grado en **Desarrollo de Aplicaciones Multiplata
 
 ## 🛠️ Stack tecnológico
 
-<table>
-<tr>
-<th style="text-align: center">Lenguajes</th>
-<th style="text-align: center">Frameworks</th>
-<th style="text-align: center">Herramientas</th>
-</tr>
-<tr>
-<td align="center">
+<div class="tech-stack">
+  <div class="tech-category">
+
+<h4>Lenguajes</h4>
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=flat&logo=openjdk&logoColor=white)
@@ -60,15 +60,19 @@ Actualmente estoy terminando el grado en **Desarrollo de Aplicaciones Multiplata
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
 ![Bash](https://img.shields.io/badge/Bash-4EAA25?style=flat&logo=gnubash&logoColor=white)
 
-</td>
-<td align="center">
+  </div>
+  <div class="tech-category">
+
+<h4>Frameworks</h4>
 
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat&logo=springboot&logoColor=white)
 ![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)
 ![Astro](https://img.shields.io/badge/Astro-FF5D01?style=flat&logo=astro&logoColor=white)
 
-</td>
-<td align="center">
+  </div>
+  <div class="tech-category">
+
+<h4>Herramientas</h4>
 
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)
 ![Git](https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white)
@@ -77,9 +81,8 @@ Actualmente estoy terminando el grado en **Desarrollo de Aplicaciones Multiplata
 ![VS Code](https://img.shields.io/badge/VS_Code-007ACC?style=flat&logo=visualstudiocode&logoColor=white)
 ![Eclipse](https://img.shields.io/badge/Eclipse-2C2255?style=flat&logo=eclipseide&logoColor=white)
 
-</td>
-</tr>
-</table>
+  </div>
+</div>
 
 ## 🚀 Proyectos
 
@@ -100,8 +103,8 @@ Actualmente estoy terminando el grado en **Desarrollo de Aplicaciones Multiplata
 
 ## 🎓 Formación
 
-- **Desarrollo de Aplicaciones Multiplataforma (DAM)** — UNIR (En curso)
-- **Grado en Física (Ciclo parcial)** — Universidad de Granada
+- 💻 **Desarrollo de Aplicaciones Multiplataforma (DAM)** — UNIR (En curso)
+- ⚛️ **Grado en Física (Ciclo parcial)** — Universidad de Granada
 
 ## 📜 Certificados
 
