@@ -1,6 +1,6 @@
 <div align="right">
-  <a href="README.md"><img src="https://img.shields.io/badge/EN-0a1527?style=flat&labelColor=0a1527&color=64ffda" alt="EN"></a>
-  <a href="README.es.md"><img src="https://img.shields.io/badge/ES-0a1527?style=flat&labelColor=0a1527&color=64ffda" alt="ES"></a>
+  <a href="README.md"><img src="https://img.shields.io/badge/EN-64ffda?style=flat&labelColor=64ffda&color=0a1527" alt="EN"></a>
+  <a href="README.es.md"><img src="https://img.shields.io/badge/ES-ccd6f6?style=flat&labelColor=ccd6f6&color=0a1527" alt="ES"></a>
 </div>
 
 <style>
@@ -47,33 +47,33 @@ I'm currently completing a degree in **Multiplatform Application Development (DA
 <tr>
 <td align="center">
 
-![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
-![Java](https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=openjdk&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
-![Rust](https://img.shields.io/badge/Rust-000000?style=flat-square&logo=rust&logoColor=white)
-![Fortran](https://img.shields.io/badge/Fortran-734F96?style=flat-square&logo=fortran&logoColor=white)
-![SQL](https://img.shields.io/badge/SQL-4472A4?style=flat-square&logo=microsoftsqlserver&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white)
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
-![Bash](https://img.shields.io/badge/Bash-4EAA25?style=flat-square&logo=gnubash&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
+![Java](https://img.shields.io/badge/Java-ED8B00?style=flat&logo=openjdk&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
+![Rust](https://img.shields.io/badge/Rust-000000?style=flat&logo=rust&logoColor=white)
+![Fortran](https://img.shields.io/badge/Fortran-734F96?style=flat&logo=fortran&logoColor=white)
+![SQL](https://img.shields.io/badge/SQL-4472A4?style=flat&logo=microsoftsqlserver&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat&logo=postgresql&logoColor=white)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
+![Bash](https://img.shields.io/badge/Bash-4EAA25?style=flat&logo=gnubash&logoColor=white)
 
 </td>
 <td align="center">
 
-![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat-square&logo=springboot&logoColor=white)
-![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB)
-![Astro](https://img.shields.io/badge/Astro-FF5D01?style=flat-square&logo=astro&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat&logo=springboot&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)
+![Astro](https://img.shields.io/badge/Astro-FF5D01?style=flat&logo=astro&logoColor=white)
 
 </td>
 <td align="center">
 
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
-![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white)
-![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white)
-![VS Code](https://img.shields.io/badge/VS_Code-007ACC?style=flat-square&logo=visualstudiocode&logoColor=white)
-![Eclipse](https://img.shields.io/badge/Eclipse-2C2255?style=flat-square&logo=eclipseide&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white)
+![VS Code](https://img.shields.io/badge/VS_Code-007ACC?style=flat&logo=visualstudiocode&logoColor=white)
+![Eclipse](https://img.shields.io/badge/Eclipse-2C2255?style=flat&logo=eclipseide&logoColor=white)
 
 </td>
 </tr>
@@ -84,17 +84,17 @@ I'm currently completing a degree in **Multiplatform Application Development (DA
 ### 🪟 WCore
 > Windows maintenance and security suite. Deep process analysis, network connections, persistence detection, VirusTotal signature verification, and system repair with DISM/SFC.
 
-[![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/AlusoReza/WCore)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/AlusoReza/WCore)
 
 ### 🐳 Dockers-Image-Creator
 > Tool to automate and simplify Docker environment creation, enabling fast and standardized deployments.
 
-[![Site](https://img.shields.io/badge/Site-64ffda?style=flat-square&logo=googlechrome&logoColor=black)](https://alusoreza.github.io/Dockers-Image-Creator/) [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/AlusoReza/Dockers-Image-Creator)
+[![Site](https://img.shields.io/badge/Site-64ffda?style=flat&logo=googlechrome&logoColor=black)](https://alusoreza.github.io/Dockers-Image-Creator/) [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/AlusoReza/Dockers-Image-Creator)
 
 ### 🔬 Computational Physics Projects
 > Fortran 90 repository: Runge-Kutta 4, Verlet integration, Monte Carlo methods (Metropolis), N-body dynamics, Ising model, Schrödinger equation. Scientific reports in LaTeX.
 
-[![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/AlusoReza/Computational-Physics-Projects)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/AlusoReza/Computational-Physics-Projects)
 
 ## 🎓 Education
 
@@ -108,8 +108,28 @@ I'm currently completing a degree in **Multiplatform Application Development (DA
 ## 📬 Contact
 
 <div align="center">
-  <a href="https://www.linkedin.com/in/alonsoreza"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
-  <a href="https://github.com/AlusoReza"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
-  <a href="https://alusoreza.github.io/"><img src="https://img.shields.io/badge/Portfolio-64ffda?style=for-the-badge&logo=googlechrome&logoColor=black" alt="Portfolio"></a>
-  <a href="https://alusoreza.github.io/assets/Alonso_Reza_CV.pdf"><img src="https://img.shields.io/badge/Download_CV-ccd6f6?style=for-the-badge&logo=adobeacrobatreader&logoColor=black" alt="Download CV"></a>
+  <table>
+    <tr>
+      <td align="center">
+        <sub style="margin-bottom: 2px;">Conectemos</sub>
+        <div style="border-top: 1px solid #30363d; width: 80px; margin: 2px auto 5Ya px;"></div>
+        <a href="https://www.linkedin.com/in/alonsoreza"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
+      </td>
+      <td align="center" style="padding: 0 12px">
+        <sub style="margin-bottom: 2px;">Repositorios</sub>
+        <div style="border-top: 1px solid #30363d; width: 80px; margin: 2px auto 5px;"></div>
+        <a href="https://github.com/AlusoReza"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
+      </td>
+      <td align="center">
+        <sub style="margin-bottom: 2px;">Ver trabajo</sub>
+        <div style="border-top: 1px solid #30363d; width: 80px; margin: 2px auto 5px;"></div>
+        <a href="https://alusoreza.github.io/"><img src="https://img.shields.io/badge/Portfolio-64ffda?style=for-the-badge&logo=googlechrome&logoColor=black" alt="Portfolio"></a>
+      </td>
+    </tr>
+  </table>
+  <div style="margin-top: 4px;">
+    <a href="https://alusoreza.github.io/assets/Alonso_Reza_CV.pdf" style="display: inline-block; background: #e63946; color: #ffffff; padding: 10px 22px; border-radius: 24px; text-decoration: none; font-weight: bold; font-size: 14px; line-height: 1;">
+      ⬇ Download CV
+    </a>
+  </div>
 </div>
