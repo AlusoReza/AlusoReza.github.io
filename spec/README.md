@@ -12,7 +12,9 @@ spec/
 │   ├── tech-stack.md        ← Technologies, conventions, design, limits
 │   ├── roadmap.md           ← Feature status: done / next / backlog
 │   ├── changelog.md         ← Historical record of sessions
-│   └── bugs.md              ← Known bugs and lifecycle tracking
+│   ├── bugs.md              ← Known bugs and lifecycle tracking
+│   ├── code-decisions.md    ← Critical code decisions and revert consequences
+│   └── frontend-decisions.md ← Visual and design decisions and revert consequences
 ├── features/                ← One folder per feature (NNN-name/)
 │   └── NNN-name/
 │       ├── spec.md          ← What it does + acceptance criteria
@@ -21,6 +23,7 @@ spec/
 ├── glossary.md              ← Domain definitions
 └── template/                ← Reusable templates for new specs
     ├── AGENTS_TEMPLATE.md
+    ├── workflow-template.md ← AI workflow protocol
     └── spec_template/       ← Canonical SDD template
 ```
 

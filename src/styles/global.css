@@ -8,21 +8,51 @@ PORTFOLIO — Global Stylesheet
    0. Design Tokens
    ======================== */
 
-@import "tailwindcss";
+/* Minimal CSS reset (replaces Tailwind preflight) */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-@theme {
-  --color-bg: #0a1527;
-  --color-bg-card: #0f1c35;
-  --color-bg-hover: #152641;
-  --color-border: #1e2d4a;
-  --color-text: #ccd6f6;
-  --color-text-bright: #e6f1ff;
-  --color-text-muted: #8892b0;
-  --color-accent: #64ffda;
-  --color-accent-muted: rgba(100, 255, 218, 0.1);
-  --font-display: 'Space Grotesk', sans-serif;
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
 }
 
 :root {

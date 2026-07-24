@@ -6434,6 +6434,91 @@ All findings below are from `run-all.ps1` test runs across sessions 90Ã¢â‚�
 - **Description:** experience.json empty
 - **Status:** Pending
 
+
+### Computational grid not detected in #inicio -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Computational grid not detected in #inicio
+- **Status:** Pending
+
+### Missing fade gradient in #inicio::after -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Missing fade gradient in #inicio::after
+- **Status:** Pending
+
+### .btn-outline not found -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** .btn-outline not found
+- **Status:** Pending
+
+### Missing sticky nav or sidebar -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Missing sticky nav or sidebar
+- **Status:** Pending
+
+### Computational grid not detected in #inicio -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Computational grid not detected in #inicio
+- **Status:** Pending
+
+### Missing fade gradient in #inicio::after -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Missing fade gradient in #inicio::after
+- **Status:** Pending
+
+### .btn-outline not found -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** .btn-outline not found
+- **Status:** Pending
+
+### Missing sticky nav or sidebar -- WARNING
+- **Source:** check-frontend-design.ps1
+- **Detected:** Session ?
+- **Description:** Missing sticky nav or sidebar
+- **Status:** Pending
+
+### Predominantly single quotes (589 single vs 144 double) -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session ?
+- **Description:** Predominantly single quotes (589 single vs 144 double)
+- **Status:** Pending
+
+### Predominantly single quotes (589 single vs 144 double) -- WARNING
+- **Source:** check-js-logic.ps1
+- **Detected:** Session ?
+- **Description:** Predominantly single quotes (589 single vs 144 double)
+- **Status:** Pending
+
+### CSS variables defined but possibly unused: --with-image -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session ?
+- **Description:** CSS variables defined but possibly unused: --with-image
+- **Status:** Pending
+
+### CSS variables defined but possibly unused: --with-image -- WARNING
+- **Source:** check-css-logic.ps1
+- **Detected:** Session ?
+- **Description:** CSS variables defined but possibly unused: --with-image
+- **Status:** Pending
+
+### experience.json empty -- WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session ?
+- **Description:** experience.json empty
+- **Status:** Pending
+
+### experience.json empty -- WARNING
+- **Source:** check-json-schema.ps1
+- **Detected:** Session ?
+- **Description:** experience.json empty
+- **Status:** Pending
+
 ## Automatic findings (Session ? -- 2026-07-24)
 
 ### Computational grid not detected in #inicio -- WARNING

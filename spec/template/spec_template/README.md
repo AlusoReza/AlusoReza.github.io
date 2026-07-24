@@ -11,12 +11,17 @@ spec/
 ├── constitution/            ← reglas estables del proyecto (cambian poco)
 │   ├── mission.md           ← qué construimos y para quién
 │   ├── tech-stack.md        ← tecnologías, convenciones y límites
-│   └── roadmap.md           ← orden de las features
+│   ├── roadmap.md           ← orden de las features
+│   ├── changelog.md         ← historial de sesiones
+│   ├── bugs.md              ← bugs conocidos y ciclo de vida
+│   ├── code-decisions.md    ← decisiones críticas de código
+│   └── frontend-decisions.md ← decisiones visuales y de diseño
 ├── features/                ← una carpeta por feature
 │   └── NNN-nombre-feature/
 │       ├── spec.md          ← qué hace + criterios de aceptación
 │       ├── plan.md          ← cómo se implementa
 │       └── tasks.md         ← checklist de tareas
+├── glossary.md              ← definiciones del dominio
 └── template/                ← plantillas reutilizables
     ├── AGENTS_TEMPLATE.md   ← configuración inicial del agente
     ├── spec_template/       ← copia esta carpeta para un proyecto nuevo

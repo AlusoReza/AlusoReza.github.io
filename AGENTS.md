@@ -7,7 +7,7 @@ Static portfolio site built with **Astro 5** (static output), vanilla CSS, and v
 - **Languages:** HTML (Astro `.astro`), CSS3 (vanilla, imported), JavaScript (vanilla ES module)
 - **Runtime:** Build-time (Node) + Browser (client JS)
 - **Database:** None
-- **Tests:** `.agents/tests/run-all.ps1` (master runner — 6 modules: astro-mcp, frontend-design, js-logic, css-logic, json-schema, paths)
+- **Tests:** `.agents/tests/run-all.ps1` (master runner — 6 modules: mcp, frontend-design, js-logic, css-logic, json-schema, paths)
 
 ## Commands
 - `npm run dev` — Start Astro dev server (usually `http://localhost:4321`)
@@ -36,59 +36,72 @@ spec/
 ├── glossary.md              — Domain definitions
 └── template/                — Templates
     ├── AGENTS_TEMPLATE.md
+    ├── workflow-template.md — AI workflow protocol
     └── spec_template/       — Canonical SDD template
 
 src/
-├── components/       — 8 Astro components (Nav, LangSwitcher, Profile, About,
-│                       Skills, Education, Projects, Experience)
+├── components/       — 7 Astro components (Profile, MobileProfile, About,
+│                       Education, Projects, Experience, Certificates)
 ├── layouts/
-│   └── BaseLayout.astro  — HTML shell, Nav, LangSwitcher, data-data attribute on body,
+│   └── BaseLayout.astro  — HTML shell, sidebar nav, lang-switcher, data-data attribute on body,
 │                           client.js bundle
 ├── pages/
 │   └── index.astro       — Single-page entry (imports all components)
 ├── scripts/
-│   └── client.js         — Client-side JS (i18n, rendering, scroll-reveal, back-to-top)
+│   └── client.js         — Client-side JS (i18n, rendering, scroll-reveal, back-to-top,
+│                           mobile profile animation, sidebar orchestration)
 ├── styles/
-│   └── global.css        — Dark GitHub theme (imported by layout → Astro bundles it)
-└── data/                 — 7 JSON files (unchanged bilingual format)
-    ├── lang.json
-    ├── profile.json
-    ├── skills.json
-    ├── education.json
-    ├── projects.json
-    ├── experience.json
-    └── certificates.json
+│   └── global.css        — Dark theme (imported by layout → Astro bundles it)
+└── data/                 — 9 JSON files (bilingual data contracts)
+    ├── nav.json            — Navigation labels and i18n static UI strings
+    ├── sections.json       — Section headings and i18n static UI strings
+    ├── about.json          — About page i18n static UI strings
+    ├── profile.json        — Profile data (name, title, CV path)
+    ├── skills.json         — Technical and personality skills
+    ├── education.json      — Education entries
+    ├── projects.json       — Project entries
+    ├── experience.json     — Work experience entries
+    └── certificates.json   — Certificate entries
 
 docs/
 ├── bitacora.md          — Global scannable workflow summary
-├── certificates/        — PDFs de certificados (ignored by git, only .gitkeep)
+├── certificates/        — Certificate PDFs (ignored by git, only .gitkeep)
 └── logs/                — Detailed logs by day (YYYY-MM-DD.md)
 
 .agents/
 ├── skills/              — Installed skills (frontend-design)
 ├── tests/
 │   ├── run-all.ps1               ← Master runner (single entry point)
-│   ├── check-astro-mcp.ps1       ← 16 checks Astro MCP
+│   ├── check-mcp.ps1             ← 16 checks Astro MCP
 │   ├── check-frontend-design.ps1 ← 22 design checks
 │   ├── check-js-logic.ps1        ← JS logic flaws (null guards, noopener, etc.)
-│   ├── check-css-logic.ps1       ← CSS logic flaws (#1a1f26, undefined classes)
+│   ├── check-css-logic.ps1       ← CSS logic flaws (hardcoded colors, undefined classes)
 │   ├── check-json-schema.ps1     ← JSON schema validation (bilingual contracts)
 │   └── check-paths.ps1           ← File path integrity (CV.pdf, assets)
-└── skills-lock.json     — Registro de skills
+└── skills-lock.json     — Internal skills registry
 
 public/
-├── assets/               — perfil.jpg, favicon.ico (CV.pdf optional)
+├── assets/               — perfil.jpg, favicon.ico, Alonso_Reza_CV.pdf
 └── certificates/.gitkeep — (kept for compatibility)
+
+Root config files:
+├── AGENTS.md             — Agent instructions (this file)
+├── opencode.json         — opencode configuration (MCP servers)
+├── skills-lock.json      — opencode skills registry
+├── package.json          — Dependencies (Astro 5)
+├── astro.config.mjs      — Astro config (static output, GitHub Pages)
+├── tsconfig.json         — TypeScript config (extends astro/tsconfigs/base)
+└── .gitignore            — Ignores node_modules, dist, .astro, certificate PDFs
 ```
 
 ## Conventions
 - **Data-driven:** All sections render from `src/data/*.json`. Edit a JSON file — no component changes needed.
 - **Bilingual fields:** Every translatable field uses `{ "es": "...", "en": "..." }`. Plain strings for language-neutral values.
-- **i18n static UI:** Nav, about paragraphs, contact use `data-i18n` attributes on HTML elements, keyed to `src/data/lang.json`.
+- **i18n static UI:** Nav, about paragraphs, contact use `data-i18n` attributes on HTML elements, keyed to `src/data/nav.json`.
 - **i18n dynamic content:** Use `t()` helper: `t({ es: "Hola", en: "Hello" })` resolves to current language.
 - **Language:** Persists in `localStorage` (`preferredLang`). Default: `es`. Switch via ES/EN buttons.
 - **Auto-hide:** Experience and certificates sections auto-hide when empty array (Astro renders `display:none` + JS `toggleSection()`).
-- **Design:** Dark theme (`#0d1117` bg, `#c9d1d9` text), accent blue `#58a6ff`, scroll-triggered reveal (`.reveal`), responsive at 650px.
+- **Design:** Dark theme (`#0a1527` bg, `#ccd6f6` text), accent teal `#64ffda`, scroll-triggered reveal (`.reveal`), responsive at 1235px.
 - **Badges:** Language badges (border-left accent) + tool badges (solid background, glow hover). AI Agents badge in tool badges (green `#10a37f`). Rendered at build time by Astro Profile component.
 - **data-data:** All JSONs serialized into a `data-data` attribute on `<body>` via `JSON.stringify()`. Client JS reads from `document.body.dataset.data` (browser auto-decodes HTML entities), no fetch calls or globals.
 - **Decisions:** Code decisions (`code-decisions.md`) and frontend decisions (`frontend-decisions.md`) cross-reference each other when a technical and visual decision are related.
@@ -154,7 +167,7 @@ public/
 
 ## Tests
 - **"Comprueba MCP"** → the agent runs `.agents/tests/run-all.ps1`.
-  - Runs sequentially: astro-mcp → frontend-design → js-logic → css-logic → json-schema → paths.
+  - Runs sequentially: mcp → frontend-design → js-logic → css-logic → json-schema → paths.
   - Each script prints PASS/FAIL/WARN per check.
   - `run-all.ps1` collects all FAILs and WARNs.
   - Prints `[MANUAL]` section with deep logic items the agent must review.
@@ -169,5 +182,4 @@ public/
 - **Future additions:** Any new file created under `spec/`, `.agents/tests/`, or `docs/bitacora.md` must be written in English. If the user requests content in another language for these files, translate it to English before writing.
 
 ## Documentation
-- [README.md](./README.md) — project overview and social links
 - [LICENSE](./LICENSE) — MIT license
