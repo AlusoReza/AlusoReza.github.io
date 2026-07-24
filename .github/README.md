@@ -13,7 +13,6 @@
 [![Portfolio](https://img.shields.io/badge/Portfolio-64ffda?style=flat&logo=googlechrome&logoColor=black)](https://alusoreza.github.io/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/alonsoreza)
 [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/AlusoReza)
-Ha
 </div>
 
 ## 🧑‍🔬 About
