@@ -15,7 +15,7 @@
     "tags": [
       { "es": "Python", "en": "Python", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" },
       { "es": "Pandas", "en": "Pandas", "logo": "" },
-      { "es": "NumPy", "en": "NumPy", "logo": "" }
+      { "es": "NumPy", "en": "NumPy", "logo": "https://cdn.simpleicons.org/numpy" }
     ],
     "description": {
       "es": "Curso de 75 horas (3 ECTS) sobre fundamentos de programaci\u00f3n en Python: sintaxis, estructuras de datos, control de flujo y resoluci\u00f3n de problemas computacionales.",
@@ -38,7 +38,7 @@
     "tags": [
       { "es": "IA", "en": "AI", "logo": "" },
       { "es": "Agentes", "en": "Agents", "logo": "" },
-      { "es": "OpenCode", "en": "OpenCode", "logo": "" }
+      { "es": "OpenCode", "en": "OpenCode", "logo": "https://cdn.simpleicons.org/opencode" }
     ],
     "description": {
       "es": "Curso de 6 horas sobre desarrollo en el nuevo paradigma de programaci\u00f3n con agentes de IA. Cubre conceptos b\u00e1sicos e intermedios/avanzados, uso de herramientas como OpenCode y Claude Code, elaboraci\u00f3n de perfiles de proyecto con buenas pr\u00e1cticas y est\u00e1ndares modernos (skills, MCP, logs, SDD, uso de m\u00faltiples agentes).",
@@ -238,7 +238,7 @@
     },
     "tags": [
       { "es": "GitHub", "en": "GitHub", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" },
-      { "es": "Actions", "en": "Actions", "logo": "" }
+      { "es": "Actions", "en": "Actions", "logo": "https://cdn.simpleicons.org/githubactions" }
     ],
     "description": {
       "es": "Curso de 3h 3m sobre uso avanzado de GitHub: pull requests, issues, GitHub Actions, Pages, seguridad y colaboraci\u00f3n en equipos de desarrollo.",
@@ -260,7 +260,7 @@
     },
     "tags": [
       { "es": "IA", "en": "AI", "logo": "" },
-      { "es": "Claude Code", "en": "Claude Code", "logo": "" },
+      { "es": "Claude Code", "en": "Claude Code", "logo": "https://cdn.simpleicons.org/claudecode" },
       { "es": "MCP", "en": "MCP", "logo": "" }
     ],
     "description": {

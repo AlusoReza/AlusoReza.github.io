@@ -318,6 +318,8 @@ function navigateTo(pageId) {
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       newPage.classList.add('active')
+      layoutCardHeaders()
+      layoutProjectStack()
     })
   })
 

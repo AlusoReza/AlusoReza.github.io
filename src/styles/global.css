@@ -1293,6 +1293,7 @@ html:not(.js-loading) .content {
   background-color: var(--color-bg-card);
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-bottom: 24px;
 }
 
 /* JS-toggled: tags move to title line */

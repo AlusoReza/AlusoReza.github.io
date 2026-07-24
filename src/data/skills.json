@@ -44,7 +44,7 @@
   "languages": [
     { "name": "Python", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" },
     { "name": "Java", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" },
-    { "name": "Fortran", "logo": "" },
+    { "name": "Fortran", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fortran/fortran-original.svg" },
     { "name": "Rust", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rust/rust-original.svg" },
     { "name": "SQL", "logo": "" },
     { "name": "PostgreSQL", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" },
@@ -55,7 +55,7 @@
     { "name": "Bash", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg" },
     { "name": "XML", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/xml/xml-original.svg" },
     { "name": "JSON", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/json/json-original.svg" },
-    { "name": "LaTeX", "logo": "" }
+    { "name": "LaTeX", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/latex/latex-original.svg" }
   ],
   "frameworks": [
     { "name": "Spring Boot", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg" },
@@ -71,11 +71,11 @@
     { "name": "Git", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" },
     { "name": "GitHub", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" },
     { "name": "Eclipse", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/eclipse/eclipse-original.svg" },
-    { "name": "Overleaf", "logo": "" },
+    { "name": "Overleaf", "logo": "https://cdn.simpleicons.org/overleaf" },
     { "name": "Excel", "logo": "" },
-    { "name": "UML", "logo": "" },
+    { "name": "UML", "logo": "https://cdn.simpleicons.org/uml" },
     { "name": "CASE", "logo": "" },
-    { "name": "OpenCode", "logo": "" },
-    { "name": "Claude", "logo": "" }
+    { "name": "OpenCode", "logo": "https://cdn.simpleicons.org/opencode" },
+    { "name": "Claude", "logo": "https://cdn.simpleicons.org/claude" }
   ]
 }

@@ -8,7 +8,8 @@
     "stack": [
       { "es": "Docker", "en": "Docker", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" },
       { "es": "Shell", "en": "Shell", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg" },
-      { "es": "Win/Linux", "en": "Win/Linux", "logo": "" }
+      { "es": "Windows", "en": "Windows", "logo": "" },
+      { "es": "Linux", "en": "Linux", "logo": "https://cdn.simpleicons.org/linux" }
     ],
     "links": [
       {
@@ -24,6 +25,44 @@
           "en": "GitHub →"
         },
         "url": "https://github.com/AlusoReza/Dockers-Image-Creator"
+      }
+    ]
+  },
+  {
+    "title": "🪟 WCore",
+    "description": {
+      "es": "Suite integral de mantenimiento y seguridad para Windows. Incluye análisis profundo de procesos, conexiones de red, persistencia, verificación de firmas digitales con VirusTotal, y reparación del sistema con DISM/SFC, optimización de cachés de GPU y mantenimiento de infraestructura WMI/WinRE.",
+      "en": "Comprehensive Windows maintenance and security suite. Includes deep process analysis, network connections, persistence detection, digital signature verification with VirusTotal, and system repair with DISM/SFC, GPU cache optimization, and WMI/WinRE infrastructure maintenance."
+    },
+    "stack": [
+      { "es": "Batch", "en": "Batch", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg" },
+      { "es": "Windows", "en": "Windows", "logo": "" },
+      { "es": "PowerShell", "en": "PowerShell", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/powershell/powershell-original.svg" }
+    ],
+    "links": [
+      {
+        "text": { "es": "GitHub →", "en": "GitHub →" },
+        "url": "https://github.com/AlusoReza/WCore"
+      }
+    ]
+  },
+  {
+    "title": "🔬 Computational Physics Projects",
+    "description": {
+      "es": "Repositorio de Física Computacional en Fortran 90. Implementación de algoritmos ODE/PDE: Runge-Kutta 4, Verlet y métodos de Monte Carlo (Metropolis). Aplicaciones en dinámica N-cuerpos, mecánica estadística (modelo Ising), ecuación de Schrödinger y mecánica celestral. Incluye informes científicos en LaTeX y visualización con Gnuplot.",
+      "en": "Computational Physics repository in Fortran 90. Implementation of ODE/PDE algorithms: Runge-Kutta 4, Verlet, and Monte Carlo methods (Metropolis). Applications in N-body dynamics, statistical mechanics (Ising model), Schrödinger equation, and celestial mechanics. Includes scientific reports in LaTeX and visualization with Gnuplot."
+    },
+    "stack": [
+      { "es": "Fortran", "en": "Fortran", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fortran/fortran-original.svg" },
+      { "es": "Gnuplot", "en": "Gnuplot", "logo": "" },
+      { "es": "LaTeX", "en": "LaTeX", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/latex/latex-original.svg" },
+      { "es": "Shell", "en": "Shell", "logo": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg" },
+      { "es": "Linux", "en": "Linux", "logo": "https://cdn.simpleicons.org/linux" }
+    ],
+    "links": [
+      {
+        "text": { "es": "GitHub →", "en": "GitHub →" },
+        "url": "https://github.com/AlusoReza/Computational-Physics-Projects"
       }
     ]
   }
