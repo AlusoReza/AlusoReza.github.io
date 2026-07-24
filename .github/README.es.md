@@ -5,7 +5,7 @@
 
 # 👨‍💻 Alonso José Suárez Reza 
 
-**Software developer** with a background in Computational Physics. I apply scientific rigor to build robust, efficient, and scalable software.
+**Desarrollador de software** con formación en Física Computacional. Aplico rigor científico para construir software robusto, eficiente y escalable.
 <div align="left">
   <a href="https://alusoreza.github.io/"><img src="https://img.shields.io/badge/Portfolio-64ffda?style=for-the-badge&logo=googlechrome&logoColor=black" alt="Portfolio"></a>
   <a href="https://www.linkedin.com/in/alonsoreza"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
@@ -14,19 +14,19 @@
 
 ---
 
-## 🧑‍🔬 About
+## 🧑‍🔬 Sobre mí
 
-I started solving differential equations and simulating N-body systems in Fortran. That training — breaking complex problems into precise, testable algorithms — is how I approach software development today.
+Empecé resolviendo ecuaciones diferenciales en Fortran y simulando sistemas de N-cuerpos en Python. Esa formación — descomponer problemas complejos en algoritmos precisos y verificables — es la forma en abordo el desarrollo de software hoy.
 
-I'm currently completing a degree in Multiplatform Application Development (DAM), where I combine my analytical foundation with modern engineering practices: backend systems, database design, containerization, and AI agent integration.
+Actualmente estoy terminando el grado en Desarrollo de Aplicaciones Multiplataforma (DAM), donde combino mi base analítica con prácticas de ingeniería modernas: sistemas backend, diseño de bases de datos, contenedorización e integración de agentes de IA.
 
-## 🛠️ Tech Stack
+## 🛠️ Stack tecnológico
 
 <table>
 <tr>
-<th style="text-align: center">Languages</th>
+<th style="text-align: center">Lenguajes</th>
 <th style="text-align: center">Frameworks</th>
-<th style="text-align: center">Tools</th>
+<th style="text-align: center">Herramientas</th>
 </tr>
 <tr>
 <td align="center">
@@ -63,37 +63,37 @@ I'm currently completing a degree in Multiplatform Application Development (DAM)
 </tr>
 </table>
 
-## 🚀 Projects
+## 🚀 Proyectos
 
 ### 🪟 WCore
-> Windows maintenance and security suite. Deep process analysis, network connections, persistence detection, VirusTotal signature verification, and system repair with DISM/SFC.
+> Suite de mantenimiento y seguridad para Windows. Análisis profundo de procesos, conexiones de red, detección de persistencia, verificación de firmas con VirusTotal y reparación del sistema con DISM/SFC.
 
 [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/AlusoReza/WCore)
 
 ### 🐳 Dockers-Image-Creator
-> Tool to automate and simplify Docker environment creation, enabling fast and standardized deployments.
+> Herramienta para automatizar y simplificar la creación de entornos Docker, permitiendo despliegues rápidos y estandarizados.
 
-[![Site](https://img.shields.io/badge/Site-64ffda?style=flat-square&logo=googlechrome&logoColor=black)](https://alusoreza.github.io/Dockers-Image-Creator/) [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/AlusoReza/Dockers-Image-Creator)
+[![Sitio](https://img.shields.io/badge/Sitio-64ffda?style=flat-square&logo=googlechrome&logoColor=black)](https://alusoreza.github.io/Dockers-Image-Creator/) [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/AlusoReza/Dockers-Image-Creator)
 
-### 🔬 Computational Physics Projects
-> Fortran 90 repository: Runge-Kutta 4, Verlet integration, Monte Carlo methods (Metropolis), N-body dynamics, Ising model, Schrödinger equation. Scientific reports in LaTeX.
+### 🔬 Proyectos de Física Computacional
+> Repositorio en Fortran 90: Runge-Kutta 4, integración Verlet, métodos de Monte Carlo (Metropolis), dinámica N-cuerpos, modelo Ising, ecuación de Schrödinger. Informes científicos en LaTeX.
 
 [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/AlusoReza/Computational-Physics-Projects)
 
-## 🎓 Education
+## 🎓 Formación
 
-- **Multiplatform Application Development (DAM)** — UNIR (In progress)
-- **Bachelor's Degree in Physics (Partial cycle)** — University of Granada
+- **Desarrollo de Aplicaciones Multiplataforma (DAM)** — UNIR (En curso)
+- **Grado en Física (Ciclo parcial)** — Universidad de Granada
 
-## 📜 Certificates
+## 📜 Certificados
 
-13 professional certificates including Python, Docker, DevOps, Git, Java, Spring Boot, Rust, and AI Agents development. [→ View all in portfolio](https://alusoreza.github.io/)
+13 certificados profesionales incluyendo Python, Docker, DevOps, Git, Java, Spring Boot, Rust y desarrollo de Agentes de IA. [→ Ver todos en el portfolio](https://alusoreza.github.io/)
 
-## 📬 Contact
+## 📬 Contacto
 
 <div align="center">
   <a href="https://www.linkedin.com/in/alonsoreza"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
   <a href="https://github.com/AlusoReza"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
   <a href="https://alusoreza.github.io/"><img src="https://img.shields.io/badge/Portfolio-64ffda?style=for-the-badge&logo=googlechrome&logoColor=black" alt="Portfolio"></a>
-  <a href="https://alusoreza.github.io/assets/Alonso_Reza_CV.pdf"><img src="https://img.shields.io/badge/Download_CV-ccd6f6?style=for-the-badge&logo=adobeacrobatreader&logoColor=black" alt="Download CV"></a>
+  <a href="https://alusoreza.github.io/assets/Alonso_Reza_CV.pdf"><img src="https://img.shields.io/badge/Descargar_CV-ccd6f6?style=for-the-badge&logo=adobeacrobatreader&logoColor=black" alt="Descargar CV"></a>
 </div>
