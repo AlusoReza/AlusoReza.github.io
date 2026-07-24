@@ -3,34 +3,12 @@
   <a href="README.es.md"><img src="https://img.shields.io/badge/ES-ccd6f6?style=flat&labelColor=ccd6f6&color=0a1527" alt="ES"></a>
 </div>
 
-<style>
-  h1 { border-bottom: none !important; margin-bottom: 0 !important; padding-bottom: 0 !important; }
-  .hero-table { width: 100%; padding-top: 2px; border-collapse: collapse; }
-  .hero-name, .hero-badges { padding: 0 !important; white-space: nowrap; }
-  .hero-badges { text-align: right; }
-  .tech-stack { display: flex; gap: 16px; }
-  .tech-category { flex: 1; text-align: center; }
-  .tech-category h4 { margin: 0 0 8px; padding-bottom: 8px; border-bottom: 1px solid #30363d; }
-  .project-row { width: 100%; border-collapse: collapse; margin-bottom: 12px; }
-  @media (max-width: 700px) {
-    .hero-name, .hero-badges { display: block !important; text-align: left !important; }
-    .hero-badges { text-align: left !important; padding-top: 8px !important; }
-    .tech-stack { flex-direction: column; }
-  }
-  @media (max-width: 900px) {
-    .tech-stack { flex-direction: column; }
-  }
-  @media (max-width: 500px) {
-    .project-row td { display: block !important; width: 100% !important; text-align: left !important; }
-  }
-</style>
-
-<table class="hero-table">
+<table style="width: 100%; padding-top: 2px; border-collapse: collapse;">
 <tr>
-<td class="hero-name">
-<h1>👨‍💻 Alonso José Suárez Reza</h1>
+<td style="padding: 0; white-space: nowrap;">
+<h1 style="border-bottom: none; margin-bottom: 0; padding-bottom: 0;">👨‍💻 Alonso José Suárez Reza</h1>
 </td>
-<td class="hero-badges" valign="bottom">
+<td style="padding: 0; white-space: nowrap; text-align: right;" valign="bottom">
   <a href="https://alusoreza.github.io/"><img src="https://img.shields.io/badge/Portfolio-64ffda?style=flat&logo=googlechrome&logoColor=black" alt="Portfolio"></a>
   <a href="https://www.linkedin.com/in/alonsoreza"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
   <a href="https://github.com/AlusoReza"><img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white" alt="GitHub"></a>
@@ -49,10 +27,10 @@ I'm currently completing a degree in **Multiplatform Application Development (DA
 
 ## 🛠️ Tech Stack
 
-<div class="tech-stack">
-  <div class="tech-category">
+<div style="display: flex; gap: 16px;">
+  <div style="flex: 1; text-align: center;">
 
-<h4>Languages</h4>
+<h4 style="margin: 0 0 8px; padding-bottom: 8px; border-bottom: 1px solid #30363d;">Languages</h4>
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=flat&logo=openjdk&logoColor=white)
@@ -66,18 +44,18 @@ I'm currently completing a degree in **Multiplatform Application Development (DA
 ![Bash](https://img.shields.io/badge/Bash-4EAA25?style=flat&logo=gnubash&logoColor=white)
 
   </div>
-  <div class="tech-category">
+  <div style="flex: 1; text-align: center;">
 
-<h4>Frameworks</h4>
+<h4 style="margin: 0 0 8px; padding-bottom: 8px; border-bottom: 1px solid #30363d;">Frameworks</h4>
 
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat&logo=springboot&logoColor=white)
 ![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)
 ![Astro](https://img.shields.io/badge/Astro-FF5D01?style=flat&logo=astro&logoColor=white)
 
   </div>
-  <div class="tech-category">
+  <div style="flex: 1; text-align: center;">
 
-<h4>Tools</h4>
+<h4 style="margin: 0 0 8px; padding-bottom: 8px; border-bottom: 1px solid #30363d;">Tools</h4>
 
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)
 ![Git](https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white)
@@ -91,7 +69,7 @@ I'm currently completing a degree in **Multiplatform Application Development (DA
 
 ## 🚀 Projects
 
-<table class="project-row">
+<table style="width: 100%; border-collapse: collapse; margin-bottom: 12px;">
 <tr>
 <td style="padding: 0; width: 70%;">
 
@@ -107,12 +85,14 @@ I'm currently completing a degree in **Multiplatform Application Development (DA
 <tr>
 <td colspan="2" style="padding: 0;">
 
-> Windows maintenance and security suite. Deep process analysis, network connections, persistence detection, VirusTotal signature verification, and system repair with DISM/SFC.
+<blockquote style="background: transparent; border-left: 3px solid rgba(208, 215, 222, 0.9); border-top: none; margin: 0; padding-left: 12px; color: #8b949e;">
+Windows maintenance and security suite. Deep process analysis, network connections, persistence detection, VirusTotal signature verification, and system repair with DISM/SFC.
+</blockquote>
 
 </td>
 </tr>
 </table>
-<table class="project-row">
+<table style="width: 100%; border-collapse: collapse; margin-bottom: 12px;">
 <tr>
 <td style="padding: 0; width: 70%;">
 
@@ -128,12 +108,14 @@ I'm currently completing a degree in **Multiplatform Application Development (DA
 <tr>
 <td colspan="2" style="padding: 0;">
 
-> Tool to automate and simplify Docker environment creation, enabling fast and standardized deployments.
+<blockquote style="background: transparent; border-left: 3px solid rgba(208, 215, 222, 0.9); border-top: none; margin: 0; padding-left: 12px; color: #8b949e;">
+Tool to automate and simplify Docker environment creation, enabling fast and standardized deployments.
+</blockquote>
 
 </td>
 </tr>
 </table>
-<table class="project-row">
+<table style="width: 100%; border-collapse: collapse; margin-bottom: 12px;">
 <tr>
 <td style="padding: 0; width: 70%;">
 
@@ -149,7 +131,9 @@ I'm currently completing a degree in **Multiplatform Application Development (DA
 <tr>
 <td colspan="2" style="padding: 0;">
 
-> Fortran 90 repository: Runge-Kutta 4, Verlet integration, Monte Carlo methods (Metropolis), N-body dynamics, Ising model, Schrödinger equation. Scientific reports in LaTeX.
+<blockquote style="background: transparent; border-left: 3px solid rgba(208, 215, 222, 0.9); border-top: none; margin: 0; padding-left: 12px; color: #8b949e;">
+Fortran 90 repository: Runge-Kutta 4, Verlet integration, Monte Carlo methods (Metropolis), N-body dynamics, Ising model, Schrödinger equation. Scientific reports in LaTeX.
+</blockquote>
 
 </td>
 </tr>
