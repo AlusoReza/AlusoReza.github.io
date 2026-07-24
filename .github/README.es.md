@@ -11,10 +11,14 @@
   .tech-stack { display: flex; gap: 16px; }
   .tech-category { flex: 1; text-align: center; }
   .tech-category h4 { margin: 0 0 8px; padding-bottom: 8px; border-bottom: 1px solid #30363d; }
+  .project-row { width: 100%; border-collapse: collapse; margin-bottom: 12px; }
   @media (max-width: 800px) {
     .hero-name, .hero-badges { display: block !important; text-align: left !important; }
     .hero-badges { text-align: left !important; padding-top: 8px !important; }
     .tech-stack { flex-direction: column; }
+  }
+  @media (max-width: 500px) {
+    .project-row td { display: block !important; width: 100% !important; text-align: left !important; }
   }
 </style>
 
@@ -86,20 +90,69 @@ Actualmente estoy terminando el grado en **Desarrollo de Aplicaciones Multiplata
 
 ## 🚀 Proyectos
 
+<table class="project-row">
+<tr>
+<td style="padding: 0; width: 70%;">
+
 ### 🪟 WCore
-> Suite de mantenimiento y seguridad para Windows. Análisis profundo de procesos, conexiones de red, detección de persistencia, verificación de firmas con VirusTotal y reparación del sistema con DISM/SFC.
+
+</td>
+<td style="padding: 0; width: 30%; text-align: right; vertical-align: bottom; white-space: nowrap;">
 
 [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/AlusoReza/WCore)
 
+</td>
+</tr>
+<tr>
+<td colspan="2" style="padding: 0;">
+
+> Suite de mantenimiento y seguridad para Windows. Análisis profundo de procesos, conexiones de red, detección de persistencia, verificación de firmas con VirusTotal y reparación del sistema con DISM/SFC.
+
+</td>
+</tr>
+</table>
+<table class="project-row">
+<tr>
+<td style="padding: 0; width: 70%;">
+
 ### 🐳 Dockers-Image-Creator
-> Herramienta para automatizar y simplificar la creación de entornos Docker, permitiendo despliegues rápidos y estandarizados.
+
+</td>
+<td style="padding: 0; width: 30%; text-align: right; vertical-align: bottom; white-space: nowrap;">
 
 [![Sitio](https://img.shields.io/badge/Sitio-64ffda?style=flat&logo=googlechrome&logoColor=black)](https://alusoreza.github.io/Dockers-Image-Creator/) [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/AlusoReza/Dockers-Image-Creator)
 
+</td>
+</tr>
+<tr>
+<td colspan="2" style="padding: 0;">
+
+> Herramienta para automatizar y simplificar la creación de entornos Docker, permitiendo despliegues rápidos y estandarizados.
+
+</td>
+</tr>
+</table>
+<table class="project-row">
+<tr>
+<td style="padding: 0; width: 70%;">
+
 ### 🔬 Proyectos de Física Computacional
-> Repositorio en Fortran 90: Runge-Kutta 4, integración Verlet, métodos de Monte Carlo (Metropolis), dinámica N-cuerpos, modelo Ising, ecuación de Schrödinger. Informes científicos en LaTeX.
+
+</td>
+<td style="padding: 0; width: 30%; text-align: right; vertical-align: bottom; white-space: nowrap;">
 
 [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/AlusoReza/Computational-Physics-Projects)
+
+</td>
+</tr>
+<tr>
+<td colspan="2" style="padding: 0;">
+
+> Repositorio en Fortran 90: Runge-Kutta 4, integración Verlet, métodos de Monte Carlo (Metropolis), dinámica N-cuerpos, modelo Ising, ecuación de Schrödinger. Informes científicos en LaTeX.
+
+</td>
+</tr>
+</table>
 
 ## 🎓 Formación
 
