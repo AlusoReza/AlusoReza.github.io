@@ -26,7 +26,15 @@ Actualmente estoy terminando el grado en **Desarrollo de Aplicaciones Multiplata
 
 Tras descubrir mi pasión por la programación estudiando Física y dar un giro a mi carrera, acabo de terminar mi primer año de DAM. Para ponerme a prueba este verano y salir de mi zona de confort, he construido mi primer portafolio personal volcando todo lo aprendido (HTML, CSS y JS) y retándome a utilizar por primera vez el framework **Astro**.
 
-En este proceso me he apoyado en la IA como tutor para desatascarme y asimilar nuevos conceptos. Soy consciente de que mi código es muy mejorable y de que me queda un largo recorrido por delante, pero estoy genuinamente orgulloso del esfuerzo y del resultado actual. Mi objetivo ahora es que este proyecto crezca conmigo, por lo que cualquier *feedback* o consejo técnico de la comunidad será enormemente agradecido.
+En este proceso me he apoyado de la IA como tutor para desatascarme y asimilar nuevos conceptos. Soy conciente de que mi código es muy mejorable y de que me queda un largo camino por recorrer, pero aún así estoy orgulloso del esfuerzo y del resultado actual. Mi objetivo es que este proyecto crezca conmigo, por lo que cualquier *feedback* o consejo técnico de la comunidad será enormemente agradecido. En los siguientes lugares podeis ver el sistema de documentación del proyecto:
+
+> 📋 **Bitácora y logs detallados** — Cada sesión queda registrada en [`docs/bitacora.md`](docs/bitacora.md) (resumen ejecutivo) y [`docs/logs/`](docs/logs/) (registro completo: qué pedí, por qué se hizo así, qué archivos cambiaron y el resultado del build). La estructura `YYYY-MM-DD.md → Sesión N → Prompt/Plan/Cambios/Build` existe porque necesitaba trazabilidad: poder mirar atrás y entender por qué una línea de código está ahí.
+>
+> 🔍 **Decisiones de código documentadas** — Las 18 decisiones arquitectónicas más críticas están en [`code-decisions.md`](spec/constitution/code-decisions.md): qué se decidió, qué bug resuelve y qué pasaría si se revierte. No son notas pasajeras — son la razón de ser de cada parte del sistema.
+>
+> 🐛 **Tracking de bugs y tests automatizados** — Cada bug se detecta, se documenta en [`bugs.md`](spec/constitution/bugs.md) con severidad y estado, se arregla y se verifica. Un suite de [74 checks automáticos](.agents/tests/) detecta inconsistencias de CSS, huecos de seguridad y problemas de datos antes de que lleguen a producción.
+
+Cada sesión, la IA propone y yo decido. El resultado es un proyecto donde puedo justificar cada línea de código.
 
 ## 🛠️ Stack tecnológico
 

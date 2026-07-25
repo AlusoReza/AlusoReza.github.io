@@ -21,6 +21,20 @@ I started solving **differential equations** and simulating **N-body systems** i
 
 I'm currently completing a degree in **Multiplatform Application Development (DAM)**, where I combine my **analytical foundation** with modern engineering practices: **backend systems**, **database design**, **containerization**, and **AI agent integration**.
 
+## 🌱 About this project
+
+After discovering my passion for programming while studying Physics and pivoting my career, I've just finished my first year of DAM. To push myself this summer and step out of my comfort zone, I built my first personal portfolio putting everything I'd learned (HTML, CSS, and JS) into practice and challenging myself to use the **Astro** framework for the first time.
+
+Throughout this process I relied on AI as a tutor to help absorb new concepts or overcome a wall. I'm aware that my code is far from perfect and that I still have a long way to go, but I'm genuinely proud of the effort and the current result. My goal is for this project to grow with me, so any feedback or technical advice from the community will be greatly appreciated. You can see the project's documentation system in the following places:
+
+> 📋 **Session logs and detailed records** — Every session is logged in [`docs/bitacora.md`](docs/bitacora.md) (executive summary) and [`docs/logs/`](docs/logs/) (full record: what I asked, why it was done that way, which files changed, and the build result). The `YYYY-MM-DD.md → Session N → Prompt/Plan/Changes/Build` structure exists because I needed traceability: to look back and understand why a line of code is there.
+>
+> 🔍 **Documented code decisions** — The 18 most critical architectural decisions are in [`code-decisions.md`](spec/constitution/code-decisions.md): what was decided, which bug it fixes, and what would happen if reverted. They're not passing notes — they're the reason each part of the system exists.
+>
+> 🐛 **Bug tracking and automated tests** — Every bug is detected, documented in [`bugs.md`](spec/constitution/bugs.md) with severity and status, fixed, and verified. A suite of [74 automated checks](.agents/tests/) catches CSS inconsistencies, security gaps, and data issues before they reach production.
+
+Every session, the AI proposes and I decide. The result is a project where I can justify every line of code.
+
 ## 🛠️ Tech Stack
 
 <div align="center">
