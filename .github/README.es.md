@@ -22,6 +22,12 @@ Empecé resolviendo **ecuaciones diferenciales** en **Fortran** y simulando sist
 
 Actualmente estoy terminando el grado en **Desarrollo de Aplicaciones Multiplataforma (DAM)**, donde combino mi **base analítica** con prácticas de ingeniería modernas: **sistemas backend**, **diseño de bases de datos**, **contenedorización** e **integración de agentes de IA**.
 
+## 🌱 Sobre este proyecto
+
+Tras descubrir mi pasión por la programación estudiando Física y dar un giro a mi carrera, acabo de terminar mi primer año de DAM. Para ponerme a prueba este verano y salir de mi zona de confort, he construido mi primer portafolio personal volcando todo lo aprendido (HTML, CSS y JS) y retándome a utilizar por primera vez el framework **Astro**.
+
+En este proceso me he apoyado en la IA como tutor para desatascarme y asimilar nuevos conceptos. Soy consciente de que mi código es muy mejorable y de que me queda un largo recorrido por delante, pero estoy genuinamente orgulloso del esfuerzo y del resultado actual. Mi objetivo ahora es que este proyecto crezca conmigo, por lo que cualquier *feedback* o consejo técnico de la comunidad será enormemente agradecido.
+
 ## 🛠️ Stack tecnológico
 
 <div align="center">
